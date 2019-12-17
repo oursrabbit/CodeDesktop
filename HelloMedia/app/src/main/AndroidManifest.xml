@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CheckDBActivity"></activity>
         <activity android:name=".IndexActivity" />
-        <activity android:name=".FaceDetectActivity">
+        <activity
+            android:name=".FaceDetectActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,5 +20,6 @@
             </intent-filter>
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>
