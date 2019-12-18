@@ -40,6 +40,7 @@ public class FaceDetectActivity extends AppCompatActivity {
             intent.setClass(FaceDetectActivity.this, IndexActivity.class);
             startActivity(intent);
         }
+
     }
 
     public void checkLogButtonClicked(View button){
