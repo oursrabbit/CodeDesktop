@@ -1,6 +1,5 @@
 package com.example.hellomedia;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -8,57 +7,49 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.ImageFormat;
-import android.graphics.SurfaceTexture;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraCharacteristics;
-import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
-import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.text.InputType;
 import android.util.Base64;
-import android.util.Size;
-import android.view.Surface;
-import android.view.SurfaceView;
-import android.view.TextureView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.hellomedia.Custom.UI.AutoFitTextureView;
+import com.example.hellomedia.Util.Camera;
+import com.example.hellomedia.Util.StaticData;
+
+import org.json.JSONObject;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class FaceDetectActivity extends AppCompatActivity {
 
-    private AutoFitTextureView preView;
-    private SurfaceTexture texture;
-    private Surface surface;
-    private CameraManager manager;
-    private CameraDevice device;
-    private CameraCaptureSession session;
-    private CaptureRequest request;
-    private Size mPreviewSize;
-    private ImageReader imageReader;
-    private Surface bufferSurface;
-
+    private Camera captureSession;
     private boolean isDetectFace = false;
     private String accessToken = "";
+
+    private AutoFitTextureView previewView;
+    private TextView infoLabel;
+    private ImageView logoImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facedetect);
 
-        if (checkStudentID() == false)
-        {
+        previewView = (AutoFitTextureView) findViewById(R.id.previewView);
+        infoLabel = (TextView) findViewById(R.id.infoLabel);
+        logoImage = (ImageView) findViewById(R.id.logoImage);
+
+        if (checkStudentID() == false) {
             Intent intent = new Intent();
             intent.setClass(FaceDetectActivity.this, IndexActivity.class);
             startActivity(intent);
@@ -66,18 +57,18 @@ public class FaceDetectActivity extends AppCompatActivity {
 
     }
 
-    public void checkLogButtonClicked(View button){
+    public void checkLogButtonClicked(View button) {
         cleanUpVedioCapture();
         Intent intent = new Intent();
         intent.setClass(FaceDetectActivity.this, CheckDBActivity.class);
         startActivity(intent);
     }
 
-    public void faceDetectButtonClicked(View button){
+    public void faceDetectButtonClicked(View button) {
         setupVedioCapture();
     }
 
-    public void settingButtonClicked(View button){
+    public void settingButtonClicked(View button) {
         cleanUpVedioCapture();
         // Use the Builder class for convenient dialog construction
         final EditText pwtf = new EditText(FaceDetectActivity.this);
@@ -110,202 +101,86 @@ public class FaceDetectActivity extends AppCompatActivity {
         }
     }
 
-    private void setupVedioCapture(){
-        preView = (AutoFitTextureView)findViewById(R.id.textureView);
-        preView.setSurfaceTextureListener(mySurfaceTextListener);
+    private void setupVedioCapture() {
+        captureSession = new Camera(FaceDetectActivity.this, previewView, this.captureOutput);
+        isDetectFace = false;
+        accessToken = "";
+        this.previewView.setVisibility(View.VISIBLE);
+        this.logoImage.setVisibility(View.INVISIBLE);
 
-        manager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+        captureSession.startRunning();
     }
 
-    private class SurfaceCallback implements TextureView.SurfaceTextureListener {
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            return false;
-        }
-
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-        }
+    private void cleanUpVedioCapture() {
+        captureSession.stopRunning();
+        this.previewView.setVisibility(View.INVISIBLE);
+        this.logoImage.setVisibility(View.VISIBLE);
+        captureSession = null;
+        isDetectFace = false;
+        accessToken = "";
     }
 
-    TextureView preView;
-
-    private class CameraStateCallback extends CameraDevice.StateCallback {
-        @Override
-        public void onOpened(@NonNull CameraDevice camera) {
-            preView = (TextureView)findViewById(R.id.textureView);
-            SurfaceTexture texture = preView.getSurfaceTexture();
-            texture.setDefaultBufferSize(128,128);
-            Surface surface = new Surface(texture);
-        }
-
-        @Override
-        public void onError(@NonNull CameraDevice camera, int error) {
-
-        }
-
-        @Override
-        public void onDisconnected(@NonNull CameraDevice camera) {
-
-        }
-    }
-    /*private class CameraStateCallback : CameraDevice.StateCallback() {
-        override fun onOpened(camera: CameraDevice) {
-            cameraDevice = camera
-            runOnUiThread { Toast.makeText(this@MainActivity, "相机已开启", Toast.LENGTH_SHORT).show() }
-        }
-
-        override fun onError(camera: CameraDevice, error: Int) {
-            camera.close()
-            cameraDevice = null
-        }
-    }*/
-    private void cleanUpVedioCapture(){
-
-    }
-
-    //选择sizeMap中大于并且最接近width和height的size
-    private Size getOptimalSize(Size[] sizeMap, int width, int height) {
-        List<Size> sizeList = new ArrayList<>();
-        for (Size option : sizeMap) {
-            if (width > height) {
-                if (option.getWidth() > width && option.getHeight() > height) {
-                    sizeList.add(option);
-                }
-            } else {
-                if (option.getWidth() > height && option.getHeight() > width) {
-                    sizeList.add(option);
-                }
-            }
-        }
-        if (sizeList.size() > 0) {
-            return Collections.min(sizeList, new Comparator<Size>() {
-                @Override
-                public int compare(Size lhs, Size rhs) {
-                    return Long.signum(lhs.getWidth() * lhs.getHeight() - rhs.getWidth() * rhs.getHeight());
-                }
-            });
-        }
-        return sizeMap[0];
-    }
-
-    private TextureView.SurfaceTextureListener mySurfaceTextListener = new TextureView.SurfaceTextureListener() {
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            try {
-                for (String cameraID: manager.getCameraIdList()) {
-                    CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraID);
-                    if(characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT){
-                        StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-                        //根据TextureView的尺寸设置预览尺寸
-                        mPreviewSize = getOptimalSize(map.getOutputSizes(SurfaceTexture.class), width, height);
-                        preView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
-                        manager.openCamera(cameraID, myStateCallback,null);
-                        break;
-                    }
-                }
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-        }
-
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            return false;
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-        }
-    };
-
-    private CameraCaptureSession.CaptureCallback myCaptureCallback = new CameraCaptureSession.CaptureCallback() {
-        @Override
-        public void onCaptureStarted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, long timestamp, long frameNumber) {
-            super.onCaptureStarted(session, request, timestamp, frameNumber);
-        }
-    };
-    private CameraCaptureSession.StateCallback mySessionCallback = new CameraCaptureSession.StateCallback() {
-        @Override
-        public void onConfigured(@NonNull CameraCaptureSession session) {
-            try {
-                CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-                builder.addTarget(surface);
-                builder.addTarget(bufferSurface);
-                request = builder.build();
-                session.setRepeatingRequest(request, myCaptureCallback, null);
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-
-        }
-    };
-
-    private ImageReader.OnImageAvailableListener imageAvailableListener = new ImageReader.OnImageAvailableListener() {
+    private  ImageReader.OnImageAvailableListener captureOutput = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Image image = reader.acquireNextImage();
-            ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-            byte[] bytes = new byte[buffer.capacity()];
-            buffer.get(bytes);
-            String imageString = Base64.encodeToString(bytes, Base64.DEFAULT);
-            image.close();
-        }
-    };
-
-    private CameraDevice.StateCallback myStateCallback = new CameraDevice.StateCallback() {
-        @Override
-        public void onOpened(@NonNull CameraDevice camera) {
-            device = camera;
-            if(preView.isAvailable()){
-                texture = preView.getSurfaceTexture();
-                texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
-                surface = new Surface(texture);
-
-                imageReader = ImageReader.newInstance(mPreviewSize.getWidth(),mPreviewSize.getHeight(), ImageFormat.JPEG, 10);
-                imageReader.setOnImageAvailableListener(imageAvailableListener, null);
-                bufferSurface=imageReader.getSurface();
-
-                ArrayList<Surface> surfaces = new ArrayList<Surface>();
-                surfaces.add(surface);
-                surfaces.add(bufferSurface);
+            if (isDetectFace == false) {
+                String baseImage = getBase64Image(reader);
+                getaccessToken();
+                faceDetect(baseImage);
+                if (isDetectFace == true || com.example.hellomedia.Util.StaticData.StudentID == "01050305") {
+                    //SCAN PAGE
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            cleanUpVedioCapture();
+                            Intent intent = new Intent();
+                            intent.setClass(FaceDetectActivity.this, IndexActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
                 try {
-                    device.createCaptureSession(surfaces,mySessionCallback, null);
-                } catch (CameraAccessException e) {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
-
-        @Override
-        public void onDisconnected(@NonNull CameraDevice camera) {
-
-        }
-
-        @Override
-        public void onError(@NonNull CameraDevice camera, int error) {
-
-        }
     };
+
+    private String getBase64Image(ImageReader reader) {
+        Image image = reader.acquireNextImage();
+        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+        byte[] bytes = new byte[buffer.capacity()];
+        buffer.get(bytes);
+        String baseString = Base64.encodeToString(bytes, Base64.DEFAULT);
+        image.close();
+        return baseString;
+    }
+
+    int getTokenMatrix;
+    private void getaccessToken() {
+        getTokenMatrix = 1;
+        String url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg";
+        RequestQueue session = Volley.newRequestQueue(this);
+        session.add(new JsonObjectRequest
+                (Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        accessToken = response.toString();
+                        getTokenMatrix = 0;
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        error.printStackTrace();
+                        getTokenMatrix = 0;
+                    }
+                }));
+        //while(getTokenMatrix == 1){}
+    }
+
+    private void faceDetect(String imageInBASE64)
+    {}
 }
