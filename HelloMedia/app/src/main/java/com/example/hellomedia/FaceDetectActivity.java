@@ -10,7 +10,9 @@ import android.content.SharedPreferences;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,10 +33,7 @@ import org.json.JSONObject;
 import java.nio.ByteBuffer;
 
 public class FaceDetectActivity extends AppCompatActivity {
-
     private Camera captureSession;
-    private boolean isDetectFace = false;
-    private String accessToken = "";
 
     private AutoFitTextureView previewView;
     private TextView infoLabel;
@@ -48,6 +47,8 @@ public class FaceDetectActivity extends AppCompatActivity {
         previewView = (AutoFitTextureView) findViewById(R.id.previewView);
         infoLabel = (TextView) findViewById(R.id.infoLabel);
         logoImage = (ImageView) findViewById(R.id.logoImage);
+
+        captureSession = new Camera(this, previewView);
 
         if (checkStudentID() == false) {
             Intent intent = new Intent();
@@ -102,9 +103,7 @@ public class FaceDetectActivity extends AppCompatActivity {
     }
 
     private void setupVedioCapture() {
-        captureSession = new Camera(FaceDetectActivity.this, previewView, this.captureOutput);
-        isDetectFace = false;
-        accessToken = "";
+        captureSession = new Camera(FaceDetectActivity.this, previewView);
         this.previewView.setVisibility(View.VISIBLE);
         this.logoImage.setVisibility(View.INVISIBLE);
 
@@ -116,71 +115,5 @@ public class FaceDetectActivity extends AppCompatActivity {
         this.previewView.setVisibility(View.INVISIBLE);
         this.logoImage.setVisibility(View.VISIBLE);
         captureSession = null;
-        isDetectFace = false;
-        accessToken = "";
     }
-
-    private  ImageReader.OnImageAvailableListener captureOutput = new ImageReader.OnImageAvailableListener() {
-        @Override
-        public void onImageAvailable(ImageReader reader) {
-            if (isDetectFace == false) {
-                String baseImage = getBase64Image(reader);
-                getaccessToken();
-                faceDetect(baseImage);
-                if (isDetectFace == true || com.example.hellomedia.Util.StaticData.StudentID == "01050305") {
-                    //SCAN PAGE
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            cleanUpVedioCapture();
-                            Intent intent = new Intent();
-                            intent.setClass(FaceDetectActivity.this, IndexActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    };
-
-    private String getBase64Image(ImageReader reader) {
-        Image image = reader.acquireNextImage();
-        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-        byte[] bytes = new byte[buffer.capacity()];
-        buffer.get(bytes);
-        String baseString = Base64.encodeToString(bytes, Base64.DEFAULT);
-        image.close();
-        return baseString;
-    }
-
-    int getTokenMatrix;
-    private void getaccessToken() {
-        getTokenMatrix = 1;
-        String url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg";
-        RequestQueue session = Volley.newRequestQueue(this);
-        session.add(new JsonObjectRequest
-                (Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        accessToken = response.toString();
-                        getTokenMatrix = 0;
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                        getTokenMatrix = 0;
-                    }
-                }));
-        //while(getTokenMatrix == 1){}
-    }
-
-    private void faceDetect(String imageInBASE64)
-    {}
 }
