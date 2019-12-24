@@ -77,6 +77,8 @@ public class Camera {
     private HandlerThread mBackgroundThread;
     private Handler mBackgroundHandler;
 
+    private RequestQueue queue;
+
     private boolean isDetectFace = false;
     private FaceDetectStep detectState =  FaceDetectStep.stop;
     private String accessToken = "";
@@ -86,6 +88,7 @@ public class Camera {
         host = context;
         this.previewView = previewView;
         manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+        queue = Volley.newRequestQueue(this.previewView.getContext());
     }
 
     private void startBackgroundThread() {
@@ -103,8 +106,12 @@ public class Camera {
         }
     }
 
-    public void stopRunning(){
-
+    public void stopRunning() {
+        detectState = FaceDetectStep.stop;
+        if (device != null)
+            device.close();
+        device = null;
+        manager = null;
     }
 
     private Size getOptimalSize(Size[] sizeMap, int width, int height) {
@@ -211,7 +218,7 @@ public class Camera {
                 CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
                 builder.addTarget(surface);
                 builder.addTarget(bufferSurface);
-                builder.set(CaptureRequest.JPEG_QUALITY, (byte)60);
+                builder.set(CaptureRequest.JPEG_QUALITY, (byte)10);
                 request = builder.build();
                 detectState = FaceDetectStep.waitingImage;
                 session.setRepeatingRequest(request, myCaptureCallback, mBackgroundHandler);
@@ -273,6 +280,7 @@ public class Camera {
                     public void onResponse(JSONObject response) {
                         try {
                             accessToken = response.getString("access_token");
+                            Log.d("getaccessToken", accessToken);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             detectState = FaceDetectStep.waitingImage;
@@ -298,8 +306,7 @@ public class Camera {
         jsonString.put("image_type","BASE64");
         jsonString.put("group_id_list","2019BK");
         jsonString.put("user_id",StaticData.StudentID);
-        RequestQueue session = Volley.newRequestQueue(this.previewView.getContext());
-        session.add(new JsonObjectRequest
+        queue.add(new JsonObjectRequest
                 (Request.Method.POST, url, new JSONObject(jsonString), new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -311,7 +318,7 @@ public class Camera {
                                 intent.setClass(host, ScannerActivity.class);
                                 host.startActivity(intent);
                             }else {
-
+                                Log.d("JsonObjectRequest", response.toString());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

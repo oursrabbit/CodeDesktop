@@ -7,30 +7,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.Image;
-import android.media.ImageReader;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.hellomedia.Custom.UI.AutoFitTextureView;
 import com.example.hellomedia.Util.Camera;
 import com.example.hellomedia.Util.StaticData;
-
-import org.json.JSONObject;
-
-import java.nio.ByteBuffer;
 
 public class FaceDetectActivity extends AppCompatActivity {
     private Camera captureSession;
@@ -44,9 +29,9 @@ public class FaceDetectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facedetect);
 
-        previewView = (AutoFitTextureView) findViewById(R.id.previewView);
-        infoLabel = (TextView) findViewById(R.id.infoLabel);
-        logoImage = (ImageView) findViewById(R.id.logoImage);
+        previewView = (AutoFitTextureView) findViewById(R.id.FD_previewView);
+        infoLabel = (TextView) findViewById(R.id.FD_infoLabel);
+        logoImage = (ImageView) findViewById(R.id.FD_logoImage);
 
         captureSession = new Camera(this, previewView);
 
@@ -111,7 +96,8 @@ public class FaceDetectActivity extends AppCompatActivity {
     }
 
     private void cleanUpVedioCapture() {
-        captureSession.stopRunning();
+        if (captureSession != null)
+            captureSession.stopRunning();
         this.previewView.setVisibility(View.INVISIBLE);
         this.logoImage.setVisibility(View.VISIBLE);
         captureSession = null;

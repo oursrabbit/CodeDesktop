@@ -7,7 +7,7 @@
     tools:context=".FaceDetectActivity">
 
     <TextView
-        android:id="@+id/infoLabel"
+        android:id="@+id/FD.infoLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="请面对摄像头不要移动"
@@ -30,7 +30,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/FD.infoLabel" />
 
     <Button
         android:id="@+id/button4"
@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:background="#00FFFFFF"
+        android:onClick="checkLogButtonClicked"
         android:text="签到记录"
         android:textColor="#03A9F4"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,13 +47,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/logoImage"
+        android:id="@+id/FD.logoImage"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginBottom="64dp"
         android:src="@drawable/logo"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/infoLabel"
+        app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -70,12 +71,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.hellomedia.Custom.UI.AutoFitTextureView
-        android:id="@+id/previewView"
+        android:id="@+id/FD.previewView"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginBottom="64dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/infoLabel"
+        app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
