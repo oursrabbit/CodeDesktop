@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +26,13 @@ public class FaceDetectActivity extends AppCompatActivity {
     private ImageView logoImage;
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+            return false;
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facedetect);
@@ -33,7 +41,7 @@ public class FaceDetectActivity extends AppCompatActivity {
         infoLabel = (TextView) findViewById(R.id.FD_infoLabel);
         logoImage = (ImageView) findViewById(R.id.FD_logoImage);
 
-        captureSession = new Camera(this, previewView);
+        captureSession = new Camera(this, previewView, infoLabel);
 
         if (checkStudentID() == false) {
             Intent intent = new Intent();
@@ -88,7 +96,7 @@ public class FaceDetectActivity extends AppCompatActivity {
     }
 
     private void setupVedioCapture() {
-        captureSession = new Camera(FaceDetectActivity.this, previewView);
+        captureSession = new Camera(FaceDetectActivity.this, previewView, infoLabel);
         this.previewView.setVisibility(View.VISIBLE);
         this.logoImage.setVisibility(View.INVISIBLE);
 

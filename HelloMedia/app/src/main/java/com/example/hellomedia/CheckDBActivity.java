@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,18 +26,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hellomedia.Util.Camera;
 import com.example.hellomedia.Util.StaticData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class CheckDBActivity extends AppCompatActivity {
 
@@ -48,8 +55,6 @@ public class CheckDBActivity extends AppCompatActivity {
     private String HttpContentTypeHeader = "Content-Type";
     private String HttpContentType = "application/json";
 
-    private RequestQueue queue;
-
     private AlertDialog waitingDialog;
     private ListView logsTable;
     private  TextView idLabel;
@@ -60,68 +65,52 @@ public class CheckDBActivity extends AppCompatActivity {
         setContentView(R.layout.activity_check_db);
         logsTable = (ListView)findViewById(R.id.CDB_logsTable);
         idLabel = (TextView)findViewById(R.id.CDB_idLabel);
-        queue = Volley.newRequestQueue(this);
         idLabel.setText(StaticData.StudentID);
         AlertDialog.Builder builder = new AlertDialog.Builder(CheckDBActivity.this);
         waitingDialog =  builder.setMessage("正在加载数据，请稍后...").show();
-        LoadingDatabase();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                LoadingDatabase();
+            }
+        }).start();
     }
 
     private void LoadingDatabase(){
-        String condition = "";
-        try {
-            condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.StudentID + "\"}", "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+        try{
+            String condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.StudentID + "\"}", "UTF-8");
+            String url = LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
+            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty(LeancloudIDHeader, LeancloudAppid);
+            connection.setRequestProperty(LeancloudKeyHeader, LeancloudAppKey);
+            connection.setRequestProperty(HttpContentTypeHeader, HttpContentType);
+            if (connection.getResponseCode() == 200) {
+                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
+                JSONArray DatabaseResults = response.getJSONArray("results");
+                final List<CheckDBItem> checkLogs = new ArrayList<CheckDBItem>();
+                for(int i =0; i<DatabaseResults.length();i++) {
+                    JSONObject checkLog = DatabaseResults.getJSONObject(i);
+                    CheckDBItem newLog = new CheckDBItem();
+                    newLog.StudentID = checkLog.getString("StudentID");
+                    newLog.RoomID = checkLog.getString("RoomID");
+                    newLog.CheckDate = checkLog.getJSONObject("CheckDate").getString("iso");
+                    checkLogs.add(newLog);
+                }
+                logsTable.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        waitingDialog.cancel();
+                        CheckDBItemAdapter adapter = new CheckDBItemAdapter(CheckDBActivity.this, R.layout.checklogitem, checkLogs);
+                        logsTable.setAdapter(adapter);
+                    }
+                });
+            } else {
+                return;
+            }
+        }catch (Exception e){
             e.printStackTrace();
         }
-        String url = LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray DatabaseResults = response.getJSONArray("results");
-                            final List<CheckDBItem> checkLogs = new ArrayList<CheckDBItem>();
-                            for(int i =0; i<DatabaseResults.length();i++) {
-                                JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                                CheckDBItem newLog = new CheckDBItem();
-                                newLog.StudentID = checkLog.getString("StudentID");
-                                newLog.RoomID = checkLog.getString("RoomID");
-                                newLog.CheckDate = checkLog.getJSONObject("CheckDate").getString("iso");
-                                checkLogs.add(newLog);
-                            }
-                            logsTable.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    waitingDialog.cancel();
-                                    CheckDBItemAdapter adapter = new CheckDBItemAdapter(CheckDBActivity.this, R.layout.checklogitem, checkLogs);
-                                    logsTable.setAdapter(adapter);
-                                }
-                            });
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                    }
-                }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> header = new HashMap<>();
-                header.put(LeancloudIDHeader, LeancloudAppid);
-                header.put(LeancloudKeyHeader, LeancloudAppKey);
-                header.put(HttpContentTypeHeader, HttpContentType);
-                return header;
-            }
-        };
-        // Add the request to the RequestQueue.
-        queue.add(jsonObjectRequest);
     }
 }
 

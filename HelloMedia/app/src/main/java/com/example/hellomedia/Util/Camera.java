@@ -22,8 +22,10 @@ import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -44,7 +46,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.Console;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +59,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class Camera {
     private enum  FaceDetectStep {
@@ -64,6 +73,7 @@ public class Camera {
 
     private Context host;
     private AutoFitTextureView previewView;
+    private TextView infoLabel;
     private SurfaceTexture texture;
     private Surface surface;
     private CameraManager manager;
@@ -77,18 +87,16 @@ public class Camera {
     private HandlerThread mBackgroundThread;
     private Handler mBackgroundHandler;
 
-    private RequestQueue queue;
-
     private boolean isDetectFace = false;
     private FaceDetectStep detectState =  FaceDetectStep.stop;
     private String accessToken = "";
     private String baseImage = "";
 
-    public Camera(Context context, AutoFitTextureView previewView) {
+    public Camera(Context context, AutoFitTextureView previewView, TextView infoLabel) {
         host = context;
         this.previewView = previewView;
+        this.infoLabel = infoLabel;
         manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-        queue = Volley.newRequestQueue(this.previewView.getContext());
     }
 
     private void startBackgroundThread() {
@@ -273,72 +281,71 @@ public class Camera {
 
     private void getaccessToken() {
         String url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg";
-        RequestQueue session = Volley.newRequestQueue(this.previewView.getContext());
-        session.add(new JsonObjectRequest
-                (Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            accessToken = response.getString("access_token");
-                            Log.d("getaccessToken", accessToken);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            detectState = FaceDetectStep.waitingImage;
-                            return;
-                        }
-                        faceDetect();
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                        detectState = FaceDetectStep.waitingImage;
-                    }
-                }));
+        try{
+            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+            connection.setRequestMethod("POST");
+            if (connection.getResponseCode() == 200) {
+                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
+                accessToken = response.getString("access_token");
+                Log.d("", accessToken);
+                faceDetect();
+            } else {
+                detectState = FaceDetectStep.waitingImage;
+                return;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            detectState = FaceDetectStep.waitingImage;
+        }
     }
 
     private void faceDetect() {
-        detectState = FaceDetectStep.detectingFace;
-        String url = "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + accessToken;
-        HashMap<String,String> jsonString = new HashMap<String, String>();
-        jsonString.put("image",baseImage);
-        jsonString.put("image_type","BASE64");
-        jsonString.put("group_id_list","2019BK");
-        jsonString.put("user_id",StaticData.StudentID);
-        queue.add(new JsonObjectRequest
-                (Request.Method.POST, url, new JSONObject(jsonString), new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            int error_code = response.getInt("error_code");
-                            if (error_code == 0){
-                                stopRunning();
-                                Intent intent = new Intent();
-                                intent.setClass(host, ScannerActivity.class);
-                                host.startActivity(intent);
-                            }else {
-                                Log.d("JsonObjectRequest", response.toString());
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            detectState = FaceDetectStep.waitingImage;
-                        }
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                        detectState = FaceDetectStep.waitingImage;
-                    }
-                }){
+        infoLabel.post(new Runnable() {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> header = new HashMap<>();
-                header.put("Content-Type", "application/json");
-                return header;
+            public void run() {
+                infoLabel.setText("正在检测...");
             }
         });
+        detectState = FaceDetectStep.detectingFace;
+        String url = "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + accessToken;
+        try{
+            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+            connection.setRequestMethod("POST");
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("image",baseImage);
+            jsonParam.put("image_type","BASE64");
+            jsonParam.put("group_id_list","2019BK");
+            jsonParam.put("user_id",StaticData.StudentID);
+            DataOutputStream os = new DataOutputStream(connection.getOutputStream());
+            os.writeBytes(jsonParam.toString());
+            os.flush();
+            os.close();
+            if (connection.getResponseCode() == 200) {
+                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
+                int error_code = response.getInt("error_code");
+                if (error_code == 0){
+                    stopRunning();
+                    Intent intent = new Intent();
+                    intent.setClass(host, ScannerActivity.class);
+                    host.startActivity(intent);
+                }else {
+                    infoLabel.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            infoLabel.setText("请学号" + StaticData.StudentID + "的同学面对手机");
+                        }
+                    });
+                }
+            } else {
+                detectState = FaceDetectStep.waitingImage;
+                return;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            detectState = FaceDetectStep.waitingImage;
+        }
     }
 }

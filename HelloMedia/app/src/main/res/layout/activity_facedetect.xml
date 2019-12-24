@@ -72,12 +72,16 @@
 
     <com.example.hellomedia.Custom.UI.AutoFitTextureView
         android:id="@+id/FD.previewView"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginBottom="64dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
