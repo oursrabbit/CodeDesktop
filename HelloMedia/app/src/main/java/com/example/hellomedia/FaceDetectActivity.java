@@ -37,9 +37,9 @@ public class FaceDetectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facedetect);
 
-        previewView = (AutoFitTextureView) findViewById(R.id.FD_previewView);
-        infoLabel = (TextView) findViewById(R.id.FD_infoLabel);
-        logoImage = (ImageView) findViewById(R.id.FD_logoImage);
+        previewView = findViewById(R.id.FD_previewView);
+        infoLabel = findViewById(R.id.FD_infoLabel);
+        logoImage = findViewById(R.id.FD_logoImage);
 
         captureSession = new Camera(this, previewView, infoLabel);
 
@@ -88,11 +88,7 @@ public class FaceDetectActivity extends AppCompatActivity {
     private boolean checkStudentID() {
         SharedPreferences localStore = getSharedPreferences("localData", Context.MODE_PRIVATE);
         StaticData.StudentID = localStore.getString("StudentID", "");
-        if (StaticData.StudentID == "") {
-            return false;
-        } else {
-            return true;
-        }
+        return StaticData.StudentID != "";
     }
 
     private void setupVedioCapture() {

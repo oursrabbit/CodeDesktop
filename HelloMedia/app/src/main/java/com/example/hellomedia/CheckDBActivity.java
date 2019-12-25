@@ -63,8 +63,8 @@ public class CheckDBActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_db);
-        logsTable = (ListView)findViewById(R.id.CDB_logsTable);
-        idLabel = (TextView)findViewById(R.id.CDB_idLabel);
+        logsTable = findViewById(R.id.CDB_logsTable);
+        idLabel = findViewById(R.id.CDB_idLabel);
         idLabel.setText(StaticData.StudentID);
         AlertDialog.Builder builder = new AlertDialog.Builder(CheckDBActivity.this);
         waitingDialog =  builder.setMessage("正在加载数据，请稍后...").show();

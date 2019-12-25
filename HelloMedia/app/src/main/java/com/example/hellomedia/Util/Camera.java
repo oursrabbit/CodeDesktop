@@ -336,6 +336,8 @@ public class Camera {
                         @Override
                         public void run() {
                             infoLabel.setText("请学号" + StaticData.StudentID + "的同学面对手机");
+                            detectState = FaceDetectStep.waitingImage;
+                            return;
                         }
                     });
                 }
