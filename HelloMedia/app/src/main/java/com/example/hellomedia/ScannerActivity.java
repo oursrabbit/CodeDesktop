@@ -24,11 +24,21 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.hellomedia.Util.Camera;
+import com.example.hellomedia.Util.StaticData;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -39,17 +49,29 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.UUID;
 
+import javax.net.ssl.HttpsURLConnection;
+
 public class ScannerActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private BluetoothLeScanner leScanner;
 
     private HashMap<String , iBeacon> iBeacons;
-    private boolean iniRoomList = true;
-    private int checkMinor = -1;
 
     private ListView iBeaconListView;
     private TextView infoLabel;
+
+    private iBeacon checkBeacon = null;
+
     private int countTime = 30;
+    private int countTimeRemind = 32000;
+
+    private String LeancloudAppid = "YHwFdAE1qj1OcWfJ5xoayLKr-gzGzoHsz";
+    private String LeancloudAppKey = "UbnM6uOP2mxah3nFMzurEDQL";
+    private String LeancloudAPIBaseURL = "https://yhwfdae1.lc-cn-n1-shared.com";
+    private String LeancloudIDHeader = "X-LC-Id";
+    private String LeancloudKeyHeader = "X-LC-Key";
+    private String HttpContentTypeHeader = "Content-Type";
+    private String HttpContentType = "application/json";
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -65,13 +87,60 @@ public class ScannerActivity extends AppCompatActivity {
 
         infoLabel = findViewById(R.id.S_counddownlabel);
         iBeaconListView = findViewById(R.id.S_ibeaconlist);
-
+        iBeaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                checkBeacon = (iBeacon)iBeaconListView.getItemAtPosition(position);
+                iBeaconListView.setEnabled(false);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        updateDB();
+                    }
+                }).start();
+            }
+        });
         countDown();
         setupNFCScanner();
     }
 
+    private void updateDB() {
+        String url = LeancloudAPIBaseURL + "/1.1/classes/CheckRecording";
+        try{
+            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty(LeancloudIDHeader, LeancloudAppid);
+            connection.setRequestProperty(LeancloudKeyHeader, LeancloudAppKey);
+            connection.setRequestProperty(HttpContentTypeHeader, HttpContentType);
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("StudentID",StaticData.StudentID);
+            jsonParam.put("RoomID",checkBeacon.Minor);
+            JSONObject checkDate = new JSONObject();
+            checkDate.put("__type", "Date");
+            checkDate.put("iso", "");
+            jsonParam.put("CheckDate", checkDate);
+            DataOutputStream os = new DataOutputStream(connection.getOutputStream());
+            os.writeBytes(jsonParam.toString());
+            os.flush();
+            os.close();
+            if (connection.getResponseCode() == 200) {
+                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
+                int error_code = response.getInt("error_code");
+            } else {
+                return;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            iBeaconListView.setEnabled(true);
+        }
+    }
+
     private void countDown () {
-        timer = new CountDownTimer(32000,1000) {
+        timer = new CountDownTimer(countTimeRemind,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 infoLabel.post(new Runnable() {
@@ -84,29 +153,21 @@ public class ScannerActivity extends AppCompatActivity {
                             infoLabel.setText(countTime + "");
 
                         List<String> removeKeys = new ArrayList<String>();
-                        for(iBeacon bb : iBeacons.values()) {
+                        for (iBeacon bb : iBeacons.values()) {
                             if ((((new Date()).getTime()) - (bb.LastAdvertisingTime.getTime())) > 10 * 1000) {
                                 removeKeys.add(bb.Minor + "");
                             }
                         }
-                        for(String rk : removeKeys) {
+                        for (String rk : removeKeys) {
                             iBeacons.remove(rk);
                         }
-
-                        if(iniRoomList) {
-                            iBeaconListView.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    iBeaconAdapter adapter = new iBeaconAdapter(ScannerActivity.this, R.layout.ibeaconitem, new ArrayList<iBeacon>(iBeacons.values()));
-                                    iBeaconListView.setAdapter(adapter);
-                                }
-                            });
-                            iniRoomList = false;
-                        }
-
-                        if (checkMinor != -1){
-
-                        }
+                        iBeaconListView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                iBeaconAdapter adapter = new iBeaconAdapter(ScannerActivity.this, R.layout.ibeaconitem, new ArrayList<iBeacon>(iBeacons.values()));
+                                iBeaconListView.setAdapter(adapter);
+                            }
+                        });
                     }
                 });
             }
@@ -116,7 +177,7 @@ public class ScannerActivity extends AppCompatActivity {
                 infoLabel.post(new Runnable() {
                     @Override
                     public void run() {
-                        infoLabel.setText("0");
+                        cleanupNFCScanner();
                         AlertDialog.Builder builder = new AlertDialog.Builder(ScannerActivity.this);
                         builder.setMessage("签到失败")
                                 .setPositiveButton("重新签到", new DialogInterface.OnClickListener() {
@@ -132,6 +193,14 @@ public class ScannerActivity extends AppCompatActivity {
             }
         };
         timer.start();
+    }
+
+    private void cleanupNFCScanner(){
+        infoLabel.setText("0");
+        timer.cancel();
+        timer = null;
+        leScanner.stopScan(myScanCallback);
+        leScanner = null;
     }
 
     private void setupNFCScanner() {
@@ -176,6 +245,7 @@ public class ScannerActivity extends AppCompatActivity {
         public void onScanResult(int callbackType, ScanResult result) {
             byte[] beaconRawData = result.getScanRecord().getBytes();
             iBeacon beacon = iBeacon.Creater(beaconRawData);
+            //Update Local iBaeacon List: iBeacons
             if (iBeacons.containsKey(beacon.Minor + "")){
                 iBeacons.get(beacon.Minor + "").LastAdvertisingTime = new Date();
             } else {
@@ -184,10 +254,6 @@ public class ScannerActivity extends AppCompatActivity {
             super.onScanResult(callbackType, result);
         }
     };
-
-    public void refreshBLETable(View button) {
-        iniRoomList = true;
-    }
 }
 
 class iBeacon {
