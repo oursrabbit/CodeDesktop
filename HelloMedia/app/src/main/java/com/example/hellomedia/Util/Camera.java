@@ -1,9 +1,7 @@
 package com.example.hellomedia.Util;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -25,30 +23,13 @@ import android.view.TextureView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.hellomedia.CheckDBActivity;
 import com.example.hellomedia.Custom.UI.AutoFitTextureView;
-import com.example.hellomedia.FaceDetectActivity;
-import com.example.hellomedia.IndexActivity;
 import com.example.hellomedia.ScannerActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -56,21 +37,11 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class Camera {
-    private enum  FaceDetectStep {
-        stop,
-        waitingImage,
-        gettingAccessToken,
-        detectingLiving,
-        detectingFace
-    }
-
     private Context host;
     private AutoFitTextureView previewView;
     private TextView infoLabel;
@@ -83,14 +54,112 @@ public class Camera {
     private Size mPreviewSize;
     private ImageReader imageReader;
     private Surface bufferSurface;
-
     private HandlerThread mBackgroundThread;
     private Handler mBackgroundHandler;
-
     private boolean isDetectFace = false;
-    private FaceDetectStep detectState =  FaceDetectStep.stop;
+    private FaceDetectStep detectState = FaceDetectStep.stop;
     private String accessToken = "";
     private String baseImage = "";
+    private CameraCaptureSession.CaptureCallback myCaptureCallback = new CameraCaptureSession.CaptureCallback() {
+        @Override
+        public void onCaptureStarted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, long timestamp, long frameNumber) {
+            super.onCaptureStarted(session, request, timestamp, frameNumber);
+        }
+    };
+    private CameraCaptureSession.StateCallback mySessionCallback = new CameraCaptureSession.StateCallback() {
+        @Override
+        public void onConfigured(@NonNull CameraCaptureSession session) {
+            try {
+                CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+                builder.addTarget(surface);
+                builder.addTarget(bufferSurface);
+                builder.set(CaptureRequest.JPEG_QUALITY, (byte) 10);
+                request = builder.build();
+                detectState = FaceDetectStep.waitingImage;
+                session.setRepeatingRequest(request, myCaptureCallback, mBackgroundHandler);
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onConfigureFailed(@NonNull CameraCaptureSession session) {
+
+        }
+    };
+    private ImageReader.OnImageAvailableListener imageAvailableListener = new ImageReader.OnImageAvailableListener() {
+        @Override
+        public void onImageAvailable(ImageReader reader) {
+            baseImage = getBase64Image(reader);
+            if (isDetectFace == false && detectState == FaceDetectStep.waitingImage) {
+                detectState = FaceDetectStep.gettingAccessToken;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        getaccessToken();
+                    }
+                }).start();
+            }
+        }
+    };
+    private CameraDevice.StateCallback myStateCallback = new CameraDevice.StateCallback() {
+        @Override
+        public void onOpened(@NonNull CameraDevice camera) {
+            device = camera;
+            texture = previewView.getSurfaceTexture();
+            texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
+            surface = new Surface(texture);
+
+            imageReader = ImageReader.newInstance(mPreviewSize.getWidth(), mPreviewSize.getHeight(), ImageFormat.JPEG, 10);
+            imageReader.setOnImageAvailableListener(imageAvailableListener, mBackgroundHandler);
+            bufferSurface = imageReader.getSurface();
+
+            ArrayList<Surface> surfaces = new ArrayList<Surface>();
+            surfaces.add(surface);
+            surfaces.add(bufferSurface);
+            try {
+                device.createCaptureSession(surfaces, mySessionCallback, mBackgroundHandler);
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onDisconnected(@NonNull CameraDevice camera) {
+
+        }
+
+        @Override
+        public void onError(@NonNull CameraDevice camera, int error) {
+
+        }
+    };
+    private TextureView.SurfaceTextureListener mySurfaceTextListener = new TextureView.SurfaceTextureListener() {
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+            openCamera(width, height);
+        }
+
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+            return false;
+        }
+
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+        }
+    };
 
     public Camera(Context context, AutoFitTextureView previewView, TextView infoLabel) {
         host = context;
@@ -105,7 +174,7 @@ public class Camera {
         mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
     }
 
-    public void startRunning(){
+    public void startRunning() {
         startBackgroundThread();
         if (previewView.isAvailable()) {
             openCamera(previewView.getWidth(), previewView.getHeight());
@@ -146,28 +215,6 @@ public class Camera {
         return sizeMap[0];
     }
 
-    private TextureView.SurfaceTextureListener mySurfaceTextListener = new TextureView.SurfaceTextureListener() {
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            openCamera(width, height);
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-        }
-
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            return false;
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-        }
-    };
-
     private void openCamera(int width, int height) {
         try {
             for (String cameraID : manager.getCameraIdList()) {
@@ -186,89 +233,6 @@ public class Camera {
         }
     }
 
-    private CameraDevice.StateCallback myStateCallback = new CameraDevice.StateCallback() {
-        @Override
-        public void onOpened(@NonNull CameraDevice camera) {
-            device = camera;
-            texture = previewView.getSurfaceTexture();
-            texture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
-            surface = new Surface(texture);
-
-            imageReader = ImageReader.newInstance(mPreviewSize.getWidth(), mPreviewSize.getHeight(), ImageFormat.JPEG, 10);
-            imageReader.setOnImageAvailableListener(imageAvailableListener, mBackgroundHandler);
-            bufferSurface = imageReader.getSurface();
-
-            ArrayList<Surface> surfaces = new ArrayList<Surface>();
-            surfaces.add(surface);
-            surfaces.add(bufferSurface);
-            try {
-                device.createCaptureSession(surfaces, mySessionCallback, mBackgroundHandler);
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onDisconnected(@NonNull CameraDevice camera) {
-
-        }
-
-        @Override
-        public void onError(@NonNull CameraDevice camera, int error) {
-
-        }
-    };
-
-    private CameraCaptureSession.StateCallback mySessionCallback = new CameraCaptureSession.StateCallback() {
-        @Override
-        public void onConfigured(@NonNull CameraCaptureSession session) {
-            try {
-                CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-                builder.addTarget(surface);
-                builder.addTarget(bufferSurface);
-                builder.set(CaptureRequest.JPEG_QUALITY, (byte)10);
-                request = builder.build();
-                detectState = FaceDetectStep.waitingImage;
-                session.setRepeatingRequest(request, myCaptureCallback, mBackgroundHandler);
-            } catch (CameraAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-
-        }
-    };
-
-    private CameraCaptureSession.CaptureCallback myCaptureCallback = new CameraCaptureSession.CaptureCallback() {
-        @Override
-        public void onCaptureStarted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, long timestamp, long frameNumber) {
-            super.onCaptureStarted(session, request, timestamp, frameNumber);
-        }
-    };
-
-    private ImageReader.OnImageAvailableListener imageAvailableListener = new ImageReader.OnImageAvailableListener() {
-        @Override
-        public void onImageAvailable(ImageReader reader) {
-            baseImage = getBase64Image(reader);
-            if (isDetectFace == false && detectState == FaceDetectStep.waitingImage){
-                detectState = FaceDetectStep.gettingAccessToken;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        getaccessToken();
-                    }
-                }).start();
-            }
-        }
-    };
-
     private String getBase64Image(ImageReader reader) {
         Image image = reader.acquireNextImage();
         ByteBuffer buffer = image.getPlanes()[0].getBuffer();
@@ -281,8 +245,8 @@ public class Camera {
 
     private void getaccessToken() {
         String url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg";
-        try{
-            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+        try {
+            HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("POST");
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
@@ -293,7 +257,7 @@ public class Camera {
                 detectState = FaceDetectStep.waitingImage;
                 return;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             detectState = FaceDetectStep.waitingImage;
         }
@@ -308,17 +272,17 @@ public class Camera {
         });
         detectState = FaceDetectStep.detectingFace;
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + accessToken;
-        try{
-            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+        try {
+            HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
             connection.setDoInput(true);
             connection.setRequestProperty("Content-Type", "application/json");
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("image",baseImage);
-            jsonParam.put("image_type","BASE64");
-            jsonParam.put("group_id_list","2019BK");
-            jsonParam.put("user_id",StaticData.StudentID);
+            jsonParam.put("image", baseImage);
+            jsonParam.put("image_type", "BASE64");
+            jsonParam.put("group_id_list", "2019BK");
+            jsonParam.put("user_id", StaticData.StudentID);
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());
             os.writeBytes(jsonParam.toString());
             os.flush();
@@ -326,12 +290,12 @@ public class Camera {
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
                 int error_code = response.getInt("error_code");
-                if (error_code == 0){
+                if (error_code == 0) {
                     stopRunning();
                     Intent intent = new Intent();
                     intent.setClass(host, ScannerActivity.class);
                     host.startActivity(intent);
-                }else {
+                } else {
                     infoLabel.post(new Runnable() {
                         @Override
                         public void run() {
@@ -345,9 +309,17 @@ public class Camera {
                 detectState = FaceDetectStep.waitingImage;
                 return;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             detectState = FaceDetectStep.waitingImage;
         }
+    }
+
+    private enum FaceDetectStep {
+        stop,
+        waitingImage,
+        gettingAccessToken,
+        detectingLiving,
+        detectingFace
     }
 }

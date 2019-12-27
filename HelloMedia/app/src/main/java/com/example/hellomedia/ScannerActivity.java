@@ -1,15 +1,10 @@
 package com.example.hellomedia;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothClass;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
-import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
@@ -17,38 +12,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.ParcelUuid;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hellomedia.Util.Camera;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.hellomedia.Util.StaticData;
 
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.UUID;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -56,7 +41,7 @@ public class ScannerActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private BluetoothLeScanner leScanner;
 
-    private HashMap<String , iBeacon> iBeacons;
+    private HashMap<String, iBeacon> iBeacons;
 
     private ListView iBeaconListView;
     private TextView infoLabel;
@@ -73,6 +58,20 @@ public class ScannerActivity extends AppCompatActivity {
     private String LeancloudKeyHeader = "X-LC-Key";
     private String HttpContentTypeHeader = "Content-Type";
     private String HttpContentType = "application/json";
+    private ScanCallback myScanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            byte[] beaconRawData = result.getScanRecord().getBytes();
+            iBeacon beacon = iBeacon.Creater(beaconRawData);
+            //Update Local iBaeacon List: iBeacons
+            if (iBeacons.containsKey(beacon.Minor + "")) {
+                iBeacons.get(beacon.Minor + "").LastAdvertisingTime = new Date();
+            } else {
+                iBeacons.put(beacon.Minor + "", beacon);
+            }
+            super.onScanResult(callbackType, result);
+        }
+    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -91,7 +90,7 @@ public class ScannerActivity extends AppCompatActivity {
         iBeaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                checkBeacon = (iBeacon)iBeaconListView.getItemAtPosition(position);
+                checkBeacon = (iBeacon) iBeaconListView.getItemAtPosition(position);
                 iBeaconListView.setEnabled(false);
                 new Thread(new Runnable() {
                     @Override
@@ -107,8 +106,8 @@ public class ScannerActivity extends AppCompatActivity {
 
     private void updateDB() {
         String url = LeancloudAPIBaseURL + "/1.1/classes/CheckRecording";
-        try{
-            HttpsURLConnection connection = (HttpsURLConnection)(new URL(url)).openConnection();
+        try {
+            HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty(LeancloudIDHeader, LeancloudAppid);
             connection.setRequestProperty(LeancloudKeyHeader, LeancloudAppKey);
@@ -117,8 +116,8 @@ public class ScannerActivity extends AppCompatActivity {
             connection.setDoInput(true);
             connection.setRequestProperty("Content-Type", "application/json");
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("StudentID",StaticData.StudentID);
-            jsonParam.put("RoomID",checkBeacon.Minor + "");
+            jsonParam.put("StudentID", StaticData.StudentID);
+            jsonParam.put("RoomID", checkBeacon.Minor + "");
             JSONObject checkDate = new JSONObject();
             checkDate.put("__type", "Date");
             checkDate.put("iso", "");
@@ -143,6 +142,12 @@ public class ScannerActivity extends AppCompatActivity {
                                 });
                         AlertDialog dialog = builder.create();
                         dialog.setCanceledOnTouchOutside(false);
+                        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                            @Override
+                            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                                return keyCode == KeyEvent.KEYCODE_BACK;
+                            }
+                        });
                         dialog.show();
                     }
                 });
@@ -156,7 +161,7 @@ public class ScannerActivity extends AppCompatActivity {
                 Toast.makeText(this, "签到失败，请重新签到", Toast.LENGTH_LONG).show();
                 return;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             iBeaconListView.post(new Runnable() {
                 @Override
                 public void run() {
@@ -168,8 +173,8 @@ public class ScannerActivity extends AppCompatActivity {
         }
     }
 
-    private void countDown () {
-        timer = new CountDownTimer(countTimeRemind,1000) {
+    private void countDown() {
+        timer = new CountDownTimer(countTimeRemind, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 infoLabel.post(new Runnable() {
@@ -224,7 +229,7 @@ public class ScannerActivity extends AppCompatActivity {
         timer.start();
     }
 
-    private void cleanupNFCScanner(){
+    private void cleanupNFCScanner() {
         infoLabel.setText("0");
         timer.cancel();
         timer = null;
@@ -241,48 +246,33 @@ public class ScannerActivity extends AppCompatActivity {
         builder.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE);
         builder.setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT);
         builder.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY);
-        ScanSettings scanSettings =  builder.build();
+        ScanSettings scanSettings = builder.build();
 
         List<ScanFilter> filters = new ArrayList<ScanFilter>();
         ScanFilter.Builder filterBuilder = new ScanFilter.Builder();
         filterBuilder.setManufacturerData(76, new byte[]{
                 0x02, 0x15,
-                (byte)0xFD, (byte)0xA5, 0x06, (byte)0x93,
-                (byte)0xA4, (byte)0xE2,
-                0x4F, (byte)0xB1,
-                (byte)0xAF, (byte)0xCF, (byte)0xC6, (byte)0xEB, 0x07, 0x64, 0x78, 0x25,
+                (byte) 0xFD, (byte) 0xA5, 0x06, (byte) 0x93,
+                (byte) 0xA4, (byte) 0xE2,
+                0x4F, (byte) 0xB1,
+                (byte) 0xAF, (byte) 0xCF, (byte) 0xC6, (byte) 0xEB, 0x07, 0x64, 0x78, 0x25,
                 0x00, 0x00,
                 0x00, 0x00,
                 0x00
         }, new byte[]{
-                1,1,
-                1,1,1,1,
-                1,1,
-                1,1,
-                1,1,1,1,1,1,1,1,
-                0,0,
-                0,0,
+                1, 1,
+                1, 1, 1, 1,
+                1, 1,
+                1, 1,
+                1, 1, 1, 1, 1, 1, 1, 1,
+                0, 0,
+                0, 0,
                 0
         });
         filters.add(filterBuilder.build());
 
         leScanner.startScan(filters, scanSettings, myScanCallback);
     }
-
-    private ScanCallback myScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            byte[] beaconRawData = result.getScanRecord().getBytes();
-            iBeacon beacon = iBeacon.Creater(beaconRawData);
-            //Update Local iBaeacon List: iBeacons
-            if (iBeacons.containsKey(beacon.Minor + "")){
-                iBeacons.get(beacon.Minor + "").LastAdvertisingTime = new Date();
-            } else {
-                iBeacons.put(beacon.Minor + "", beacon);
-            }
-            super.onScanResult(callbackType, result);
-        }
-    };
 }
 
 class iBeacon {
@@ -331,7 +321,7 @@ class iBeaconAdapter extends ArrayAdapter<iBeacon> {
         if (convertView == null) {
             convertView = LayoutInflater.from(host).inflate(resourceId, container, false);
         }
-        ((TextView)convertView.findViewById(R.id.S_ITEM_minor)).setText(getItem(position).Minor + "");
+        ((TextView) convertView.findViewById(R.id.S_ITEM_minor)).setText(getItem(position).Minor + "");
         return convertView;
     }
 }

@@ -1,7 +1,5 @@
 package com.example.hellomedia;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hellomedia.Custom.UI.AutoFitTextureView;
 import com.example.hellomedia.Util.Camera;
@@ -45,7 +45,7 @@ public class FaceDetectActivity extends AppCompatActivity {
 
         if (checkStudentID() == false) {
             Intent intent = new Intent();
-            intent.setClass(FaceDetectActivity.this, IndexActivity.class);
+            intent.setClass(FaceDetectActivity.this, QinSettingActivity.class);
             startActivity(intent);
         }
 
@@ -73,7 +73,7 @@ public class FaceDetectActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         if (pwtf.getText().toString().equals("111111")) {
                             Intent intent = new Intent();
-                            intent.setClass(FaceDetectActivity.this, IndexActivity.class);
+                            intent.setClass(FaceDetectActivity.this, QinSettingActivity.class);
                             startActivity(intent);
                         } else {
                             new AlertDialog.Builder(FaceDetectActivity.this).setTitle("验证失败").setMessage("请联系管理员修改个人信息").setNegativeButton("确定", null).show();

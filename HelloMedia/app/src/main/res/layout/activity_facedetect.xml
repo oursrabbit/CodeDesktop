@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     tools:context=".FaceDetectActivity">
 
     <TextView
         android:id="@+id/FD.infoLabel"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="请面对摄像头不要移动"
-        android:textSize="30sp"
-        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#812D575B"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +26,7 @@
         android:layout_width="140dp"
         android:layout_height="40dp"
         android:layout_marginTop="128dp"
-        android:background="#03A9F4"
+        android:background="#2D575B"
         android:onClick="faceDetectButtonClicked"
         android:text="刷脸签到"
         android:textColor="#FFFFFF"
@@ -41,7 +44,7 @@
         android:background="#00FFFFFF"
         android:onClick="checkLogButtonClicked"
         android:text="签到记录"
-        android:textColor="#03A9F4"
+        android:textColor="#2D575B"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -66,7 +69,7 @@
         android:layout_marginRight="8dp"
         android:clickable="true"
         android:onClick="settingButtonClicked"
-        android:src="@drawable/user"
+        android:src="@drawable/settingdarkgreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
