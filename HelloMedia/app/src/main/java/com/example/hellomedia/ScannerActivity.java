@@ -29,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.hellomedia.Util.Camera;
 import com.example.hellomedia.Util.StaticData;
@@ -117,25 +118,53 @@ public class ScannerActivity extends AppCompatActivity {
             connection.setRequestProperty("Content-Type", "application/json");
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("StudentID",StaticData.StudentID);
-            jsonParam.put("RoomID",checkBeacon.Minor);
+            jsonParam.put("RoomID",checkBeacon.Minor + "");
             JSONObject checkDate = new JSONObject();
             checkDate.put("__type", "Date");
             checkDate.put("iso", "");
-            jsonParam.put("CheckDate", checkDate);
+            //jsonParam.put("CheckDate", checkDate);
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());
             os.writeBytes(jsonParam.toString());
             os.flush();
             os.close();
-            if (connection.getResponseCode() == 200) {
-                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
-                int error_code = response.getInt("error_code");
+            if (connection.getResponseCode() == 201) {
+                infoLabel.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        cleanupNFCScanner();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ScannerActivity.this);
+                        builder.setMessage("签到成功")
+                                .setPositiveButton("重新签到", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent();
+                                        intent.setClass(ScannerActivity.this, FaceDetectActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.setCanceledOnTouchOutside(false);
+                        dialog.show();
+                    }
+                });
             } else {
+                iBeaconListView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        iBeaconListView.setEnabled(true);
+                    }
+                });
+                Toast.makeText(this, "签到失败，请重新签到", Toast.LENGTH_LONG).show();
                 return;
             }
         }catch (Exception e){
+            iBeaconListView.post(new Runnable() {
+                @Override
+                public void run() {
+                    iBeaconListView.setEnabled(true);
+                }
+            });
+            Toast.makeText(this, "系统错误，请重新签到", Toast.LENGTH_LONG).show();
             e.printStackTrace();
-        } finally {
-            iBeaconListView.setEnabled(true);
         }
     }
 
