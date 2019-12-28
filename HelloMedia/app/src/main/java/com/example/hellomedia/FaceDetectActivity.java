@@ -24,6 +24,7 @@ public class FaceDetectActivity extends AppCompatActivity {
     private AutoFitTextureView previewView;
     private TextView infoLabel;
     private ImageView logoImage;
+    private ImageView logoBgImage;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -40,15 +41,13 @@ public class FaceDetectActivity extends AppCompatActivity {
         previewView = findViewById(R.id.FD_previewView);
         infoLabel = findViewById(R.id.FD_infoLabel);
         logoImage = findViewById(R.id.FD_logoImage);
-
-        captureSession = new Camera(this, previewView, infoLabel);
+        logoBgImage = findViewById(R.id.FD_logobg);
 
         if (checkStudentID() == false) {
             Intent intent = new Intent();
             intent.setClass(FaceDetectActivity.this, QinSettingActivity.class);
             startActivity(intent);
         }
-
     }
 
     public void checkLogButtonClicked(View button) {

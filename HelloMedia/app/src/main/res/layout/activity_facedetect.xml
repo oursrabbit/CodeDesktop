@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#214A4D"
     android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     tools:context=".FaceDetectActivity">
 
@@ -11,9 +12,8 @@
         android:id="@+id/FD.infoLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="请面对摄像头不要移动"
         android:textAlignment="center"
-        android:textColor="#812D575B"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,14 +23,18 @@
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="128dp"
+        android:layout_marginEnd="8dp"
         android:background="#2D575B"
         android:onClick="faceDetectButtonClicked"
-        android:text="刷脸签到"
+        android:text="签到"
+        android:textAlignment="center"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FD.infoLabel" />
@@ -44,19 +48,8 @@
         android:background="#00FFFFFF"
         android:onClick="checkLogButtonClicked"
         android:text="签到记录"
-        android:textColor="#2D575B"
+        android:textColor="#FFFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/FD.logoImage"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginBottom="64dp"
-        android:src="@drawable/logo"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -77,14 +70,31 @@
         android:id="@+id/FD.previewView"
         android:layout_width="256dp"
         android:layout_height="256dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="64dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/FD.logobg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/FD.previewView"
+        app:layout_constraintEnd_toEndOf="@+id/FD.previewView"
+        app:layout_constraintStart_toStartOf="@+id/FD.previewView"
+        app:layout_constraintTop_toTopOf="@+id/FD.previewView"
+        app:srcCompat="@drawable/Mask" />
+
+    <ImageView
+        android:id="@+id/FD.logoImage"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/logo"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
