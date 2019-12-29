@@ -5,29 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#214A4D"
-    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
     tools:context=".FaceDetectActivity">
 
     <TextView
         android:id="@+id/FD.infoLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="00000000"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#CCFFFFFF"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button7"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
         android:background="#2D575B"
         android:onClick="faceDetectButtonClicked"
         android:text="签到"
@@ -35,12 +36,12 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/button8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FD.infoLabel" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button8"
         style="@android:style/Widget.Material.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,19 +60,18 @@
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:clickable="true"
         android:onClick="settingButtonClicked"
         android:src="@drawable/settingicon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.qin.Custom.UI.AutoFitTextureView
+    <edu.bfa.ss.qin.Custom.UI.AutoFitTextureView
         android:id="@+id/FD.previewView"
         android:layout_width="256dp"
         android:layout_height="256dp"
+        android:layout_marginTop="16dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -92,9 +92,8 @@
         android:layout_height="128dp"
         android:src="@drawable/logo"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/FD.infoLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/FD.previewView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
+        app:layout_constraintTop_toTopOf="@+id/FD.previewView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
