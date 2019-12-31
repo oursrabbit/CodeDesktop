@@ -280,7 +280,7 @@ public class ScannerActivity extends AppCompatActivity {
                 0, 0, 0, 0
         });
         filterBuilder.setDeviceName("BFASS");
-        filters.add(filterBuilder.build());
+        //filters.add(filterBuilder.build());
 
         leScanner.startScan(filters, scanSettings, myScanCallback);
     }
@@ -288,14 +288,15 @@ public class ScannerActivity extends AppCompatActivity {
     private ScanCallback myScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
-            byte[] beaconRawData = result.getScanRecord().getManufacturerSpecificData(0x0501);
-            BFASSBeacon beacon = BFASSBeacon.Creater(beaconRawData);
+            byte[] beaconRawData = result.getScanRecord().getManufacturerSpecificData(0x0502);
+            /*BFASSBeacon beacon = BFASSBeacon.Creater(beaconRawData);
             //Update Local iBaeacon List: bfassBeaconHashMap
             if (bfassBeaconHashMap.containsKey(beacon.Building + beacon.Room + "")) {
                 bfassBeaconHashMap.get(beacon.Building + beacon.Room + "").LastAdvertisingTime = new Date();
             } else {
                 bfassBeaconHashMap.put(beacon.Building + beacon.Room + "", beacon);
-            }
+            }*/
+
             super.onScanResult(callbackType, result);
         }
     };

@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         adapter = manager.getAdapter();
         adapter.setName("BFASS");
-        advertiser = adapter.getBluetoothLeAdvertiser();
 
+        advertiser = adapter.getBluetoothLeAdvertiser();
         setAdvertiseData();
         setAdvertiseSettings();
 
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     protected void setAdvertiseSettings() {
         AdvertiseSettings.Builder mBuilder = new AdvertiseSettings.Builder();
         mBuilder.setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY);
-        mBuilder.setConnectable(false);
+        mBuilder.setConnectable(true);
         mBuilder.setTimeout(0);
         mBuilder.setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_MEDIUM);
         mAdvertiseSettings = mBuilder.build();

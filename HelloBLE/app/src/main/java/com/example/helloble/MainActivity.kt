@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ParcelUuid
+import android.util.Log
 import android.widget.Toast
 import androidx.core.app.JobIntentService
 
@@ -30,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
-            var record = result?.scanRecord
-            var data = record?.serviceData
+            var record = result?.scanRecord;
+            var data = record?.manufacturerSpecificData
         }
     }
 
