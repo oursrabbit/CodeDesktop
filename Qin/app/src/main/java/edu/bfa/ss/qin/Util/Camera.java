@@ -145,6 +145,7 @@ public class Camera {
             public void onConfigured(@NonNull CameraCaptureSession session) {
                 try {
                     updateInfoLabel("开始识别，请面对摄像头...");
+                    Log.d("QIN","setup requese");
                     CaptureRequest.Builder builder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
                     builder.addTarget(surface);
                     builder.addTarget(bufferSurface);
@@ -285,10 +286,13 @@ public class Camera {
     }
 
     private void getaccessToken() {
+        Log.d("QIN","start get at");
         String url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg";
         try {
+            Log.d("QIN","open connection");
             HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("POST");
+            Log.d("QIN","get resp code");
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
                 accessToken = response.getString("access_token");
@@ -306,9 +310,11 @@ public class Camera {
     }
 
     private void faceDetect() {
+        Log.d("QIN","start fd");
         detectState = FaceDetectStep.detectingFace;
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + accessToken;
         try {
+            Log.d("QIN","open fd connection");
             HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
@@ -323,6 +329,7 @@ public class Camera {
             os.writeBytes(jsonParam.toString());
             os.flush();
             os.close();
+            Log.d("QIN","get fd resp code");
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
                 int error_code = response.getInt("error_code");

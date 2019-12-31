@@ -42,12 +42,12 @@ public class ScannerActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private BluetoothLeScanner leScanner;
     private AlertDialog waitingDialog;
-    private HashMap<String, iBeacon> iBeacons;
+    private HashMap<String, BFASSBeacon> bfassBeaconHashMap;
 
-    private ListView iBeaconListView;
+    private ListView bfassBeaconListView;
     private TextView infoLabel;
 
-    private iBeacon checkBeacon = null;
+    private BFASSBeacon checkBeacon = null;
 
     private int countTime = 30;
     private int countTimeRemind = 32000;
@@ -59,20 +59,6 @@ public class ScannerActivity extends AppCompatActivity {
     private String LeancloudKeyHeader = "X-LC-Key";
     private String HttpContentTypeHeader = "Content-Type";
     private String HttpContentType = "application/json";
-    private ScanCallback myScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            byte[] beaconRawData = result.getScanRecord().getBytes();
-            iBeacon beacon = iBeacon.Creater(beaconRawData);
-            //Update Local iBaeacon List: iBeacons
-            if (iBeacons.containsKey(beacon.Minor + "")) {
-                iBeacons.get(beacon.Minor + "").LastAdvertisingTime = new Date();
-            } else {
-                iBeacons.put(beacon.Minor + "", beacon);
-            }
-            super.onScanResult(callbackType, result);
-        }
-    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -87,12 +73,12 @@ public class ScannerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scanner);
 
         infoLabel = findViewById(R.id.S_counddownlabel);
-        iBeaconListView = findViewById(R.id.S_ibeaconlist);
-        iBeaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        bfassBeaconListView = findViewById(R.id.S_ibeaconlist);
+        bfassBeaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                checkBeacon = (iBeacon) iBeaconListView.getItemAtPosition(position);
-                iBeaconListView.setEnabled(false);
+                checkBeacon = (BFASSBeacon) bfassBeaconListView.getItemAtPosition(position);
+                bfassBeaconListView.setEnabled(false);
                 waitingDialog.show();
                 new Thread(new Runnable() {
                     @Override
@@ -116,21 +102,23 @@ public class ScannerActivity extends AppCompatActivity {
 
         countDown();
         if(StaticData.StudentID.equals("01050305")) {
-            iBeacons = new HashMap<String, iBeacon>();
+            bfassBeaconHashMap = new HashMap<String, BFASSBeacon>();
             for (int i = 0; i < 30; i ++) {
-                iBeacon newBeacon = new iBeacon();
+                BFASSBeacon newBeacon = new BFASSBeacon();
                 newBeacon.LastAdvertisingTime = new Date(2099,1,1);
-                newBeacon.Minor = (new Random(i)).nextInt(600);
-                iBeacons.put(newBeacon.Minor + "", newBeacon);
+                newBeacon.Building = (new Random(i)).nextInt(600);
+                newBeacon.Room = (new Random(i)).nextInt(600);
+                newBeacon.Extra = (new Random(i)).nextInt(600);
+                bfassBeaconHashMap.put(newBeacon.Building + newBeacon.Room + "", newBeacon);
             }
-        } else {
-            new Thread(new Runnable() {
+        }
+
+        new Thread(new Runnable() {
                 @Override
                 public void run() {
                     setupNFCScanner();
                 }
             }).start();
-        }
     }
 
     private void updateDB() {
@@ -146,7 +134,7 @@ public class ScannerActivity extends AppCompatActivity {
             connection.setRequestProperty("Content-Type", "application/json");
             JSONObject jsonParam = new JSONObject();
             jsonParam.put("StudentID", StaticData.StudentID);
-            jsonParam.put("RoomID", checkBeacon.Minor + "");
+            jsonParam.put("RoomID", checkBeacon.Building + checkBeacon.Room + "");
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());
             os.writeBytes(jsonParam.toString());
             os.flush();
@@ -178,22 +166,22 @@ public class ScannerActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                iBeaconListView.post(new Runnable() {
+                bfassBeaconListView.post(new Runnable() {
                     @Override
                     public void run() {
                         waitingDialog.hide();
-                        iBeaconListView.setEnabled(true);
+                        bfassBeaconListView.setEnabled(true);
                     }
                 });
                 Toast.makeText(this, "签到失败，请重新签到", Toast.LENGTH_LONG).show();
                 return;
             }
         } catch (Exception e) {
-            iBeaconListView.post(new Runnable() {
+            bfassBeaconListView.post(new Runnable() {
                 @Override
                 public void run() {
                     waitingDialog.hide();
-                    iBeaconListView.setEnabled(true);
+                    bfassBeaconListView.setEnabled(true);
                 }
             });
             Toast.makeText(this, "系统错误，请重新签到", Toast.LENGTH_LONG).show();
@@ -215,19 +203,19 @@ public class ScannerActivity extends AppCompatActivity {
                             infoLabel.setText(countTime + "");
 
                         List<String> removeKeys = new ArrayList<String>();
-                        for (iBeacon bb : iBeacons.values()) {
+                        for (BFASSBeacon bb : bfassBeaconHashMap.values()) {
                             if ((((new Date()).getTime()) - (bb.LastAdvertisingTime.getTime())) > 10 * 1000) {
-                                removeKeys.add(bb.Minor + "");
+                                removeKeys.add(bb.Building + bb.Room + "");
                             }
                         }
                         for (String rk : removeKeys) {
-                            iBeacons.remove(rk);
+                            bfassBeaconHashMap.remove(rk);
                         }
-                        iBeaconListView.post(new Runnable() {
+                        bfassBeaconListView.post(new Runnable() {
                             @Override
                             public void run() {
-                                iBeaconAdapter adapter = new iBeaconAdapter(ScannerActivity.this, R.layout.table_scanner_item, new ArrayList<iBeacon>(iBeacons.values()));
-                                iBeaconListView.setAdapter(adapter);
+                                BFASSBeaconAdapter adapter = new BFASSBeaconAdapter(ScannerActivity.this, R.layout.table_scanner_item, new ArrayList<BFASSBeacon>(bfassBeaconHashMap.values()));
+                                bfassBeaconListView.setAdapter(adapter);
                             }
                         });
                     }
@@ -268,7 +256,7 @@ public class ScannerActivity extends AppCompatActivity {
     }
 
     private void setupNFCScanner() {
-        iBeacons = new HashMap<String, iBeacon>();
+        bfassBeaconHashMap = new HashMap<String, BFASSBeacon>();
         leScanner = ((BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE)).getAdapter().getBluetoothLeScanner();
 
         ScanSettings.Builder builder = new ScanSettings.Builder();
@@ -280,67 +268,76 @@ public class ScannerActivity extends AppCompatActivity {
 
         List<ScanFilter> filters = new ArrayList<ScanFilter>();
         ScanFilter.Builder filterBuilder = new ScanFilter.Builder();
-        filterBuilder.setManufacturerData(76, new byte[]{
-                0x02, 0x15,
-                (byte) 0xFD, (byte) 0xA5, 0x06, (byte) 0x93,
-                (byte) 0xA4, (byte) 0xE2,
-                0x4F, (byte) 0xB1,
-                (byte) 0xAF, (byte) 0xCF, (byte) 0xC6, (byte) 0xEB, 0x07, 0x64, 0x78, 0x25,
-                0x00, 0x00,
-                0x00, 0x00,
-                0x00
+        filterBuilder.setManufacturerData(0x0501, new byte[]{
+                0x03, 0x0C,
+                0x00, 0x00,0x00, 0x00,
+                0x00, 0x00,0x00, 0x00,
+                0x00, 0x00,0x00, 0x00,
         }, new byte[]{
                 1, 1,
-                1, 1, 1, 1,
-                1, 1,
-                1, 1,
-                1, 1, 1, 1, 1, 1, 1, 1,
-                0, 0,
-                0, 0,
-                0
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
         });
+        filterBuilder.setDeviceName("BFASS");
         filters.add(filterBuilder.build());
 
         leScanner.startScan(filters, scanSettings, myScanCallback);
     }
+
+    private ScanCallback myScanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            byte[] beaconRawData = result.getScanRecord().getManufacturerSpecificData(0x0501);
+            BFASSBeacon beacon = BFASSBeacon.Creater(beaconRawData);
+            //Update Local iBaeacon List: bfassBeaconHashMap
+            if (bfassBeaconHashMap.containsKey(beacon.Building + beacon.Room + "")) {
+                bfassBeaconHashMap.get(beacon.Building + beacon.Room + "").LastAdvertisingTime = new Date();
+            } else {
+                bfassBeaconHashMap.put(beacon.Building + beacon.Room + "", beacon);
+            }
+            super.onScanResult(callbackType, result);
+        }
+    };
 }
 
-class iBeacon {
-    public String UUID;
-    public int Major;
-    public int Minor;
-    public int SignalPower;
+class BFASSBeacon {
+    public String DeviceName;
+    public int Building;
+    public int Room;
+    public int Extra;
 
     public Date LastAdvertisingTime;
 
-    public static iBeacon Creater(byte[] rawData) {
-        iBeacon beacon = new iBeacon();
-        beacon.UUID = "";
-        for (int i = 9; i < 25; i++) {
-            beacon.UUID += String.format("%02X", rawData[i]);
+    public static BFASSBeacon Creater(byte[] rawData) {
+        BFASSBeacon beacon = new BFASSBeacon();
+        beacon.DeviceName = "BFASS";
+        beacon.Building = 0;
+        for (int i = 2; i < 6; i++) {
+            beacon.Building += rawData[i];
+            beacon.Building = beacon.Building << (8 * (5 - i));
         }
-        beacon.Major = 0;
-        for (int i = 25; i < 27; i++) {
-            beacon.Major += rawData[i];
-            beacon.Major = beacon.Major << (8 * (26 - i));
+        beacon.Room = 0;
+        for (int i = 6; i < 10; i++) {
+            beacon.Room += rawData[i];
+            beacon.Room = beacon.Room << (8 * (9 - i));
         }
-        beacon.Minor = 0;
-        for (int i = 27; i < 29; i++) {
-            beacon.Minor += rawData[i];
-            beacon.Minor = beacon.Minor << (8 * (28 - i));
+        beacon.Extra = 0;
+        for (int i = 10; i < 14; i++) {
+            beacon.Extra += rawData[i];
+            beacon.Extra = beacon.Extra << (8 * (13 - i));
         }
-        beacon.SignalPower = (int) rawData[29];
         beacon.LastAdvertisingTime = new Date();
         return beacon;
     }
 }
 
-class iBeaconAdapter extends ArrayAdapter<iBeacon> {
+class BFASSBeaconAdapter extends ArrayAdapter<BFASSBeacon> {
     private Context host;
 
     private int resourceId;
 
-    public iBeaconAdapter(Context context, int resource, List<iBeacon> objects) {
+    public BFASSBeaconAdapter(Context context, int resource, List<BFASSBeacon> objects) {
         super(context, resource, objects);
         resourceId = resource;
         host = context;
@@ -351,7 +348,7 @@ class iBeaconAdapter extends ArrayAdapter<iBeacon> {
         if (convertView == null) {
             convertView = LayoutInflater.from(host).inflate(resourceId, container, false);
         }
-        ((TextView) convertView.findViewById(R.id.S_ITEM_roomid)).setText(getItem(position).Minor + "");
+        ((TextView) convertView.findViewById(R.id.S_ITEM_roomid)).setText(getItem(position).Room + "");
         return convertView;
     }
 }
