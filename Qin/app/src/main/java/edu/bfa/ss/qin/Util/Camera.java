@@ -39,8 +39,9 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import edu.bfa.ss.qin.CheckResultActivity;
 import edu.bfa.ss.qin.Custom.UI.AutoFitTextureView;
-import edu.bfa.ss.qin.ScannerActivity;
+import edu.bfa.ss.qin.FaceDetectActivity;
 
 public class Camera {
     private Context host;
@@ -62,11 +63,18 @@ public class Camera {
     private String accessToken = "";
     private String baseImage = "";
 
-    public Camera(Context context, AutoFitTextureView previewView, TextView infoLabel) {
+    public static interface CameraFaceDetectListener {
+        public void onFaceDetected();
+    }
+
+    private CameraFaceDetectListener listener;
+
+    public Camera(Context context, AutoFitTextureView previewView, TextView infoLabel, CameraFaceDetectListener listener) {
         this.host = context;
         this.previewView = previewView;
         this.infoLabel = infoLabel;
         this.manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
+        this.listener = listener;
     }
 
     private TextureView.SurfaceTextureListener mySurfaceTextListener = new TextureView.SurfaceTextureListener() {
@@ -190,22 +198,17 @@ public class Camera {
     private ImageReader.OnImageAvailableListener imageAvailableListener = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            baseImage = getBase64Image(reader);
             if (isDetectFace == false && detectState == FaceDetectStep.waitingImage) {
+                baseImage = getBase64Image(reader);
                 detectState = FaceDetectStep.gettingAccessToken;
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                         getaccessToken();
                     }
                 }).start();
-            } else if (detectState == FaceDetectStep.stop) {
-                return;
+            } else {
+                reader.acquireNextImage().close();
             }
         }
     };
@@ -233,6 +236,7 @@ public class Camera {
 
     public void startRunning() {
         startBackgroundThread();
+        updateInfoLabel("");
         detectState = FaceDetectStep.stop;
         if (previewView.isAvailable()) {
             openCamera(previewView.getWidth(), previewView.getHeight());
@@ -243,7 +247,6 @@ public class Camera {
 
     public void stopRunning() {
         stopBackgroundThread();
-        updateInfoLabel("");
         detectState = FaceDetectStep.stop;
         if (device != null)
             device.close();
@@ -286,31 +289,20 @@ public class Camera {
     }
 
     private void getaccessToken() {
-        Log.d("QIN","start get at");
-        String url = "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg";
-        try {
-            Log.d("QIN","open connection");
-            HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
-            connection.setRequestMethod("POST");
-            Log.d("QIN","get resp code");
-            if (connection.getResponseCode() == 200) {
-                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
-                accessToken = response.getString("access_token");
-                faceDetect();
-            } else {
-                detectState = FaceDetectStep.waitingImage;
-                updateInfoLabel("网络连接失败，正在重试...");
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            detectState = FaceDetectStep.waitingImage;
-            updateInfoLabel("网络连接失败，正在重试...");
+        Log.d("QIN","getaccessToken");
+        int retry = 10;
+        accessToken = "";
+        while ((retry--) != 0 && accessToken == "")
+            accessToken = StaticData.getBaiduAIAccessToken();
+        if(accessToken == ""){
+            updateInfoLabel("获取AT失败...");
+            return;
         }
+        faceDetect();
     }
 
     private void faceDetect() {
-        Log.d("QIN","start fd");
+        Log.d("QIN","faceDetect");
         detectState = FaceDetectStep.detectingFace;
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + accessToken;
         try {
@@ -335,9 +327,7 @@ public class Camera {
                 int error_code = response.getInt("error_code");
                 if (error_code == 0 || StaticData.StudentID.equals("01050305")) {
                     stopRunning();
-                    Intent intent = new Intent();
-                    intent.setClass(host, ScannerActivity.class);
-                    host.startActivity(intent);
+                    listener.onFaceDetected();
                 } else {
                     infoLabel.post(new Runnable() {
                         @Override

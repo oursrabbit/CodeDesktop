@@ -41,7 +41,6 @@ import edu.bfa.ss.qin.Util.StaticData;
 public class ScannerActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private BluetoothLeScanner leScanner;
-    private AlertDialog waitingDialog;
     private HashMap<String, BFASSBeacon> bfassBeaconHashMap;
 
     private ListView bfassBeaconListView;
@@ -86,17 +85,6 @@ public class ScannerActivity extends AppCompatActivity {
                         updateDB();
                     }
                 }).start();
-            }
-        });
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(ScannerActivity.this);
-        builder.setMessage("正在上传签到数据...");
-        waitingDialog= builder.create();
-        waitingDialog.setCanceledOnTouchOutside(false);
-        waitingDialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                return keyCode == KeyEvent.KEYCODE_BACK;
             }
         });
 

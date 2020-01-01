@@ -47,36 +47,9 @@ public class FaceDetectActivity extends AppCompatActivity {
         logoBgImage = findViewById(R.id.FD_logobg);
         
         infoLabel.setText("");
-
-        if (StaticData.checkPermission(this) == false) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(FaceDetectActivity.this);
-            builder.setMessage("未开启硬件权限，请前往应用设置开启")
-                    .setPositiveButton("前往", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                            intent.setData(Uri.parse("package:" + "edu.bfa.ss.qin"));
-                            startActivity(intent);
-                        }
-                    })
-                    .setNegativeButton("取消", null);
-            builder.show();
-            return;
-        }
-
-        if (checkStudentID() == false) {
-            Intent intent = new Intent();
-            intent.setClass(FaceDetectActivity.this, QinSettingActivity.class);
-            startActivity(intent);
-        }
     }
 
     public void checkLogButtonClicked(View button) {
-        if (checkStudentID() == false) {
-            Intent intent = new Intent();
-            intent.setClass(FaceDetectActivity.this, CheckDBActivity.class);
-            startActivity(intent);
-            return;
-        }
         cleanUpVedioCapture();
         Intent intent = new Intent();
         intent.setClass(FaceDetectActivity.this, CheckDBActivity.class);
@@ -84,12 +57,6 @@ public class FaceDetectActivity extends AppCompatActivity {
     }
 
     public void faceDetectButtonClicked(View button) {
-        if (checkStudentID() == false) {
-            Intent intent = new Intent();
-            intent.setClass(FaceDetectActivity.this, QinSettingActivity.class);
-            startActivity(intent);
-            return;
-        }
         setupVideoCapture();
     }
 
@@ -116,15 +83,14 @@ public class FaceDetectActivity extends AppCompatActivity {
         builder.show();
     }
 
-    private boolean checkStudentID() {
-        SharedPreferences localStore = getSharedPreferences("localData", Context.MODE_PRIVATE);
-        StaticData.StudentID = localStore.getString("StudentID", "");
-        return StaticData.StudentID != "";
-    }
-
     private void setupVideoCapture() {
         infoLabel.setText("");
-        captureSession = new Camera(FaceDetectActivity.this, previewView, infoLabel);
+        captureSession = new Camera(FaceDetectActivity.this, previewView, infoLabel, new Camera.CameraFaceDetectListener() {
+            @Override
+            public void onFaceDetected() {
+
+            }
+        });
         this.previewView.setVisibility(View.VISIBLE);
         this.logoBgImage.setVisibility(View.INVISIBLE);
         this.logoImage.setVisibility(View.INVISIBLE);
