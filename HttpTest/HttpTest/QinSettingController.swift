@@ -10,7 +10,7 @@ import UIKit
 
 var StudentID = "";
 
-class IndexViewController: UIViewController {
+class QinSettingController: UIViewController {
 
     @IBOutlet weak var idtextView: UITextField!
     
@@ -22,11 +22,7 @@ class IndexViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         idtextView.text = StudentID
     }
-    
-    @IBAction func checkLogButtonClicked(_ sender: Any) {
-        self.performSegue(withIdentifier: "SettingToLog", sender: self)
-    }
-    
+        
     @IBAction func UpdateStudentID(_ sender: Any?) {
         StudentID = idtextView.text!
         let localStore = UserDefaults.standard

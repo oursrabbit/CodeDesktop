@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C94EBBE238E43EB00D9059B /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C94EBBD238E43EB00D9059B /* IndexViewController.swift */; };
+		4C94EBBE238E43EB00D9059B /* QinSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C94EBBD238E43EB00D9059B /* QinSettingController.swift */; };
 		4C9D87D42397BF3B00A5BF54 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D87D32397BF3B00A5BF54 /* Utilities.swift */; };
 		4C9D87D62397DAF000A5BF54 /* CheckDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9D87D52397DAF000A5BF54 /* CheckDBViewController.swift */; };
 		4CB0B6E12393F2370097DC5C /* IBeaconScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB0B6E02393F2370097DC5C /* IBeaconScannerViewController.swift */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C94EBBD238E43EB00D9059B /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
+		4C94EBBD238E43EB00D9059B /* QinSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QinSettingController.swift; sourceTree = "<group>"; };
 		4C9D87D12397B60A00A5BF54 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		4C9D87D32397BF3B00A5BF54 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		4C9D87D52397DAF000A5BF54 /* CheckDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 				4CBBBE01238B4C2B001F4A1A /* Info.plist */,
 				4CBBBE0A238B6C54001F4A1A /* Preview.swift */,
 				4CBC1E0C238E228600B23DFB /* FaceDetectViewController.swift */,
-				4C94EBBD238E43EB00D9059B /* IndexViewController.swift */,
+				4C94EBBD238E43EB00D9059B /* QinSettingController.swift */,
 				4CB0B6E02393F2370097DC5C /* IBeaconScannerViewController.swift */,
 				4C9D87D32397BF3B00A5BF54 /* Utilities.swift */,
 				4C9D87D52397DAF000A5BF54 /* CheckDBViewController.swift */,
@@ -184,7 +184,7 @@
 				4CB0B6E12393F2370097DC5C /* IBeaconScannerViewController.swift in Sources */,
 				4C9D87D62397DAF000A5BF54 /* CheckDBViewController.swift in Sources */,
 				4CBBBDF6238B4C22001F4A1A /* SceneDelegate.swift in Sources */,
-				4C94EBBE238E43EB00D9059B /* IndexViewController.swift in Sources */,
+				4C94EBBE238E43EB00D9059B /* QinSettingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
