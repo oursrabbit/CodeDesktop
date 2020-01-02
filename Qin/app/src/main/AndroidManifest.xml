@@ -20,7 +20,6 @@
         <activity android:name=".CheckResultActivity"></activity>
         <activity android:name=".FaceDetectSimpleActivity" />
         <activity android:name=".RoomListActivity"/>
-        <activity android:name=".ScannerActivity" />
         <activity android:name=".CheckDBActivity" />
         <activity android:name=".QinSettingActivity">
             <intent-filter>
@@ -29,7 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FaceDetectActivity" />
     </application>
 
 </manifest>

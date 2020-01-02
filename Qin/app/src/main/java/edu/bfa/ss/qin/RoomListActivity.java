@@ -71,6 +71,11 @@ public class RoomListActivity extends AppCompatActivity {
                         .setNegativeButton("取消", null)
                         .setView(convertView).show();
                 return true;
+            case R.id.RL_MENU_checklog:
+                Intent intent = new Intent();
+                intent.setClass(RoomListActivity.this, CheckDBActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -96,7 +101,7 @@ public class RoomListActivity extends AppCompatActivity {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Building building = buildings.get(groupPosition);
                 Room room = building.Rooms.get(childPosition);
-                StaticData.CheckInRoom = room;
+                StaticData.CheckInRoomID = room.RoomID;
                 new InCanceledAlterDialog.Builder( RoomListActivity.this).setMessage("是否已经到达房间？\n\n" + building.BuildingName + " " + room.RoomName)
                         .setPositiveButton("立刻签到", new DialogInterface.OnClickListener() {
                             @Override

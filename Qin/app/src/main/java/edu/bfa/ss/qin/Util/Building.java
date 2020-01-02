@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Building extends RealmObject {
     public String getBuildingName() {
@@ -22,6 +23,16 @@ public class Building extends RealmObject {
         Rooms = rooms;
     }
 
+    public int getBuildingID() {
+        return BuildingID;
+    }
+
+    public void setBuildingID(int buildingID) {
+        BuildingID = buildingID;
+    }
+
+    @PrimaryKey
+    public int BuildingID;
     public String BuildingName;
     public RealmList<Room> Rooms;
 }

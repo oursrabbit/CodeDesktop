@@ -24,8 +24,11 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import edu.bfa.ss.qin.Util.CheckLog;
 import edu.bfa.ss.qin.Util.DatabaseHelper;
+import edu.bfa.ss.qin.Util.Room;
 import edu.bfa.ss.qin.Util.StaticData;
+import io.realm.Realm;
 
 public class CheckDBActivity extends AppCompatActivity {
 
@@ -59,23 +62,23 @@ public class CheckDBActivity extends AppCompatActivity {
     private void LoadingDatabase() {
         try {
             updateInfoLabel("正在加载数据...");
-            String condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.StudentID + "\"}", "UTF-8");
+            String condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.CurrentUser.StudentID + "\"}", "UTF-8");
             String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
             JSONObject response = DatabaseHelper.LCSearch(url);
             JSONArray DatabaseResults = response.getJSONArray("results");
-            final List<CheckDBItem> checkLogs = new ArrayList<CheckDBItem>();
+            final List<CheckLog> checkLogs = new ArrayList<CheckLog>();
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                CheckDBItem newLog = new CheckDBItem();
+                CheckLog newLog = new CheckLog();
                 newLog.StudentID = checkLog.getString("StudentID");
-                newLog.RoomID = checkLog.getString("RoomID");
-                newLog.CheckDateString = checkLog.getString("createdAt");
+                newLog.RoomID = checkLog.getInt("RoomID");
+                newLog.CheckDate = StaticData.fromISO8601UTC(checkLog.getString("createdAt"));
                 checkLogs.add(newLog);
             }
             logsTable.post(new Runnable() {
                 @Override
                 public void run() {
-                    idLabel.setText(StaticData.StudentID);
+                    idLabel.setText(StaticData.CurrentUser.StudentID);
                     CheckDBItemAdapter adapter = new CheckDBItemAdapter(CheckDBActivity.this, R.layout.table_check_db_item, checkLogs);
                     logsTable.setAdapter(adapter);
                 }
@@ -87,21 +90,11 @@ public class CheckDBActivity extends AppCompatActivity {
     }
 }
 
-class CheckDBItem {
-    public String StudentID;
-    public String CheckDateString;
-    public String RoomID;
-
-    public Date getCheckDate() {
-        return  StaticData.fromISO8601UTC(CheckDateString);
-    }
-}
-
-class CheckDBItemAdapter extends ArrayAdapter<CheckDBItem> {
+class CheckDBItemAdapter extends ArrayAdapter<CheckLog> {
     private Context host;
     private int resourceId;
 
-    public CheckDBItemAdapter(Context context, int resource, List<CheckDBItem> objects) {
+    public CheckDBItemAdapter(Context context, int resource, List<CheckLog> objects) {
         super(context, resource, objects);
         resourceId = resource;
         host = context;
@@ -112,9 +105,12 @@ class CheckDBItemAdapter extends ArrayAdapter<CheckDBItem> {
         if (convertView == null) {
             convertView = LayoutInflater.from(host).inflate(resourceId, container, false);
         }
-        ((TextView) convertView.findViewById(R.id.CDB_ITEM_roomid)).setText(getItem(position).RoomID);
-        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checkdate)).setText(StaticData.getDateString("yyyy年MM月dd日", getItem(position).getCheckDate()));
-        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checktime)).setText(StaticData.getDateString("HH时mm分", getItem(position).getCheckDate()));
+        CheckLog checkLog = getItem(position);
+        Realm realm = Realm.getDefaultInstance();
+        Room checkRoom = realm.where(Room.class).equalTo("RoomID", checkLog.RoomID).findFirst();
+        ((TextView) convertView.findViewById(R.id.CDB_ITEM_roomid)).setText(checkRoom.RoomName);
+        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checkdate)).setText(StaticData.getDateString("yyyy年MM月dd日", getItem(position).CheckDate));
+        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checktime)).setText(StaticData.getDateString("HH时mm分", getItem(position).CheckDate));
         return convertView;
     }
 }

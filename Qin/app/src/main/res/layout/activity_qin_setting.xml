@@ -26,7 +26,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:background="#2D575B"
-        android:enabled="false"
         android:onClick="updateStudentID"
         android:text="登录"
         android:textAlignment="center"

@@ -22,8 +22,9 @@
 
     <TextView
         android:id="@+id/S.ITEM.roomid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="60sp"
+        android:gravity="center"
         android:text="606"
         android:textAlignment="center"
         android:textColor="#FFFFFF"

@@ -41,7 +41,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import edu.bfa.ss.qin.CheckResultActivity;
 import edu.bfa.ss.qin.Custom.UI.AutoFitTextureView;
-import edu.bfa.ss.qin.FaceDetectActivity;
 
 public class Camera {
     private Context host;
@@ -316,7 +315,7 @@ public class Camera {
             jsonParam.put("image", baseImage);
             jsonParam.put("image_type", "BASE64");
             jsonParam.put("group_id_list", "2019BK");
-            jsonParam.put("user_id", StaticData.StudentID);
+            jsonParam.put("user_id", StaticData.CurrentUser.BaiduFaceID);
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());
             os.writeBytes(jsonParam.toString());
             os.flush();
@@ -325,14 +324,14 @@ public class Camera {
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
                 int error_code = response.getInt("error_code");
-                if (error_code == 0 || StaticData.StudentID.equals("01050305")) {
+                if (error_code == 0 || StaticData.CurrentUser.StudentID.equals("01050305")) {
                     stopRunning();
                     listener.onFaceDetected();
                 } else {
                     infoLabel.post(new Runnable() {
                         @Override
                         public void run() {
-                            infoLabel.setText("请学号" + StaticData.StudentID + "的同学面对手机");
+                            infoLabel.setText("请学号" + StaticData.CurrentUser.StudentID + "的同学面对手机");
                             detectState = FaceDetectStep.waitingImage;
                             return;
                         }

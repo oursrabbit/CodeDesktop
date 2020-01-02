@@ -25,19 +25,19 @@ import javax.net.ssl.HttpsURLConnection;
 
 import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 import static edu.bfa.ss.qin.Util.DatabaseHelper.LeancloudAPIBaseURL;
 
 public class StaticData {
-    public static String StudentID = "";
-    public static Room CheckInRoom;
+    public static Student CurrentUser = new Student();
+    public static int CheckInRoomID;
     public static Boolean InitState = true;
     private static Context errorHost;
-    private static Realm realm;
 
-    public static boolean InitQinApplication(Context errorContext, Realm realm) {
+
+    public static boolean InitQinApplication(Context errorContext) {
         errorHost = errorContext;
-        StaticData.realm = realm;
         InitState = false;
 
         if (checkPermission() == false){
@@ -47,12 +47,6 @@ public class StaticData {
             return  false;
         }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                getBaiduAIAccessToken();
-            }
-        }).start();
         return true;
     }
 
@@ -156,6 +150,7 @@ public class StaticData {
     }
 
     private static boolean updateLocalDatabase() {
+        Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         realm.deleteAll();
         HashMap<String, Building> buildings = new HashMap<String, Building>();
@@ -166,23 +161,16 @@ public class StaticData {
             JSONArray DatabaseResults = response.getJSONArray("results");
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                Building newBuilding = realm.createObject(Building.class);
+                Building newBuilding = realm.createObject(Building.class, checkLog.getInt("BuildingID"));
                 newBuilding.BuildingName = checkLog.getString("BuildingName");
                 buildings.put(newBuilding.BuildingName, newBuilding);
             }
-        } catch (Exception e) {
-            realm.cancelTransaction();
-            e.printStackTrace();
-            return false;
-        }
-        //Room
-        try {
-            String url = LeancloudAPIBaseURL + "/1.1/classes/Room?limit=1000&&&&";
-            JSONObject response = DatabaseHelper.LCSearch(url);
-            JSONArray DatabaseResults = response.getJSONArray("results");
+            url = LeancloudAPIBaseURL + "/1.1/classes/Room?limit=1000&&&&";
+            response = DatabaseHelper.LCSearch(url);
+            DatabaseResults = response.getJSONArray("results");
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                Room newRoom = realm.createObject(Room.class);
+                Room newRoom = realm.createObject(Room.class, checkLog.getInt("RoomID"));
                 newRoom.RoomName = checkLog.getString("RoomName");
                 //Relation
                 String locationName = checkLog.getString("BuildingName");
@@ -190,12 +178,14 @@ public class StaticData {
                 newRoom.Location = location;
                 location.Rooms.add(newRoom);
             }
+            realm.commitTransaction();
         } catch (Exception e) {
             realm.cancelTransaction();
             e.printStackTrace();
             return false;
+        } finally {
+            realm.close();
         }
-        realm.commitTransaction();
         return true;
     }
 
