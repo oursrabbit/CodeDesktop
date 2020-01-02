@@ -24,17 +24,10 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import edu.bfa.ss.qin.Util.DatabaseHelper;
 import edu.bfa.ss.qin.Util.StaticData;
 
 public class CheckDBActivity extends AppCompatActivity {
-
-    private String LeancloudAppid = "YHwFdAE1qj1OcWfJ5xoayLKr-gzGzoHsz";
-    private String LeancloudAppKey = "UbnM6uOP2mxah3nFMzurEDQL";
-    private String LeancloudAPIBaseURL = "https://yhwfdae1.lc-cn-n1-shared.com";
-    private String LeancloudIDHeader = "X-LC-Id";
-    private String LeancloudKeyHeader = "X-LC-Key";
-    private String HttpContentTypeHeader = "Content-Type";
-    private String HttpContentType = "application/json";
 
     private ListView logsTable;
     private TextView idLabel;
@@ -67,36 +60,26 @@ public class CheckDBActivity extends AppCompatActivity {
         try {
             updateInfoLabel("正在加载数据...");
             String condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.StudentID + "\"}", "UTF-8");
-            String url = LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
-            HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
-            connection.setRequestMethod("GET");
-            connection.setRequestProperty(LeancloudIDHeader, LeancloudAppid);
-            connection.setRequestProperty(LeancloudKeyHeader, LeancloudAppKey);
-            connection.setRequestProperty(HttpContentTypeHeader, HttpContentType);
-            if (connection.getResponseCode() == 200) {
-                JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
-                JSONArray DatabaseResults = response.getJSONArray("results");
-                final List<CheckDBItem> checkLogs = new ArrayList<CheckDBItem>();
-                for (int i = 0; i < DatabaseResults.length(); i++) {
-                    JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                    CheckDBItem newLog = new CheckDBItem();
-                    newLog.StudentID = checkLog.getString("StudentID");
-                    newLog.RoomID = checkLog.getString("RoomID");
-                    newLog.CheckDateString = checkLog.getString("createdAt");
-                    checkLogs.add(newLog);
-                }
-                logsTable.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        idLabel.setText(StaticData.StudentID);
-                        CheckDBItemAdapter adapter = new CheckDBItemAdapter(CheckDBActivity.this, R.layout.table_check_db_item, checkLogs);
-                        logsTable.setAdapter(adapter);
-                    }
-                });
-            } else {
-                updateInfoLabel("加载失败");
-                return;
+            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
+            JSONObject response = DatabaseHelper.LCSearch(url);
+            JSONArray DatabaseResults = response.getJSONArray("results");
+            final List<CheckDBItem> checkLogs = new ArrayList<CheckDBItem>();
+            for (int i = 0; i < DatabaseResults.length(); i++) {
+                JSONObject checkLog = DatabaseResults.getJSONObject(i);
+                CheckDBItem newLog = new CheckDBItem();
+                newLog.StudentID = checkLog.getString("StudentID");
+                newLog.RoomID = checkLog.getString("RoomID");
+                newLog.CheckDateString = checkLog.getString("createdAt");
+                checkLogs.add(newLog);
             }
+            logsTable.post(new Runnable() {
+                @Override
+                public void run() {
+                    idLabel.setText(StaticData.StudentID);
+                    CheckDBItemAdapter adapter = new CheckDBItemAdapter(CheckDBActivity.this, R.layout.table_check_db_item, checkLogs);
+                    logsTable.setAdapter(adapter);
+                }
+            });
         } catch (Exception e) {
             updateInfoLabel("加载失败");
             e.printStackTrace();
