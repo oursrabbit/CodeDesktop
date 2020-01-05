@@ -24,25 +24,19 @@ import android.widget.Toast;
 import java.util.List;
 
 import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
+import edu.bfa.ss.qin.Custom.UI.StaticAppCompatActivity;
 import edu.bfa.ss.qin.Util.Building;
 import edu.bfa.ss.qin.Util.Room;
 import edu.bfa.ss.qin.Util.StaticData;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class RoomListActivity extends AppCompatActivity {
+public class RoomListActivity extends StaticAppCompatActivity {
 
     private RealmResults<Building> buildings;
     private RealmResults<Room> rooms;
     private Realm realm;
     private ExpandableListView buildingList;
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-            return false;
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

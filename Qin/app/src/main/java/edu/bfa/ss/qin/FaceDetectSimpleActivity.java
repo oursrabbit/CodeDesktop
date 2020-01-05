@@ -14,21 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.bfa.ss.qin.Custom.UI.AutoFitTextureView;
+import edu.bfa.ss.qin.Custom.UI.StaticAppCompatActivity;
 import edu.bfa.ss.qin.Util.Camera;
 
-public class FaceDetectSimpleActivity extends AppCompatActivity {
+public class FaceDetectSimpleActivity extends StaticAppCompatActivity {
 
     private Camera captureSession;
 
     private AutoFitTextureView previewView;
     private TextView infoLabel;
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-            return false;
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

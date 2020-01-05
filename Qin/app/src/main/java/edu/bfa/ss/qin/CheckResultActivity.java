@@ -10,22 +10,21 @@ import android.bluetooth.le.AdvertiseData;
 import android.bluetooth.le.AdvertiseSettings;
 import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Date;
 
 import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
+import edu.bfa.ss.qin.Custom.UI.StaticAppCompatActivity;
 import edu.bfa.ss.qin.Util.DatabaseHelper;
 import edu.bfa.ss.qin.Util.StaticData;
 
-public class CheckResultActivity extends AppCompatActivity {
+public class CheckResultActivity extends StaticAppCompatActivity {
 
     private BluetoothManager manager;
     private BluetoothAdapter adapter;
@@ -35,12 +34,6 @@ public class CheckResultActivity extends AppCompatActivity {
     private Date checkingStartTime;
 
     private TextView infoLabel;
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-            return false;
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +50,7 @@ public class CheckResultActivity extends AppCompatActivity {
             public void run() {
                 if (updateDatabaseAdvertising() == false) {
                     updateInfoLabel("签到失败：无法连接数据库");
+                    advertiser.stopAdvertising(mAdvertiseCallback);
                     return;
                 }
                 startAdvertising();
@@ -66,14 +60,17 @@ public class CheckResultActivity extends AppCompatActivity {
                     if(checkingAdvertisingFlag() == true) {
                         if(uploadCheck() == true) {
                             updateInfoLabel("签到成功");
+                            advertiser.stopAdvertising(mAdvertiseCallback);
                             return;
                         } else {
                             timeout = 60000;
+                            advertiser.stopAdvertising(mAdvertiseCallback);
                         }
                     }
                     try { Thread.sleep(1000);} catch (Exception e) {}
                 }
                 updateInfoLabel("签到失败");
+                advertiser.stopAdvertising(mAdvertiseCallback);
             }
         }).start();
     }
@@ -86,6 +83,14 @@ public class CheckResultActivity extends AppCompatActivity {
                 infoLabel.setText(message);
             }
         });
+    }
+
+    public void goBackRoomList(View button) {
+        startActivity(new Intent().setClass(this, RoomListActivity.class));
+    }
+
+    public void checkLogData(View button) {
+        startActivity(new Intent().setClass(this, CheckDBActivity.class));
     }
 
     private boolean updateDatabaseAdvertising() {
@@ -125,32 +130,32 @@ public class CheckResultActivity extends AppCompatActivity {
 
     protected void setAdvertiseData() {
         ByteBuffer mManufacturerData = ByteBuffer.allocate(23);
-        mManufacturerData.put(0, (byte)0x02); // SubType
-        mManufacturerData.put(1, (byte)0x15); // Length
+        mManufacturerData.put(0, (byte) 0x02); // SubType
+        mManufacturerData.put(1, (byte) 0x15); // Length
         //0a66e898-2d31-11ea-978f-2e728ce88125
-        mManufacturerData.put(2, (byte)0x0a); //
-        mManufacturerData.put(3, (byte)0x66); //
-        mManufacturerData.put(4, (byte)0xe8); //
-        mManufacturerData.put(5, (byte)0x98); //
-        mManufacturerData.put(6, (byte)0x2d); //
-        mManufacturerData.put(7, (byte)0x31); //
-        mManufacturerData.put(8, (byte)0x11); //
-        mManufacturerData.put(9, (byte)0xea); //
-        mManufacturerData.put(10, (byte)0x97); //
-        mManufacturerData.put(11, (byte)0x8f); //
-        mManufacturerData.put(12, (byte)0x2e); //
-        mManufacturerData.put(13, (byte)0x72); //
-        mManufacturerData.put(14, (byte)0x8c); //
-        mManufacturerData.put(15, (byte)0xe8); //
-        mManufacturerData.put(16, (byte)0x81); //
-        mManufacturerData.put(17, (byte)0x25); //
-        mManufacturerData.put(18, StaticData.CurrentUser.getStrudingIDBytes()[0]); //
-        mManufacturerData.put(19, StaticData.CurrentUser.getStrudingIDBytes()[1]); //
-        mManufacturerData.put(20, StaticData.CurrentUser.getStrudingIDBytes()[2]); //
-        mManufacturerData.put(21, StaticData.CurrentUser.getStrudingIDBytes()[3]); //
-        mManufacturerData.put(22, (byte)0xC5); //
+        mManufacturerData.put(2, (byte) 0x0a); //
+        mManufacturerData.put(3, (byte) 0x66); //
+        mManufacturerData.put(4, (byte) 0xe8); //
+        mManufacturerData.put(5, (byte) 0x98); //
+        mManufacturerData.put(6, (byte) 0x2d); //
+        mManufacturerData.put(7, (byte) 0x31); //
+        mManufacturerData.put(8, (byte) 0x11); //
+        mManufacturerData.put(9, (byte) 0xea); //
+        mManufacturerData.put(10, (byte) 0x97); //
+        mManufacturerData.put(11, (byte) 0x8f); //
+        mManufacturerData.put(12, (byte) 0x2e); //
+        mManufacturerData.put(13, (byte) 0x72); //
+        mManufacturerData.put(14, (byte) 0x8c); //
+        mManufacturerData.put(15, (byte) 0xe8); //
+        mManufacturerData.put(16, (byte) 0x81); //
+        mManufacturerData.put(17, (byte) 0x25); //
+        mManufacturerData.put(18, (byte) 0x00); //
+        mManufacturerData.put(19, (byte) 0x00); //
+        mManufacturerData.put(20, StaticData.CurrentUser.getStudentBeaconMinor()[0]); //
+        mManufacturerData.put(21, StaticData.CurrentUser.getStudentBeaconMinor()[1]); //
+        mManufacturerData.put(22, (byte) 0xC5); //
         AdvertiseData.Builder mBuilder = new AdvertiseData.Builder();
-        mBuilder.addManufacturerData(0x4C00, mManufacturerData.array()); //
+        mBuilder.addManufacturerData(76, mManufacturerData.array()); //
         mAdvertiseData = mBuilder.build();
     }
 

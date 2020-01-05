@@ -108,7 +108,7 @@ public class Camera {
                     mPreviewSize = getOptimalSize(map.getOutputSizes(SurfaceTexture.class), width, height);
                     previewView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
 
-                    if (StaticData.checkPermission(this.host) == false) {
+                    if (StaticData.checkPermission(null) == false) {
                         updateInfoLabel("相机权限未开启，无法签到");
                         return;
                     }
@@ -292,7 +292,7 @@ public class Camera {
         int retry = 10;
         accessToken = "";
         while ((retry--) != 0 && accessToken == "")
-            accessToken = StaticData.getBaiduAIAccessToken();
+            accessToken = StaticData.getBaiduAIAccessToken(null);
         if(accessToken == ""){
             updateInfoLabel("获取AT失败...");
             return;
