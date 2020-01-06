@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5D10D06BDFE5D00D7C8D0B4420744BF8"
-               BuildableName = "Pods_Qin_ios.framework"
-               BlueprintName = "Pods-Qin-ios"
+               BlueprintIdentifier = "0B00B2C167CD783351BD1D00BD5AD1F8"
+               BuildableName = "Reachability.framework"
+               BlueprintName = "ReachabilitySwift"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

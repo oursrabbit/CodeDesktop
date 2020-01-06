@@ -3,28 +3,62 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2879F706CE76CFC90C39EA55 /* Pods_Qin_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */; };
 		4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81E823BEE99F00A470FF /* AppDelegate.swift */; };
 		4C9C81EB23BEE99F00A470FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */; };
-		4C9C81ED23BEE99F00A470FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EC23BEE99F00A470FF /* ViewController.swift */; };
+		4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EC23BEE99F00A470FF /* InitializationViewController.swift */; };
 		4C9C81F023BEE99F00A470FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9C81EE23BEE99F00A470FF /* Main.storyboard */; };
 		4C9C81F223BEE9A000A470FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C9C81F123BEE9A000A470FF /* Assets.xcassets */; };
 		4C9C81F523BEE9A000A470FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9C81F323BEE9A000A470FF /* LaunchScreen.storyboard */; };
+		4CA279BC23C2F8BE00DD3D38 /* QinPreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279BB23C2F8BE00DD3D38 /* QinPreView.swift */; };
+		4CA279BE23C2F90800DD3D38 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA279BD23C2F90800DD3D38 /* AVFoundation.framework */; };
+		4CA279C223C2F95500DD3D38 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C123C2F95500DD3D38 /* Building.swift */; };
+		4CA279C423C2F96100DD3D38 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C323C2F96100DD3D38 /* Camera.swift */; };
+		4CA279C623C2F97400DD3D38 /* CheckLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C523C2F97400DD3D38 /* CheckLog.swift */; };
+		4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */; };
+		4CA279CA23C2F98D00DD3D38 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C923C2F98D00DD3D38 /* Room.swift */; };
+		4CA279CC23C2F99500DD3D38 /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279CB23C2F99500DD3D38 /* StaticData.swift */; };
+		4CA279CE23C2F9A200DD3D38 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279CD23C2F9A200DD3D38 /* Student.swift */; };
+		4CA279D023C2F9A900DD3D38 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279CF23C2F9A900DD3D38 /* Version.swift */; };
+		4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D123C2FA8000DD3D38 /* CheckDBViewController.swift */; };
+		4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D323C2FA8B00DD3D38 /* CheckResultViewController.swift */; };
+		4CA279D623C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D523C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift */; };
+		4CA279D823C2FAAE00DD3D38 /* QinSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D723C2FAAE00DD3D38 /* QinSettingViewController.swift */; };
+		4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */; };
+		4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */; };
+		4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C9C81E523BEE99F00A470FF /* Qin-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qin-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C9C81E823BEE99F00A470FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C9C81EC23BEE99F00A470FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C9C81EC23BEE99F00A470FF /* InitializationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationViewController.swift; sourceTree = "<group>"; };
 		4C9C81EF23BEE99F00A470FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C9C81F123BEE9A000A470FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C9C81F423BEE9A000A470FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C9C81F623BEE9A000A470FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CA279BB23C2F8BE00DD3D38 /* QinPreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QinPreView.swift; sourceTree = "<group>"; };
+		4CA279BD23C2F90800DD3D38 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		4CA279C123C2F95500DD3D38 /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		4CA279C323C2F96100DD3D38 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		4CA279C523C2F97400DD3D38 /* CheckLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLog.swift; sourceTree = "<group>"; };
+		4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		4CA279C923C2F98D00DD3D38 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		4CA279CB23C2F99500DD3D38 /* StaticData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticData.swift; sourceTree = "<group>"; };
+		4CA279CD23C2F9A200DD3D38 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		4CA279CF23C2F9A900DD3D38 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		4CA279D123C2FA8000DD3D38 /* CheckDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBViewController.swift; sourceTree = "<group>"; };
+		4CA279D323C2FA8B00DD3D38 /* CheckResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckResultViewController.swift; sourceTree = "<group>"; };
+		4CA279D523C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectSimpleViewController.swift; sourceTree = "<group>"; };
+		4CA279D723C2FAAE00DD3D38 /* QinSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QinSettingViewController.swift; sourceTree = "<group>"; };
+		4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
 		8D91006867A7B390C2862E48 /* Pods-Qin-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qin-ios.debug.xcconfig"; path = "Target Support Files/Pods-Qin-ios/Pods-Qin-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		B6560DF1AB4EA09341915180 /* Pods-Qin-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qin-ios.release.xcconfig"; path = "Target Support Files/Pods-Qin-ios/Pods-Qin-ios.release.xcconfig"; sourceTree = "<group>"; };
 		EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qin_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CA279BE23C2F90800DD3D38 /* AVFoundation.framework in Frameworks */,
 				2879F706CE76CFC90C39EA55 /* Pods_Qin_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,20 +98,53 @@
 		4C9C81E723BEE99F00A470FF /* Qin-ios */ = {
 			isa = PBXGroup;
 			children = (
-				4C9C81E823BEE99F00A470FF /* AppDelegate.swift */,
-				4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */,
-				4C9C81EC23BEE99F00A470FF /* ViewController.swift */,
+				4CA279BA23C2F82A00DD3D38 /* Util */,
+				4CA279B923C2F7FD00DD3D38 /* Custom.UI */,
+				4C9C81EC23BEE99F00A470FF /* InitializationViewController.swift */,
+				4CA279D123C2FA8000DD3D38 /* CheckDBViewController.swift */,
+				4CA279D323C2FA8B00DD3D38 /* CheckResultViewController.swift */,
+				4CA279D523C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift */,
+				4CA279D723C2FAAE00DD3D38 /* QinSettingViewController.swift */,
+				4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */,
+				4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */,
 				4C9C81EE23BEE99F00A470FF /* Main.storyboard */,
 				4C9C81F123BEE9A000A470FF /* Assets.xcassets */,
 				4C9C81F323BEE9A000A470FF /* LaunchScreen.storyboard */,
 				4C9C81F623BEE9A000A470FF /* Info.plist */,
+				4C9C81E823BEE99F00A470FF /* AppDelegate.swift */,
+				4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */,
 			);
 			path = "Qin-ios";
+			sourceTree = "<group>";
+		};
+		4CA279B923C2F7FD00DD3D38 /* Custom.UI */ = {
+			isa = PBXGroup;
+			children = (
+				4CA279BB23C2F8BE00DD3D38 /* QinPreView.swift */,
+				4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */,
+			);
+			path = Custom.UI;
+			sourceTree = "<group>";
+		};
+		4CA279BA23C2F82A00DD3D38 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				4CA279C123C2F95500DD3D38 /* Building.swift */,
+				4CA279C323C2F96100DD3D38 /* Camera.swift */,
+				4CA279C523C2F97400DD3D38 /* CheckLog.swift */,
+				4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */,
+				4CA279C923C2F98D00DD3D38 /* Room.swift */,
+				4CA279CB23C2F99500DD3D38 /* StaticData.swift */,
+				4CA279CD23C2F9A200DD3D38 /* Student.swift */,
+				4CA279CF23C2F9A900DD3D38 /* Version.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		728DFFC0E81382B381EA289D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CA279BD23C2F90800DD3D38 /* AVFoundation.framework */,
 				EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */,
 			);
 			name = Frameworks;
@@ -88,7 +156,6 @@
 				8D91006867A7B390C2862E48 /* Pods-Qin-ios.debug.xcconfig */,
 				B6560DF1AB4EA09341915180 /* Pods-Qin-ios.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -207,9 +274,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C9C81ED23BEE99F00A470FF /* ViewController.swift in Sources */,
+				4CA279D623C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift in Sources */,
+				4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */,
+				4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */,
+				4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */,
+				4CA279C623C2F97400DD3D38 /* CheckLog.swift in Sources */,
+				4CA279C223C2F95500DD3D38 /* Building.swift in Sources */,
+				4CA279CA23C2F98D00DD3D38 /* Room.swift in Sources */,
+				4CA279D823C2FAAE00DD3D38 /* QinSettingViewController.swift in Sources */,
+				4CA279D023C2F9A900DD3D38 /* Version.swift in Sources */,
+				4CA279BC23C2F8BE00DD3D38 /* QinPreView.swift in Sources */,
+				4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */,
 				4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */,
+				4CA279CE23C2F9A200DD3D38 /* Student.swift in Sources */,
+				4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */,
+				4CA279C423C2F96100DD3D38 /* Camera.swift in Sources */,
+				4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */,
+				4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */,
 				4C9C81EB23BEE99F00A470FF /* SceneDelegate.swift in Sources */,
+				4CA279CC23C2F99500DD3D38 /* StaticData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

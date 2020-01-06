@@ -7,5 +7,6 @@ target 'Qin-ios' do
 
   # Pods for Qin-ios
 	pod 'RealmSwift'
+	pod 'ReachabilitySwift'
 
 end
