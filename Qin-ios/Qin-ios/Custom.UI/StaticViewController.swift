@@ -10,12 +10,16 @@ import UIKit
 
 class StaticViewController: UIViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.hidesBackButton = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
-        self.navigationController?.navigationItem.hidesBackButton = true;
     }
     
 

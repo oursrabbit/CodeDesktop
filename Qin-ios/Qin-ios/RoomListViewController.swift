@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RoomListViewController: UIViewController {
+class RoomListViewController: StaticViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

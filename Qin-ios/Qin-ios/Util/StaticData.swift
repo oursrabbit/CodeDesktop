@@ -12,6 +12,7 @@ import CoreLocation
 import UIKit
 import CoreTelephony
 import Reachability
+import RealmSwift
 
 public protocol StaticDataUpdateInfoDelegate: NSObjectProtocol{
     func updateInfomation(message: String)
@@ -22,21 +23,101 @@ public class StaticData {
     public static var CurrentUser = Student()
     public static var CheckInRoomID = 0;
 
-    public static var localVersion = Version(versionString: "1.0.0.0");
-    public static var serverVersion = Version();
+    public static let localVersion = Version(versionString: "1.0.0.0");
+    public static var serverVersion = Version(versionString: "2.0.0.0");
     
-    public static func checkPermission(listener: StaticDataUpdateInfoDelegate?) -> Bool {
-        listener?.updateInfomation(message: "正在检查系统权限...");
-        var internetPermission = true
-        let reachability = try! Reachability()
-        reachability.whenUnreachable = { _ in
-            internetPermission = false
+    public static func checkCLLocationPermission(manager: CLLocationManager, completionHandler: @escaping (Bool) -> Void) {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            completionHandler(true)
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .restricted:
+            completionHandler(false)
+        case .denied:
+            completionHandler(false)
+        case .authorizedWhenInUse:
+            completionHandler(true)
+        @unknown default:
+            completionHandler(false)
         }
-        if CLLocationManager.authorizationStatus() == . {
-            isOpen = true
+    }
+    
+    public static func checkVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (Int) -> Void) {
+        listener?.updateInfomation(message: "正在检测软件版本...")
+        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/QinSetting/5e0c10ae562071008e1fcc28";
+        DatabaseHelper.LCSearch(searchURL: url) { json, error in
+            if error == nil {
+                StaticData.serverVersion = Version(versionString: json["Version"] as! String)
+                if StaticData.localVersion.MainVersion != StaticData.serverVersion.MainVersion || StaticData.localVersion.FunctionVersion != StaticData.serverVersion.FunctionVersion || StaticData.localVersion.BugVersion != StaticData.serverVersion.BugVersion {
+                    completionHandler(1)
+                } else {
+                    completionHandler(0)
+                }
+            } else {
+                completionHandler(2)
+            }
         }
-        let manager = CLLocationManager()
-        CLLocationManager().requestWhenInUseAuthorization()
+    }
+    
+    public static func checkLocalDatabaseVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (Int) -> Void) {
+        listener?.updateInfomation(message: "正在检查本地数据库版本...")
+        var localDataVersion = 0
+        let localStore = UserDefaults.standard
+        if let _ = localStore.object(forKey: "localDataVersion") {
+            localDataVersion = localStore.integer(forKey: "localDataVersion")
+        } else {
+            localDataVersion = -1
+        }
+        if localDataVersion == StaticData.serverVersion.DatabaseVersion {
+            completionHandler(0)
+        } else {
+            listener?.updateInfomation(message: "正在更新本地数据版本...")
+            listener?.updateInfomation(message: "正在获取建筑信息...")
+            let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Building?limit=1000&&&&"
+            DatabaseHelper.LCSearch(searchURL: url) { response, error in
+                if error == nil {
+                    let DatabaseResults = response["results"] as! [[String:Any?]]
+                    listener?.updateInfomation(message: "正在更新建筑信息...")
+                    let realm = try! Realm()
+                    try! realm.write {
+                        for checkLog in DatabaseResults {
+                            let newBuilding = Building()
+                            newBuilding.BuildingID = checkLog["BuildingID"] as! Int
+                            newBuilding.BuildingName = checkLog["BuildingName"] as! String
+                            realm.add(newBuilding)
+                            print(newBuilding.BuildingName)
+                        }
+                    }
+                    listener?.updateInfomation(message: "正在获取房间信息...")
+                    let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Room?limit=1000&&&&"
+                    DatabaseHelper.LCSearch(searchURL: url) { roomresponse, roomerror in
+                        if roomerror == nil {
+                            let DatabaseResults = roomresponse["results"] as! [[String:Any?]]
+                            listener?.updateInfomation(message: "正在更新房间信息...")
+                            let roomrealm = try! Realm()
+                            try! roomrealm.write {
+                                for checkLog in DatabaseResults {
+                                    let newRoom = Room()
+                                    newRoom.RoomID = checkLog["RoomID"] as! Int
+                                    newRoom.RoomName = checkLog["RoomName"] as! String
+                                    let locationName = checkLog["BuildingName"] as! String
+                                    roomrealm.add(newRoom)
+                                    roomrealm.objects(Building.self).filter("BuildingName = \(locationName)").first!.Rooms.append(newRoom)
+                                    print(newRoom.RoomName)
+                                }
+                            }
+                            UserDefaults.standard.set(StaticData.serverVersion.DatabaseVersion, forKey: "localDataVersion")
+                            completionHandler(1)
+                        } else {
+                            completionHandler(2)
+                        }
+                    }
+                } else {
+                    completionHandler(2)
+                }
+            }
+        }
     }
 }
 

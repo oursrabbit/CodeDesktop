@@ -124,7 +124,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
             public void run() {
                 infoLabel.setText("请重启程序");
                 waitingDialog.cancel();
-                new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("请更新\n\n本机：" + StaticData.localVersion.VersionString + "最新版：" + StaticData.serverVersion.VersionString)
+                new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("请更新\n\n本机：" + StaticData.localVersion.VersionString + "\n\n最新版：" + StaticData.serverVersion.VersionString)
                         .setPositiveButton("前往", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 InitializationActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.baidu.com")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
