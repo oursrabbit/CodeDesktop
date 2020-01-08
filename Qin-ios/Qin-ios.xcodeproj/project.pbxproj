@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2879F706CE76CFC90C39EA55 /* Pods_Qin_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */; };
 		4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81E823BEE99F00A470FF /* AppDelegate.swift */; };
 		4C9C81EB23BEE99F00A470FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */; };
 		4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EC23BEE99F00A470FF /* InitializationViewController.swift */; };
@@ -31,9 +30,15 @@
 		4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */; };
 		4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */; };
 		4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */; };
+		4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */; };
+		4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */; };
+		4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */; };
+		6F9D0D6EBA0B9CCBF3A1A9F0 /* Pods_Qin_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C502EF523C4A13600B31ABB /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C502EF923C4A13900B31ABB /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C9C81E523BEE99F00A470FF /* Qin-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qin-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C9C81E823BEE99F00A470FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +64,9 @@
 		4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
+		4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
+		4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
+		4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
 		8D91006867A7B390C2862E48 /* Pods-Qin-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qin-ios.debug.xcconfig"; path = "Target Support Files/Pods-Qin-ios/Pods-Qin-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		B6560DF1AB4EA09341915180 /* Pods-Qin-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qin-ios.release.xcconfig"; path = "Target Support Files/Pods-Qin-ios/Pods-Qin-ios.release.xcconfig"; sourceTree = "<group>"; };
 		EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qin_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CA279BE23C2F90800DD3D38 /* AVFoundation.framework in Frameworks */,
-				2879F706CE76CFC90C39EA55 /* Pods_Qin_ios.framework in Frameworks */,
+				6F9D0D6EBA0B9CCBF3A1A9F0 /* Pods_Qin_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +106,7 @@
 		4C9C81E723BEE99F00A470FF /* Qin-ios */ = {
 			isa = PBXGroup;
 			children = (
+				4CDC337823C4A5B1003E0C34 /* Layouts */,
 				4CA279BA23C2F82A00DD3D38 /* Util */,
 				4CA279B923C2F7FD00DD3D38 /* Custom.UI */,
 				4C9C81EC23BEE99F00A470FF /* InitializationViewController.swift */,
@@ -106,6 +115,7 @@
 				4CA279D523C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift */,
 				4CA279D723C2FAAE00DD3D38 /* QinSettingViewController.swift */,
 				4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */,
+				4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */,
 				4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */,
 				4C9C81EE23BEE99F00A470FF /* Main.storyboard */,
 				4C9C81F123BEE9A000A470FF /* Assets.xcassets */,
@@ -141,9 +151,20 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		4CDC337823C4A5B1003E0C34 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */,
+				4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */,
+			);
+			path = Layouts;
+			sourceTree = "<group>";
+		};
 		728DFFC0E81382B381EA289D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4C502EF923C4A13900B31ABB /* RealmSwift.framework */,
+				4C502EF523C4A13600B31ABB /* Realm.framework */,
 				4CA279BD23C2F90800DD3D38 /* AVFoundation.framework */,
 				EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */,
 			);
@@ -170,7 +191,7 @@
 				4C9C81E123BEE99F00A470FF /* Sources */,
 				4C9C81E223BEE99F00A470FF /* Frameworks */,
 				4C9C81E323BEE99F00A470FF /* Resources */,
-				3020B1E56FC3283883E28ED3 /* [CP] Embed Pods Frameworks */,
+				C88D061C3A36BB4145046A55 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,23 +249,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3020B1E56FC3283883E28ED3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Qin-ios/Pods-Qin-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Qin-ios/Pods-Qin-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qin-ios/Pods-Qin-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		B4D7610611393DD6EE5128FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -267,6 +271,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C88D061C3A36BB4145046A55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Qin-ios/Pods-Qin-ios-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Qin-ios/Pods-Qin-ios-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Qin-ios/Pods-Qin-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -280,6 +301,8 @@
 				4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */,
 				4CA279C623C2F97400DD3D38 /* CheckLog.swift in Sources */,
 				4CA279C223C2F95500DD3D38 /* Building.swift in Sources */,
+				4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */,
+				4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */,
 				4CA279CA23C2F98D00DD3D38 /* Room.swift in Sources */,
 				4CA279D823C2FAAE00DD3D38 /* QinSettingViewController.swift in Sources */,
 				4CA279D023C2F9A900DD3D38 /* Version.swift in Sources */,
@@ -290,6 +313,7 @@
 				4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */,
 				4CA279C423C2F96100DD3D38 /* Camera.swift in Sources */,
 				4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */,
+				4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */,
 				4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */,
 				4C9C81EB23BEE99F00A470FF /* SceneDelegate.swift in Sources */,
 				4CA279CC23C2F99500DD3D38 /* StaticData.swift in Sources */,

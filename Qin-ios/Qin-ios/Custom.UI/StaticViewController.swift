@@ -12,7 +12,8 @@ class StaticViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationItem.hidesBackButton = true
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.toolbar.isHidden = true
     }
     
     override func viewDidLoad() {

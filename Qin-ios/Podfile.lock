@@ -1,5 +1,5 @@
 PODS:
-  - ReachabilitySwift (5.0.0)
+  - LUExpandableTableView (5.0.0)
   - Realm (4.3.0):
     - Realm/Headers (= 4.3.0)
   - Realm/Headers (4.3.0)
@@ -7,20 +7,20 @@ PODS:
     - Realm (= 4.3.0)
 
 DEPENDENCIES:
-  - ReachabilitySwift
+  - LUExpandableTableView
   - RealmSwift
 
 SPEC REPOS:
   trunk:
-    - ReachabilitySwift
+    - LUExpandableTableView
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  LUExpandableTableView: 710ed7e7d55d0b58d61c95561bd9ecbf39692010
   Realm: 9357c3589555793e1860a7104a7412bca4a48d99
   RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
 
-PODFILE CHECKSUM: 0aa564c085b2475108ecbdfb9d4eb0e3b82a558c
+PODFILE CHECKSUM: 6a05d70728d02efe15773ad918b4fdb52bb9ed57
 
 COCOAPODS: 1.8.4

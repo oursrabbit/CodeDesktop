@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RoomListViewController: StaticViewController {
 
+    var building: Building!
+    
+    @IBOutlet weak var roomList: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,5 +31,29 @@ class RoomListViewController: StaticViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func backBuildingListView(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+}
 
+extension RoomListViewController: UITableViewDelegate{
+
+}
+
+extension RoomListViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return building.Rooms.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "room") as! RoomTableViewCell
+        cell.roomName.text = building.Rooms[indexPath.row].RoomName
+        return cell
+    }
 }

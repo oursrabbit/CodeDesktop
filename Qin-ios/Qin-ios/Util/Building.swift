@@ -14,4 +14,8 @@ public class Building: Object {
     @objc dynamic var BuildingName = ""
     
     let Rooms = List<Room>()
+    
+    override public static func primaryKey() -> String? {
+        return "BuildingID"
+    }
 }

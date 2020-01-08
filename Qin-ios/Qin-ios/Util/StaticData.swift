@@ -11,7 +11,6 @@ import AVFoundation
 import CoreLocation
 import UIKit
 import CoreTelephony
-import Reachability
 import RealmSwift
 
 public protocol StaticDataUpdateInfoDelegate: NSObjectProtocol{
@@ -73,19 +72,26 @@ public class StaticData {
             completionHandler(0)
         } else {
             listener?.updateInfomation(message: "正在更新本地数据版本...")
+            autoreleasepool {
+                let realm = try! Realm()
+                realm.beginWrite()
+                realm.deleteAll()
+                try! realm.commitWrite()
+            }
             listener?.updateInfomation(message: "正在获取建筑信息...")
             let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Building?limit=1000&&&&"
             DatabaseHelper.LCSearch(searchURL: url) { response, error in
                 if error == nil {
                     let DatabaseResults = response["results"] as! [[String:Any?]]
                     listener?.updateInfomation(message: "正在更新建筑信息...")
-                    let realm = try! Realm()
-                    try! realm.write {
+                    autoreleasepool {
+                        let realm = try! Realm()
                         for checkLog in DatabaseResults {
-                            let newBuilding = Building()
-                            newBuilding.BuildingID = checkLog["BuildingID"] as! Int
-                            newBuilding.BuildingName = checkLog["BuildingName"] as! String
-                            realm.add(newBuilding)
+                            realm.beginWrite()
+                            let newBuilding = realm.create(Building.self, value: [
+                                "BuildingID" : checkLog["BuildingID"] as! Int,
+                                "BuildingName" : checkLog["BuildingName"] as! String])
+                            try! realm.commitWrite()
                             print(newBuilding.BuildingName)
                         }
                     }
@@ -95,17 +101,21 @@ public class StaticData {
                         if roomerror == nil {
                             let DatabaseResults = roomresponse["results"] as! [[String:Any?]]
                             listener?.updateInfomation(message: "正在更新房间信息...")
-                            let roomrealm = try! Realm()
-                            try! roomrealm.write {
+                            autoreleasepool {
+                                let realm = try! Realm()
                                 for checkLog in DatabaseResults {
-                                    let newRoom = Room()
-                                    newRoom.RoomID = checkLog["RoomID"] as! Int
-                                    newRoom.RoomName = checkLog["RoomName"] as! String
+                                    realm.beginWrite()
+                                    let newRoom = realm.create(Room.self, value: [
+                                        "RoomID" : checkLog["RoomID"] as! Int,
+                                        "RoomName" : checkLog["RoomName"] as! String
+                                    ])
                                     let locationName = checkLog["BuildingName"] as! String
-                                    roomrealm.add(newRoom)
-                                    roomrealm.objects(Building.self).filter("BuildingName = \(locationName)").first!.Rooms.append(newRoom)
+                                    let building = realm.objects(Building.self).filter("BuildingName = '\(locationName)'").first!
+                                    building.Rooms.append(newRoom)
+                                    try! realm.commitWrite()
                                     print(newRoom.RoomName)
                                 }
+                                
                             }
                             UserDefaults.standard.set(StaticData.serverVersion.DatabaseVersion, forKey: "localDataVersion")
                             completionHandler(1)
