@@ -60,6 +60,7 @@ public class QinSettingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = localStore.edit();
         editor.putString("StudentID", StaticData.CurrentUser.StudentID);
         editor.commit();
+        waitingDialog.show();
         new Thread(new Runnable() {
             @Override
             public void run() {

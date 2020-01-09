@@ -48,31 +48,33 @@ public class CheckResultActivity extends StaticAppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (updateDatabaseAdvertising() == false) {
-                    updateInfoLabel("签到失败：无法连接数据库");
-                    advertiser.stopAdvertising(mAdvertiseCallback);
-                    return;
-                }
-                startAdvertising();
-                checkingStartTime = new Date();
-                int timeout = 30000;
-                while ((new Date()).getTime() - checkingStartTime.getTime() < timeout) {
-                    if(checkingAdvertisingFlag() == true) {
-                        if(uploadCheck() == true) {
-                            updateInfoLabel("签到成功");
-                            advertiser.stopAdvertising(mAdvertiseCallback);
-                            return;
-                        } else {
-                            timeout = 60000;
-                            advertiser.stopAdvertising(mAdvertiseCallback);
-                        }
-                    }
-                    try { Thread.sleep(1000);} catch (Exception e) {}
-                }
-                updateInfoLabel("签到失败");
-                advertiser.stopAdvertising(mAdvertiseCallback);
+                countingDown()
             }
         }).start();
+    }
+    
+    private void countingDown() {
+        if (DatabaseHelper.LCUpdateAdvertising() == false) {
+            updateInfoLabel("签到失败：无法连接数据库");
+            advertiser.stopAdvertising(mAdvertiseCallback);
+            return;
+        }
+        startAdvertising();
+        checkingStartTime = new Date();
+        int timeout = 30000;
+        while ((new Date()).getTime() - checkingStartTime.getTime() < timeout) {
+            if(DatabaseHelper.LCCheckAdvertising("0")  == true) {
+                timeout = 60000;
+                advertiser.stopAdvertising(mAdvertiseCallback);
+                if(DatabaseHelper.LCUploadCheckLog() == true) {
+                    updateInfoLabel("签到成功");
+                    return;
+                }
+            }
+            try { Thread.sleep(1000);} catch (Exception e) {}
+        }
+        updateInfoLabel("签到失败：超时");
+        advertiser.stopAdvertising(mAdvertiseCallback);
     }
 
     private void updateInfoLabel(final String message) {
@@ -91,18 +93,6 @@ public class CheckResultActivity extends StaticAppCompatActivity {
 
     public void checkLogData(View button) {
         startActivity(new Intent().setClass(this, CheckDBActivity.class));
-    }
-
-    private boolean updateDatabaseAdvertising() {
-        return DatabaseHelper.LCUpdateAdvertising();
-    }
-
-    private boolean checkingAdvertisingFlag(){
-        return DatabaseHelper.LCCheckAdvertising("0");
-    }
-
-    private boolean uploadCheck() {
-        return DatabaseHelper.LCUploadCheckLog();
     }
 
     private void startAdvertising() {

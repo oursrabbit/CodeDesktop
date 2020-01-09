@@ -129,6 +129,22 @@ public class StaticData {
             }
         }
     }
+    
+    public static func getaccessToken(completionHandler: @escaping (String?) -> Void)
+    {
+        let url = URL(string: "https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=CGFGbXrchcUA0KwfLTpCQG0T&client_secret=IyGcGlMoB26U1Zf2s2qX05O9dETGGxHg")!
+        let session = URLSession.shared;
+        var request = URLRequest(url: url);
+        request.httpMethod = "POST";
+        session.dataTask(with: request){ data, response, error in
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
+                completionHandler(json["access_token"] as? String)
+            } catch {
+                completionHandler(nil)
+            }
+        }.resume()
+    }
 }
 
 extension ISO8601DateFormatter {

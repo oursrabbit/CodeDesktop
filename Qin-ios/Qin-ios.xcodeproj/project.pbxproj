@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D114723C5E4200092CA1C /* WaitingView.swift */; };
+		4C6D114A23C5E4370092CA1C /* WaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D114923C5E4370092CA1C /* WaitingView.xib */; };
 		4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81E823BEE99F00A470FF /* AppDelegate.swift */; };
 		4C9C81EB23BEE99F00A470FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */; };
 		4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81EC23BEE99F00A470FF /* InitializationViewController.swift */; };
@@ -30,6 +32,7 @@
 		4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */; };
 		4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */; };
 		4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */; };
+		4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */; };
 		4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */; };
 		4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */; };
 		4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */; };
@@ -39,6 +42,8 @@
 /* Begin PBXFileReference section */
 		4C502EF523C4A13600B31ABB /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C502EF923C4A13900B31ABB /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C6D114723C5E4200092CA1C /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
+		4C6D114923C5E4370092CA1C /* WaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaitingView.xib; sourceTree = "<group>"; };
 		4C9C81E523BEE99F00A470FF /* Qin-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Qin-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C9C81E823BEE99F00A470FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C9C81EA23BEE99F00A470FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +69,7 @@
 		4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
+		4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBTableViewCell.swift; sourceTree = "<group>"; };
 		4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
 		4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
 		4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
@@ -132,6 +138,8 @@
 			children = (
 				4CA279BB23C2F8BE00DD3D38 /* QinPreView.swift */,
 				4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */,
+				4C6D114723C5E4200092CA1C /* WaitingView.swift */,
+				4C6D114923C5E4370092CA1C /* WaitingView.xib */,
 			);
 			path = Custom.UI;
 			sourceTree = "<group>";
@@ -156,6 +164,7 @@
 			children = (
 				4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */,
 				4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */,
+				4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */,
 			);
 			path = Layouts;
 			sourceTree = "<group>";
@@ -242,6 +251,7 @@
 			files = (
 				4C9C81F523BEE9A000A470FF /* LaunchScreen.storyboard in Resources */,
 				4C9C81F223BEE9A000A470FF /* Assets.xcassets in Resources */,
+				4C6D114A23C5E4370092CA1C /* WaitingView.xib in Resources */,
 				4C9C81F023BEE99F00A470FF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,6 +307,7 @@
 			files = (
 				4CA279D623C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift in Sources */,
 				4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */,
+				4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */,
 				4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */,
 				4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */,
 				4CA279C623C2F97400DD3D38 /* CheckLog.swift in Sources */,
@@ -317,6 +328,7 @@
 				4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */,
 				4C9C81EB23BEE99F00A470FF /* SceneDelegate.swift in Sources */,
 				4CA279CC23C2F99500DD3D38 /* StaticData.swift in Sources */,
+				4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
