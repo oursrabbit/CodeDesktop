@@ -21,6 +21,12 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
         initApplication()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let des = segue.destination as! QinSettingViewController
+        des.autoLogin = true
+    }
+
+    
     func updateInfomation(message: String) {
         updateWaitingDialog(message: message)
     }
@@ -37,21 +43,20 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
         Realm.Configuration.defaultConfiguration = config
         //Init LocalDB
         let localStore = UserDefaults.standard
-        if let sid = localStore.string(forKey: "StudentID") {
-            StaticData.CurrentUser.StudentID = sid
+        if let sid = localStore.string(forKey: "SchoolID") {
+            ApplicationHelper.CurrentUser.SchoolID = sid
         } else {
-            StaticData.CurrentUser.StudentID = ""
+            ApplicationHelper.CurrentUser.SchoolID = ""
         }
         DispatchQueue.global().async {
             //Check Version
-            StaticData.checkVersion(listener: self) { versionErrorCode in
+            ApplicationHelper.checkVersion(listener: self) { versionErrorCode in
                 switch versionErrorCode {
-                case 0:
+                case .Success:
                     //Check DBVersion
-                    StaticData.checkLocalDatabaseVersion(listener: self) { databaseErrorCode in
+                    ApplicationHelper.checkLocalDatabaseVersion(listener: self) { databaseErrorCode in
                         switch databaseErrorCode {
-                        //DBVersion Error
-                        case 2:
+                        case .NetError:
                             self.showNetError()
                             break
                         default:
@@ -61,11 +66,10 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
                         }
                     }
                     break
-                //Version Error
-                case 1:
+                case .ApplicationVersionError:
                     self.openDownLoadLink()
                     break
-                case 2:
+                case .NetError:
                     self.showNetError()
                     break
                 default:
@@ -102,7 +106,7 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
     func openDownLoadLink() {
         DispatchQueue.main.async {
             self.infoLabel.text = "请重启程序"
-            let alert = UIAlertController(title: "启动失败", message: "请更新\n\n本机：\(StaticData.localVersion.VersionString)\n\n最新版：\(StaticData.serverVersion.VersionString)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "启动失败", message: "请更新\n\n本机：\(ApplicationHelper.localVersion)\n\n最新版：\(ApplicationHelper.serverVersion)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "前往", style: .default, handler: { _ in
                 let url = URL(string: "https://www.baidu.com")!
                 if UIApplication.shared.canOpenURL(url) {
@@ -119,5 +123,7 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
             self.performSegue(withIdentifier: "startQin", sender: self)
         }
     }
+    
+    
 }
 

@@ -10,12 +10,8 @@ import Foundation
 import RealmSwift
 
 public class Room: Object {
-    @objc dynamic var RoomID = 0
-    @objc dynamic var RoomName = ""
+    @objc dynamic var ID = 0
+    @objc dynamic var Name = ""
     
     let Location = LinkingObjects(fromType: Building.self, property: "Rooms")
-    
-    override public static func primaryKey() -> String? {
-        return "RoomID"
-    }
 }

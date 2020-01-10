@@ -19,6 +19,7 @@ class RoomListViewController: StaticViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
     }
     
 
@@ -40,8 +41,8 @@ class RoomListViewController: StaticViewController {
 
 extension RoomListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        StaticData.CheckInRoomID = building.Rooms[indexPath.row].RoomID
-        let alert = UIAlertController(title: "准备签到", message: "是否已经到达房间？\n\n\(building.BuildingName) \(building.Rooms[indexPath.row].RoomName)", preferredStyle: .alert)
+        ApplicationHelper.CheckInRoomID = building.Rooms[indexPath.row].ID
+        let alert = UIAlertController(title: "准备签到", message: "是否已经到达房间？\n\n\(building.Name) \(building.Rooms[indexPath.row].Name)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "立刻签到", style: .default, handler: { _ in
             self.performSegue(withIdentifier: "facedetect", sender: self)
         }))
@@ -62,7 +63,7 @@ extension RoomListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "room") as! RoomTableViewCell
-        cell.roomName.text = building.Rooms[indexPath.row].RoomName
+        cell.roomName.text = building.Rooms[indexPath.row].Name
         return cell
     }
 }

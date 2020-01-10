@@ -10,12 +10,8 @@ import Foundation
 import RealmSwift
 
 public class Building: Object {
-    @objc dynamic var BuildingID = 0
-    @objc dynamic var BuildingName = ""
+    @objc dynamic var ID = 0
+    @objc dynamic var Name = ""
     
     let Rooms = List<Room>()
-    
-    override public static func primaryKey() -> String? {
-        return "BuildingID"
-    }
 }

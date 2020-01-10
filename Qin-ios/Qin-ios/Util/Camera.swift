@@ -117,7 +117,7 @@ class Camera: NSObject {
         let faceJSON = ["image": imageInBASE64,
                         "image_type":"BASE64",
                         "group_id_list":"2019BK",
-                        "user_id": StaticData.CurrentUser.BaiduFaceID]
+                        "user_id": ApplicationHelper.CurrentUser.BaiduFaceID]
         let faceJSONData = try? JSONSerialization.data(withJSONObject: faceJSON, options: [])
         let facem = DispatchSemaphore(value: 0)
         facesession.uploadTask(with: faceReq, from: faceJSONData) { data, response, error in
@@ -127,7 +127,7 @@ class Camera: NSObject {
                 if(json["error_msg"] as! String == "SUCCESS"){
                     completionHandler(nil)
                 } else {
-                    completionHandler("请学号\(StaticData.CurrentUser.StudentID)的同学面对摄像头")
+                    completionHandler("请 \(ApplicationHelper.CurrentUser.Name) 同学面对摄像头")
                 }
             }catch{
                 completionHandler("网络错误，正在重试...")
@@ -142,9 +142,9 @@ extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
         if self.facedetectStep == .waitingImage {
             let baseImage = getBase64Image(buffer: sampleBuffer);
             self.facedetectStep = .gettingAccessToken
-            StaticData.getaccessToken() { accessToken in
+            ApplicationHelper.getaccessToken() { accessToken in
                 if let baiduAT = accessToken {
-                    if StaticData.CurrentUser.StudentID == "01050305"{
+                    if ApplicationHelper.CurrentUser.SchoolID == "01050305"{
                         self.facedetectStep = .stop
                         self.captureSession.stopRunning()
                         self.delegate?.cameraOnFaceDetected()

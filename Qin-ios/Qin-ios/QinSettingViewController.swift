@@ -13,12 +13,18 @@ class QinSettingViewController: StaticViewController {
     @IBOutlet weak var idtextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var waitingView: WaitingView!
+    
+    public var autoLogin = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        idtextfield.text = StaticData.CurrentUser.StudentID
+        idtextfield.text = "\(ApplicationHelper.CurrentUser.SchoolID)"
+        
+        if autoLogin && ApplicationHelper.CurrentUser.SchoolID != "" {
+            updateSchoolID(self)
+        }
     }
     
 
@@ -38,24 +44,24 @@ class QinSettingViewController: StaticViewController {
         }
     }
 
-    @IBAction func updateStudentID (_ sender: Any) {
-        if let studentid = idtextfield.text {
-            StaticData.CurrentUser.StudentID = studentid
-            UserDefaults.standard.set(StaticData.CurrentUser.StudentID, forKey: "StudentID")
+    @IBAction func updateSchoolID (_ sender: Any) {
+        if let schoolId = idtextfield.text {
+            ApplicationHelper.CurrentUser.SchoolID = schoolId
+            UserDefaults.standard.set(ApplicationHelper.CurrentUser.SchoolID, forKey: "SchoolID")
             waitingView.isHidden = false
             self.updateWaitingView(message: "正在获取用户信息...")
             DispatchQueue.global().async {
-                self.updateStudentObjectID()
+                self.getCurrentUserInfomation()
             }
         }
     }
     
-    func updateStudentObjectID() {
-        let checkJson = ["StudentID": StaticData.CurrentUser.StudentID]
+    func getCurrentUserInfomation() {
+        let checkJson = ["SchoolID": ApplicationHelper.CurrentUser.SchoolID]
         let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
         let jsonString = String(data: checkJSONData!, encoding: .utf8)
         let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/Students?where=\(urlString)"
+        let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/Student?where=\(urlString)"
         DatabaseHelper.LCSearch(searchURL: url) { response, error in
             if error == nil {
                 let DatabaseResults = response["results"] as! [[String:Any?]]
@@ -69,10 +75,12 @@ class QinSettingViewController: StaticViewController {
                     }
                 } else {
                     let checkLog = DatabaseResults[0]
-                    StaticData.CurrentUser.Advertising = "0"
-                    StaticData.CurrentUser.BaiduFaceID = checkLog["BaiduFaceID"] as! String
-                    StaticData.CurrentUser.ObjectID = checkLog["objectId"] as! String
-                    StaticData.CurrentUser.StudentBeaconID = checkLog["StudentBeaconMinor"] as! Int
+                    ApplicationHelper.CurrentUser.Advertising = "0"
+                    ApplicationHelper.CurrentUser.BaiduFaceID = checkLog["BaiduFaceID"] as! String
+                    ApplicationHelper.CurrentUser.LCObjectID = checkLog["objectId"] as! String
+                    ApplicationHelper.CurrentUser.ID = checkLog["ID"] as! Int
+                    ApplicationHelper.CurrentUser.SchoolID = checkLog["SchoolID"] as! String
+                    ApplicationHelper.CurrentUser.Name = checkLog["Name"] as! String
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "roomlist", sender: self)
                     }

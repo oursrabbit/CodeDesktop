@@ -15,6 +15,7 @@ class BuildingListViewController: StaticViewController {
     var selectedBuilding: Building!
     
     @IBOutlet weak var buildingList: UITableView!
+    @IBOutlet weak var studentNameLabel: UILabel!
 
     
     override func viewDidLoad() {
@@ -22,9 +23,11 @@ class BuildingListViewController: StaticViewController {
 
         // Do any additional setup after loading the view.
         
+        studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Name)"
+        
         autoreleasepool {
             let realm = try! Realm()
-            buildings = realm.objects(Building.self).sorted(by: { $0.BuildingID > $1.BuildingID })
+            buildings = realm.objects(Building.self).sorted(by: { $0.ID > $1.ID })
         }
     }    
 
@@ -57,7 +60,7 @@ extension BuildingListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "building") as! BuildingTableViewCell
-        cell.buildingName.text = buildings[indexPath.row].BuildingName
+        cell.buildingName.text = buildings[indexPath.row].Name
         return cell
     }
 }

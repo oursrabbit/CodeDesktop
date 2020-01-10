@@ -13,63 +13,54 @@ import UIKit
 import CoreTelephony
 import RealmSwift
 
+public enum QinMessage {
+    case NetError
+    case ApplicationVersionError
+    case Nothing
+    case Success
+    case DatabaseUpdated
+}
+
 public protocol StaticDataUpdateInfoDelegate: NSObjectProtocol{
     func updateInfomation(message: String)
 }
 
 
-public class StaticData {
+public class ApplicationHelper {
     public static var CurrentUser = Student()
     public static var CheckInRoomID = 0;
 
-    public static let localVersion = Version(versionString: "1.0.0.0");
-    public static var serverVersion = Version(versionString: "2.0.0.0");
-    
-    public static func checkCLLocationPermission(manager: CLLocationManager, completionHandler: @escaping (Bool) -> Void) {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedAlways:
-            completionHandler(true)
-        case .notDetermined:
-            manager.requestWhenInUseAuthorization()
-        case .restricted:
-            completionHandler(false)
-        case .denied:
-            completionHandler(false)
-        case .authorizedWhenInUse:
-            completionHandler(true)
-        @unknown default:
-            completionHandler(false)
-        }
-    }
-    
-    public static func checkVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (Int) -> Void) {
+    public static let localVersion = 1
+    public static var serverVersion = 0
+    public static var databaseVersion = 0
+        
+    public static func checkVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (QinMessage) -> Void) {
         listener?.updateInfomation(message: "正在检测软件版本...")
-        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/QinSetting/5e0c10ae562071008e1fcc28";
+        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/ApplicationData/5e184373562071008e2f4a0a";
         DatabaseHelper.LCSearch(searchURL: url) { json, error in
             if error == nil {
-                StaticData.serverVersion = Version(versionString: json["Version"] as! String)
-                if StaticData.localVersion.MainVersion != StaticData.serverVersion.MainVersion || StaticData.localVersion.FunctionVersion != StaticData.serverVersion.FunctionVersion || StaticData.localVersion.BugVersion != StaticData.serverVersion.BugVersion {
-                    completionHandler(1)
+                ApplicationHelper.serverVersion = json["ApplicationVersion"] as! Int
+                ApplicationHelper.databaseVersion = json["DatabaseVersion"] as! Int
+                if ApplicationHelper.localVersion == ApplicationHelper.serverVersion {
+                    completionHandler(.Success)
                 } else {
-                    completionHandler(0)
+                    completionHandler(.ApplicationVersionError)
                 }
             } else {
-                completionHandler(2)
+                completionHandler(.NetError)
             }
         }
     }
     
-    public static func checkLocalDatabaseVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (Int) -> Void) {
+    public static func checkLocalDatabaseVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (QinMessage) -> Void) {
         listener?.updateInfomation(message: "正在检查本地数据库版本...")
-        var localDataVersion = 0
+        var localDataVersion = -1
         let localStore = UserDefaults.standard
         if let _ = localStore.object(forKey: "localDataVersion") {
             localDataVersion = localStore.integer(forKey: "localDataVersion")
-        } else {
-            localDataVersion = -1
         }
-        if localDataVersion == StaticData.serverVersion.DatabaseVersion {
-            completionHandler(0)
+        if localDataVersion == ApplicationHelper.databaseVersion {
+            completionHandler(.Success)
         } else {
             listener?.updateInfomation(message: "正在更新本地数据版本...")
             autoreleasepool {
@@ -89,10 +80,10 @@ public class StaticData {
                         for checkLog in DatabaseResults {
                             realm.beginWrite()
                             let newBuilding = realm.create(Building.self, value: [
-                                "BuildingID" : checkLog["BuildingID"] as! Int,
-                                "BuildingName" : checkLog["BuildingName"] as! String])
+                                "ID" : checkLog["ID"] as! Int,
+                                "Name" : checkLog["Name"] as! String])
                             try! realm.commitWrite()
-                            print(newBuilding.BuildingName)
+                            print(newBuilding.Name)
                         }
                     }
                     listener?.updateInfomation(message: "正在获取房间信息...")
@@ -106,25 +97,25 @@ public class StaticData {
                                 for checkLog in DatabaseResults {
                                     realm.beginWrite()
                                     let newRoom = realm.create(Room.self, value: [
-                                        "RoomID" : checkLog["RoomID"] as! Int,
-                                        "RoomName" : checkLog["RoomName"] as! String
+                                        "ID" : checkLog["ID"] as! Int,
+                                        "Name" : checkLog["Name"] as! String
                                     ])
-                                    let locationName = checkLog["BuildingName"] as! String
-                                    let building = realm.objects(Building.self).filter("BuildingName = '\(locationName)'").first!
+                                    let locationID = checkLog["LocationID"] as! Int
+                                    let building = realm.objects(Building.self).filter("ID = \(locationID)").first!
                                     building.Rooms.append(newRoom)
                                     try! realm.commitWrite()
-                                    print(newRoom.RoomName)
+                                    print(newRoom.Name)
                                 }
                                 
                             }
-                            UserDefaults.standard.set(StaticData.serverVersion.DatabaseVersion, forKey: "localDataVersion")
-                            completionHandler(1)
+                            UserDefaults.standard.set(ApplicationHelper.databaseVersion, forKey: "localDataVersion")
+                            completionHandler(.DatabaseUpdated)
                         } else {
-                            completionHandler(2)
+                            completionHandler(.NetError)
                         }
                     }
                 } else {
-                    completionHandler(2)
+                    completionHandler(.NetError)
                 }
             }
         }
@@ -165,7 +156,7 @@ extension Date {
     
     var shortString: String {
         let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return df.string(from: self)
     }
     
@@ -177,7 +168,7 @@ extension Date {
     
     var timeString: String {
         let df = DateFormatter()
-        df.dateFormat = "hh:mm:ss"
+        df.dateFormat = "HH:mm:ss"
         return df.string(from: self)
     }
 }

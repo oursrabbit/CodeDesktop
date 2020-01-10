@@ -108,47 +108,70 @@ class CheckResultViewController: StaticViewController {
     */
     
     func countingDown() {
+        var updateAdver = false
+        var semaphore = DispatchSemaphore(value: 0)
         DatabaseHelper.LCUpdateAdvertising() { success in
             if success {
-                self.startAdvertising()
-                self.checkingStartTime = Date()
-                self.timeout = 30
-                while Int(Date().timeIntervalSince(self.checkingStartTime)) < self.timeout {
-                    DatabaseHelper.LCCheckAdvertising(value: "0") { couldCheckin in
-                        if couldCheckin {
-                            self.timeout = 60
-                            self.peripheral.stopAdvertising()
-                            DatabaseHelper.LCUpdateAdvertising() { checked in
-                                if checked {
-                                    self.updateInfoLabel(message: "签到成功")
-                                    return
-                                }
-                            }
-                        }
-                    }
-                    sleep(1)
-                }
-                self.updateInfoLabel(message: "签到失败：超时")
+                updateAdver = true
+                semaphore.signal()
             } else {
-                self.updateInfoLabel(message: "签到失败：无法连接数据库")
+                updateAdver = false
+                semaphore.signal()
             }
+        }
+        semaphore.wait()
+        if updateAdver == false {
+            updateInfoLabel(message: "签到失败：无法连接数据库")
+            return
+        }
+        
+        var checkAdver = false
+        self.startAdvertising()
+        self.checkingStartTime = Date()
+        self.timeout = 30
+        while Int(Date().timeIntervalSince(self.checkingStartTime)) < self.timeout && checkAdver == false {
+            semaphore = DispatchSemaphore(value: 0)
+            DatabaseHelper.LCCheckAdvertising(value: "0") { couldCheckin in
+                checkAdver = couldCheckin
+                semaphore.signal()
+            }
+            semaphore.wait()
+            sleep(1)
+        }
+        if checkAdver == false {
+            updateInfoLabel(message: "签到失败：超时")
+            return
+        }
+        
+        var uploadchecklog = false
+        self.peripheral.stopAdvertising()
+        self.timeout = 60
+        while Int(Date().timeIntervalSince(self.checkingStartTime)) < self.timeout && uploadchecklog == false {
+            semaphore = DispatchSemaphore(value: 0)
+            DatabaseHelper.LCUploadCheckLog() { uploaded in
+                uploadchecklog = uploaded
+                semaphore.signal()
+            }
+            semaphore.wait()
+            sleep(1)
+        }
+        if uploadchecklog == false {
+            updateInfoLabel(message: "签到失败：无法连接数据库")
+            return
+        } else {
+            updateInfoLabel(message: "签到成功")
         }
     }
     
     func startAdvertising() {
-        self.peripheral = CBPeripheralManager(delegate: self, queue: nil)
-        //self.peripheralData = region.peripheralData(withMeasuredPower: nil)
+        self.peripheral = CBPeripheralManager()
+        
+        let proximityUUID = UUID(uuidString: "0a66e898-2d31-11ea-978f-2e728ce88125")!
+        let major : CLBeaconMajorValue = CLBeaconMajorValue(ApplicationHelper.CheckInRoomID)
+        let minor : CLBeaconMinorValue = CLBeaconMinorValue(ApplicationHelper.CurrentUser.ID)
+        let beaconID = "bfass"
+        self.peripheralData =  CLBeaconRegion(uuid: proximityUUID, major: major, minor: minor, identifier: beaconID)
             
-        //peripheral.startAdvertising(((peripheralData as NSDictionary) as! [String : Any]))
-    }
-}
-
-extension CheckResultViewController: CBPeripheralManagerDelegate {
-    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        if peripheral.state == .poweredOn {
-            
-        } else {
-            self.updateInfoLabel(message: "签到失败：无法启动蓝牙")
-        }
+        peripheral.startAdvertising(((peripheralData.peripheralData(withMeasuredPower: nil) as NSDictionary) as! [String : Any]))
     }
 }

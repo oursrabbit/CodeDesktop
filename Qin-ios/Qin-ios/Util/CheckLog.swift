@@ -9,7 +9,7 @@
 import Foundation
 
 public class CheckLog {
-    public var StudentID = ""
+    public var StudentID = 0
     public var RoomID = 0
     public var CheckDate = Date()
 }

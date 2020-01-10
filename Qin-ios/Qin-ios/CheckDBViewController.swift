@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class CheckDBViewController: UIViewController {
+class CheckDBViewController: StaticViewController {
 
     var logs = [CheckLog]()
     
@@ -20,6 +20,8 @@ class CheckDBViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        
         idlabel.text = "正在加载数据..."
         DispatchQueue.global().async {
             self.LoadingDatabase()
@@ -27,7 +29,7 @@ class CheckDBViewController: UIViewController {
     }
     
     func LoadingDatabase() {
-        let checkJson = ["StudentID": StaticData.CurrentUser.StudentID]
+        let checkJson = ["StudentID": ApplicationHelper.CurrentUser.ID]
         let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
         let jsonString = String(data: checkJSONData!, encoding: .utf8)
         let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
@@ -38,13 +40,13 @@ class CheckDBViewController: UIViewController {
                 self.logs.removeAll()
                 for checkLog in DatabaseResults {
                     let newLog = CheckLog()
-                    newLog.StudentID = checkLog["StudentID"] as! String
+                    newLog.StudentID = checkLog["StudentID"] as! Int
                     newLog.RoomID = checkLog["RoomID"] as! Int
                     newLog.CheckDate = (checkLog["createdAt"] as! String).iso8601!
                     self.logs.append(newLog)
                 }
                 DispatchQueue.main.async {
-                    self.idlabel.text = StaticData.CurrentUser.StudentID
+                    self.idlabel.text = ApplicationHelper.CurrentUser.Name
                     self.logstableview.reloadData()
                 }
             } else {
@@ -76,9 +78,9 @@ extension CheckDBViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let room = (try! Realm()).objects(Room.self).filter("RoomID = \(logs[indexPath.row].RoomID)").first!
+        let room = (try! Realm()).objects(Room.self).filter("ID = \(logs[indexPath.row].RoomID)").first!
         let cell = tableView.dequeueReusableCell(withIdentifier: "checkdb") as! CheckDBTableViewCell
-        cell.roomidlabel.text = room.RoomName
+        cell.roomidlabel.text = room.Name
         cell.checkdatelabel.text = logs[indexPath.row].CheckDate.dateString
         cell.checktimelabel.text = logs[indexPath.row].CheckDate.timeString
         return cell

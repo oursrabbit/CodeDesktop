@@ -11,9 +11,9 @@ import RealmSwift
 
 public class DatabaseHelper {
     //Lean Cloud
-    public static var LeancloudAppid = "YHwFdAE1qj1OcWfJ5xoayLKr-gzGzoHsz";
-    public static var LeancloudAppKey = "UbnM6uOP2mxah3nFMzurEDQL";
-    public static var LeancloudAPIBaseURL = "https://yhwfdae1.lc-cn-n1-shared.com";
+    public static var LeancloudAppid = "N4v46EIBIAWtiOANE61Fe1no-gzGzoHsz";
+    public static var LeancloudAppKey = "RCzPdQyEuPLaFhcPlxaKVb9P";
+    public static var LeancloudAPIBaseURL = "https://n4v46eib.lc-cn-n1-shared.com";
     public static var LeancloudIDHeader = "X-LC-Id";
     public static var LeancloudKeyHeader = "X-LC-Key";
     public static var HttpContentTypeHeader = "Content-Type";
@@ -43,7 +43,7 @@ public class DatabaseHelper {
     }
     
     public static func LCUpdateAdvertising(completionHandler: @escaping (Bool) -> Void){
-        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Students/" + StaticData.CurrentUser.ObjectID
+        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Student/" + ApplicationHelper.CurrentUser.LCObjectID
         let createCheckItemURL = URL(string: url)
         let leancloudSession = URLSession.shared;
         var leancloudRequest = URLRequest(url: createCheckItemURL!);
@@ -63,12 +63,13 @@ public class DatabaseHelper {
     }
 
     public static func LCCheckAdvertising(value:String, completionHandler: @escaping (Bool) -> Void) {
-        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Students/" + StaticData.CurrentUser.ObjectID;
+        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Student/" + ApplicationHelper.CurrentUser.LCObjectID;
         DatabaseHelper.LCSearch(searchURL: url){ json, error in
             if let advertiding = json["Advertising"] as? String , error == nil {
-                print("id: \(StaticData.CurrentUser.StudentID) adv: \(advertiding)  value: \(value)")
+                //print("id: \(ApplicationHelper.CurrentUser.SchoolID) adv: \(advertiding)  value: \(value)")
                 completionHandler(advertiding == value)
             } else {
+                print("false")
                 completionHandler(false)
             }
         }
@@ -77,7 +78,7 @@ public class DatabaseHelper {
     public static func LCUploadCheckLog(completionHandler: @escaping (Bool) -> Void) {
         var checkInRoom = Room()
         autoreleasepool {
-            checkInRoom =  (try! Realm()).objects(Room.self).filter("RoomID = \(StaticData.CheckInRoomID)").first!
+            checkInRoom =  (try! Realm()).objects(Room.self).filter("ID = \(ApplicationHelper.CheckInRoomID)").first!
         }
         let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/CheckRecording"
         let createCheckItemURL = URL(string: url)
@@ -87,8 +88,8 @@ public class DatabaseHelper {
         leancloudRequest.setValue(HttpContentTypeJSONUTF8, forHTTPHeaderField: HttpContentTypeHeader)
         leancloudRequest.setValue(LeancloudAppid, forHTTPHeaderField: LeancloudIDHeader)
         leancloudRequest.setValue(LeancloudAppKey, forHTTPHeaderField: LeancloudKeyHeader)
-        let checkJson = ["StudentID"    : StaticData.CurrentUser.StudentID,
-                         "RoomID"       : checkInRoom.RoomID] as [String : Any]
+        let checkJson = ["StudentID"    : ApplicationHelper.CurrentUser.ID,
+                         "RoomID"       : checkInRoom.ID]
         let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
         leancloudSession.uploadTask(with: leancloudRequest, from: checkJSONData) { data, response, error in
             if let httpres = response as? HTTPURLResponse {

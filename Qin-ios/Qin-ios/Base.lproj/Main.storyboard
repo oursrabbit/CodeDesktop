@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TlR-wB-oRO">
-    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,25 +12,25 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="previewmask" translatesAutoresizingMaskIntoConstraints="NO" id="3uA-ir-H5I">
-                                <rect key="frame" x="54" y="62" width="212" height="212"/>
+                                <rect key="frame" x="54" y="106" width="212" height="212"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="212" id="B3c-3X-fPf"/>
                                     <constraint firstAttribute="height" constant="212" id="Cqw-Vb-g6k"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="DAO-jT-heT">
-                                <rect key="frame" x="96" y="104" width="128" height="128"/>
+                                <rect key="frame" x="96" y="148" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="k5a-OW-qZM"/>
                                     <constraint firstAttribute="height" constant="128" id="wGT-tI-8OQ"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Foj-s3-P9v">
-                                <rect key="frame" x="0.0" y="324" width="320" height="24"/>
+                                <rect key="frame" x="0.0" y="368" width="320" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -64,24 +64,24 @@
             <objects>
                 <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="neX-i9-ARt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cN5-yH-FaN">
-                                <rect key="frame" x="8" y="215" width="304" height="24"/>
+                                <rect key="frame" x="8" y="249" width="304" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入学号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KKc-Jh-fXC">
-                                <rect key="frame" x="8" y="255" width="304" height="34"/>
+                                <rect key="frame" x="8" y="289" width="304" height="34"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9g-8U-u5M">
-                                <rect key="frame" x="8" y="400" width="304" height="48"/>
+                                <rect key="frame" x="8" y="468" width="304" height="48"/>
                                 <color key="backgroundColor" red="0.19722897510000001" green="0.44812337790000001" blue="0.47015783630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="gUw-C7-Lcd"/>
@@ -91,18 +91,18 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="updateStudentID:" destination="0kV-aZ-6fk" eventType="touchUpInside" id="xTP-Dn-lO6"/>
+                                    <action selector="updateSchoolID:" destination="0kV-aZ-6fk" eventType="touchUpInside" id="xTP-Dn-lO6"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="MYr-Zp-vnr">
-                                <rect key="frame" x="96" y="76" width="128" height="128"/>
+                                <rect key="frame" x="96" y="32" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="561-e5-LSZ"/>
                                     <constraint firstAttribute="width" constant="128" id="Db5-xR-Rle"/>
                                 </constraints>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="Qin_ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -144,11 +144,11 @@
             <objects>
                 <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ntX-hF-DuZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gT6-QS-4qw">
-                                <rect key="frame" x="0.0" y="44" width="320" height="376"/>
+                                <rect key="frame" x="0.0" y="52" width="320" height="436"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="building" id="PLa-8m-qfv" customClass="BuildingTableViewCell" customModule="Qin_ios" customModuleProvider="target">
@@ -189,7 +189,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o20-Hf-9gx">
-                                <rect key="frame" x="8" y="428" width="304" height="36"/>
+                                <rect key="frame" x="8" y="496" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="历史记录">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -198,39 +198,65 @@
                                     <segue destination="VFR-DZ-KvD" kind="show" id="dj3-cw-uo5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amC-MS-G0Z">
+                                <rect key="frame" x="240" y="8" width="72" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="72" id="FL2-Lf-DwF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="设置">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="0kV-aZ-6fk" kind="show" id="sfl-bo-7jb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你好，" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCk-iw-l36">
+                                <rect key="frame" x="16" y="8" width="216" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Wiu-ac-BD2" firstAttribute="trailing" secondItem="o20-Hf-9gx" secondAttribute="trailing" constant="8" id="1D9-K0-a02"/>
                             <constraint firstItem="o20-Hf-9gx" firstAttribute="leading" secondItem="Wiu-ac-BD2" secondAttribute="leading" constant="8" id="56y-W8-6FL"/>
+                            <constraint firstItem="lCk-iw-l36" firstAttribute="top" secondItem="Wiu-ac-BD2" secondAttribute="top" constant="8" id="CBi-N0-icY"/>
                             <constraint firstItem="o20-Hf-9gx" firstAttribute="top" secondItem="gT6-QS-4qw" secondAttribute="bottom" constant="8" id="Et3-jd-ulD"/>
                             <constraint firstItem="Wiu-ac-BD2" firstAttribute="trailing" secondItem="gT6-QS-4qw" secondAttribute="trailing" id="Od7-Yb-MmS"/>
+                            <constraint firstItem="lCk-iw-l36" firstAttribute="leading" secondItem="Wiu-ac-BD2" secondAttribute="leading" constant="16" id="Roz-nC-oon"/>
+                            <constraint firstItem="gT6-QS-4qw" firstAttribute="top" secondItem="lCk-iw-l36" secondAttribute="bottom" constant="8" id="TbJ-0G-uid"/>
                             <constraint firstItem="Wiu-ac-BD2" firstAttribute="bottom" secondItem="o20-Hf-9gx" secondAttribute="bottom" constant="16" id="VXW-9n-UDh"/>
+                            <constraint firstItem="amC-MS-G0Z" firstAttribute="top" secondItem="Wiu-ac-BD2" secondAttribute="top" constant="8" id="Xj3-rl-5ZZ"/>
+                            <constraint firstItem="Wiu-ac-BD2" firstAttribute="trailing" secondItem="amC-MS-G0Z" secondAttribute="trailing" constant="8" id="fOj-Sj-t6w"/>
                             <constraint firstItem="gT6-QS-4qw" firstAttribute="leading" secondItem="Wiu-ac-BD2" secondAttribute="leading" id="iMN-OE-w1Q"/>
-                            <constraint firstItem="gT6-QS-4qw" firstAttribute="top" secondItem="Wiu-ac-BD2" secondAttribute="top" id="k9f-mC-8Kg"/>
+                            <constraint firstItem="amC-MS-G0Z" firstAttribute="leading" secondItem="lCk-iw-l36" secondAttribute="trailing" constant="8" id="kpC-tW-nKC"/>
+                            <constraint firstItem="gT6-QS-4qw" firstAttribute="top" secondItem="amC-MS-G0Z" secondAttribute="bottom" constant="8" id="zSr-A3-Rkd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wiu-ac-BD2"/>
                     </view>
                     <navigationItem key="navigationItem" id="wAu-rO-cfB"/>
                     <connections>
                         <outlet property="buildingList" destination="gT6-QS-4qw" id="IZk-lw-0DQ"/>
+                        <outlet property="studentNameLabel" destination="lCk-iw-l36" id="nIC-1G-G9f"/>
                         <segue destination="Vre-IP-CUg" kind="show" identifier="roomlist" id="CgZ-iB-aQV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kaa-qM-CrH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2719" y="138"/>
+            <point key="canvasLocation" x="2718.75" y="137.32394366197184"/>
         </scene>
         <!--Room List View Controller-->
         <scene sceneID="UV4-br-EKM">
             <objects>
                 <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C2J-Qf-R77">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hte-iL-Qxu">
-                                <rect key="frame" x="8" y="52" width="304" height="36"/>
+                                <rect key="frame" x="8" y="8" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="&lt;&lt;返回">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -240,7 +266,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1EO-Kc-ig4">
-                                <rect key="frame" x="8" y="428" width="304" height="36"/>
+                                <rect key="frame" x="8" y="496" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="历史记录">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -250,7 +276,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LMf-mq-OlY">
-                                <rect key="frame" x="0.0" y="96" width="320" height="324"/>
+                                <rect key="frame" x="0.0" y="52" width="320" height="436"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="Qin_ios" customModuleProvider="target">
@@ -320,18 +346,18 @@
             <objects>
                 <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DPd-Go-xcR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="Qin_ios" customModuleProvider="target">
-                                <rect key="frame" x="96" y="80" width="128" height="128"/>
+                                <rect key="frame" x="96" y="114" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="N3N-9W-cyf"/>
                                     <constraint firstAttribute="height" constant="128" id="y11-2x-qWL"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9X-Zm-VG4">
-                                <rect key="frame" x="16" y="324" width="288" height="24"/>
+                                <rect key="frame" x="16" y="358" width="288" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -363,11 +389,11 @@
             <objects>
                 <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoB-Dx-11B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在签到..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLD-8q-0Wl">
-                                <rect key="frame" x="8" y="82" width="304" height="60"/>
+                                <rect key="frame" x="8" y="116" width="304" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ouI-XT-qeA"/>
                                 </constraints>
@@ -376,7 +402,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaz-bv-E1s">
-                                <rect key="frame" x="32" y="248" width="256" height="48"/>
+                                <rect key="frame" x="32" y="282" width="256" height="48"/>
                                 <color key="backgroundColor" red="0.19722897510000001" green="0.44812337790000001" blue="0.47015783630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="WgE-aJ-tbC"/>
@@ -385,16 +411,22 @@
                                 <state key="normal" title="再次签到">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7Ij-J3-hze" kind="show" id="gWw-M4-Jgc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHo-8M-PRp">
-                                <rect key="frame" x="8" y="412" width="304" height="36"/>
+                                <rect key="frame" x="8" y="480" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="历史记录">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="VFR-DZ-KvD" kind="show" id="efQ-lb-3M0"/>
+                                </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="Qin_ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -433,11 +465,11 @@
             <objects>
                 <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49z-33-RvL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-TA-G0A">
-                                <rect key="frame" x="0.0" y="164" width="320" height="316"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="428"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="Qin_ios" customModuleProvider="target">
@@ -528,7 +560,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nk-l1-fDb">
-                                <rect key="frame" x="8" y="96" width="304" height="60"/>
+                                <rect key="frame" x="8" y="52" width="304" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="DnD-JU-EzV"/>
                                 </constraints>
@@ -537,7 +569,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rT-w5-i2F">
-                                <rect key="frame" x="8" y="52" width="304" height="36"/>
+                                <rect key="frame" x="8" y="8" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="&lt;&lt;返回">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -598,6 +630,8 @@
         <image name="previewmask" width="406" height="384"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8FS-B3-nNO"/>
+        <segue reference="efQ-lb-3M0"/>
+        <segue reference="gWw-M4-Jgc"/>
+        <segue reference="sfl-bo-7jb"/>
     </inferredMetricsTieBreakers>
 </document>
