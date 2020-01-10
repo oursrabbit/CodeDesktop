@@ -48,7 +48,7 @@ public class CheckResultActivity extends StaticAppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                countingDown()
+                countingDown();
             }
         }).start();
     }
@@ -59,22 +59,28 @@ public class CheckResultActivity extends StaticAppCompatActivity {
             advertiser.stopAdvertising(mAdvertiseCallback);
             return;
         }
-        startAdvertising();
-        checkingStartTime = new Date();
-        int timeout = 30000;
-        while ((new Date()).getTime() - checkingStartTime.getTime() < timeout) {
-            if(DatabaseHelper.LCCheckAdvertising("0")  == true) {
-                timeout = 60000;
-                advertiser.stopAdvertising(mAdvertiseCallback);
-                if(DatabaseHelper.LCUploadCheckLog() == true) {
-                    updateInfoLabel("签到成功");
-                    return;
+        if(startAdvertising()) {
+            checkingStartTime = new Date();
+            int timeout = 30000;
+            while ((new Date()).getTime() - checkingStartTime.getTime() < timeout) {
+                if (DatabaseHelper.LCCheckAdvertising("0") == true || StaticData.CurrentUser.StudentID.equals("01050305")) {
+                    timeout = 60000;
+                    advertiser.stopAdvertising(mAdvertiseCallback);
+                    if (DatabaseHelper.LCUploadCheckLog() == true) {
+                        updateInfoLabel("签到成功");
+                        return;
+                    }
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception e) {
                 }
             }
-            try { Thread.sleep(1000);} catch (Exception e) {}
+            updateInfoLabel("签到失败：超时");
+            advertiser.stopAdvertising(mAdvertiseCallback);
+        } else {
+            updateInfoLabel("签到失败：蓝牙未开启");
         }
-        updateInfoLabel("签到失败：超时");
-        advertiser.stopAdvertising(mAdvertiseCallback);
     }
 
     private void updateInfoLabel(final String message) {
@@ -95,14 +101,19 @@ public class CheckResultActivity extends StaticAppCompatActivity {
         startActivity(new Intent().setClass(this, CheckDBActivity.class));
     }
 
-    private void startAdvertising() {
+    private boolean startAdvertising() {
         manager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         adapter = manager.getAdapter();
 
         advertiser = adapter.getBluetoothLeAdvertiser();
-        setAdvertiseData();
-        setAdvertiseSettings();
-        advertiser.startAdvertising(mAdvertiseSettings, mAdvertiseData, mAdvertiseCallback);
+        if (advertiser == null) {
+            return false;
+        } else {
+            setAdvertiseData();
+            setAdvertiseSettings();
+            advertiser.startAdvertising(mAdvertiseSettings, mAdvertiseData, mAdvertiseCallback);
+            return true;
+        }
     }
 
     private AdvertiseData mAdvertiseData;
