@@ -164,14 +164,20 @@ class CheckResultViewController: StaticViewController {
     }
     
     func startAdvertising() {
-        self.peripheral = CBPeripheralManager()
-        
-        let proximityUUID = UUID(uuidString: "0a66e898-2d31-11ea-978f-2e728ce88125")!
-        let major : CLBeaconMajorValue = CLBeaconMajorValue(ApplicationHelper.CheckInRoomID)
-        let minor : CLBeaconMinorValue = CLBeaconMinorValue(ApplicationHelper.CurrentUser.ID)
-        let beaconID = "bfass"
-        self.peripheralData =  CLBeaconRegion(uuid: proximityUUID, major: major, minor: minor, identifier: beaconID)
-            
-        peripheral.startAdvertising(((peripheralData.peripheralData(withMeasuredPower: nil) as NSDictionary) as! [String : Any]))
+        self.peripheral = CBPeripheralManager(delegate: self, queue: nil)
+    }
+}
+
+extension CheckResultViewController: CBPeripheralManagerDelegate {
+    func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
+        if peripheral.state == .poweredOn {
+            let proximityUUID = UUID(uuidString: "0a66e898-2d31-11ea-978f-2e728ce88125")!
+            let major : CLBeaconMajorValue = CLBeaconMajorValue(ApplicationHelper.CheckInRoomID & 0x0000FFFF)
+            let minor : CLBeaconMinorValue = CLBeaconMinorValue(ApplicationHelper.CurrentUser.ID & 0x0000FFFF)
+            let beaconID = "bfass"
+            self.peripheralData =  CLBeaconRegion(uuid: proximityUUID, major: major, minor: minor, identifier: beaconID)
+                
+            peripheral.startAdvertising(((peripheralData.peripheralData(withMeasuredPower: 68) as NSDictionary) as! [String : Any]))
+        }
     }
 }

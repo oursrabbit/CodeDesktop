@@ -10,7 +10,7 @@
         <!--Initialization View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,7 +62,7 @@
         <!--Qin Setting View Controller-->
         <scene sceneID="35H-ol-105">
             <objects>
-                <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="neX-i9-ARt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
                                     <constraint firstAttribute="width" constant="128" id="Db5-xR-Rle"/>
                                 </constraints>
                             </imageView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="Qin_ios" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="声音学院签到助手" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -142,7 +142,7 @@
         <!--Building List View Controller-->
         <scene sceneID="pVm-8b-xhB">
             <objects>
-                <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ntX-hF-DuZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,7 +151,7 @@
                                 <rect key="frame" x="0.0" y="52" width="320" height="436"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="building" id="PLa-8m-qfv" customClass="BuildingTableViewCell" customModule="Qin_ios" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="building" id="PLa-8m-qfv" customClass="BuildingTableViewCell" customModule="声音学院签到助手" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="86.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PLa-8m-qfv" id="hdm-8J-SlN">
@@ -250,7 +250,7 @@
         <!--Room List View Controller-->
         <scene sceneID="UV4-br-EKM">
             <objects>
-                <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C2J-Qf-R77">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,7 +279,7 @@
                                 <rect key="frame" x="0.0" y="52" width="320" height="436"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="Qin_ios" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="声音学院签到助手" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="86.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7kU-vY-K0x" id="hst-R3-p4L">
@@ -344,12 +344,12 @@
         <!--Face Detect Simple View Controller-->
         <scene sceneID="QdR-HH-Nin">
             <objects>
-                <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DPd-Go-xcR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="Qin_ios" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="声音学院签到助手" customModuleProvider="target">
                                 <rect key="frame" x="96" y="114" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="N3N-9W-cyf"/>
@@ -387,7 +387,7 @@
         <!--Check Result View Controller-->
         <scene sceneID="G4r-bJ-b4M">
             <objects>
-                <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoB-Dx-11B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -412,7 +412,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="7Ij-J3-hze" kind="show" id="gWw-M4-Jgc"/>
+                                    <segue destination="7Ij-J3-hze" kind="show" id="k1K-V0-AtR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHo-8M-PRp">
@@ -422,10 +422,10 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="VFR-DZ-KvD" kind="show" id="efQ-lb-3M0"/>
+                                    <segue destination="VFR-DZ-KvD" kind="show" id="ZLp-5P-Oy4"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="Qin_ios" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="声音学院签到助手" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -463,7 +463,7 @@
         <!--CheckDB View Controller-->
         <scene sceneID="E7B-fe-pte">
             <objects>
-                <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="Qin_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49z-33-RvL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -472,7 +472,7 @@
                                 <rect key="frame" x="0.0" y="120" width="320" height="428"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="Qin_ios" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="声音学院签到助手" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="88.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bbw-eJ-ZyS" id="ml2-hd-CVv">
@@ -630,8 +630,8 @@
         <image name="previewmask" width="406" height="384"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="efQ-lb-3M0"/>
-        <segue reference="gWw-M4-Jgc"/>
+        <segue reference="ZLp-5P-Oy4"/>
+        <segue reference="k1K-V0-AtR"/>
         <segue reference="sfl-bo-7jb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "CheckResultViewController.peripheralManagerDidUpdateState(_:):CheckResultViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CLBeaconMajorValue(ApplicationHelper.CheckInRoomID)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "InitializationViewController.startQin():InitializationViewController.swift">
          <PersistentStrings>
             <PersistentString

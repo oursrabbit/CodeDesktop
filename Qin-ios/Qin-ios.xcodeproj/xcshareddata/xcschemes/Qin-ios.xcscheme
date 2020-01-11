@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C9C81E423BEE99F00A470FF"
-               BuildableName = "Qin-ios.app"
+               BuildableName = "&#x52e4;&#xff01;.app"
                BlueprintName = "Qin-ios"
                ReferencedContainer = "container:Qin-ios.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C9C81E423BEE99F00A470FF"
-            BuildableName = "Qin-ios.app"
+            BuildableName = "&#x52e4;&#xff01;.app"
             BlueprintName = "Qin-ios"
             ReferencedContainer = "container:Qin-ios.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C9C81E423BEE99F00A470FF"
-            BuildableName = "Qin-ios.app"
+            BuildableName = "&#x52e4;&#xff01;.app"
             BlueprintName = "Qin-ios"
             ReferencedContainer = "container:Qin-ios.xcodeproj">
          </BuildableReference>
