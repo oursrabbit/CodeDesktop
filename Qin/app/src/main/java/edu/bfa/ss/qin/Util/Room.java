@@ -4,12 +4,12 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class Room extends RealmObject {
-    public String getRoomName() {
-        return RoomName;
+    public String getName() {
+        return Name;
     }
 
-    public void setRoomName(String roomName) {
-        RoomName = roomName;
+    public void setName(String name) {
+        Name = name;
     }
 
     public Building getLocation() {
@@ -20,16 +20,16 @@ public class Room extends RealmObject {
         Location = location;
     }
 
-    public int getRoomID() {
-        return RoomID;
+    public int getID() {
+        return ID;
     }
 
-    public void setRoomID(int roomID) {
-        RoomID = roomID;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     @PrimaryKey
-    public int RoomID;
-    public String RoomName;
+    public int ID;
+    public String Name;
     public Building Location;
 }

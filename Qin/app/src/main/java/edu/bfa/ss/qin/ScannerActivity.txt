@@ -36,7 +36,7 @@ import java.util.Random;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import edu.bfa.ss.qin.Util.StaticData;
+import edu.bfa.ss.qin.Util.ApplicationHelper;
 
 public class ScannerActivity extends AppCompatActivity {
     private CountDownTimer timer;

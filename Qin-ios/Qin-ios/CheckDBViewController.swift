@@ -46,6 +46,7 @@ class CheckDBViewController: StaticViewController {
                     self.logs.append(newLog)
                 }
                 DispatchQueue.main.async {
+                    self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
                     self.idlabel.text = ApplicationHelper.CurrentUser.Name
                     self.logstableview.reloadData()
                 }

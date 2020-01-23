@@ -1,13 +1,9 @@
 package edu.bfa.ss.qin.Util;
 
 import android.Manifest;
-import android.app.Application;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,21 +21,35 @@ import java.util.TimeZone;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
 import edu.bfa.ss.qin.Custom.UI.QinApplication;
-import edu.bfa.ss.qin.InitializationActivity;
-import edu.bfa.ss.qin.QinSettingActivity;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import io.realm.internal.android.ISO8601Utils;
 
 import static edu.bfa.ss.qin.Util.DatabaseHelper.LeancloudAPIBaseURL;
 
-public class StaticData {
+public class ApplicationHelper {
+
+    public enum QinMessage {
+        NetError,
+        ApplicationVersionError,
+        Nothing,
+        Success,
+        DatabaseUpdated
+    }
+
     public static Student CurrentUser = new Student();
     public static int CheckInRoomID;
 
-    public static Version localVersion = new Version("1.0.0.0");
-    public static Version serverVersion;
+    public static byte[] getCheckInRoomID() {
+        byte[] bytes = {0x00, 0x00};
+        bytes[0] = (byte)(CheckInRoomID >> 8 & 0xFF);
+        bytes[1] = (byte)(CheckInRoomID & 0xFF);
+        return bytes;
+    }
+
+    public static final int localVersion = 1;
+    public static int serverVersion = 0;
+    public static int databaseVersion = 0;
 
     public static String toISO8601UTC(Date date) {
         TimeZone tz = TimeZone.getTimeZone("UTC+8");
@@ -48,23 +59,18 @@ public class StaticData {
     }
 
     public static Date fromISO8601UTC(String dateStr) {
-        TimeZone tz = TimeZone.getTimeZone("UTC+8");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        df.setTimeZone(tz);
-
         try {
-            return df.parse(dateStr);
+            return ISO8601Utils.parse(dateStr, new ParsePosition(0));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
     public static String getDateString(String formart, Date date) {
-        TimeZone tz = TimeZone.getTimeZone("UTC+8");
+        //TimeZone tz = TimeZone.getTimeZone("UTC+8");
         DateFormat df = new SimpleDateFormat(formart);
-        df.setTimeZone(tz);
+        //df.setTimeZone(tz);
         return df.format(date);
     }
 
@@ -85,34 +91,36 @@ public class StaticData {
                 || context.checkSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
+
         return true;
     }
 
-    public static int checkVersion(StaticDataUpdateInfoListener listener) {
+    public static ApplicationHelper.QinMessage checkVersion(StaticDataUpdateInfoListener listener) {
         try {
             if (listener != null)
                 listener.updateInfomation("正在检查软件版本...");
-            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/QinSetting/5e0c10ae562071008e1fcc28";
+            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/ApplicationData/5e184373562071008e2f4a0a";
             JSONObject response = DatabaseHelper.LCSearch(url);
-            String serverVersionString = response.getString("Version");
-            serverVersion = new Version(serverVersionString);
-            if (localVersion.MainVersion != serverVersion.MainVersion || localVersion.FunctionVersion != serverVersion.FunctionVersion || localVersion.BugVersion != serverVersion.BugVersion) {
-                return 1;
+            ApplicationHelper.serverVersion = response.getInt("ApplicationVersion");
+            ApplicationHelper.databaseVersion = response.getInt("DatabaseVersion");
+            if (ApplicationHelper.localVersion == ApplicationHelper.serverVersion) {
+                return QinMessage.Success;
+            } else {
+                return QinMessage.ApplicationVersionError;
             }
-            return 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 2;
+        return QinMessage.NetError;
     }
 
-    public static int checkLocalDatabaseVersion(StaticDataUpdateInfoListener listener) {
+    public static QinMessage checkLocalDatabaseVersion(StaticDataUpdateInfoListener listener) {
         if (listener != null)
             listener.updateInfomation("正在检查本地数据版本...");
         SharedPreferences localStore = QinApplication.getContext().getSharedPreferences("localData", Context.MODE_PRIVATE);
         int localDataVersion = localStore.getInt("localDataVersion", -1);
-        if (localDataVersion == serverVersion.DatabaseVersion) {
-            return 0;
+        if (localDataVersion == ApplicationHelper.databaseVersion) {
+            return QinMessage.Success;
         }
         if (listener != null)
             listener.updateInfomation("正在更新本地数据版本...");
@@ -130,9 +138,9 @@ public class StaticData {
                 listener.updateInfomation("正在更新建筑信息...");
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                Building newBuilding = realm.createObject(Building.class, checkLog.getInt("BuildingID"));
-                newBuilding.BuildingName = checkLog.getString("BuildingName");
-                buildings.put(newBuilding.BuildingName, newBuilding);
+                Building newBuilding = realm.createObject(Building.class, checkLog.getInt("ID"));
+                newBuilding.Name = checkLog.getString("Name");
+                buildings.put(newBuilding.ID + "", newBuilding);
             }
             if (listener != null)
                 listener.updateInfomation("正在获取房间信息...");
@@ -143,21 +151,21 @@ public class StaticData {
                 listener.updateInfomation("正在更新房间信息...");
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                Room newRoom = realm.createObject(Room.class, checkLog.getInt("RoomID"));
-                newRoom.RoomName = checkLog.getString("RoomName");
+                Room newRoom = realm.createObject(Room.class, checkLog.getInt("ID"));
+                newRoom.Name = checkLog.getString("Name");
                 //Relation
-                String locationName = checkLog.getString("BuildingName");
-                Building location = buildings.get(locationName);
+                int locationID = checkLog.getInt("LocationID");
+                Building location = buildings.get(locationID + "");
                 newRoom.Location = location;
                 location.Rooms.add(newRoom);
             }
             realm.commitTransaction();
-            localStore.edit().putInt("localDataVersion", serverVersion.DatabaseVersion).commit();
-            return 1;
+            localStore.edit().putInt("localDataVersion", ApplicationHelper.databaseVersion).commit();
+            return QinMessage.DatabaseUpdated;
         } catch (Exception e) {
             realm.cancelTransaction();
             e.printStackTrace();
-            return 2;
+            return QinMessage.NetError;
         } finally {
             realm.close();
         }

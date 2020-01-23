@@ -3,12 +3,9 @@ package edu.bfa.ss.qin;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,15 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 
 import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
+import edu.bfa.ss.qin.Util.ApplicationHelper;
 import edu.bfa.ss.qin.Util.DatabaseHelper;
-import edu.bfa.ss.qin.Util.StaticData;
-import edu.bfa.ss.qin.Util.Student;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public class QinSettingActivity extends AppCompatActivity {
 
@@ -40,7 +32,7 @@ public class QinSettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_qin_setting);
 
         idtextView = findViewById(R.id.QS_idtextview);
-        idtextView.setText(StaticData.CurrentUser.StudentID);
+        idtextView.setText(ApplicationHelper.CurrentUser.SchoolID);
         saveButton = findViewById(R.id.QS_savebutton);
         waitingDialog = new InCanceledAlterDialog.Builder(this).setMessage("").create();
     }
@@ -55,10 +47,10 @@ public class QinSettingActivity extends AppCompatActivity {
     }
 
     public void updateStudentID(View button) {
-        StaticData.CurrentUser.StudentID = idtextView.getText().toString();
+        ApplicationHelper.CurrentUser.SchoolID = idtextView.getText().toString();
         SharedPreferences localStore = getSharedPreferences("localData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = localStore.edit();
-        editor.putString("StudentID", StaticData.CurrentUser.StudentID);
+        editor.putString("SchoolID", ApplicationHelper.CurrentUser.SchoolID);
         editor.commit();
         waitingDialog.show();
         new Thread(new Runnable() {
@@ -72,8 +64,8 @@ public class QinSettingActivity extends AppCompatActivity {
     private void updateStudentObjectID() {
         try {
             updateWaitingDialog("正在获取用户信息...");
-            String condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.CurrentUser.StudentID + "\"}", "UTF-8");
-            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Students?where=" + condition;
+            String condition = URLEncoder.encode("{\"SchoolID\":\"" + ApplicationHelper.CurrentUser.SchoolID + "\"}", "UTF-8");
+            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Student?where=" + condition;
             JSONObject response = DatabaseHelper.LCSearch(url);
             JSONArray DatabaseResults = response.getJSONArray("results");
             updateWaitingDialog("正在更新用户信息...");
@@ -86,10 +78,12 @@ public class QinSettingActivity extends AppCompatActivity {
                 });
             } else {
                 JSONObject checkLog = DatabaseResults.getJSONObject(0);
-                StaticData.CurrentUser.Advertising = "0";
-                StaticData.CurrentUser.BaiduFaceID = checkLog.getString("BaiduFaceID");
-                StaticData.CurrentUser.ObjectID = checkLog.getString("objectId");
-                StaticData.CurrentUser.StudentBeaconID = checkLog.getInt("StudentBeaconMinor");
+                ApplicationHelper.CurrentUser.Advertising = "0";
+                ApplicationHelper.CurrentUser.BaiduFaceID = checkLog.getString("BaiduFaceID");
+                ApplicationHelper.CurrentUser.LCObjectID = checkLog.getString("objectId");
+                ApplicationHelper.CurrentUser.ID = checkLog.getInt("ID");
+                ApplicationHelper.CurrentUser.SchoolID = checkLog.getString("SchoolID");
+                ApplicationHelper.CurrentUser.Name = checkLog.getString("Name");
                 startActivity(new Intent().setClass(this, RoomListActivity.class));
             }
         } catch (Exception e) {

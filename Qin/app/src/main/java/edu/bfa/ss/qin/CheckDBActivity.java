@@ -14,20 +14,17 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
-
+import edu.bfa.ss.qin.Util.ApplicationHelper;
 import edu.bfa.ss.qin.Util.CheckLog;
 import edu.bfa.ss.qin.Util.DatabaseHelper;
 import edu.bfa.ss.qin.Util.Room;
-import edu.bfa.ss.qin.Util.StaticData;
 import io.realm.Realm;
 
 public class CheckDBActivity extends AppCompatActivity {
@@ -62,7 +59,7 @@ public class CheckDBActivity extends AppCompatActivity {
     private void LoadingDatabase() {
         try {
             updateInfoLabel("正在加载数据...");
-            String condition = URLEncoder.encode("{\"StudentID\":\"" + StaticData.CurrentUser.StudentID + "\"}", "UTF-8");
+            String condition = URLEncoder.encode("{\"StudentID\":" + ApplicationHelper.CurrentUser.ID + "}", "UTF-8");
             String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
             JSONObject response = DatabaseHelper.LCSearch(url);
             JSONArray DatabaseResults = response.getJSONArray("results");
@@ -70,15 +67,16 @@ public class CheckDBActivity extends AppCompatActivity {
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
                 CheckLog newLog = new CheckLog();
-                newLog.StudentID = checkLog.getString("StudentID");
+                newLog.StudentID = checkLog.getInt("StudentID");
                 newLog.RoomID = checkLog.getInt("RoomID");
-                newLog.CheckDate = StaticData.fromISO8601UTC(checkLog.getString("createdAt"));
+                newLog.CheckDate = ApplicationHelper.fromISO8601UTC(checkLog.getString("createdAt"));
                 checkLogs.add(newLog);
             }
             logsTable.post(new Runnable() {
                 @Override
                 public void run() {
-                    idLabel.setText(StaticData.CurrentUser.StudentID);
+                    Collections.sort(checkLogs);
+                    idLabel.setText(ApplicationHelper.CurrentUser.Name);
                     CheckDBItemAdapter adapter = new CheckDBItemAdapter(CheckDBActivity.this, R.layout.table_check_db_item, checkLogs);
                     logsTable.setAdapter(adapter);
                 }
@@ -107,10 +105,10 @@ class CheckDBItemAdapter extends ArrayAdapter<CheckLog> {
         }
         CheckLog checkLog = getItem(position);
         Realm realm = Realm.getDefaultInstance();
-        Room checkRoom = realm.where(Room.class).equalTo("RoomID", checkLog.RoomID).findFirst();
-        ((TextView) convertView.findViewById(R.id.CDB_ITEM_roomid)).setText(checkRoom.RoomName);
-        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checkdate)).setText(StaticData.getDateString("yyyy年MM月dd日", getItem(position).CheckDate));
-        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checktime)).setText(StaticData.getDateString("HH时mm分", getItem(position).CheckDate));
+        Room checkRoom = realm.where(Room.class).equalTo("ID", checkLog.RoomID).findFirst();
+        ((TextView) convertView.findViewById(R.id.CDB_ITEM_roomid)).setText(checkRoom.Name);
+        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checkdate)).setText(ApplicationHelper.getDateString("yyyy年MM月dd日", getItem(position).CheckDate));
+        ((TextView) convertView.findViewById(R.id.CDB_ITEM_checktime)).setText(ApplicationHelper.getDateString("HH时mm分", getItem(position).CheckDate));
         return convertView;
     }
 }

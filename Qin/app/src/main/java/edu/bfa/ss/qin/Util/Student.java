@@ -1,16 +1,17 @@
 package edu.bfa.ss.qin.Util;
 
 public class Student {
-    public String ObjectID;
-    public String StudentID;
+    public String LCObjectID;
+    public String SchoolID;
     public String Advertising;
     public String BaiduFaceID;
-    public int StudentBeaconID;
+    public int ID;
+    public String Name;
 
     public byte[] getStudentBeaconMinor() {
         byte[] bytes = {0x00, 0x00};
-        bytes[0] = (byte)(StudentBeaconID >> 8 & 0xFF);
-        bytes[1] = (byte)(StudentBeaconID & 0xFF);
+        bytes[0] = (byte)(ID >> 8 & 0xFF);
+        bytes[1] = (byte)(ID & 0xFF);
         return bytes;
     }
 }

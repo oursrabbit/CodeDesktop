@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import edu.bfa.ss.qin.Custom.UI.AutoFitTextureView;
 import edu.bfa.ss.qin.Util.Camera;
-import edu.bfa.ss.qin.Util.StaticData;
+import edu.bfa.ss.qin.Util.ApplicationHelper;
 
 public class FaceDetectActivity extends AppCompatActivity {
 

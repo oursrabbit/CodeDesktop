@@ -15,9 +15,9 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class DatabaseHelper {
     //Lean Cloud
-    public static String LeancloudAppid = "YHwFdAE1qj1OcWfJ5xoayLKr-gzGzoHsz";
-    public static String LeancloudAppKey = "UbnM6uOP2mxah3nFMzurEDQL";
-    public static String LeancloudAPIBaseURL = "https://yhwfdae1.lc-cn-n1-shared.com";
+    public static String LeancloudAppid = "N4v46EIBIAWtiOANE61Fe1no-gzGzoHsz";
+    public static String LeancloudAppKey = "RCzPdQyEuPLaFhcPlxaKVb9P";
+    public static String LeancloudAPIBaseURL = "https://n4v46eib.lc-cn-n1-shared.com";
     public static String LeancloudIDHeader = "X-LC-Id";
     public static String LeancloudKeyHeader = "X-LC-Key";
     public static String HttpContentTypeHeader = "Content-Type";
@@ -29,6 +29,7 @@ public class DatabaseHelper {
         connection.setRequestProperty(DatabaseHelper.LeancloudIDHeader, DatabaseHelper.LeancloudAppid);
         connection.setRequestProperty(DatabaseHelper.LeancloudKeyHeader, DatabaseHelper.LeancloudAppKey);
         connection.setRequestProperty(DatabaseHelper.HttpContentTypeHeader, DatabaseHelper.HttpContentTypeJSONUTF8);
+        //int code = connection.getResponseCode();
         if (connection.getResponseCode() == 200) {
             return new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
         }
@@ -37,8 +38,8 @@ public class DatabaseHelper {
 
     public static String getStudentObjectIDByBeacon(int beacon) {
         try {
-            String condition = URLEncoder.encode("{\"StudentBeaconMinor\":" + beacon + "}", "UTF-8");
-            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Students?where=" + condition;
+            String condition = URLEncoder.encode("{\"ID\":" + beacon + ", \"Advertising\": \"1\"}", "UTF-8");
+            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Student?where=" + condition;
             JSONObject response = DatabaseHelper.LCSearch(url);
             JSONArray DatabaseResults = response.getJSONArray("results");
             if(DatabaseResults.length() != 1) {
@@ -55,7 +56,7 @@ public class DatabaseHelper {
 
     public static boolean LCUpdateAdvertising(String objectID){
         try {
-            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Students/" + objectID;
+            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Student/" + objectID;
             HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("PUT");
             connection.setRequestProperty(DatabaseHelper.LeancloudIDHeader, DatabaseHelper.LeancloudAppid);

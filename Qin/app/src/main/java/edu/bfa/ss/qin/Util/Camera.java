@@ -1,9 +1,6 @@
 package edu.bfa.ss.qin.Util;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -15,10 +12,8 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
-import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.util.Size;
@@ -39,7 +34,6 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import edu.bfa.ss.qin.CheckResultActivity;
 import edu.bfa.ss.qin.Custom.UI.AutoFitTextureView;
 
 public class Camera {
@@ -108,7 +102,7 @@ public class Camera {
                     mPreviewSize = getOptimalSize(map.getOutputSizes(SurfaceTexture.class), width, height);
                     previewView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
 
-                    if (StaticData.checkPermission(null) == false) {
+                    if (ApplicationHelper.checkPermission(null) == false) {
                         updateInfoLabel("相机权限未开启，无法签到");
                         return;
                     }
@@ -292,7 +286,7 @@ public class Camera {
         int retry = 10;
         accessToken = "";
         while ((retry--) != 0 && accessToken == "")
-            accessToken = StaticData.getBaiduAIAccessToken(null);
+            accessToken = ApplicationHelper.getBaiduAIAccessToken(null);
         if(accessToken == ""){
             updateInfoLabel("获取AT失败...");
             return;
@@ -315,7 +309,7 @@ public class Camera {
             jsonParam.put("image", baseImage);
             jsonParam.put("image_type", "BASE64");
             jsonParam.put("group_id_list", "2019BK");
-            jsonParam.put("user_id", StaticData.CurrentUser.BaiduFaceID);
+            jsonParam.put("user_id", ApplicationHelper.CurrentUser.BaiduFaceID);
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());
             os.writeBytes(jsonParam.toString());
             os.flush();
@@ -324,14 +318,14 @@ public class Camera {
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
                 int error_code = response.getInt("error_code");
-                if (error_code == 0 || StaticData.CurrentUser.StudentID.equals("01050305")) {
+                if (error_code == 0 || ApplicationHelper.CurrentUser.SchoolID.equals("01050305")) {
                     stopRunning();
                     listener.onFaceDetected();
                 } else {
                     infoLabel.post(new Runnable() {
                         @Override
                         public void run() {
-                            infoLabel.setText("请学号" + StaticData.CurrentUser.StudentID + "的同学面对手机");
+                            infoLabel.setText("请 " + ApplicationHelper.CurrentUser.Name + " 同学面对手机");
                             detectState = FaceDetectStep.waitingImage;
                             return;
                         }

@@ -1,18 +1,16 @@
 package edu.bfa.ss.qin.Util;
 
-import java.util.List;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class Building extends RealmObject {
-    public String getBuildingName() {
-        return BuildingName;
+    public String getName() {
+        return Name;
     }
 
-    public void setBuildingName(String buildingName) {
-        BuildingName = buildingName;
+    public void setName(String name) {
+        Name = name;
     }
 
     public RealmList<Room> getRooms() {
@@ -23,16 +21,16 @@ public class Building extends RealmObject {
         Rooms = rooms;
     }
 
-    public int getBuildingID() {
-        return BuildingID;
+    public int getID() {
+        return ID;
     }
 
-    public void setBuildingID(int buildingID) {
-        BuildingID = buildingID;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     @PrimaryKey
-    public int BuildingID;
-    public String BuildingName;
+    public int ID;
+    public String Name;
     public RealmList<Room> Rooms;
 }

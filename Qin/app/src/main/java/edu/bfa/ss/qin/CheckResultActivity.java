@@ -1,7 +1,6 @@
 package edu.bfa.ss.qin;
 
 import android.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -12,7 +11,6 @@ import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,8 +19,8 @@ import java.util.Date;
 
 import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
 import edu.bfa.ss.qin.Custom.UI.StaticAppCompatActivity;
+import edu.bfa.ss.qin.Util.ApplicationHelper;
 import edu.bfa.ss.qin.Util.DatabaseHelper;
-import edu.bfa.ss.qin.Util.StaticData;
 
 public class CheckResultActivity extends StaticAppCompatActivity {
 
@@ -63,7 +61,7 @@ public class CheckResultActivity extends StaticAppCompatActivity {
             checkingStartTime = new Date();
             int timeout = 30000;
             while ((new Date()).getTime() - checkingStartTime.getTime() < timeout) {
-                if (DatabaseHelper.LCCheckAdvertising("0") == true || StaticData.CurrentUser.StudentID.equals("01050305")) {
+                if (DatabaseHelper.LCCheckAdvertising("0") == true || ApplicationHelper.CurrentUser.SchoolID.equals("01050305")) {
                     timeout = 60000;
                     advertiser.stopAdvertising(mAdvertiseCallback);
                     if (DatabaseHelper.LCUploadCheckLog() == true) {
@@ -150,10 +148,10 @@ public class CheckResultActivity extends StaticAppCompatActivity {
         mManufacturerData.put(15, (byte) 0xe8); //
         mManufacturerData.put(16, (byte) 0x81); //
         mManufacturerData.put(17, (byte) 0x25); //
-        mManufacturerData.put(18, (byte) 0x00); //
-        mManufacturerData.put(19, (byte) 0x00); //
-        mManufacturerData.put(20, StaticData.CurrentUser.getStudentBeaconMinor()[0]); //
-        mManufacturerData.put(21, StaticData.CurrentUser.getStudentBeaconMinor()[1]); //
+        mManufacturerData.put(18, ApplicationHelper.getCheckInRoomID()[0]); //
+        mManufacturerData.put(19, ApplicationHelper.getCheckInRoomID()[1]); //
+        mManufacturerData.put(20, ApplicationHelper.CurrentUser.getStudentBeaconMinor()[0]); //
+        mManufacturerData.put(21, ApplicationHelper.CurrentUser.getStudentBeaconMinor()[1]); //
         mManufacturerData.put(22, (byte) 0xC5); //
         AdvertiseData.Builder mBuilder = new AdvertiseData.Builder();
         mBuilder.addManufacturerData(76, mManufacturerData.array()); //

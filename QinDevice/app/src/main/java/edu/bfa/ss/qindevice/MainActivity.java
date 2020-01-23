@@ -16,6 +16,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,23 +45,23 @@ public class MainActivity extends AppCompatActivity {
 
         infoLabel = findViewById(R.id.MA_infoLabel);
 
-        requestPermissions(new String[] {
+        /*requestPermissions(new String[] {
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.BLUETOOTH,
                 Manifest.permission.BLUETOOTH_ADMIN,
                 Manifest.permission.INTERNET,
-                Manifest.permission.ACCESS_NETWORK_STATE}, 0);
+                Manifest.permission.ACCESS_NETWORK_STATE}, 0);*/
 
         if(checkPermission() == false) {
-            requestPermissions(new String[] {
+            /*requestPermissions(new String[] {
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.BLUETOOTH,
                     Manifest.permission.BLUETOOTH_ADMIN,
                     Manifest.permission.INTERNET,
-                    Manifest.permission.ACCESS_NETWORK_STATE}, 0);
-            new InCanceledAlterDialog.Builder(this).setMessage("未开启硬件权限，请开始后重启程序")
+                    Manifest.permission.ACCESS_NETWORK_STATE}, 0);*/
+            new InCanceledAlterDialog.Builder(this).setMessage("未开启硬件权限，或GPS定位功能，请开启后重启程序")
                     .setPositiveButton("前往系统设置", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).setData(Uri.parse("package:" + "edu.bfa.ss.qindevice")));
@@ -86,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
         manager = (BluetoothManager)getSystemService(Context.BLUETOOTH_SERVICE);
         adapter = manager.getAdapter();
         scanner = adapter.getBluetoothLeScanner();
-        //setScannerFilters();
-        //setScannerSetting();
-        scanner.startScan(mScannerCallback);
-        //scanner.startScan(mScannerFilters, mScannerSettings, mScannerCallback);
+        setScannerFilters();
+        setScannerSetting();
+        //scanner.startScan(mScannerCallback);
+        scanner.startScan(mScannerFilters, mScannerSettings, mScannerCallback);
     }
 
     private List<ScanFilter> mScannerFilters;
@@ -106,22 +107,16 @@ public class MainActivity extends AppCompatActivity {
                 (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00
         };
         byte[] iBeaconMask = {
-                0,0,
-                0,0,0,0,
-                0,0,
-                0,0,
-                0,0,
-                0,0,0,0,0,0,
-                0,0,0,0,0,
-                /*1, 1,
+                1, 1,
                 1, 1, 1, 1,
                 1, 1,
                 1, 1,
                 1, 1,
                 1, 1, 1, 1, 1, 1,
-                0, 0, 0, 0, 0*/
+                0, 0, 0, 0, 0
         };
         mScannerFilters = new ArrayList<ScanFilter>();
+        //76 for Apple
         ScanFilter filter = new ScanFilter.Builder().setManufacturerData(76, iBeaconData, iBeaconMask).build();
         mScannerFilters.add(filter);
     }
@@ -135,9 +130,8 @@ public class MainActivity extends AppCompatActivity {
     private ScanCallback mScannerCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
-            updateInfoLabel("收到");
-            Log.d("",callbackType +"");
-            /*byte[] iBeaconRawData = result.getScanRecord().getManufacturerSpecificData(76);
+            super.onScanResult(callbackType, result);
+            byte[] iBeaconRawData = result.getScanRecord().getManufacturerSpecificData(76);
             final iBeacon Student = new iBeacon(iBeaconRawData);
             if (!updatingStudentID.contains(Student.StudentBeaconID + "")) {
                 updatingStudentID.add(Student.StudentBeaconID + "");
@@ -147,14 +141,6 @@ public class MainActivity extends AppCompatActivity {
                         updateStudentsDB(Student);
                     }
                 }).start();
-            }/*/
-        }
-
-        @Override
-        public void onBatchScanResults(List<ScanResult> results) {
-            super.onBatchScanResults(results);
-            for (ScanResult res:results) {
-                byte[] iBeaconRawData = res.getScanRecord().getManufacturerSpecificData(76);
             }
         }
 
@@ -200,6 +186,16 @@ public class MainActivity extends AppCompatActivity {
                 || QinDeviceApplication.getContext().checkSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
             return false;
         }
+
+        LocationManager locationManager = (LocationManager) QinDeviceApplication.getContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (!gps && !network) {
+            return false;
+        }
+
+        //QinDeviceApplication.getContext().checkCallingOrSelfPermission(Context.BLUETOOTH_SERVICE)
+
         return true;
     }
 

@@ -1,7 +1,5 @@
 package edu.bfa.ss.qin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 import edu.bfa.ss.qin.Custom.UI.InCanceledAlterDialog;
 import edu.bfa.ss.qin.Custom.UI.QinApplication;
 import edu.bfa.ss.qin.Custom.UI.StaticAppCompatActivity;
-import edu.bfa.ss.qin.Util.StaticData;
+import edu.bfa.ss.qin.Util.ApplicationHelper;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -32,7 +30,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
         initApplication();
     }
 
-    private StaticData.StaticDataUpdateInfoListener updateInfoListener = new StaticData.StaticDataUpdateInfoListener() {
+    private ApplicationHelper.StaticDataUpdateInfoListener updateInfoListener = new ApplicationHelper.StaticDataUpdateInfoListener() {
         @Override
         public void updateInfomation(String message) {
             updateWaitingDialog(message);
@@ -57,26 +55,26 @@ public class InitializationActivity extends StaticAppCompatActivity {
         Realm.setDefaultConfiguration(config);
         //Init LocalDB
         SharedPreferences localStore = getSharedPreferences("localData", Context.MODE_PRIVATE);
-        StaticData.CurrentUser.StudentID = localStore.getString("StudentID", "");
+        ApplicationHelper.CurrentUser.SchoolID = localStore.getString("SchoolID", "");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 //Check Permission
-                if (StaticData.checkPermission(updateInfoListener) == false) {
+                if (ApplicationHelper.checkPermission(updateInfoListener) == false) {
                     openSystemSetting();
                     return;
                 }
                 //Check Version
-                int versionErrorCode = StaticData.checkVersion(updateInfoListener);
-                if (versionErrorCode == 1) {
+                ApplicationHelper.QinMessage versionErrorCode = ApplicationHelper.checkVersion(updateInfoListener);
+                if (versionErrorCode == ApplicationHelper.QinMessage.ApplicationVersionError) {
                     openDownLoadLink();
                     return;
-                } else if(versionErrorCode == 2) {
+                } else if(versionErrorCode == ApplicationHelper.QinMessage.NetError) {
                     showNetError();
                     return;
                 }
                 //Check DBVersion
-                if(StaticData.checkLocalDatabaseVersion(updateInfoListener) == 2) {
+                if(ApplicationHelper.checkLocalDatabaseVersion(updateInfoListener) == ApplicationHelper.QinMessage.NetError) {
                     showNetError();
                     return;
                 }
@@ -124,7 +122,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
             public void run() {
                 infoLabel.setText("请重启程序");
                 waitingDialog.cancel();
-                new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("请更新\n\n本机：" + StaticData.localVersion.VersionString + "\n\n最新版：" + StaticData.serverVersion.VersionString)
+                new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("请更新\n\n本机：" + ApplicationHelper.localVersion + "\n\n最新版：" + ApplicationHelper.serverVersion)
                         .setPositiveButton("前往", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 InitializationActivity.this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.baidu.com")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
