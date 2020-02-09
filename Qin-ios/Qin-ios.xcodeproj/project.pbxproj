@@ -34,6 +34,9 @@
 		4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */; };
 		4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */; };
 		4CDA2A2623C87D690009F5C4 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDA2A2523C87D690009F5C4 /* Lesson.swift */; };
+		4CDF8A4E23EFC42100E7C8B4 /* hs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */; };
+		4CDF8A5023EFC43600E7C8B4 /* sf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */; };
+		4CDF8A5423F016DF00E7C8B4 /* BuildingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */; };
 		4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */; };
 		4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */; };
 		4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */; };
@@ -72,6 +75,9 @@
 		4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
 		4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBTableViewCell.swift; sourceTree = "<group>"; };
 		4CDA2A2523C87D690009F5C4 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = hs.ttf; path = "../../../../../Downloads/规范文档-20200209-p6/Fonts/汉仪字研欢乐宋/hs.ttf"; sourceTree = "<group>"; };
+		4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sf.ttf; path = "../../../../../Downloads/规范文档-20200209-p6/Fonts/sfprodisplay_downcc/sf.ttf"; sourceTree = "<group>"; };
+		4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
 		4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
 		4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 		4C9C81E723BEE99F00A470FF /* Qin-ios */ = {
 			isa = PBXGroup;
 			children = (
+				4CDF8A4C23EFC3FA00E7C8B4 /* fonts */,
 				4CDC337823C4A5B1003E0C34 /* Layouts */,
 				4CA279BA23C2F82A00DD3D38 /* Util */,
 				4CA279B923C2F7FD00DD3D38 /* Custom.UI */,
@@ -168,8 +175,18 @@
 				4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */,
 				4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */,
 				4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */,
+				4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */,
 			);
 			path = Layouts;
+			sourceTree = "<group>";
+		};
+		4CDF8A4C23EFC3FA00E7C8B4 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */,
+				4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		728DFFC0E81382B381EA289D /* Frameworks */ = {
@@ -254,6 +271,8 @@
 			files = (
 				4C9C81F523BEE9A000A470FF /* LaunchScreen.storyboard in Resources */,
 				4C9C81F223BEE9A000A470FF /* Assets.xcassets in Resources */,
+				4CDF8A4E23EFC42100E7C8B4 /* hs.ttf in Resources */,
+				4CDF8A5023EFC43600E7C8B4 /* sf.ttf in Resources */,
 				4C6D114A23C5E4370092CA1C /* WaitingView.xib in Resources */,
 				4C9C81F023BEE99F00A470FF /* Main.storyboard in Resources */,
 			);
@@ -320,6 +339,7 @@
 				4CA279CA23C2F98D00DD3D38 /* Room.swift in Sources */,
 				4CDA2A2623C87D690009F5C4 /* Lesson.swift in Sources */,
 				4CA279D823C2FAAE00DD3D38 /* QinSettingViewController.swift in Sources */,
+				4CDF8A5423F016DF00E7C8B4 /* BuildingCollectionViewCell.swift in Sources */,
 				4CA279D023C2F9A900DD3D38 /* Version.swift in Sources */,
 				4CA279BC23C2F8BE00DD3D38 /* QinPreView.swift in Sources */,
 				4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */,
@@ -478,7 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -500,7 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
