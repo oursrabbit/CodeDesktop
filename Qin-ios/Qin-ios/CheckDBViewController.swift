@@ -47,7 +47,7 @@ class CheckDBViewController: StaticViewController {
                 }
                 DispatchQueue.main.async {
                     self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
-                    self.idlabel.text = ApplicationHelper.CurrentUser.Name
+                    self.idlabel.text = "\(ApplicationHelper.CurrentUser.Name)·签到记录"
                     self.logstableview.reloadData()
                 }
             } else {
@@ -81,9 +81,37 @@ extension CheckDBViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let room = (try! Realm()).objects(Room.self).filter("ID = \(logs[indexPath.row].RoomID)").first!
         let cell = tableView.dequeueReusableCell(withIdentifier: "checkdb") as! CheckDBTableViewCell
-        cell.roomidlabel.text = room.Name
-        cell.checkdatelabel.text = logs[indexPath.row].CheckDate.dateString
-        cell.checktimelabel.text = logs[indexPath.row].CheckDate.timeString
+        cell.initCellInterface()
+        cell.roomidlabel.text = "签到地点: \(room.Location.first!.Name) \(room.Name)"
+        cell.checkdatelabel.text = "签到时间: \(logs[indexPath.row].CheckDate.shortString)"
+        let timespan = logs[indexPath.row].CheckDate.distance(to: Date())
+        let ti = Int(timespan)
+        let sec = ti % 60
+        let min = (ti / 60) % 60
+        let hours = (ti / 3600)
+        let days = (hours / 24)
+        let months = (days / 30)
+        let years = (months / 12)
+        if years != 0 {
+            cell.checktimelabel.text = "\(years) 年前"
+        } else if months != 0 {
+            cell.checktimelabel.text = "\(months) 个月前"
+        } else if days != 0 {
+            cell.checktimelabel.text = "\(days) 天前"
+        } else if hours != 0 {
+            cell.checktimelabel.text = "\(hours) 小时前"
+        } else if min != 0 {
+            cell.checktimelabel.text = "\(min) 分钟前"
+        } else if sec != 0 {
+            cell.checktimelabel.text = "\(sec) 秒前"
+        } else {
+            cell.checktimelabel.text = "刚刚"
+        }
+        if let image = UIImage(named: "\(room.Location.first!.ID)") {
+            cell.buildingImage.image = image
+        } else {
+            cell.buildingImage.image = UIImage(named: "0")
+        }
         return cell
     }
     

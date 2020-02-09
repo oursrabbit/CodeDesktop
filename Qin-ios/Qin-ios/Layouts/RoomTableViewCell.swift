@@ -11,6 +11,7 @@ import UIKit
 class RoomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var roomName: UILabel!
+    @IBOutlet weak var uiView:UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,4 +24,15 @@ class RoomTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func initCellInterface() {
+           self.uiView.layer.cornerRadius = 15
+           self.uiView.layer.borderWidth = 0.0
+
+           self.uiView.layer.shadowColor = UIColor.black.cgColor
+           self.uiView.layer.shadowOffset = CGSize(width:0,height: 0)
+           self.uiView.layer.shadowRadius = 5
+           self.uiView.layer.shadowOpacity = 0.5
+           self.uiView.layer.masksToBounds = false;
+           //self.layer.shadowPath = UIBezierPath(roundedRect:self.contentView.bounds, cornerRadius:self.contentView.layer.cornerRadius).cgPath
+       }
 }

@@ -63,6 +63,7 @@ extension RoomListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "room") as! RoomTableViewCell
+        cell.initCellInterface()
         cell.roomName.text = building.Rooms[indexPath.row].Name
         return cell
     }
