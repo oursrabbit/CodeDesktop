@@ -19,7 +19,7 @@ class RoomListViewController: StaticViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        // self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
     }
     
 

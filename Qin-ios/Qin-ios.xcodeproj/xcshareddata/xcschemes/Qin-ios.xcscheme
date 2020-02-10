@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4C9C81E423BEE99F00A470FF"
-               BuildableName = "&#x58f0;&#x97f3;&#x5b66;&#x9662;&#x7b7e;&#x5230;&#x52a9;&#x624b;.app"
+               BuildableName = "SSA&#x7b7e;&#x5230;.app"
                BlueprintName = "Qin-ios"
                ReferencedContainer = "container:Qin-ios.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C9C81E423BEE99F00A470FF"
-            BuildableName = "&#x58f0;&#x97f3;&#x5b66;&#x9662;&#x7b7e;&#x5230;&#x52a9;&#x624b;.app"
+            BuildableName = "SSA&#x7b7e;&#x5230;.app"
             BlueprintName = "Qin-ios"
             ReferencedContainer = "container:Qin-ios.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4C9C81E423BEE99F00A470FF"
-            BuildableName = "&#x58f0;&#x97f3;&#x5b66;&#x9662;&#x7b7e;&#x5230;&#x52a9;&#x624b;.app"
+            BuildableName = "SSA&#x7b7e;&#x5230;.app"
             BlueprintName = "Qin-ios"
             ReferencedContainer = "container:Qin-ios.xcodeproj">
          </BuildableReference>

@@ -21,7 +21,7 @@ class CheckDBViewController: StaticViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        //self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
         
         idlabel.text = "正在加载数据..."
         DispatchQueue.global().async {

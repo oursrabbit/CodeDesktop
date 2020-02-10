@@ -19,7 +19,7 @@
         <!--Initialization View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,13 +75,13 @@
         <!--Qin Setting View Controller-->
         <scene sceneID="35H-ol-105">
             <objects>
-                <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="neX-i9-ARt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEj-Nt-HUN">
-                                <rect key="frame" x="0.0" y="213.5" width="320" height="334.5"/>
+                                <rect key="frame" x="0.0" y="213.5" width="320" height="354.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="矩形" translatesAutoresizingMaskIntoConstraints="NO" id="r5J-ZQ-6Ax">
@@ -111,13 +111,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入学号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DSg-3i-AZD">
-                                <rect key="frame" x="80" y="263.5" width="160" height="17.5"/>
+                                <rect key="frame" x="80" y="273.5" width="160" height="17.5"/>
                                 <fontDescription key="fontDescription" name="HYZiYanHuanLeSongW" family="HYZiYanHuanLeSong" pointSize="15"/>
                                 <color key="textColor" red="0.57862675190000001" green="0.6393323541" blue="0.64794158940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9g-8U-u5M">
-                                <rect key="frame" x="80" y="451" width="160" height="45"/>
+                                <rect key="frame" x="80" y="461" width="160" height="45"/>
                                 <color key="backgroundColor" red="0.19722897510000001" green="0.44812337790000001" blue="0.47015783630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HYZiYanHuanLeSongW" family="HYZiYanHuanLeSong" pointSize="28"/>
                                 <state key="normal" title="登录">
@@ -128,12 +128,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1234567890" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KKc-Jh-fXC">
-                                <rect key="frame" x="80" y="289" width="160" height="34"/>
+                                <rect key="frame" x="80" y="299" width="160" height="34"/>
                                 <fontDescription key="fontDescription" name="DFWaWa-W5-WINP-BF" family="DFPWaWa-B5" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="勤_" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                            <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="SSA签到" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -187,7 +187,7 @@
         <!--Building List View Controller-->
         <scene sceneID="pVm-8b-xhB">
             <objects>
-                <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ntX-hF-DuZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="building" id="BxS-sr-cJW" customClass="BuildingCollectionViewCell" customModule="勤_" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="building" id="BxS-sr-cJW" customClass="BuildingCollectionViewCell" customModule="SSA签到" customModuleProvider="target">
                                         <rect key="frame" x="45.5" y="0.0" width="165" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VB2-Gs-9HO">
@@ -330,7 +330,7 @@
         <!--Room List View Controller-->
         <scene sceneID="UV4-br-EKM">
             <objects>
-                <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C2J-Qf-R77">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,7 +353,7 @@
                                 <rect key="frame" x="32" y="132" width="256" height="356"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="勤_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="SSA签到" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="256" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7kU-vY-K0x" id="hst-R3-p4L">
@@ -423,12 +423,12 @@
         <!--Face Detect Simple View Controller-->
         <scene sceneID="QdR-HH-Nin">
             <objects>
-                <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DPd-Go-xcR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="勤_" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="SSA签到" customModuleProvider="target">
                                 <rect key="frame" x="64" y="64" width="192" height="192"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hdd-gb-cY9" secondAttribute="height" multiplier="1:1" id="oHZ-nU-jyL"/>
@@ -467,7 +467,7 @@
         <!--Check Result View Controller-->
         <scene sceneID="G4r-bJ-b4M">
             <objects>
-                <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoB-Dx-11B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,7 +505,7 @@
                                     <segue destination="VFR-DZ-KvD" kind="show" id="ZLp-5P-Oy4"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="勤_" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="SSA签到" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -543,7 +543,7 @@
         <!--CheckDB View Controller-->
         <scene sceneID="E7B-fe-pte">
             <objects>
-                <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49z-33-RvL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -552,7 +552,7 @@
                                 <rect key="frame" x="32" y="276" width="256" height="212"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" rowHeight="132" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="勤_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" rowHeight="132" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="SSA签到" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="256" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bbw-eJ-ZyS" id="ml2-hd-CVv">
@@ -720,8 +720,9 @@
         <image name="设置" width="6" height="6"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bi1-v9-K3S"/>
         <segue reference="dj3-cw-uo5"/>
         <segue reference="k1K-V0-AtR"/>
-        <segue reference="sfl-bo-7jb"/>
+        <segue reference="6me-Fi-o2A"/>
     </inferredMetricsTieBreakers>
 </document>
