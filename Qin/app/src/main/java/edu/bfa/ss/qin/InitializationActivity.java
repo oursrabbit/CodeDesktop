@@ -18,14 +18,14 @@ import io.realm.RealmConfiguration;
 
 public class InitializationActivity extends StaticAppCompatActivity {
 
-    private AlertDialog waitingDialog;
+    //private AlertDialog waitingDialog;
     private TextView infoLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initialization);
-        waitingDialog = new InCanceledAlterDialog.Builder(this).setMessage("").show();
+        //waitingDialog = new InCanceledAlterDialog.Builder(this).setMessage("").show();
         infoLabel = findViewById(R.id.INIT_infolabel);
         initApplication();
     }
@@ -41,7 +41,8 @@ public class InitializationActivity extends StaticAppCompatActivity {
         infoLabel.post(new Runnable() {
             @Override
             public void run() {
-                waitingDialog.setMessage(message);
+                infoLabel.setText(message);
+                //waitingDialog.setMessage(message);
             }
         });
     }
@@ -88,7 +89,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
             @Override
             public void run() {
                 infoLabel.setText("请重启程序");
-                waitingDialog.cancel();
+                //waitingDialog.cancel();
                 new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("网络错误")
                         .setPositiveButton("退出", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -104,7 +105,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
             @Override
             public void run() {
                 infoLabel.setText("请重启程序");
-                waitingDialog.cancel();
+                //waitingDialog.cancel();
                 new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("未开启硬件权限，请前往应用设置开启，并重启程序")
                         .setPositiveButton("前往", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -121,7 +122,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
             @Override
             public void run() {
                 infoLabel.setText("请重启程序");
-                waitingDialog.cancel();
+                //waitingDialog.cancel();
                 new InCanceledAlterDialog.Builder(InitializationActivity.this).setMessage("请更新\n\n本机：" + ApplicationHelper.localVersion + "\n\n最新版：" + ApplicationHelper.serverVersion)
                         .setPositiveButton("前往", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
