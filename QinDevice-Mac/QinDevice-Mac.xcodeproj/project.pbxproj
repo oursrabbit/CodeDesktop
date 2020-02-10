@@ -7,26 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C1C628523DAF35E0030C8AE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C628423DAF35E0030C8AE /* AppDelegate.swift */; };
-		4C1C628723DAF35E0030C8AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C628623DAF35E0030C8AE /* ContentView.swift */; };
-		4C1C628923DAF3620030C8AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C1C628823DAF3620030C8AE /* Assets.xcassets */; };
-		4C1C628C23DAF3620030C8AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C1C628B23DAF3620030C8AE /* Preview Assets.xcassets */; };
-		4C1C628F23DAF3620030C8AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1C628D23DAF3620030C8AE /* Main.storyboard */; };
+		4CAA396E23F1003200C790E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA396D23F1003200C790E8 /* AppDelegate.swift */; };
+		4CAA397023F1003200C790E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA396F23F1003200C790E8 /* ViewController.swift */; };
+		4CAA397223F1003600C790E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CAA397123F1003600C790E8 /* Assets.xcassets */; };
+		4CAA397523F1003600C790E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CAA397323F1003600C790E8 /* Main.storyboard */; };
+		4CAA398023F1005D00C790E8 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA397D23F1005C00C790E8 /* DatabaseHelper.swift */; };
+		4CAA398123F1005D00C790E8 /* ApplicationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA397E23F1005C00C790E8 /* ApplicationHelper.swift */; };
+		4CAA398223F1005D00C790E8 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAA397F23F1005D00C790E8 /* Student.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4C1C628123DAF35E0030C8AE /* QinCenterMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QinCenterMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C1C628423DAF35E0030C8AE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C1C628623DAF35E0030C8AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4C1C628823DAF3620030C8AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4C1C628B23DAF3620030C8AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4C1C628E23DAF3620030C8AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4C1C629023DAF3620030C8AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C1C629123DAF3620030C8AE /* QinCenterMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QinCenterMac.entitlements; sourceTree = "<group>"; };
+		4CAA396A23F1003200C790E8 /* QinDevice-Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QinDevice-Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CAA396D23F1003200C790E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4CAA396F23F1003200C790E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4CAA397123F1003600C790E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4CAA397423F1003600C790E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4CAA397623F1003600C790E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4CAA397723F1003600C790E8 /* QinDevice_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = QinDevice_Mac.entitlements; sourceTree = "<group>"; };
+		4CAA397D23F1005C00C790E8 /* DatabaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
+		4CAA397E23F1005C00C790E8 /* ApplicationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationHelper.swift; sourceTree = "<group>"; };
+		4CAA397F23F1005D00C790E8 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4C1C627E23DAF35E0030C8AE /* Frameworks */ = {
+		4CAA396723F1003200C790E8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -36,80 +40,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4C1C627823DAF35E0030C8AE = {
+		4CAA396123F1003200C790E8 = {
 			isa = PBXGroup;
 			children = (
-				4C1C628323DAF35E0030C8AE /* QinCenterMac */,
-				4C1C628223DAF35E0030C8AE /* Products */,
+				4CAA396C23F1003200C790E8 /* QinDevice-Mac */,
+				4CAA396B23F1003200C790E8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4C1C628223DAF35E0030C8AE /* Products */ = {
+		4CAA396B23F1003200C790E8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4C1C628123DAF35E0030C8AE /* QinCenterMac.app */,
+				4CAA396A23F1003200C790E8 /* QinDevice-Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4C1C628323DAF35E0030C8AE /* QinCenterMac */ = {
+		4CAA396C23F1003200C790E8 /* QinDevice-Mac */ = {
 			isa = PBXGroup;
 			children = (
-				4C1C628423DAF35E0030C8AE /* AppDelegate.swift */,
-				4C1C628623DAF35E0030C8AE /* ContentView.swift */,
-				4C1C628823DAF3620030C8AE /* Assets.xcassets */,
-				4C1C628D23DAF3620030C8AE /* Main.storyboard */,
-				4C1C629023DAF3620030C8AE /* Info.plist */,
-				4C1C629123DAF3620030C8AE /* QinCenterMac.entitlements */,
-				4C1C628A23DAF3620030C8AE /* Preview Content */,
+				4CAA397E23F1005C00C790E8 /* ApplicationHelper.swift */,
+				4CAA397D23F1005C00C790E8 /* DatabaseHelper.swift */,
+				4CAA397F23F1005D00C790E8 /* Student.swift */,
+				4CAA396D23F1003200C790E8 /* AppDelegate.swift */,
+				4CAA396F23F1003200C790E8 /* ViewController.swift */,
+				4CAA397123F1003600C790E8 /* Assets.xcassets */,
+				4CAA397323F1003600C790E8 /* Main.storyboard */,
+				4CAA397623F1003600C790E8 /* Info.plist */,
+				4CAA397723F1003600C790E8 /* QinDevice_Mac.entitlements */,
 			);
-			path = QinCenterMac;
-			sourceTree = "<group>";
-		};
-		4C1C628A23DAF3620030C8AE /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				4C1C628B23DAF3620030C8AE /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
+			path = "QinDevice-Mac";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4C1C628023DAF35E0030C8AE /* QinCenterMac */ = {
+		4CAA396923F1003200C790E8 /* QinDevice-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4C1C629423DAF3620030C8AE /* Build configuration list for PBXNativeTarget "QinCenterMac" */;
+			buildConfigurationList = 4CAA397A23F1003600C790E8 /* Build configuration list for PBXNativeTarget "QinDevice-Mac" */;
 			buildPhases = (
-				4C1C627D23DAF35E0030C8AE /* Sources */,
-				4C1C627E23DAF35E0030C8AE /* Frameworks */,
-				4C1C627F23DAF35E0030C8AE /* Resources */,
+				4CAA396623F1003200C790E8 /* Sources */,
+				4CAA396723F1003200C790E8 /* Frameworks */,
+				4CAA396823F1003200C790E8 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = QinCenterMac;
-			productName = QinCenterMac;
-			productReference = 4C1C628123DAF35E0030C8AE /* QinCenterMac.app */;
+			name = "QinDevice-Mac";
+			productName = "QinDevice-Mac";
+			productReference = 4CAA396A23F1003200C790E8 /* QinDevice-Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4C1C627923DAF35E0030C8AE /* Project object */ = {
+		4CAA396223F1003200C790E8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "杨璨";
 				TargetAttributes = {
-					4C1C628023DAF35E0030C8AE = {
+					4CAA396923F1003200C790E8 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 4C1C627C23DAF35E0030C8AE /* Build configuration list for PBXProject "QinCenterMac" */;
+			buildConfigurationList = 4CAA396523F1003200C790E8 /* Build configuration list for PBXProject "QinDevice-Mac" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -117,46 +115,48 @@
 				en,
 				Base,
 			);
-			mainGroup = 4C1C627823DAF35E0030C8AE;
-			productRefGroup = 4C1C628223DAF35E0030C8AE /* Products */;
+			mainGroup = 4CAA396123F1003200C790E8;
+			productRefGroup = 4CAA396B23F1003200C790E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4C1C628023DAF35E0030C8AE /* QinCenterMac */,
+				4CAA396923F1003200C790E8 /* QinDevice-Mac */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4C1C627F23DAF35E0030C8AE /* Resources */ = {
+		4CAA396823F1003200C790E8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C1C628F23DAF3620030C8AE /* Main.storyboard in Resources */,
-				4C1C628C23DAF3620030C8AE /* Preview Assets.xcassets in Resources */,
-				4C1C628923DAF3620030C8AE /* Assets.xcassets in Resources */,
+				4CAA397223F1003600C790E8 /* Assets.xcassets in Resources */,
+				4CAA397523F1003600C790E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4C1C627D23DAF35E0030C8AE /* Sources */ = {
+		4CAA396623F1003200C790E8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C1C628723DAF35E0030C8AE /* ContentView.swift in Sources */,
-				4C1C628523DAF35E0030C8AE /* AppDelegate.swift in Sources */,
+				4CAA397023F1003200C790E8 /* ViewController.swift in Sources */,
+				4CAA398023F1005D00C790E8 /* DatabaseHelper.swift in Sources */,
+				4CAA398123F1005D00C790E8 /* ApplicationHelper.swift in Sources */,
+				4CAA398223F1005D00C790E8 /* Student.swift in Sources */,
+				4CAA396E23F1003200C790E8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4C1C628D23DAF3620030C8AE /* Main.storyboard */ = {
+		4CAA397323F1003600C790E8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4C1C628E23DAF3620030C8AE /* Base */,
+				4CAA397423F1003600C790E8 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -164,7 +164,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4C1C629223DAF3620030C8AE /* Debug */ = {
+		4CAA397823F1003600C790E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -224,7 +224,7 @@
 			};
 			name = Debug;
 		};
-		4C1C629323DAF3620030C8AE /* Release */ = {
+		4CAA397923F1003600C790E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -277,47 +277,41 @@
 			};
 			name = Release;
 		};
-		4C1C629523DAF3620030C8AE /* Debug */ = {
+		4CAA397B23F1003600C790E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = QinCenterMac/QinCenterMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "QinDevice-Mac/QinDevice_Mac.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"QinCenterMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = QinCenterMac/Info.plist;
+				INFOPLIST_FILE = "QinDevice-Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.bfa.ssa.QinCenterMac;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.bfa.ssa.qin.QinDevice-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
-		4C1C629623DAF3620030C8AE /* Release */ = {
+		4CAA397C23F1003600C790E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = QinCenterMac/QinCenterMac.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "QinDevice-Mac/QinDevice_Mac.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"QinCenterMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = QinCenterMac/Info.plist;
+				INFOPLIST_FILE = "QinDevice-Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.bfa.ssa.QinCenterMac;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.bfa.ssa.qin.QinDevice-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -326,25 +320,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4C1C627C23DAF35E0030C8AE /* Build configuration list for PBXProject "QinCenterMac" */ = {
+		4CAA396523F1003200C790E8 /* Build configuration list for PBXProject "QinDevice-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4C1C629223DAF3620030C8AE /* Debug */,
-				4C1C629323DAF3620030C8AE /* Release */,
+				4CAA397823F1003600C790E8 /* Debug */,
+				4CAA397923F1003600C790E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C1C629423DAF3620030C8AE /* Build configuration list for PBXNativeTarget "QinCenterMac" */ = {
+		4CAA397A23F1003600C790E8 /* Build configuration list for PBXNativeTarget "QinDevice-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4C1C629523DAF3620030C8AE /* Debug */,
-				4C1C629623DAF3620030C8AE /* Release */,
+				4CAA397B23F1003600C790E8 /* Debug */,
+				4CAA397C23F1003600C790E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4C1C627923DAF35E0030C8AE /* Project object */;
+	rootObject = 4CAA396223F1003200C790E8 /* Project object */;
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14814" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14814"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -10,11 +11,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="QinCenterMac" id="1Xt-HY-uBw">
+                            <menuItem title="QinDevice-Mac" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="QinCenterMac" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="QinDevice-Mac" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About QinCenterMac" id="5kV-Vb-QxS">
+                                        <menuItem title="About QinDevice-Mac" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -28,7 +29,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide QinCenterMac" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide QinDevice-Mac" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -46,7 +47,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit QinCenterMac" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit QinDevice-Mac" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -659,7 +660,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
                                     <items>
-                                        <menuItem title="QinCenterMac Help" keyEquivalent="?" id="FKE-Sm-Kum">
+                                        <menuItem title="QinDevice-Mac Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
                                                 <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
                                             </connections>
@@ -673,11 +674,100 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="QinDevice_Mac" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                    </connections>
+                </windowController>
+                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="QinDevice_Mac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="m2S-Jp-Qdl">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="320"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uKy-fh-Q27">
+                                <rect key="frame" x="261" y="32" width="187" height="256"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="E6B-bk-xtJ"/>
+                                    <constraint firstAttribute="width" constant="187" id="Ela-Lc-zOy"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="IMG_872A412358CF-1" id="wYx-Ya-aH0"/>
+                            </imageView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Lc-3W-0Ks">
+                                <rect key="frame" x="18" y="181" width="203" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="进入签到界面后点击按钮完成签到" id="e5i-Dr-fc2">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fIA-Oi-ofT">
+                                <rect key="frame" x="20" y="152" width="199" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="请输入学号" drawsBackground="YES" id="680-CI-XZq">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZn-uy-hY1">
+                                <rect key="frame" x="14" y="116" width="211" height="32"/>
+                                <buttonCell key="cell" type="push" title="完成签到" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="79m-GC-dfF">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="updateAdvertising:" target="XfG-lQ-9wD" id="xPK-iN-uXd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="fZn-uy-hY1" firstAttribute="top" secondItem="fIA-Oi-ofT" secondAttribute="bottom" constant="8" symbolic="YES" id="0ed-lv-xoF"/>
+                            <constraint firstItem="3Lc-3W-0Ks" firstAttribute="trailing" secondItem="fIA-Oi-ofT" secondAttribute="trailing" id="4l8-rw-sN8"/>
+                            <constraint firstItem="3Lc-3W-0Ks" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="Ga9-R2-4TL"/>
+                            <constraint firstItem="fIA-Oi-ofT" firstAttribute="trailing" secondItem="fZn-uy-hY1" secondAttribute="trailing" id="HHs-zJ-xJW"/>
+                            <constraint firstItem="uKy-fh-Q27" firstAttribute="leading" secondItem="3Lc-3W-0Ks" secondAttribute="trailing" constant="42" id="SF9-7b-5AI"/>
+                            <constraint firstItem="3Lc-3W-0Ks" firstAttribute="leading" secondItem="fIA-Oi-ofT" secondAttribute="leading" id="U7A-Ti-4Mv"/>
+                            <constraint firstItem="fIA-Oi-ofT" firstAttribute="top" secondItem="3Lc-3W-0Ks" secondAttribute="bottom" constant="8" symbolic="YES" id="YFk-cC-Rja"/>
+                            <constraint firstItem="uKy-fh-Q27" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="YTy-93-fz0"/>
+                            <constraint firstItem="fIA-Oi-ofT" firstAttribute="leading" secondItem="fZn-uy-hY1" secondAttribute="leading" id="owN-Po-W2X"/>
+                            <constraint firstItem="3Lc-3W-0Ks" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="123" id="xtk-NI-j0j"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="changeButton" destination="79m-GC-dfF" id="jBa-3g-ReK"/>
+                        <outlet property="schoolIDTextFiled" destination="fIA-Oi-ofT" id="PpZ-Aa-d7l"/>
+                    </connections>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="655"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="IMG_872A412358CF-1" width="750" height="1334"/>
+    </resources>
 </document>

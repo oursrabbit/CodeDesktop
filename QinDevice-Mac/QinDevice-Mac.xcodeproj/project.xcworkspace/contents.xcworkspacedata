@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:QinCenterMac.xcodeproj">
+      location = "self:QinDevice-Mac.xcodeproj">
    </FileRef>
 </Workspace>
