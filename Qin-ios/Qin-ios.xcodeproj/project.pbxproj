@@ -498,7 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -507,7 +507,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canyang.qin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canyang.ssa.qin;
 				PRODUCT_NAME = "声音学院签到助手";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -520,7 +520,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -529,7 +529,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.canyang.qin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.canyang.ssa.qin;
 				PRODUCT_NAME = "声音学院签到助手";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

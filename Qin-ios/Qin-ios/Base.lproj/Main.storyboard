@@ -19,7 +19,7 @@
         <!--Initialization View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="InitializationViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,7 +75,7 @@
         <!--Qin Setting View Controller-->
         <scene sceneID="35H-ol-105">
             <objects>
-                <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0kV-aZ-6fk" customClass="QinSettingViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="neX-i9-ARt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -132,7 +132,7 @@
                                 <fontDescription key="fontDescription" name="DFWaWa-W5-WINP-BF" family="DFPWaWa-B5" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="声音学院签到助手" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="勤_" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -187,7 +187,7 @@
         <!--Building List View Controller-->
         <scene sceneID="pVm-8b-xhB">
             <objects>
-                <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ntX-hF-DuZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -240,7 +240,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="building" id="BxS-sr-cJW" customClass="BuildingCollectionViewCell" customModule="声音学院签到助手" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="building" id="BxS-sr-cJW" customClass="BuildingCollectionViewCell" customModule="勤_" customModuleProvider="target">
                                         <rect key="frame" x="45.5" y="0.0" width="165" height="147"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VB2-Gs-9HO">
@@ -330,7 +330,7 @@
         <!--Room List View Controller-->
         <scene sceneID="UV4-br-EKM">
             <objects>
-                <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C2J-Qf-R77">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -353,7 +353,7 @@
                                 <rect key="frame" x="32" y="132" width="256" height="356"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="声音学院签到助手" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="勤_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="256" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7kU-vY-K0x" id="hst-R3-p4L">
@@ -423,12 +423,12 @@
         <!--Face Detect Simple View Controller-->
         <scene sceneID="QdR-HH-Nin">
             <objects>
-                <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DPd-Go-xcR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="声音学院签到助手" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="勤_" customModuleProvider="target">
                                 <rect key="frame" x="64" y="64" width="192" height="192"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Hdd-gb-cY9" secondAttribute="height" multiplier="1:1" id="oHZ-nU-jyL"/>
@@ -467,7 +467,7 @@
         <!--Check Result View Controller-->
         <scene sceneID="G4r-bJ-b4M">
             <objects>
-                <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoB-Dx-11B">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,7 +505,7 @@
                                     <segue destination="VFR-DZ-KvD" kind="show" id="ZLp-5P-Oy4"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="声音学院签到助手" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="勤_" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -543,7 +543,7 @@
         <!--CheckDB View Controller-->
         <scene sceneID="E7B-fe-pte">
             <objects>
-                <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="声音学院签到助手" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="勤_" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49z-33-RvL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -552,7 +552,7 @@
                                 <rect key="frame" x="32" y="276" width="256" height="212"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" rowHeight="132" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="声音学院签到助手" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" rowHeight="132" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="勤_" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="256" height="132"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bbw-eJ-ZyS" id="ml2-hd-CVv">
@@ -652,6 +652,9 @@
                                     <string>Title</string>
                                     <string>Title</string>
                                 </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="VFR-DZ-KvD" id="PJ9-vf-ZyW"/>
+                                </connections>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="肖战·签到记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nk-l1-fDb">
                                 <rect key="frame" x="0.0" y="130" width="300" height="33"/>
@@ -717,7 +720,6 @@
         <image name="设置" width="6" height="6"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bi1-v9-K3S"/>
         <segue reference="dj3-cw-uo5"/>
         <segue reference="k1K-V0-AtR"/>
         <segue reference="sfl-bo-7jb"/>

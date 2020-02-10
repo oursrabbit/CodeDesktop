@@ -12,6 +12,7 @@ import RealmSwift
 class CheckDBViewController: StaticViewController {
 
     var logs = [CheckLog]()
+    var leanlogs = [CheckLog]()
     
     @IBOutlet weak var idlabel: UILabel!
     @IBOutlet weak var logstableview: UITableView!
@@ -38,12 +39,14 @@ class CheckDBViewController: StaticViewController {
             if error == nil {
                 let DatabaseResults = response["results"] as! [[String:Any?]]
                 self.logs.removeAll()
+                self.leanlogs.removeAll()
                 for checkLog in DatabaseResults {
                     let newLog = CheckLog()
                     newLog.StudentID = checkLog["StudentID"] as! Int
                     newLog.RoomID = checkLog["RoomID"] as! Int
                     newLog.CheckDate = (checkLog["createdAt"] as! String).iso8601!
                     self.logs.append(newLog)
+                    self.leanlogs.append(newLog)
                 }
                 DispatchQueue.main.async {
                     self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
@@ -56,6 +59,18 @@ class CheckDBViewController: StaticViewController {
                 }
             }
         }
+    }
+    
+    func LoadingLocalDatabase(keyword: String) {
+        self.logs =  self.leanlogs.filter{ (item) -> Bool in
+            let room = (try! Realm()).objects(Room.self).filter("ID = \(item.RoomID)").first!
+            let building = room.Location.first!
+            let checkDate = item.CheckDate.shortString
+            return room.Name.contains(keyword) || building.Name.contains(keyword) || checkDate.contains(keyword)
+        }
+        self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
+        self.idlabel.text = "\(ApplicationHelper.CurrentUser.Name)·签到记录"
+        self.logstableview.reloadData()
     }
 
     /*
@@ -122,4 +137,19 @@ extension CheckDBViewController: UITableViewDataSource {
 
 extension CheckDBViewController: UITableViewDelegate {
     
+}
+
+extension CheckDBViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let keyword = searchBar.text {
+            idlabel.text = "正在加载数据..."
+            self.LoadingLocalDatabase(keyword: keyword)
+        } else {
+            idlabel.text = "正在加载数据..."
+            DispatchQueue.global().async {
+                self.LoadingDatabase()
+            }
+        }
+    }
 }
