@@ -82,7 +82,19 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEj-Nt-HUN">
                                 <rect key="frame" x="0.0" y="213.5" width="320" height="354.5"/>
+                                <subviews>
+                                    <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="SSA签到" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-214" width="320" height="568.5"/>
+                                        <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ITN-k2-uut" secondAttribute="trailing" id="AvC-tf-65U"/>
+                                    <constraint firstItem="ITN-k2-uut" firstAttribute="top" secondItem="QEj-Nt-HUN" secondAttribute="top" constant="-214" id="Vgc-gp-Y6C"/>
+                                    <constraint firstAttribute="bottom" secondItem="ITN-k2-uut" secondAttribute="bottom" id="bmo-xL-rmh"/>
+                                    <constraint firstItem="ITN-k2-uut" firstAttribute="leading" secondItem="QEj-Nt-HUN" secondAttribute="leading" id="sW4-hd-1dN"/>
+                                </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="矩形" translatesAutoresizingMaskIntoConstraints="NO" id="r5J-ZQ-6Ax">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="213.5"/>
@@ -132,10 +144,6 @@
                                 <fontDescription key="fontDescription" name="DFWaWa-W5-WINP-BF" family="DFPWaWa-B5" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITN-k2-uut" customClass="WaitingView" customModule="SSA签到" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -150,20 +158,16 @@
                             <constraint firstItem="r5J-ZQ-6Ax" firstAttribute="centerX" secondItem="LW7-6s-wG9" secondAttribute="centerX" id="DSg-cz-mDz"/>
                             <constraint firstItem="KKc-Jh-fXC" firstAttribute="centerY" secondItem="neX-i9-ARt" secondAttribute="centerY" constant="32" id="IUt-ui-PCG"/>
                             <constraint firstAttribute="trailing" secondItem="QEj-Nt-HUN" secondAttribute="trailing" id="LWV-e6-rqT"/>
-                            <constraint firstItem="ITN-k2-uut" firstAttribute="leading" secondItem="neX-i9-ARt" secondAttribute="leading" id="MvF-mP-Rcc"/>
                             <constraint firstItem="QEj-Nt-HUN" firstAttribute="leading" secondItem="neX-i9-ARt" secondAttribute="leading" id="N97-Gz-gYY"/>
                             <constraint firstAttribute="bottom" secondItem="QEj-Nt-HUN" secondAttribute="bottom" id="Olj-a7-M0b"/>
                             <constraint firstItem="T9g-8U-u5M" firstAttribute="top" secondItem="KKc-Jh-fXC" secondAttribute="bottom" constant="128" id="QD9-xf-yfS"/>
                             <constraint firstItem="f66-6b-WZz" firstAttribute="top" secondItem="LW7-6s-wG9" secondAttribute="bottom" constant="8" symbolic="YES" id="QyG-WO-nui"/>
                             <constraint firstItem="QEj-Nt-HUN" firstAttribute="top" secondItem="f66-6b-WZz" secondAttribute="bottom" id="Tlm-Mu-0lc"/>
-                            <constraint firstAttribute="trailing" secondItem="ITN-k2-uut" secondAttribute="trailing" id="bob-Gg-O5p"/>
                             <constraint firstItem="r5J-ZQ-6Ax" firstAttribute="leading" secondItem="neX-i9-ARt" secondAttribute="leading" id="bp5-k6-ywV"/>
-                            <constraint firstItem="ITN-k2-uut" firstAttribute="top" secondItem="neX-i9-ARt" secondAttribute="top" id="gOf-56-sk8"/>
                             <constraint firstAttribute="trailing" secondItem="r5J-ZQ-6Ax" secondAttribute="trailing" id="kAe-Py-dsf"/>
                             <constraint firstItem="T9g-8U-u5M" firstAttribute="trailing" secondItem="KKc-Jh-fXC" secondAttribute="trailing" id="lgv-76-KOY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KKc-Jh-fXC" secondAttribute="trailing" constant="64" id="lm8-PD-sN5"/>
                             <constraint firstItem="KKc-Jh-fXC" firstAttribute="leading" secondItem="neX-i9-ARt" secondAttribute="leadingMargin" constant="64" id="na7-BJ-52O"/>
-                            <constraint firstAttribute="bottom" secondItem="ITN-k2-uut" secondAttribute="bottom" id="nhz-CC-2pH"/>
                             <constraint firstItem="r5J-ZQ-6Ax" firstAttribute="centerY" secondItem="MYr-Zp-vnr" secondAttribute="centerY" id="q6a-e6-78r"/>
                             <constraint firstItem="r5J-ZQ-6Ax" firstAttribute="centerY" secondItem="LW7-6s-wG9" secondAttribute="centerY" id="uBR-tA-hS4"/>
                             <constraint firstItem="QEj-Nt-HUN" firstAttribute="top" secondItem="r5J-ZQ-6Ax" secondAttribute="bottom" id="vit-NA-OOP"/>
@@ -189,11 +193,11 @@
             <objects>
                 <viewController id="7Ij-J3-hze" customClass="BuildingListViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ntX-hF-DuZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o20-Hf-9gx">
-                                <rect key="frame" x="32" y="471" width="256" height="45"/>
+                                <rect key="frame" x="32" y="491" width="256" height="45"/>
                                 <fontDescription key="fontDescription" name="HYZiYanHuanLeSongW" family="HYZiYanHuanLeSong" pointSize="28"/>
                                 <state key="normal" title="签到历史">
                                     <color key="titleColor" red="0.2774598002" green="0.41985791919999998" blue="0.43304911260000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -231,7 +235,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="G42-3C-cFP">
-                                <rect key="frame" x="32" y="158" width="256" height="297"/>
+                                <rect key="frame" x="32" y="158" width="256" height="317"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ALN-6u-Y8g">
                                     <size key="itemSize" width="250" height="253"/>
@@ -332,7 +336,7 @@
             <objects>
                 <viewController id="Vre-IP-CUg" customClass="RoomListViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C2J-Qf-R77">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hte-iL-Qxu">
@@ -350,7 +354,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LMf-mq-OlY">
-                                <rect key="frame" x="32" y="132" width="256" height="356"/>
+                                <rect key="frame" x="32" y="132" width="256" height="376"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="room" id="7kU-vY-K0x" customClass="RoomTableViewCell" customModule="SSA签到" customModuleProvider="target">
@@ -425,7 +429,7 @@
             <objects>
                 <viewController id="67B-as-Tch" customClass="FaceDetectSimpleViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DPd-Go-xcR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdd-gb-cY9" customClass="QinPreView" customModule="SSA签到" customModuleProvider="target">
@@ -469,11 +473,11 @@
             <objects>
                 <viewController id="cOU-0L-e51" customClass="CheckResultViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QoB-Dx-11B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在签到..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLD-8q-0Wl">
-                                <rect key="frame" x="8" y="116" width="304" height="60"/>
+                                <rect key="frame" x="8" y="126" width="304" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ouI-XT-qeA"/>
                                 </constraints>
@@ -482,7 +486,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uaz-bv-E1s">
-                                <rect key="frame" x="32" y="282" width="256" height="48"/>
+                                <rect key="frame" x="32" y="292" width="256" height="48"/>
                                 <color key="backgroundColor" red="0.19722897510000001" green="0.44812337790000001" blue="0.47015783630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="WgE-aJ-tbC"/>
@@ -496,7 +500,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHo-8M-PRp">
-                                <rect key="frame" x="8" y="471" width="304" height="45"/>
+                                <rect key="frame" x="8" y="491" width="304" height="45"/>
                                 <fontDescription key="fontDescription" name="HYZiYanHuanLeSongW" family="HYZiYanHuanLeSong" pointSize="28"/>
                                 <state key="normal" title="签到历史">
                                     <color key="titleColor" red="0.2774598002" green="0.41985791919999998" blue="0.43304911260000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -506,7 +510,7 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="SSA签到" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.13042375449999999" green="0.29042872790000002" blue="0.30360871550000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -545,11 +549,11 @@
             <objects>
                 <viewController id="VFR-DZ-KvD" customClass="CheckDBViewController" customModule="SSA签到" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49z-33-RvL">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="132" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OYa-TA-G0A">
-                                <rect key="frame" x="32" y="276" width="256" height="212"/>
+                                <rect key="frame" x="32" y="276" width="256" height="232"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="checkdb" rowHeight="132" id="bbw-eJ-ZyS" customClass="CheckDBTableViewCell" customModule="SSA签到" customModuleProvider="target">
@@ -585,7 +589,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 天之前" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="45Y-Ad-Xwx">
-                                                            <rect key="frame" x="167" y="75" width="45" height="17"/>
+                                                            <rect key="frame" x="168" y="75" width="44" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="gA6-db-Cq7"/>
                                                             </constraints>
@@ -720,9 +724,8 @@
         <image name="设置" width="6" height="6"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bi1-v9-K3S"/>
         <segue reference="dj3-cw-uo5"/>
-        <segue reference="k1K-V0-AtR"/>
-        <segue reference="6me-Fi-o2A"/>
+        <segue reference="fJ0-Zs-D3b"/>
+        <segue reference="sfl-bo-7jb"/>
     </inferredMetricsTieBreakers>
 </document>
