@@ -24,7 +24,11 @@ class BuildingListViewController: StaticViewController {
 
         // Do any additional setup after loading the view.
         
-        studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Name)"
+        if ApplicationHelper.CurrentUser.Groups.count == 0 {
+            studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Name)"
+        } else {
+            studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Groups[0].Name) 的 \(ApplicationHelper.CurrentUser.Name)"
+        }
         
         autoreleasepool {
             let realm = try! Realm()
@@ -88,30 +92,6 @@ extension BuildingListViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedBuilding = buildings[indexPath.row]
-        self.performSegue(withIdentifier: "roomlist", sender: self)
-    }
-}
-
-extension BuildingListViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return buildings.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "building") as! BuildingTableViewCell
-        cell.buildingName.text = buildings[indexPath.row].Name
-        return cell
-    }
-}
-
-extension BuildingListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedBuilding = buildings[indexPath.row]
         self.performSegue(withIdentifier: "roomlist", sender: self)
     }

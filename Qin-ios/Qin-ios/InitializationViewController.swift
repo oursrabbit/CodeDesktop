@@ -106,7 +106,7 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
     func openDownLoadLink() {
         DispatchQueue.main.async {
             self.infoLabel.text = "请重启程序"
-            let alert = UIAlertController(title: "启动失败", message: "请更新\n\n本机：\(ApplicationHelper.localVersion)\n\n最新版：\(ApplicationHelper.serverVersion)", preferredStyle: .alert)
+            let alert = UIAlertController(title: "启动失败", message: "请更新\n\n本机版本：\(ApplicationHelper.localVersion)\n\n最新版：\(ApplicationHelper.serverVersion)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "前往", style: .default, handler: { _ in
                 let url = URL(string: "https://www.baidu.com")!
                 if UIApplication.shared.canOpenURL(url) {

@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C11FB5823F7A81600EA1CE4 /* CheckLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB4F23F7A81500EA1CE4 /* CheckLog.swift */; };
+		4C11FB5923F7A81600EA1CE4 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5023F7A81500EA1CE4 /* Group.swift */; };
+		4C11FB5A23F7A81600EA1CE4 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5123F7A81500EA1CE4 /* Student.swift */; };
+		4C11FB5B23F7A81600EA1CE4 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5223F7A81500EA1CE4 /* Room.swift */; };
+		4C11FB5C23F7A81600EA1CE4 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5323F7A81500EA1CE4 /* Section.swift */; };
+		4C11FB5D23F7A81600EA1CE4 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5423F7A81500EA1CE4 /* Course.swift */; };
+		4C11FB5E23F7A81600EA1CE4 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5523F7A81500EA1CE4 /* Building.swift */; };
+		4C11FB5F23F7A81600EA1CE4 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5623F7A81500EA1CE4 /* Version.swift */; };
+		4C11FB6023F7A81600EA1CE4 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB5723F7A81600EA1CE4 /* Schedule.swift */; };
+		4C11FB6223F7AAE200EA1CE4 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB6123F7AAE200EA1CE4 /* LaunchViewController.swift */; };
+		4C11FB6423F7E3E600EA1CE4 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB6323F7E3E500EA1CE4 /* ScheduleTableViewCell.swift */; };
+		4C11FB6623F7E55C00EA1CE4 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB6523F7E55C00EA1CE4 /* ScheduleTableViewController.swift */; };
+		4C11FB6823F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB6723F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift */; };
+		4C11FB8B23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB8A23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift */; };
 		4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D114723C5E4200092CA1C /* WaitingView.swift */; };
 		4C6D114A23C5E4370092CA1C /* WaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D114923C5E4370092CA1C /* WaitingView.xib */; };
 		4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81E823BEE99F00A470FF /* AppDelegate.swift */; };
@@ -17,14 +31,9 @@
 		4C9C81F523BEE9A000A470FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C9C81F323BEE9A000A470FF /* LaunchScreen.storyboard */; };
 		4CA279BC23C2F8BE00DD3D38 /* QinPreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279BB23C2F8BE00DD3D38 /* QinPreView.swift */; };
 		4CA279BE23C2F90800DD3D38 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA279BD23C2F90800DD3D38 /* AVFoundation.framework */; };
-		4CA279C223C2F95500DD3D38 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C123C2F95500DD3D38 /* Building.swift */; };
 		4CA279C423C2F96100DD3D38 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C323C2F96100DD3D38 /* Camera.swift */; };
-		4CA279C623C2F97400DD3D38 /* CheckLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C523C2F97400DD3D38 /* CheckLog.swift */; };
 		4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */; };
-		4CA279CA23C2F98D00DD3D38 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279C923C2F98D00DD3D38 /* Room.swift */; };
 		4CA279CC23C2F99500DD3D38 /* ApplicationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279CB23C2F99500DD3D38 /* ApplicationHelper.swift */; };
-		4CA279CE23C2F9A200DD3D38 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279CD23C2F9A200DD3D38 /* Student.swift */; };
-		4CA279D023C2F9A900DD3D38 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279CF23C2F9A900DD3D38 /* Version.swift */; };
 		4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D123C2FA8000DD3D38 /* CheckDBViewController.swift */; };
 		4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D323C2FA8B00DD3D38 /* CheckResultViewController.swift */; };
 		4CA279D623C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D523C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift */; };
@@ -33,7 +42,6 @@
 		4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */; };
 		4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */; };
 		4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */; };
-		4CDA2A2623C87D690009F5C4 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDA2A2523C87D690009F5C4 /* Lesson.swift */; };
 		4CDF8A4E23EFC42100E7C8B4 /* hs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */; };
 		4CDF8A5023EFC43600E7C8B4 /* sf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */; };
 		4CDF8A5423F016DF00E7C8B4 /* BuildingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */; };
@@ -44,6 +52,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C11FB4F23F7A81500EA1CE4 /* CheckLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckLog.swift; sourceTree = "<group>"; };
+		4C11FB5023F7A81500EA1CE4 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		4C11FB5123F7A81500EA1CE4 /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		4C11FB5223F7A81500EA1CE4 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		4C11FB5323F7A81500EA1CE4 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		4C11FB5423F7A81500EA1CE4 /* Course.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		4C11FB5523F7A81500EA1CE4 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
+		4C11FB5623F7A81500EA1CE4 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		4C11FB5723F7A81600EA1CE4 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		4C11FB6123F7AAE200EA1CE4 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		4C11FB6323F7E3E500EA1CE4 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		4C11FB6523F7E55C00EA1CE4 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
+		4C11FB6723F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewController.swift; sourceTree = "<group>"; };
+		4C11FB8A23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C502EF523C4A13600B31ABB /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C502EF923C4A13900B31ABB /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C6D114723C5E4200092CA1C /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
@@ -58,14 +80,9 @@
 		4C9C81F623BEE9A000A470FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CA279BB23C2F8BE00DD3D38 /* QinPreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QinPreView.swift; sourceTree = "<group>"; };
 		4CA279BD23C2F90800DD3D38 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		4CA279C123C2F95500DD3D38 /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		4CA279C323C2F96100DD3D38 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
-		4CA279C523C2F97400DD3D38 /* CheckLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckLog.swift; sourceTree = "<group>"; };
 		4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
-		4CA279C923C2F98D00DD3D38 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		4CA279CB23C2F99500DD3D38 /* ApplicationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationHelper.swift; sourceTree = "<group>"; };
-		4CA279CD23C2F9A200DD3D38 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
-		4CA279CF23C2F9A900DD3D38 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		4CA279D123C2FA8000DD3D38 /* CheckDBViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBViewController.swift; sourceTree = "<group>"; };
 		4CA279D323C2FA8B00DD3D38 /* CheckResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckResultViewController.swift; sourceTree = "<group>"; };
 		4CA279D523C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectSimpleViewController.swift; sourceTree = "<group>"; };
@@ -74,9 +91,8 @@
 		4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
 		4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBTableViewCell.swift; sourceTree = "<group>"; };
-		4CDA2A2523C87D690009F5C4 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
-		4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = hs.ttf; path = "../../../../../Downloads/规范文档-20200209-p6/Fonts/汉仪字研欢乐宋/hs.ttf"; sourceTree = "<group>"; };
-		4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sf.ttf; path = "../../../../../Downloads/规范文档-20200209-p6/Fonts/sfprodisplay_downcc/sf.ttf"; sourceTree = "<group>"; };
+		4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hs.ttf; sourceTree = "<group>"; };
+		4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sf.ttf; sourceTree = "<group>"; };
 		4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCollectionViewCell.swift; sourceTree = "<group>"; };
 		4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
 		4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
@@ -99,9 +115,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C11FB4623F7A7BF00EA1CE4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C11FB5523F7A81500EA1CE4 /* Building.swift */,
+				4C11FB4F23F7A81500EA1CE4 /* CheckLog.swift */,
+				4C11FB5423F7A81500EA1CE4 /* Course.swift */,
+				4C11FB5023F7A81500EA1CE4 /* Group.swift */,
+				4C11FB5223F7A81500EA1CE4 /* Room.swift */,
+				4C11FB5723F7A81600EA1CE4 /* Schedule.swift */,
+				4C11FB5323F7A81500EA1CE4 /* Section.swift */,
+				4C11FB5123F7A81500EA1CE4 /* Student.swift */,
+				4C11FB5623F7A81500EA1CE4 /* Version.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4C11FB8923F7FB6F00EA1CE4 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		4C9C81DC23BEE99F00A470FF = {
 			isa = PBXGroup;
 			children = (
+				4C11FB8923F7FB6F00EA1CE4 /* New Group */,
 				4C9C81E723BEE99F00A470FF /* Qin-ios */,
 				4C9C81E623BEE99F00A470FF /* Products */,
 				C8668A937AD6399845F615C3 /* Pods */,
@@ -132,6 +172,9 @@
 				4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */,
 				4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */,
 				4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */,
+				4C11FB6523F7E55C00EA1CE4 /* ScheduleTableViewController.swift */,
+				4C11FB6723F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift */,
+				4C11FB6123F7AAE200EA1CE4 /* LaunchViewController.swift */,
 				4C9C81EE23BEE99F00A470FF /* Main.storyboard */,
 				4C9C81F123BEE9A000A470FF /* Assets.xcassets */,
 				4C9C81F323BEE9A000A470FF /* LaunchScreen.storyboard */,
@@ -156,13 +199,8 @@
 		4CA279BA23C2F82A00DD3D38 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				4C11FB4623F7A7BF00EA1CE4 /* Model */,
 				4CA279C323C2F96100DD3D38 /* Camera.swift */,
-				4CA279C123C2F95500DD3D38 /* Building.swift */,
-				4CA279C523C2F97400DD3D38 /* CheckLog.swift */,
-				4CA279C923C2F98D00DD3D38 /* Room.swift */,
-				4CA279CD23C2F9A200DD3D38 /* Student.swift */,
-				4CA279CF23C2F9A900DD3D38 /* Version.swift */,
-				4CDA2A2523C87D690009F5C4 /* Lesson.swift */,
 				4CA279CB23C2F99500DD3D38 /* ApplicationHelper.swift */,
 				4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */,
 			);
@@ -176,6 +214,8 @@
 				4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */,
 				4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */,
 				4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */,
+				4C11FB6323F7E3E500EA1CE4 /* ScheduleTableViewCell.swift */,
+				4C11FB8A23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift */,
 			);
 			path = Layouts;
 			sourceTree = "<group>";
@@ -327,25 +367,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C11FB5D23F7A81600EA1CE4 /* Course.swift in Sources */,
+				4C11FB6223F7AAE200EA1CE4 /* LaunchViewController.swift in Sources */,
+				4C11FB6023F7A81600EA1CE4 /* Schedule.swift in Sources */,
+				4C11FB5C23F7A81600EA1CE4 /* Section.swift in Sources */,
+				4C11FB6823F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift in Sources */,
 				4CA279D623C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift in Sources */,
 				4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */,
+				4C11FB5B23F7A81600EA1CE4 /* Room.swift in Sources */,
 				4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */,
 				4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */,
+				4C11FB6423F7E3E600EA1CE4 /* ScheduleTableViewCell.swift in Sources */,
 				4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */,
-				4CA279C623C2F97400DD3D38 /* CheckLog.swift in Sources */,
-				4CA279C223C2F95500DD3D38 /* Building.swift in Sources */,
 				4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */,
 				4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */,
-				4CA279CA23C2F98D00DD3D38 /* Room.swift in Sources */,
-				4CDA2A2623C87D690009F5C4 /* Lesson.swift in Sources */,
 				4CA279D823C2FAAE00DD3D38 /* QinSettingViewController.swift in Sources */,
 				4CDF8A5423F016DF00E7C8B4 /* BuildingCollectionViewCell.swift in Sources */,
-				4CA279D023C2F9A900DD3D38 /* Version.swift in Sources */,
 				4CA279BC23C2F8BE00DD3D38 /* QinPreView.swift in Sources */,
+				4C11FB6623F7E55C00EA1CE4 /* ScheduleTableViewController.swift in Sources */,
+				4C11FB5A23F7A81600EA1CE4 /* Student.swift in Sources */,
 				4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */,
+				4C11FB5923F7A81600EA1CE4 /* Group.swift in Sources */,
+				4C11FB5823F7A81600EA1CE4 /* CheckLog.swift in Sources */,
 				4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */,
-				4CA279CE23C2F9A200DD3D38 /* Student.swift in Sources */,
+				4C11FB5F23F7A81600EA1CE4 /* Version.swift in Sources */,
+				4C11FB8B23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift in Sources */,
 				4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */,
+				4C11FB5E23F7A81600EA1CE4 /* Building.swift in Sources */,
 				4CA279C423C2F96100DD3D38 /* Camera.swift in Sources */,
 				4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */,
 				4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */,
@@ -498,7 +546,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -520,7 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

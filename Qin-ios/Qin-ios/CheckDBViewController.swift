@@ -65,7 +65,7 @@ class CheckDBViewController: StaticViewController {
         self.logs =  self.leanlogs.filter{ (item) -> Bool in
             let room = (try! Realm()).objects(Room.self).filter("ID = \(item.RoomID)").first!
             let building = room.Location.first!
-            let checkDate = item.CheckDate.shortString
+            let checkDate = item.CheckDate.longString
             return room.Name.contains(keyword) || building.Name.contains(keyword) || checkDate.contains(keyword)
         }
         self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
@@ -98,7 +98,7 @@ extension CheckDBViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "checkdb") as! CheckDBTableViewCell
         cell.initCellInterface()
         cell.roomidlabel.text = "签到地点: \(room.Location.first!.Name) \(room.Name)"
-        cell.checkdatelabel.text = "签到时间: \(logs[indexPath.row].CheckDate.shortString)"
+        cell.checkdatelabel.text = "签到时间: \(logs[indexPath.row].CheckDate.longString)"
         let timespan = logs[indexPath.row].CheckDate.distance(to: Date())
         let ti = Int(timespan)
         let sec = ti % 60

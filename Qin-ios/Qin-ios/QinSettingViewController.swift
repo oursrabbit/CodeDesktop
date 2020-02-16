@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class QinSettingViewController: StaticViewController {
     
@@ -74,6 +75,7 @@ class QinSettingViewController: StaticViewController {
                         self.present(alert, animated: true, completion: nil)
                     }
                 } else {
+                    //Student Info
                     let checkLog = DatabaseResults[0]
                     ApplicationHelper.CurrentUser.Advertising = "0"
                     ApplicationHelper.CurrentUser.BaiduFaceID = checkLog["BaiduFaceID"] as! String
@@ -81,8 +83,64 @@ class QinSettingViewController: StaticViewController {
                     ApplicationHelper.CurrentUser.ID = checkLog["ID"] as! Int
                     ApplicationHelper.CurrentUser.SchoolID = checkLog["SchoolID"] as! String
                     ApplicationHelper.CurrentUser.Name = checkLog["Name"] as! String
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "roomlist", sender: self)
+                    //Group Info
+                    let checkJson = ["Students": ["$regex":",\(ApplicationHelper.CurrentUser.ID)"]]
+                    let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
+                    let jsonString = String(data: checkJSONData!, encoding: .utf8)
+                    let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                    let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/Group?where=\(urlString)"
+                    DatabaseHelper.LCSearch(searchURL: url) { response, error in
+                        if error == nil {
+                            ApplicationHelper.CurrentUser.Groups.removeAll()
+                            let DatabaseResults = response["results"] as! [[String:Any?]]
+                            for checkLog in DatabaseResults {
+                                let newGroup = Group()
+                                newGroup.ID = checkLog["ID"] as! Int
+                                newGroup.Name = checkLog["Name"] as! String
+                                ApplicationHelper.CurrentUser.Groups.append(newGroup)
+                            }
+                            //Schedule Info
+                            var checkJSONData: Data? = nil
+                            if ApplicationHelper.CurrentUser.Groups.count == 0 {
+                                let checkJson = ["StudentsID": ["$regex":",\(ApplicationHelper.CurrentUser.ID)"]]
+                                checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
+                            } else {
+                                let checkJson = ["$or":[["GroupsID": ["$regex":"\(ApplicationHelper.CurrentUser.getGroupsRegex())"]],
+                                        ["StudentsID": ["$regex":",\(ApplicationHelper.CurrentUser.ID)"]]]]
+                                checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
+                            }
+                            let jsonString = String(data: checkJSONData!, encoding: .utf8)
+                            let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+                            let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/Schedule?where=\(urlString)"
+                            DatabaseHelper.LCSearch(searchURL: url) { response, error in
+                                if error == nil {
+                                    ApplicationHelper.CurrentUser.Schedules.removeAll()
+                                    let DatabaseResults = response["results"] as! [[String:Any?]]
+                                    for checkLog in DatabaseResults {
+                                        let newSchedule = Schedule()
+                                        newSchedule.ID = checkLog["ID"] as! Int
+                                        newSchedule.WorkingDate = (checkLog["WorkingDate"] as! String).dateDate!
+                                        newSchedule.WorkingCourseID = checkLog["CourseID"] as! Int
+                                        newSchedule.WorkingRoomID = checkLog["RoomID"] as! Int
+                                        newSchedule.setSections(sctionIDString: checkLog["SectionID"] as! String)
+                                        ApplicationHelper.CurrentUser.Schedules.append(newSchedule)
+                                    }
+                                    DispatchQueue.main.async {
+                                        self.performSegue(withIdentifier: "roomlist", sender: self)
+                                    }
+                                } else {
+                                    self.waitingView.isHidden = true
+                                    let alert = UIAlertController(title: "登录失败", message: "网络错误", preferredStyle: .alert)
+                                    alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                                    self.present(alert, animated: true, completion: nil)
+                                }
+                            }
+                        } else {
+                            self.waitingView.isHidden = true
+                            let alert = UIAlertController(title: "登录失败", message: "网络错误", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        }
                     }
                 }
             } else {
