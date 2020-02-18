@@ -99,7 +99,7 @@ extension CheckDBViewController: UITableViewDataSource {
         cell.initCellInterface()
         cell.roomidlabel.text = "签到地点: \(room.Location.first!.Name) \(room.Name)"
         cell.checkdatelabel.text = "签到时间: \(logs[indexPath.row].CheckDate.longString)"
-        let timespan = logs[indexPath.row].CheckDate.distance(to: Date())
+        let timespan = -logs[indexPath.row].CheckDate.timeIntervalSinceNow
         let ti = Int(timespan)
         let sec = ti % 60
         let min = (ti / 60) % 60

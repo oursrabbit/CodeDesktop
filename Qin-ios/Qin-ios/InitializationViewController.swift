@@ -53,6 +53,7 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
             ApplicationHelper.checkVersion(listener: self) { versionErrorCode in
                 switch versionErrorCode {
                 case .Success:
+                    ApplicationHelper.checkLaunchImageVersion()
                     //Check DBVersion
                     ApplicationHelper.checkLocalDatabaseVersion(listener: self) { databaseErrorCode in
                         switch databaseErrorCode {

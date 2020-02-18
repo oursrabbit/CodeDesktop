@@ -7,16 +7,30 @@
 //
 
 import UIKit
+import Foundation
+import RealmSwift
 
 class LaunchViewController: StaticViewController {
 
     var countdown = 3
     @IBOutlet weak var countdownButton:UIButton!
+    @IBOutlet weak var launchImageView: UIImageView!
+    @IBOutlet weak var launchImageBackgroundView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let launchImageCount = (try! Realm()).objects(LaunchImage.self).count
+        if launchImageCount != 0 {
+            let applicationData = (try! Realm()).objects(LaunchImage.self)[Int.random(in: 0..<launchImageCount)]
+            let launchImageData = applicationData.LaunchImage!
+            let launchImageBackgroundData = applicationData.LaunchImageBackground!
+            let launchImage = UIImage(data: launchImageData)
+            let launchImageBackground = UIImage(data: launchImageBackgroundData)
+            launchImageView.image = launchImage
+            launchImageBackgroundView.image = launchImageBackground
+        }
         
         DispatchQueue.global().async {
             self.countingDown()
@@ -26,9 +40,9 @@ class LaunchViewController: StaticViewController {
 
     
     func countingDown() {
-        while self.countdown != 0 {
+        while self.countdown > 0 {
             DispatchQueue.main.async {
-                self.countdownButton.setTitle("跳过 \(self.countdown)s", for: .normal)
+                self.countdownButton.setTitle("跳过 \(self.countdown)s >", for: .normal)
                 self.countdown = self.countdown - 1
             }
             sleep(1)

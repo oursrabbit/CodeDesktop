@@ -175,7 +175,12 @@ extension CheckResultViewController: CBPeripheralManagerDelegate {
             let major : CLBeaconMajorValue = CLBeaconMajorValue(ApplicationHelper.CheckInRoomID & 0x0000FFFF)
             let minor : CLBeaconMinorValue = CLBeaconMinorValue(ApplicationHelper.CurrentUser.ID & 0x0000FFFF)
             let beaconID = "bfass"
-            self.peripheralData =  CLBeaconRegion(uuid: proximityUUID, major: major, minor: minor, identifier: beaconID)
+            if #available(iOS 13.0, *) {
+                self.peripheralData =  CLBeaconRegion(uuid: proximityUUID, major: major, minor: minor, identifier: beaconID)
+            } else {
+                // Fallback on earlier versions
+                self.peripheralData = CLBeaconRegion(proximityUUID: proximityUUID, major: major, minor: minor, identifier: beaconID)
+            }
                 
             peripheral.startAdvertising(((peripheralData.peripheralData(withMeasuredPower: 68) as NSDictionary) as! [String : Any]))
         }

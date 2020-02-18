@@ -49,6 +49,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AppDelegate.application(_:didFinishLaunchingWithOptions:):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "window?.rootViewController?.view.subviews">
+            </PersistentString>
+            <PersistentString
+               value = "window">
+            </PersistentString>
+            <PersistentString
+               value = "window?.rootViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
       </ContextState>
    </ContextStates>

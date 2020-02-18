@@ -31,9 +31,10 @@ public class ApplicationHelper {
     public static var CurrentUser = Student()
     public static var CheckInRoomID = 0;
     
-    public static let localVersion = 3
+    public static let localVersion = 4
     public static var serverVersion = 0
     public static var databaseVersion = 0
+    public static var launchImageVersion = 0
     
     public static func checkVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (QinMessage) -> Void) {
         listener?.updateInfomation(message: "正在检测软件版本...")
@@ -42,10 +43,12 @@ public class ApplicationHelper {
             if error == nil {
                 ApplicationHelper.serverVersion = json["ApplicationVersion"] as! Int
                 ApplicationHelper.databaseVersion = json["DatabaseVersion"] as! Int
-                if ApplicationHelper.localVersion >= ApplicationHelper.serverVersion {
+                ApplicationHelper.launchImageVersion = json["LaunchImageVersion"] as! Int
+                if ApplicationHelper.localVersion == ApplicationHelper.serverVersion {
                     completionHandler(.Success)
                 } else {
                     UserDefaults.standard.set(-1, forKey: "localDataVersion")
+                    UserDefaults.standard.set(-1, forKey: "launchImageVersion")
                     completionHandler(.ApplicationVersionError)
                 }
             } else {
@@ -61,7 +64,7 @@ public class ApplicationHelper {
         if let _ = localStore.object(forKey: "localDataVersion") {
             localDataVersion = localStore.integer(forKey: "localDataVersion")
         }
-        if localDataVersion >= ApplicationHelper.databaseVersion {
+        if localDataVersion == ApplicationHelper.databaseVersion {
             completionHandler(.Success)
         } else {
             autoreleasepool {
@@ -233,6 +236,61 @@ public class ApplicationHelper {
                 completionHandler(nil)
             }
         }.resume()
+    }
+        
+    public static func checkLaunchImageVersion() {
+        var launchImageVersion = -1
+        let localStore = UserDefaults.standard
+        if let _ = localStore.object(forKey: "launchImageVersion") {
+            launchImageVersion = localStore.integer(forKey: "launchImageVersion")
+        }
+        if launchImageVersion != ApplicationHelper.launchImageVersion {
+            let realm = try! Realm()
+            realm.beginWrite()
+            realm.delete(realm.objects(LaunchImage.self))
+            try! realm.commitWrite()
+            let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/LaunchImage?limit=1000&&&&"
+            DatabaseHelper.LCSearch(searchURL: url) { response, error in
+                if error == nil {
+                    let DatabaseResults = response["results"] as! [[String:Any?]]
+                    for checkLog in DatabaseResults {
+                            createLaunchImage(json: checkLog)
+                    }
+                    UserDefaults.standard.set(ApplicationHelper.launchImageVersion, forKey: "launchImageVersion")
+                }
+            }
+        }
+    }
+    
+    public static func createLaunchImage(json: [String: Any?]) {
+        let leancloudSession = URLSession.shared;
+        let launchImageJson = json["LaunchImageData"] as! [String:Any]
+        var launchImageURL = launchImageJson["url"] as! String
+        launchImageURL = launchImageURL.replacingOccurrences(of: "http://", with: "https://")
+        var launchImageRequest = URLRequest(url: URL(string: launchImageURL)!)
+        launchImageRequest.httpMethod = "GET"
+        launchImageRequest.setValue(DatabaseHelper.LeancloudAppid, forHTTPHeaderField: DatabaseHelper.LeancloudIDHeader)
+        launchImageRequest.setValue(DatabaseHelper.LeancloudAppKey, forHTTPHeaderField: DatabaseHelper.LeancloudKeyHeader)
+        leancloudSession.dataTask(with: launchImageRequest, completionHandler: { launchImageData, response, error in
+            if error == nil {
+                let launchImageBackgroundJson = json["LaunchImageBackgroundData"] as! [String:Any]
+                var launchImageBackgroundURL = launchImageBackgroundJson["url"] as! String
+                launchImageBackgroundURL = launchImageBackgroundURL.replacingOccurrences(of: "http://", with: "https://")
+                var launchImageBackgroundRequest = URLRequest(url: URL(string: launchImageBackgroundURL)!)
+                launchImageBackgroundRequest.httpMethod = "GET"
+                launchImageBackgroundRequest.setValue(DatabaseHelper.LeancloudAppid, forHTTPHeaderField: DatabaseHelper.LeancloudIDHeader)
+                launchImageBackgroundRequest.setValue(DatabaseHelper.LeancloudAppKey, forHTTPHeaderField: DatabaseHelper.LeancloudKeyHeader)
+                leancloudSession.dataTask(with: launchImageBackgroundRequest, completionHandler: { launchImageBackgroundData, response, error in
+                    if error == nil {
+                        let realm = try! Realm()
+                        realm.beginWrite()
+                        let newLaunchImage = realm.create(LaunchImage.self)
+                        newLaunchImage.LaunchImage = launchImageData
+                        newLaunchImage.LaunchImageBackground = launchImageBackgroundData
+                        try! realm.commitWrite()
+                        print("Save Launch Image SUCCESS")
+                }}).resume()
+        }}).resume()
     }
 }
 
