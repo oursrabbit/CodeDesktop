@@ -74,9 +74,9 @@ extension BuildingListViewController: UICollectionViewDataSource {
 
 extension BuildingListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = collectionView.bounds.size.width;
-        let cellWidth = (screenWidth - 32) / 2
-        return CGSize(width: cellWidth, height: cellWidth)
+        //let screenWidth = collectionView.bounds.size.width;
+        //let cellWidth = (screenWidth - 32) / 2
+        return CGSize(width: 215, height: 215)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

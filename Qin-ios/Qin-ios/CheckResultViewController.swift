@@ -138,6 +138,7 @@ class CheckResultViewController: StaticViewController {
             semaphore.wait()
             sleep(1)
         }
+        self.peripheral.stopAdvertising()
         if checkAdver == false {
             updateInfoLabel(message: "签到失败：超时")
             return
