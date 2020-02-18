@@ -26,6 +26,11 @@ class FaceDetectSimpleViewController: StaticViewController, CameraDelegate {
         captureSession.startRunning() 
     }
     
+    @IBAction func backBuildingListView(_ sender: Any) {
+        self.captureSession.stopRunning()
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func cameraOnFaceDetected() {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "checkresult", sender: self)

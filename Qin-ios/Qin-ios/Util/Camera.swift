@@ -20,7 +20,6 @@ public enum FaceDetectStep {
     case stop
     case waitingImage
     case gettingAccessToken
-    case detectingLiving
     case detectingFace
 }
 
@@ -37,8 +36,7 @@ class Camera: NSObject {
     var captureSession = AVCaptureSession()
     var facedetectStep = FaceDetectStep.stop
 
-    public func startRunning()
-    {
+    public func startRunning() {
         captureSession = AVCaptureSession()
         
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -67,8 +65,14 @@ class Camera: NSObject {
         }
     }
     
+    public func stopRunning() {
+        self.captureSession.stopRunning()
+        //self.previewView?.isHidden = true
+    }
+    
     func setupSession() {
         do {
+            //self.previewView?.isHidden = false
             delegate?.updateInfoLabel(message: "开始初始化摄像头")
             captureSession.beginConfiguration()
             captureSession.sessionPreset = .low
@@ -81,14 +85,17 @@ class Camera: NSObject {
             videoOutput.alwaysDiscardsLateVideoFrames = true
             videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: .background))
             captureSession.addOutput(videoOutput)
-            self.previewView?.videoPreviewLayer.session = captureSession
-            captureSession.commitConfiguration()
-            DispatchQueue.global().async {
-                self.delegate?.updateInfoLabel(message: "初始化面部识别...")
-                self.facedetectStep = .waitingImage
-                self.captureSession.startRunning()
+            DispatchQueue.main.async {
+                self.previewView?.videoPreviewLayer.session = self.captureSession
+                self.captureSession.commitConfiguration()
+                DispatchQueue.global().async {
+                    self.delegate?.updateInfoLabel(message: "初始化面部识别...")
+                    self.facedetectStep = .waitingImage
+                    self.captureSession.startRunning()
+                }
             }
         } catch {
+            //self.previewView?.isHidden = true
             delegate?.faceDetectFail(errorcode: .deviceInitFailed, error: "摄像头初始化失败")
             return
         }
@@ -107,6 +114,7 @@ class Camera: NSObject {
         let baseImg = self.convert(cmage: ciimage).jpegData(compressionQuality: 1.0)!.base64EncodedString();
         return baseImg;
     }
+
     
     func faceDetect(imageInBASE64: String, accessToken: String, completionHandler: @escaping (String?) -> Void) {
         let faceUrl = URL(string: "https://aip.baidubce.com/rest/2.0/face/v3/search?access_token=" + accessToken)!;
@@ -117,9 +125,8 @@ class Camera: NSObject {
         let faceJSON = ["image": imageInBASE64,
                         "image_type":"BASE64",
                         "group_id_list":"2019BK",
-                        "user_id": ApplicationHelper.CurrentUser.BaiduFaceID]
+                        "liveness_control":"NORMAL"]
         let faceJSONData = try? JSONSerialization.data(withJSONObject: faceJSON, options: [])
-        let facem = DispatchSemaphore(value: 0)
         facesession.uploadTask(with: faceReq, from: faceJSONData) { data, response, error in
             do{
                 let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
@@ -132,12 +139,12 @@ class Camera: NSObject {
             }catch{
                 completionHandler("网络错误，正在重试...")
             }
-            facem.signal();
         }.resume()
     }
 }
 
 extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
+    
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         if self.facedetectStep == .waitingImage {
             let baseImage = getBase64Image(buffer: sampleBuffer);
@@ -158,11 +165,10 @@ extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
                             } else {
                                 self.delegate?.updateInfoLabel(message: error!)
                                 self.facedetectStep = .waitingImage
-                            }
-                        }
+                            }}
                     }
                 } else {
-                    self.delegate?.updateInfoLabel(message: "面部识别初始化失败，正在重试...")
+                    self.delegate?.updateInfoLabel(message: "面部识别失败，正在重试...")
                     self.facedetectStep = .waitingImage
                 }
             }

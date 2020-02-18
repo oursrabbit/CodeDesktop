@@ -400,8 +400,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
             endingLineNumber = "72"
-            landmarkName = "setupSession()"
-            landmarkType = "7">
+            landmarkName = "Camera"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -542,8 +542,8 @@
             filePath = "Qin-ios/InitializationViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "startQin()"
             landmarkType = "7">
             <Locations>
@@ -734,8 +734,8 @@
             filePath = "Qin-ios/Util/ApplicationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "updateBuildingDatabase(listener:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -750,8 +750,8 @@
             filePath = "Qin-ios/Util/ApplicationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "updateBuildingDatabase(listener:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -766,8 +766,8 @@
             filePath = "Qin-ios/Util/ApplicationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "updateBuildingDatabase(listener:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -782,8 +782,8 @@
             filePath = "Qin-ios/Util/ApplicationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "updateBuildingDatabase(listener:completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -878,8 +878,8 @@
             filePath = "Qin-ios/Util/ApplicationHelper.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "checkLocalDatabaseVersion(listener:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1009,6 +1009,179 @@
             startingLineNumber = "38"
             endingLineNumber = "38"
             landmarkName = "viewWillAppear(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8E24E2F-A07B-4DC5-9E54-54DC083F12C2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Qin-ios/Custom.UI/QinPreView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "QinPreView"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "B8E24E2F-A07B-4DC5-9E54-54DC083F12C2 - 3e656aba0d5f8b40"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SSA&#x7b7e;&#x5230;.QinPreView.__allocating_init(frame: __C.CGRect) -&gt; SSA&#x7b7e;&#x5230;.QinPreView"
+                  moduleName = "SSA&#x7b7e;&#x5230;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangcan/Desktop/CodeDesktop/Qin-ios/Qin-ios/Custom.UI/QinPreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  uuid = "B8E24E2F-A07B-4DC5-9E54-54DC083F12C2 - deb286f094586608"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SSA&#x7b7e;&#x5230;.QinPreView.init(frame: __C.CGRect) -&gt; SSA&#x7b7e;&#x5230;.QinPreView"
+                  moduleName = "SSA&#x7b7e;&#x5230;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangcan/Desktop/CodeDesktop/Qin-ios/Qin-ios/Custom.UI/QinPreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "184">
+               </Location>
+               <Location
+                  uuid = "B8E24E2F-A07B-4DC5-9E54-54DC083F12C2 - b73de446c18442c4"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SSA&#x7b7e;&#x5230;.QinPreView.__allocating_init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;SSA&#x7b7e;&#x5230;.QinPreView&gt;"
+                  moduleName = "SSA&#x7b7e;&#x5230;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangcan/Desktop/CodeDesktop/Qin-ios/Qin-ios/Custom.UI/QinPreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "B8E24E2F-A07B-4DC5-9E54-54DC083F12C2 - f0d3dbc324f4428c"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SSA&#x7b7e;&#x5230;.QinPreView.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;SSA&#x7b7e;&#x5230;.QinPreView&gt;"
+                  moduleName = "SSA&#x7b7e;&#x5230;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangcan/Desktop/CodeDesktop/Qin-ios/Qin-ios/Custom.UI/QinPreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "256">
+               </Location>
+               <Location
+                  uuid = "B8E24E2F-A07B-4DC5-9E54-54DC083F12C2 - 45492504399e12a"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SSA&#x7b7e;&#x5230;.QinPreView.__deallocating_deinit"
+                  moduleName = "SSA&#x7b7e;&#x5230;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yangcan/Desktop/CodeDesktop/Qin-ios/Qin-ios/Custom.UI/QinPreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F21890D6-9330-4099-ABA4-9195C47438C4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Qin-ios/CheckDBViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B9460FC1-5073-4861-96F9-EE77DD805F4A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Qin-ios/LaunchViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DC7410AA-468F-456F-AA4E-A1867019BD9E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Qin-ios/LaunchViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "131A5498-38E7-4E08-A9CE-E7F136FB7567"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Qin-ios/Util/Camera.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "stopRunning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B3C663BE-98A7-424B-A6E5-308BA92F50BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Qin-ios/FaceDetectSimpleViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "backBuildingListView(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
