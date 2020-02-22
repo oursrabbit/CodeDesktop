@@ -125,6 +125,7 @@ class QinSettingViewController: StaticViewController {
                                         newSchedule.setSections(sctionIDString: checkLog["SectionID"] as! String)
                                         ApplicationHelper.CurrentUser.Schedules.append(newSchedule)
                                     }
+                                    ApplicationHelper.CurrentUser.setDrawableSchedules()
                                     DispatchQueue.main.async {
                                         self.performSegue(withIdentifier: "roomlist", sender: self)
                                     }

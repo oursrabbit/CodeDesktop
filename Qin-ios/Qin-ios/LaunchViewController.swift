@@ -12,7 +12,7 @@ import RealmSwift
 
 class LaunchViewController: StaticViewController {
 
-    var countdown = 3
+    var countdown = 1
     @IBOutlet weak var countdownButton:UIButton!
     @IBOutlet weak var launchImageView: UIImageView!
     @IBOutlet weak var launchImageBackgroundView: UIImageView!

@@ -3,10 +3,16 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "CheckResultViewController.peripheralManagerDidUpdateState(_:):CheckResultViewController.swift">
+         contextName = "ScheduleTableViewController.collectionView(_:cellForItemAt:):ScheduleTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "CLBeaconMajorValue(ApplicationHelper.CheckInRoomID)">
+               value = "(try! Realm()).objects(Course.self).filter(&quot;ID = \(schedule.WorkingCourseID)&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "cellDate.longString">
+            </PersistentString>
+            <PersistentString
+               value = "cell.NameLabel">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,32 +25,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+         contextName = "Student.setDrawableSchedules():Student.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in static StaticData.checkVersion(listener:completionHandler:):StaticData.swift">
+         contextName = "Schedule.getCellX():Schedule.swift">
          <PersistentStrings>
             <PersistentString
-               value = "StaticData.localVersion">
+               value = "startDate.StartTime.min">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #2 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "realm.objects(Building.self).first!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in QinSettingViewController.getCurrentUserInfomation():QinSettingViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "ApplicationHelper.CurrentUser">
+               value = "startDate.StartTime.hour">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,7 +53,97 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #2 in closure #2 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "realm.objects(Building.self).first!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CalendarMonthCollectionViewLayout.prepare():CalendarMonthCollectionViewLayout.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "atts">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in static StaticData.checkVersion(listener:completionHandler:):StaticData.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "StaticData.localVersion">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in QinSettingViewController.getCurrentUserInfomation():QinSettingViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ApplicationHelper.CurrentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CalendayDayCollectionViewLayout.layoutAttributesForItem(at:):CalendayDayCollectionViewLayout.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "dayInMonthAttributesArray">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+      </ContextState>
+      <ContextState
+         contextName = "static Date.getDayByIndexRow(year:month:row:column:):ApplicationHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(row - 1) * 7">
+            </PersistentString>
+            <PersistentString
+               value = "(row - 1)*7+column+firstDay.dayInWeek">
+            </PersistentString>
+            <PersistentString
+               value = "row - 1">
+            </PersistentString>
+            <PersistentString
+               value = "firstDay.dayInWeek">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScheduleTableViewController.InitInterface():ScheduleTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectDate.longString">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CheckResultViewController.peripheralManagerDidUpdateState(_:):CheckResultViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CLBeaconMajorValue(ApplicationHelper.CheckInRoomID)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScheduleTableViewController.collectionView(_:didSelectItemAt:):ScheduleTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "selectDate.longString">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

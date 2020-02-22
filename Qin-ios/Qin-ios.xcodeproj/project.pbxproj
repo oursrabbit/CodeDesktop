@@ -21,7 +21,12 @@
 		4C11FB6623F7E55C00EA1CE4 /* ScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB6523F7E55C00EA1CE4 /* ScheduleTableViewController.swift */; };
 		4C11FB6823F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB6723F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift */; };
 		4C11FB8B23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C11FB8A23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift */; };
+		4C1A2F1223FFA62400C136BB /* SelectMonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A2F1123FFA62400C136BB /* SelectMonthTableViewCell.swift */; };
+		4C1A2F1423FFB09200C136BB /* CalendayDayCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A2F1323FFB09200C136BB /* CalendayDayCollectionViewLayout.swift */; };
+		4C1A2F1623FFC44D00C136BB /* ScheduleCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A2F1523FFC44D00C136BB /* ScheduleCollectionViewLayout.swift */; };
+		4C1A2F1A23FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A2F1923FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift */; };
 		4C2ABB6E23FBDE8700538B1E /* LaunchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2ABB6D23FBDE8700538B1E /* LaunchImage.swift */; };
+		4C617D2923FFA39000769062 /* CalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C617D2823FFA39000769062 /* CalendarDayCollectionViewCell.swift */; };
 		4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D114723C5E4200092CA1C /* WaitingView.swift */; };
 		4C6D114A23C5E4370092CA1C /* WaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D114923C5E4370092CA1C /* WaitingView.xib */; };
 		4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9C81E823BEE99F00A470FF /* AppDelegate.swift */; };
@@ -40,6 +45,8 @@
 		4CA279DA23C2FAB600DD3D38 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */; };
 		4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */; };
 		4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */; };
+		4CBC7B232400C4B50099AC40 /* CalendarMonthCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC7B222400C4B50099AC40 /* CalendarMonthCollectionViewCell.swift */; };
+		4CBC7B252400C4D70099AC40 /* CalendarMonthCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBC7B242400C4D70099AC40 /* CalendarMonthCollectionViewLayout.swift */; };
 		4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */; };
 		4CDF8A4E23EFC42100E7C8B4 /* hs.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */; };
 		4CDF8A5023EFC43600E7C8B4 /* sf.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */; };
@@ -65,9 +72,14 @@
 		4C11FB6523F7E55C00EA1CE4 /* ScheduleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewController.swift; sourceTree = "<group>"; };
 		4C11FB6723F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewController.swift; sourceTree = "<group>"; };
 		4C11FB8A23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewCell.swift; sourceTree = "<group>"; };
+		4C1A2F1123FFA62400C136BB /* SelectMonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMonthTableViewCell.swift; sourceTree = "<group>"; };
+		4C1A2F1323FFB09200C136BB /* CalendayDayCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendayDayCollectionViewLayout.swift; sourceTree = "<group>"; };
+		4C1A2F1523FFC44D00C136BB /* ScheduleCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewLayout.swift; sourceTree = "<group>"; };
+		4C1A2F1923FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C2ABB6D23FBDE8700538B1E /* LaunchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchImage.swift; sourceTree = "<group>"; };
 		4C502EF523C4A13600B31ABB /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C502EF923C4A13900B31ABB /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C617D2823FFA39000769062 /* CalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C6D114723C5E4200092CA1C /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		4C6D114923C5E4370092CA1C /* WaitingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WaitingView.xib; sourceTree = "<group>"; };
 		4C9C81E523BEE99F00A470FF /* SSA签到.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SSA签到.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +100,8 @@
 		4CA279D923C2FAB600DD3D38 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
 		4CA279DB23C2FAC700DD3D38 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		4CA279DD23C2FB5900DD3D38 /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
+		4CBC7B222400C4B50099AC40 /* CalendarMonthCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthCollectionViewCell.swift; sourceTree = "<group>"; };
+		4CBC7B242400C4D70099AC40 /* CalendarMonthCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMonthCollectionViewLayout.swift; sourceTree = "<group>"; };
 		4CBEE2C423C5D91B00C7D102 /* CheckDBTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckDBTableViewCell.swift; sourceTree = "<group>"; };
 		4CDF8A4D23EFC42000E7C8B4 /* hs.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hs.ttf; sourceTree = "<group>"; };
 		4CDF8A4F23EFC43600E7C8B4 /* sf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sf.ttf; sourceTree = "<group>"; };
@@ -130,17 +144,9 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4C11FB8923F7FB6F00EA1CE4 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		4C9C81DC23BEE99F00A470FF = {
 			isa = PBXGroup;
 			children = (
-				4C11FB8923F7FB6F00EA1CE4 /* New Group */,
 				4C9C81E723BEE99F00A470FF /* Qin-ios */,
 				4C9C81E623BEE99F00A470FF /* Products */,
 				C8668A937AD6399845F615C3 /* Pods */,
@@ -213,6 +219,13 @@
 				4CDF8A5323F016DF00E7C8B4 /* BuildingCollectionViewCell.swift */,
 				4C11FB6323F7E3E500EA1CE4 /* ScheduleTableViewCell.swift */,
 				4C11FB8A23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift */,
+				4C1A2F1923FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift */,
+				4C1A2F1523FFC44D00C136BB /* ScheduleCollectionViewLayout.swift */,
+				4C1A2F1123FFA62400C136BB /* SelectMonthTableViewCell.swift */,
+				4C617D2823FFA39000769062 /* CalendarDayCollectionViewCell.swift */,
+				4C1A2F1323FFB09200C136BB /* CalendayDayCollectionViewLayout.swift */,
+				4CBC7B222400C4B50099AC40 /* CalendarMonthCollectionViewCell.swift */,
+				4CBC7B242400C4D70099AC40 /* CalendarMonthCollectionViewLayout.swift */,
 			);
 			path = Layouts;
 			sourceTree = "<group>";
@@ -368,15 +381,19 @@
 				4C11FB6023F7A81600EA1CE4 /* Schedule.swift in Sources */,
 				4C11FB5C23F7A81600EA1CE4 /* Section.swift in Sources */,
 				4C11FB6823F7ED5E00EA1CE4 /* ScheduleCollectionViewController.swift in Sources */,
+				4C1A2F1A23FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift in Sources */,
 				4CA279D623C2FA9D00DD3D38 /* FaceDetectSimpleViewController.swift in Sources */,
 				4C9C81ED23BEE99F00A470FF /* InitializationViewController.swift in Sources */,
 				4C11FB5B23F7A81600EA1CE4 /* Room.swift in Sources */,
 				4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */,
+				4C617D2923FFA39000769062 /* CalendarDayCollectionViewCell.swift in Sources */,
 				4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */,
 				4C11FB6423F7E3E600EA1CE4 /* ScheduleTableViewCell.swift in Sources */,
 				4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */,
+				4CBC7B252400C4D70099AC40 /* CalendarMonthCollectionViewLayout.swift in Sources */,
 				4C2ABB6E23FBDE8700538B1E /* LaunchImage.swift in Sources */,
 				4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */,
+				4C1A2F1223FFA62400C136BB /* SelectMonthTableViewCell.swift in Sources */,
 				4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */,
 				4CA279D823C2FAAE00DD3D38 /* QinSettingViewController.swift in Sources */,
 				4CDF8A5423F016DF00E7C8B4 /* BuildingCollectionViewCell.swift in Sources */,
@@ -388,15 +405,18 @@
 				4C11FB5823F7A81600EA1CE4 /* CheckLog.swift in Sources */,
 				4C9C81E923BEE99F00A470FF /* AppDelegate.swift in Sources */,
 				4C11FB5F23F7A81600EA1CE4 /* Version.swift in Sources */,
+				4C1A2F1623FFC44D00C136BB /* ScheduleCollectionViewLayout.swift in Sources */,
 				4C11FB8B23F7FB9600EA1CE4 /* ScheduleCollectionViewCell.swift in Sources */,
 				4CA279DE23C2FB5900DD3D38 /* StaticViewController.swift in Sources */,
 				4C11FB5E23F7A81600EA1CE4 /* Building.swift in Sources */,
 				4CA279C423C2F96100DD3D38 /* Camera.swift in Sources */,
 				4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */,
+				4C1A2F1423FFB09200C136BB /* CalendayDayCollectionViewLayout.swift in Sources */,
 				4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */,
 				4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */,
 				4CA279CC23C2F99500DD3D38 /* ApplicationHelper.swift in Sources */,
 				4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */,
+				4CBC7B232400C4B50099AC40 /* CalendarMonthCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,7 +554,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -556,7 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

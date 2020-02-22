@@ -13,7 +13,7 @@ class ScheduleCollectionViewController: UIViewController {
 
     @IBOutlet weak var ExampleImageView: UIImageView!
     @IBOutlet weak var MaskView: UIView!
-
+    @IBOutlet weak var BackButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +35,27 @@ class ScheduleCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ApplicationHelper.Orientation = true
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedRotation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillDisappear(animated)
         ApplicationHelper.Orientation = false
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
-
+        
+    @objc func receivedRotation() {
+        if UIDevice.current.orientation == .portrait {
+            BackButton.isHidden = false
+            self.tabBarController?.tabBar.isHidden = false
+        } else if UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight {
+            BackButton.isHidden = true
+            self.tabBarController?.tabBar.isHidden = true
+        } else {
+            
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -305,9 +305,16 @@ extension ISO8601DateFormatter {
 extension Formatter {
     static let iso8601 = ISO8601DateFormatter([.withInternetDateTime, .withFractionalSeconds])
 }
+
 extension Date {
     var iso8601: String {
         return Formatter.iso8601.string(from: self)
+    }
+    
+    var yearMonthStringZH: String {
+        let df = DateFormatter()
+        df.dateFormat = "yyyy年MM月"
+        return df.string(from: self)
     }
     
     var longString: String {
@@ -333,7 +340,69 @@ extension Date {
         df.dateFormat = "HH:mm"
         return df.string(from: self)
     }
+    
+    var dayInMonth: Int {
+        return Calendar.current.component(.day, from: self)
+    }
+    
+    var dayInMonthString: String {
+        let df = DateFormatter()
+        df.dateFormat = "dd"
+        return df.string(from: self)
+    }
+    
+    var daysInMonth: Int {
+        return Calendar.current.range(of: .day, in: .month, for: self)!.count
+    }
+    
+    var dayInWeek: Int {
+        return Calendar.current.component(.weekday, from: self)
+    }
+    
+    var dayInWeekString: String {
+        let weekDayString = ["", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        return weekDayString[self.dayInWeek]
+    }
+    
+    var year: Int {
+        return Calendar.current.component(.year, from: self)
+    }
+    
+    var monthInYear: Int {
+        return Calendar.current.component(.month, from: self)
+    }
+    
+    var min: Int {
+        return Calendar.current.component(.minute, from: self)
+    }
+    
+    var hour: Int {
+        return Calendar.current.component(.hour, from: self)
+    }
+    
+    static func getIndexRow(year: Int, month: Int) -> [Int] {
+        let firstDay = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1))!
+        var rowIndex = [Int]()
+        for day in 0..<firstDay.daysInMonth {
+            rowIndex.append(6 + firstDay.dayInWeek + day)
+        }
+        return rowIndex
+    }
+    
+    static func getDayByIndexRow(year: Int, month: Int, row: Int, column: Int) -> Int {
+        if month == 2 {
+            print("")
+        }
+        let firstDay = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1))!
+        let day = ((row - 1) * 7 + column + 1) - (firstDay.dayInWeek - 1)
+        return ((day > 0) && (day <= firstDay.daysInMonth)) ? day : 0
+    }
+    
+    func equelsTo(date: Date) -> Bool {
+        return self.year == date.year && self.monthInYear == date.monthInYear && self.dayInMonth == date.dayInMonth
+    }
 }
+
 extension String {
     var iso8601: Date? {
         return Formatter.iso8601.date(from: self)
@@ -355,5 +424,43 @@ extension String {
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return df.date(from: self)
+    }
+}
+
+extension UIColor {
+    static func getColorByRGB (red: Double, green: Double, blue: Double, alpha: Double) -> UIColor {
+        return UIColor(red: CGFloat(red/255.0), green: CGFloat(green/255.0), blue: CGFloat(blue/255.0), alpha: CGFloat(alpha/100.0))
+    }
+
+    static var calendarBg: UIColor {
+        return getColorByRGB(red: 70.0, green: 79.0, blue: 229.0, alpha: 100.0)
+    }
+    
+    static var selectDayTextColor: UIColor {
+        return getColorByRGB(red: 48, green: 78, blue: 236, alpha: 100)
+    }
+    
+    static var deselectDayTextColor: UIColor {
+        return getColorByRGB(red: 255, green: 255, blue: 255, alpha: 60)
+    }
+    
+    static var scheduleCellColor1: UIColor {
+        return getColorByRGB(red: 241, green: 99, blue: 19, alpha: 100)
+    }
+    
+    static var scheduleCellColor2: UIColor {
+        return getColorByRGB(red: 13, green: 89, blue: 60, alpha: 100)
+    }
+    
+    static var scheduleCellColor3: UIColor {
+        return getColorByRGB(red: 61, green: 131, blue: 249, alpha: 100)
+    }
+    
+    static var scheduleCellColor4: UIColor {
+        return getColorByRGB(red: 105, green: 40, blue: 212, alpha: 100)
+    }
+    
+    static var scheduleCellColors: [UIColor] {
+        return [scheduleCellColor1, scheduleCellColor2, scheduleCellColor3, scheduleCellColor4]
     }
 }

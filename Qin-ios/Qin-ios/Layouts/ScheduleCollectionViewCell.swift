@@ -14,4 +14,6 @@ class ScheduleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var DateLabel: UILabel!
     @IBOutlet weak var SectionLabel: UILabel!
     @IBOutlet weak var TimeLabel: UILabel!
+    @IBOutlet weak var DecorateView: UIView!
+    @IBOutlet weak var InfoView:UIView!
 }

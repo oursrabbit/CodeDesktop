@@ -17,6 +17,7 @@ class BuildingListViewController: StaticViewController {
     @IBOutlet weak var buildingList: UITableView!
     @IBOutlet weak var buildingCollection: UICollectionView!
     @IBOutlet weak var studentNameLabel: UILabel!
+    @IBOutlet weak var menuView: UIView!
 
     
     override func viewDidLoad() {
@@ -50,7 +51,20 @@ class BuildingListViewController: StaticViewController {
         default:
             break
         }
+        self.menuView.isHidden = true
     }
+    
+    @IBAction func showMenu(_ sender: Any) {
+        UIView.animate(withDuration: 1, animations: {
+            self.menuView.isHidden = !self.menuView.isHidden
+        })
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.menuView.isHidden = true
+    }
+    
 }
 
 extension BuildingListViewController: UICollectionViewDataSource {
@@ -76,17 +90,17 @@ extension BuildingListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //let screenWidth = collectionView.bounds.size.width;
         //let cellWidth = (screenWidth - 32) / 2
-        return CGSize(width: 215, height: 215)
+        return CGSize(width: 147, height: 147)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 16
+        return 32
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return 32
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }

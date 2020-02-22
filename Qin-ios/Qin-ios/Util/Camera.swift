@@ -75,7 +75,7 @@ class Camera: NSObject {
             //self.previewView?.isHidden = false
             delegate?.updateInfoLabel(message: "开始初始化摄像头")
             captureSession.beginConfiguration()
-            captureSession.sessionPreset = .low
+            captureSession.sessionPreset = .vga640x480
             let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera,for: .video, position: .front)
             let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice!)
             captureSession.canAddInput(videoDeviceInput)
@@ -87,6 +87,7 @@ class Camera: NSObject {
             captureSession.addOutput(videoOutput)
             DispatchQueue.main.async {
                 self.previewView?.videoPreviewLayer.session = self.captureSession
+                self.previewView?.videoPreviewLayer.videoGravity = .resize
                 self.captureSession.commitConfiguration()
                 DispatchQueue.global().async {
                     self.delegate?.updateInfoLabel(message: "初始化面部识别...")
@@ -125,6 +126,7 @@ class Camera: NSObject {
         let faceJSON = ["image": imageInBASE64,
                         "image_type":"BASE64",
                         "group_id_list":"2019BK",
+                        "user_id":ApplicationHelper.CurrentUser.BaiduFaceID,
                         "liveness_control":"NORMAL"]
         let faceJSONData = try? JSONSerialization.data(withJSONObject: faceJSON, options: [])
         facesession.uploadTask(with: faceReq, from: faceJSONData) { data, response, error in
@@ -132,7 +134,14 @@ class Camera: NSObject {
                 let json = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
                 print(json)
                 if(json["error_msg"] as! String == "SUCCESS"){
-                    completionHandler(nil)
+                    let result = json["result"] as! [String:Any?]
+                    let userlist = result["user_list"] as! [[String:Any?]]
+                    let score = userlist[0]["score"] as! NSNumber
+                    if score.floatValue >= 80.0 {
+                        completionHandler(nil)
+                    } else {
+                        completionHandler("请 \(ApplicationHelper.CurrentUser.Name) 同学面对摄像头")
+                    }
                 } else {
                     completionHandler("请 \(ApplicationHelper.CurrentUser.Name) 同学面对摄像头")
                 }
