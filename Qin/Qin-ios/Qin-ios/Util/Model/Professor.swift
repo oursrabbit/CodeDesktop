@@ -1,15 +1,15 @@
 //
-//  Course.swift
+//  Professor.swift
 //  Qin-ios
 //
-//  Created by 杨璨 on 2020/2/14.
+//  Created by 杨璨 on 2020/2/29.
 //  Copyright © 2020 canyang. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
 
-public class Course: Object {
+public class Professor: Object {
     @objc dynamic var ID = ""
     @objc dynamic var Name = ""
     
@@ -19,7 +19,7 @@ public class Course: Object {
              var getDBR = [[String:Any?]]()
              repeat {
                  getDBR = [[String:Any?]]()
-                 let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Course?order=ID&limit=1000&skip=\(DatabaseResults.count)"
+                 let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Professor?order=ID&limit=1000&skip=\(DatabaseResults.count)"
                  if let response = DatabaseHelper.LCSearch(searchURL: url) {
                      getDBR = response["results"] as! [[String:Any?]]
                      DatabaseResults.append(contentsOf: getDBR)
@@ -29,7 +29,7 @@ public class Course: Object {
                  let realm = try! Realm()
                  for checkLog in DatabaseResults {
                      realm.beginWrite()
-                     realm.create(Course.self, value: [
+                     realm.create(Professor.self, value: [
                          "ID" : checkLog["ID"] as! String,
                          "Name" : checkLog["Name"] as! String])
                      try! realm.commitWrite()
@@ -38,4 +38,3 @@ public class Course: Object {
          }
     }
 }
-

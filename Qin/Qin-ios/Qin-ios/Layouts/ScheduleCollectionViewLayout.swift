@@ -33,7 +33,7 @@ class ScheduleCollectionViewLayout: UICollectionViewLayout {
         
         let scheduleCell = collectionView.numberOfItems(inSection: 1)
         for currentScheduleCell in 0 ..< scheduleCell {
-            let schedule = ApplicationHelper.CurrentUser.DrawableSchedules[currentScheduleCell]
+            let schedule = ApplicationHelper.CurrentUser.Schedules[currentScheduleCell]
             let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: currentScheduleCell, section: 1))
             attributes.frame = CGRect(x: 0, y: schedule.getCellX(), width: Int(collectionView.bounds.size.width), height: schedule.getCellHeight())
             attributes.zIndex = 1

@@ -25,6 +25,8 @@ class ScheduleTableViewController: StaticViewController {
     var startDate = Date()
     var endDate = Date()
     
+    var schedules = [Schedule]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,7 @@ class ScheduleTableViewController: StaticViewController {
     }
     
     func InitInterface() {
+        schedules = ApplicationHelper.CurrentUser.GetScheduleBy(date: selectDate)
         self.calendarDayCollectionView.backgroundColor = UIColor.clear.withAlphaComponent(0)
         if selectingMonth {
             headerViewHeight.constant = 400
@@ -58,7 +61,7 @@ class ScheduleTableViewController: StaticViewController {
             self.calendarDayCollectionView.layoutIfNeeded()
             calendarDayCollectionView.scrollToItem(at: IndexPath(row: selectDate.dayInMonth - 1, section: 0), at: .left, animated: true)
         }
-        nocourseImageView.isHidden = selectDate.dayInMonth % 2 == 0
+        nocourseImageView.isHidden = schedules.count != 0
         self.selectMonthButton.setTitle(selectDate.yearMonthStringZH, for: .normal)
         self.scheduleCollectionView.reloadData()
     }
@@ -105,7 +108,7 @@ extension ScheduleTableViewController: UICollectionViewDataSource {
             if section == 0 {
                 return 24
             } else if section == 1 {
-                return selectDate.dayInMonth % 2 == 0 ? ApplicationHelper.CurrentUser.DrawableSchedules.count : 0
+                return schedules.count
             }
         }
         return 0
@@ -145,7 +148,7 @@ extension ScheduleTableViewController: UICollectionViewDataSource {
                     cell.dayLabel.backgroundColor = cellDate.equelsTo(date: selectDate) ? .white : UIColor.clear.withAlphaComponent(0)
                     cell.dayLabel.textColor = cellDate.equelsTo(date: selectDate) ? .selectDayTextColor : UIColor.deselectDayTextColor
                     cell.dayLabel.text = cellDate.dayInMonthString
-                    cell.pointImageView.isHidden = day % 2 != 0
+                    cell.pointImageView.isHidden = ApplicationHelper.CurrentUser.GetScheduleBy(date: cellDate).count == 0
                 }
                 return cell
             } else {
@@ -166,30 +169,28 @@ extension ScheduleTableViewController: UICollectionViewDataSource {
                 return cell
             } else if indexPath.section == 1 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "schedulecell", for: indexPath) as! ScheduleCollectionViewCell
-                let schedule = ApplicationHelper.CurrentUser.DrawableSchedules[indexPath.row]
-                let courseName = (try! Realm()).objects(Course.self).filter("ID = \(schedule.WorkingCourseID)").first!.Name
-                let room = (try! Realm()).objects(Room.self).filter("ID = \(schedule.WorkingRoomID)").first!
-                let building = room.Location.first!
+                let schedule = schedules[indexPath.row]
+                let courseName = (try! Realm()).objects(Course.self).first(where: {$0.ID == schedule.CourseID})?.Name ?? ""
+                let room = (try! Realm()).objects(Room.self).first(where: {$0.ID == schedule.RoomID})!
+                let building = room.Location!
                 let location = "\(building.Name) \(room.Name)"
-                let workingDateString = schedule.WorkingDate.dateString
-                /*cell.SectionLabel.text = ""
-                 cell.TimeLabel.text = ""
-                 for sectionID in schedule.SectionsID {
-                 let section = (try! Realm()).objects(Section.self).filter("ID = \(sectionID)").first!
-                 cell.SectionLabel.text = cell.SectionLabel.text! + "\(section.Name) "
-                 cell.TimeLabel.text = cell.TimeLabel.text! + "\(section.StartTime.shortTimeString)-\(section.EndTime.shortTimeString) "
-                 }*/
-                //***********************
-                let startSection = (try! Realm()).objects(Section.self).filter("ID = \(schedule.SectionsID.first!)").first!
-                let endSection = (try! Realm()).objects(Section.self).filter("ID = \(schedule.SectionsID.last!)").first!
+                var professorString = ""
+                for pro in schedule.ProfessorID {
+                    let professor = (try! Realm()).objects(Professor.self).first(where: {$0.ID == pro})!
+                    professorString += "\(professor.Name) "
+                }
+                let startSection = (try! Realm()).objects(Section.self).first(where: {$0.ID == schedule.StartSectionID})!
+                let endSection = (try! Realm()).objects(Section.self).first(where: {$0.Order == startSection.Order + schedule.ContinueSection - 1})!
+                //let checkLog = ApplicationHelper.CurrentUser.GetCheckLogBy(startDate: startSection.StartTime, endDate: endSection.EndTime, roomID: schedule.RoomID)
+                //let checkState = checkLog == nil ? "(未签到)" : "(已签到：\(checkLog!.CheckDate.longString)"
                 cell.RoomLabel.text = "\(location)  \(startSection.StartTime.shortTimeString)-\(endSection.EndTime.shortTimeString)"
                 cell.RoomLabel.textColor = schedule.CellColor
-                cell.DateLabel.text = "\(courseName)"
+                cell.DateLabel.text = "\(courseName) \(professorString)"
                 cell.DateLabel.textColor = schedule.CellColor
-                //***********************
                 cell.DecorateView.backgroundColor = schedule.CellColor
+                //cell.CheckStateLabel.text = checkState
+                cell.CheckStateLabel.textColor = schedule.CellColor
                 cell.InfoView.backgroundColor = schedule.CellColor.withAlphaComponent(0.15)
-                //collectionView.bringSubviewToFront(cell)
                 return cell
             }
         }
@@ -237,9 +238,10 @@ extension ScheduleTableViewController: UICollectionViewDelegate {
                 cell.dayInMonthLabel.textColor = .selectDayTextColor
                 cell.dayInWeekLabel.textColor = .selectDayTextColor
                 selectDate = Calendar.current.date(from: DateComponents(year: selectDate.year, month: selectDate.monthInYear, day: indexPath.row + 1))!
-                nocourseImageView.isHidden = selectDate.dayInMonth % 2 == 0
-                self.scheduleCollectionView.reloadData()
+                InitInterface()
             }
+        } else if collectionView == self.scheduleCollectionView && indexPath.section == 1 {
+
         }
     }
     

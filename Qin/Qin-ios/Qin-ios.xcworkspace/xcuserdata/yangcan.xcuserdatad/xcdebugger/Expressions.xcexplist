@@ -39,6 +39,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static ApplicationHelper.checkLocalDatabaseVersion(listener:):ApplicationHelper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "&#xff08;try! Realm()).objects(Room.self)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "AppDelegate.application(_:didFinishLaunchingWithOptions:):AppDelegate.swift">
          <PersistentStrings>
             <PersistentString
@@ -53,15 +61,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BuildingListViewController.collectionView(_:cellForItemAt:):BuildingListViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "buildings[indexPath.row]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #2 in closure #2 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
          <PersistentStrings>
             <PersistentString
                value = "realm.objects(Building.self).first!">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
       </ContextState>
       <ContextState
          contextName = "CalendarMonthCollectionViewLayout.prepare():CalendarMonthCollectionViewLayout.swift">
@@ -80,17 +96,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in QinSettingViewController.getCurrentUserInfomation():QinSettingViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "ApplicationHelper.CurrentUser">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "CalendayDayCollectionViewLayout.layoutAttributesForItem(at:):CalendayDayCollectionViewLayout.swift">
          <PersistentStrings>
             <PersistentString
@@ -102,13 +107,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in QinSettingViewController.getCurrentUserInfomation():QinSettingViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ApplicationHelper.CurrentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in static StaticData.checkLocalDatabaseVersion(listener:completionHandler:):StaticData.swift">
       </ContextState>
       <ContextState
          contextName = "static Date.getDayByIndexRow(year:month:row:column:):ApplicationHelper.swift">
          <PersistentStrings>
             <PersistentString
-               value = "(row - 1) * 7">
+               value = "firstDay.dayInWeek">
             </PersistentString>
             <PersistentString
                value = "(row - 1)*7+column+firstDay.dayInWeek">
@@ -117,7 +133,7 @@
                value = "row - 1">
             </PersistentString>
             <PersistentString
-               value = "firstDay.dayInWeek">
+               value = "(row - 1) * 7">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

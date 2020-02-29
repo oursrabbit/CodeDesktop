@@ -9,8 +9,10 @@
 import UIKit
 import RealmSwift
 
-class QinSettingViewController: StaticViewController {
+class QinSettingViewController: StaticViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var superViewBottom: NSLayoutConstraint!
+    @IBOutlet weak var superViewTop: NSLayoutConstraint!
     @IBOutlet weak var idtextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var waitingView: WaitingView!
@@ -21,9 +23,10 @@ class QinSettingViewController: StaticViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        idtextfield.text = "\(ApplicationHelper.CurrentUser.SchoolID)"
+        idtextfield.text = "\(ApplicationHelper.CurrentUser.ID)"
+        idtextfield.delegate = self
         
-        if autoLogin && ApplicationHelper.CurrentUser.SchoolID != "" {
+        if autoLogin && ApplicationHelper.CurrentUser.ID != "" {
             updateSchoolID(self)
         }
     }
@@ -44,11 +47,21 @@ class QinSettingViewController: StaticViewController {
             self.waitingView.messageLabel.text = message
         }
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.superViewTop.constant = -200;
+        self.superViewBottom.constant = 200;
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.superViewTop.constant = 0;
+        self.superViewBottom.constant = 0;
+    }
 
     @IBAction func updateSchoolID (_ sender: Any) {
         if let schoolId = idtextfield.text {
-            ApplicationHelper.CurrentUser.SchoolID = schoolId
-            UserDefaults.standard.set(ApplicationHelper.CurrentUser.SchoolID, forKey: "SchoolID")
+            ApplicationHelper.CurrentUser.ID = schoolId
+            UserDefaults.standard.set(ApplicationHelper.CurrentUser.ID, forKey: "ID")
             waitingView.isHidden = false
             self.updateWaitingView(message: "正在获取用户信息...")
             DispatchQueue.global().async {
@@ -58,7 +71,21 @@ class QinSettingViewController: StaticViewController {
     }
     
     func getCurrentUserInfomation() {
-        let checkJson = ["SchoolID": ApplicationHelper.CurrentUser.SchoolID]
+        self.updateWaitingView(message: "正在更新用户信息...")
+        if Student.SetupCurrentStudent() {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "roomlist", sender: self)
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.waitingView.isHidden = true
+                let alert = UIAlertController(title: "登录失败", message: "未找到用户", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        /*
+        let checkJson = ["ID": ApplicationHelper.CurrentUser.ID]
         let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
         let jsonString = String(data: checkJSONData!, encoding: .utf8)
         let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
@@ -80,33 +107,33 @@ class QinSettingViewController: StaticViewController {
                     ApplicationHelper.CurrentUser.Advertising = "0"
                     ApplicationHelper.CurrentUser.BaiduFaceID = checkLog["BaiduFaceID"] as! String
                     ApplicationHelper.CurrentUser.LCObjectID = checkLog["objectId"] as! String
-                    ApplicationHelper.CurrentUser.ID = checkLog["ID"] as! Int
-                    ApplicationHelper.CurrentUser.SchoolID = checkLog["SchoolID"] as! String
+                    ApplicationHelper.CurrentUser.BLE = checkLog["BLE"] as! Int
+                    ApplicationHelper.CurrentUser.ID = checkLog["ID"] as! String
                     ApplicationHelper.CurrentUser.Name = checkLog["Name"] as! String
                     //Group Info
-                    let checkJson = ["Students": ["$regex":",\(ApplicationHelper.CurrentUser.ID)"]]
+                    let checkJson = ["StudentID": ApplicationHelper.CurrentUser.ID]
                     let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
                     let jsonString = String(data: checkJSONData!, encoding: .utf8)
                     let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-                    let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/Group?where=\(urlString)"
+                    let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/ReStudentGroup?where=\(urlString)"
                     DatabaseHelper.LCSearch(searchURL: url) { response, error in
                         if error == nil {
-                            ApplicationHelper.CurrentUser.Groups.removeAll()
+                            ApplicationHelper.CurrentUser.GroupsID.removeAll()
                             let DatabaseResults = response["results"] as! [[String:Any?]]
                             for checkLog in DatabaseResults {
-                                let newGroup = Group()
-                                newGroup.ID = checkLog["ID"] as! Int
-                                newGroup.Name = checkLog["Name"] as! String
-                                ApplicationHelper.CurrentUser.Groups.append(newGroup)
+                                var groupID = checkLog["GroupID"] as! String
+                                if let newGroup = realm.objects(Building.self).first(where: {$0.ID == buildingID}) {
+                                    ApplicationHelper.CurrentUser.Groups.append(newGroup)
+                                }
                             }
                             //Schedule Info
                             var checkJSONData: Data? = nil
-                            if ApplicationHelper.CurrentUser.Groups.count == 0 {
-                                let checkJson = ["StudentsID": ["$regex":",\(ApplicationHelper.CurrentUser.ID)"]]
+                            if ApplicationHelper.CurrentUser.GroupsID.count == 0 {
+                                let checkJson = ["StudentsID": ["$regex":",\(ApplicationHelper.CurrentUser.BLE)"]]
                                 checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
                             } else {
                                 let checkJson = ["$or":[["GroupsID": ["$regex":"\(ApplicationHelper.CurrentUser.getGroupsRegex())"]],
-                                        ["StudentsID": ["$regex":",\(ApplicationHelper.CurrentUser.ID)"]]]]
+                                        ["StudentsID": ["$regex":",\(ApplicationHelper.CurrentUser.BLE)"]]]]
                                 checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
                             }
                             let jsonString = String(data: checkJSONData!, encoding: .utf8)
@@ -151,5 +178,6 @@ class QinSettingViewController: StaticViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
+ */
     }
 }

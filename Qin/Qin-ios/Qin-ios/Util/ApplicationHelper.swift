@@ -29,35 +29,33 @@ public protocol StaticDataUpdateInfoDelegate: NSObjectProtocol{
 public class ApplicationHelper {
     public static var Orientation = false
     public static var CurrentUser = Student()
-    public static var CheckInRoomID = 0;
+    public static var CheckInRoomID = "";
     
-    public static let localVersion = 6
+    public static let localVersion = 7
     public static var serverVersion = 0
     public static var databaseVersion = 0
     public static var launchImageVersion = 0
     
-    public static func checkVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (QinMessage) -> Void) {
+    public static func checkVersion(listener: StaticDataUpdateInfoDelegate?) -> QinMessage {
         listener?.updateInfomation(message: "正在检测软件版本...")
-        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/ApplicationData/5e184373562071008e2f4a0a";
-        DatabaseHelper.LCSearch(searchURL: url) { json, error in
-            if error == nil {
-                ApplicationHelper.serverVersion = json["ApplicationVersion"] as! Int
-                ApplicationHelper.databaseVersion = json["DatabaseVersion"] as! Int
-                ApplicationHelper.launchImageVersion = json["LaunchImageVersion"] as! Int
-                if ApplicationHelper.localVersion == ApplicationHelper.serverVersion {
-                    completionHandler(.Success)
-                } else {
-                    UserDefaults.standard.set(-1, forKey: "localDataVersion")
-                    UserDefaults.standard.set(-1, forKey: "launchImageVersion")
-                    completionHandler(.ApplicationVersionError)
-                }
+        let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/ApplicationData/5e59e2ec21b47e0081de8189";
+        if let json = DatabaseHelper.LCSearch(searchURL: url){
+            ApplicationHelper.serverVersion = json["ApplicationVersion"] as! Int
+            ApplicationHelper.databaseVersion = json["DatabaseVersion"] as! Int
+            ApplicationHelper.launchImageVersion = json["LaunchImageVersion"] as! Int
+            if ApplicationHelper.localVersion == ApplicationHelper.serverVersion {
+                return .Success
             } else {
-                completionHandler(.NetError)
+                UserDefaults.standard.set(-1, forKey: "localDataVersion")
+                UserDefaults.standard.set(-1, forKey: "launchImageVersion")
+                return .ApplicationVersionError
             }
+        } else {
+            return .NetError
         }
     }
     
-    public static func checkLocalDatabaseVersion(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (QinMessage) -> Void) {
+    public static func checkLocalDatabaseVersion(listener: StaticDataUpdateInfoDelegate?) -> QinMessage {
         listener?.updateInfomation(message: "正在更新本地数据库...")
         var localDataVersion = -1
         let localStore = UserDefaults.standard
@@ -65,7 +63,7 @@ public class ApplicationHelper {
             localDataVersion = localStore.integer(forKey: "localDataVersion")
         }
         if localDataVersion == ApplicationHelper.databaseVersion {
-            completionHandler(.Success)
+            return .Success
         } else {
             autoreleasepool {
                 let realm = try! Realm()
@@ -75,6 +73,12 @@ public class ApplicationHelper {
             }
             
             //*** MUST BE IN ORDER ***
+            ReBuildingRoom.CreateBuildingRoom(refresh: true)
+            Section.GetAll(refresh: true)
+            Course.GetAll(refresh: true)
+            Professor.GetAll(refresh: true)
+            UserDefaults.standard.set(ApplicationHelper.databaseVersion, forKey: "localDataVersion")
+            /*
             //Building
             self.updateBuildingDatabase(listener: listener, completionHandler: { updateBuilding in
                 switch updateBuilding {
@@ -117,10 +121,12 @@ public class ApplicationHelper {
                     })
                     break
                 }
-            })
+            })*/
         }
+        return .DatabaseUpdated
     }
-    
+
+    /*
     public static func updateBuildingDatabase(listener: StaticDataUpdateInfoDelegate?, completionHandler: @escaping (QinMessage) -> Void) {
         listener?.updateInfomation(message: "正在更新建筑信息...")
         let url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/Building?limit=1000&&&&"
@@ -221,6 +227,7 @@ public class ApplicationHelper {
             }
         }
     }
+ */
     
     public static func getaccessToken(completionHandler: @escaping (String?) -> Void)
     {
@@ -238,6 +245,7 @@ public class ApplicationHelper {
         }.resume()
     }
         
+    /*
     public static func checkLaunchImageVersion() {
         var launchImageVersion = -1
         let localStore = UserDefaults.standard
@@ -291,7 +299,7 @@ public class ApplicationHelper {
                         print("Save Launch Image SUCCESS")
                 }}).resume()
         }}).resume()
-    }
+    }*/
 }
 
 extension ISO8601DateFormatter {
@@ -380,6 +388,10 @@ extension Date {
         return Calendar.current.component(.hour, from: self)
     }
     
+    static func addDays(days: Int, to: Date) -> Date {
+        return Calendar.current.date(byAdding: .day, value: days, to: to)!
+    }
+    
     static func getIndexRow(year: Int, month: Int) -> [Int] {
         let firstDay = Calendar.current.date(from: DateComponents(year: year, month: month, day: 1))!
         var rowIndex = [Int]()
@@ -417,6 +429,12 @@ extension String {
     var timeDate: Date? {
         let df = DateFormatter()
         df.dateFormat = "HH:mm:ss"
+        return df.date(from: self)
+    }
+    
+    var sectionTimeDate: Date? {
+        let df = DateFormatter()
+        df.dateFormat = "HH:mm"
         return df.date(from: self)
     }
     

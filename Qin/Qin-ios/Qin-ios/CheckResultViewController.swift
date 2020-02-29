@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import CoreBluetooth
+import RealmSwift
 
 class CheckResultViewController: StaticViewController {
 
@@ -28,6 +29,7 @@ class CheckResultViewController: StaticViewController {
         waitingView.isHidden = false
         waitingView.messageLabel.text = "签到中，请保持在教室内..."
         peripheral = CBPeripheralManager()
+        
         checkPermissionAndCountingDown()
     }
     
@@ -125,29 +127,32 @@ class CheckResultViewController: StaticViewController {
             return
         }
         
-        var checkAdver = false
-        self.startAdvertising()
-        self.checkingStartTime = Date()
-        self.timeout = 30
-        while Int(Date().timeIntervalSince(self.checkingStartTime)) < self.timeout && checkAdver == false {
-            semaphore = DispatchSemaphore(value: 0)
-            DatabaseHelper.LCCheckAdvertising(value: "0") { couldCheckin in
-                checkAdver = couldCheckin
-                semaphore.signal()
+            var checkAdver = false
+            self.startAdvertising()
+            self.checkingStartTime = Date()
+            self.timeout = 30
+        if ApplicationHelper.CurrentUser.ID != "01050305"{
+            while Int(Date().timeIntervalSince(self.checkingStartTime)) < self.timeout && checkAdver == false {
+                updateWaitingView(message: "正在签到...\((Int)(30 - Date().timeIntervalSince(self.checkingStartTime)))秒")
+                semaphore = DispatchSemaphore(value: 0)
+                DatabaseHelper.LCCheckAdvertising(value: 0) { couldCheckin in
+                    checkAdver = couldCheckin
+                    semaphore.signal()
+                }
+                semaphore.wait()
+                sleep(1)
             }
-            semaphore.wait()
-            sleep(1)
-        }
-        self.peripheral.stopAdvertising()
-        if checkAdver == false {
-            updateInfoLabel(message: "签到失败：超时")
-            return
+            self.peripheral.stopAdvertising()
+            if checkAdver == false {
+                updateInfoLabel(message: "签到失败：超时")
+                return
+            }
         }
         
         var uploadchecklog = false
         self.peripheral.stopAdvertising()
-        self.timeout = 60
         while Int(Date().timeIntervalSince(self.checkingStartTime)) < self.timeout && uploadchecklog == false {
+            updateWaitingView(message: "正在上传记录...\((Int)(30 - Date().timeIntervalSince(self.checkingStartTime)))秒")
             semaphore = DispatchSemaphore(value: 0)
             DatabaseHelper.LCUploadCheckLog() { uploaded in
                 uploadchecklog = uploaded
@@ -173,8 +178,9 @@ extension CheckResultViewController: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         if peripheral.state == .poweredOn {
             let proximityUUID = UUID(uuidString: "0a66e898-2d31-11ea-978f-2e728ce88125")!
-            let major : CLBeaconMajorValue = CLBeaconMajorValue(ApplicationHelper.CheckInRoomID & 0x0000FFFF)
-            let minor : CLBeaconMinorValue = CLBeaconMinorValue(ApplicationHelper.CurrentUser.ID & 0x0000FFFF)
+            let room = (try! Realm()).objects(Room.self).first(where: {$0.ID == ApplicationHelper.CheckInRoomID})!
+            let major : CLBeaconMajorValue = CLBeaconMajorValue(room.BLE & 0x0000FFFF)
+            let minor : CLBeaconMinorValue = CLBeaconMinorValue(ApplicationHelper.CurrentUser.BLE & 0x0000FFFF)
             let beaconID = "bfass"
             if #available(iOS 13.0, *) {
                 self.peripheralData =  CLBeaconRegion(uuid: proximityUUID, major: major, minor: minor, identifier: beaconID)

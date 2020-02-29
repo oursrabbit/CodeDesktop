@@ -26,6 +26,7 @@
 		4C1A2F1623FFC44D00C136BB /* ScheduleCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A2F1523FFC44D00C136BB /* ScheduleCollectionViewLayout.swift */; };
 		4C1A2F1A23FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A2F1923FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift */; };
 		4C2ABB6E23FBDE8700538B1E /* LaunchImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2ABB6D23FBDE8700538B1E /* LaunchImage.swift */; };
+		4C4E09A7240A3D6200465CB7 /* Professor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4E09A6240A3D6200465CB7 /* Professor.swift */; };
 		4C617D2923FFA39000769062 /* CalendarDayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C617D2823FFA39000769062 /* CalendarDayCollectionViewCell.swift */; };
 		4C6D114823C5E4200092CA1C /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6D114723C5E4200092CA1C /* WaitingView.swift */; };
 		4C6D114A23C5E4370092CA1C /* WaitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C6D114923C5E4370092CA1C /* WaitingView.xib */; };
@@ -54,6 +55,7 @@
 		4CE53DC723C5A74800A38581 /* BuildingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */; };
 		4CE53DC923C5A8A300A38581 /* BuildingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */; };
 		4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */; };
+		4CEBC41F240A25D500FAC440 /* ReBuildingRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBC41E240A25D500FAC440 /* ReBuildingRoom.swift */; };
 		6F9D0D6EBA0B9CCBF3A1A9F0 /* Pods_Qin_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,7 @@
 		4C1A2F1523FFC44D00C136BB /* ScheduleCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCollectionViewLayout.swift; sourceTree = "<group>"; };
 		4C1A2F1923FFC49300C136BB /* ScheduleTimeLineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeLineCollectionViewCell.swift; sourceTree = "<group>"; };
 		4C2ABB6D23FBDE8700538B1E /* LaunchImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchImage.swift; sourceTree = "<group>"; };
+		4C4E09A6240A3D6200465CB7 /* Professor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Professor.swift; sourceTree = "<group>"; };
 		4C502EF523C4A13600B31ABB /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C502EF923C4A13900B31ABB /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C617D2823FFA39000769062 /* CalendarDayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDayCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -109,6 +112,7 @@
 		4CE53DC623C5A74800A38581 /* BuildingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingListViewController.swift; sourceTree = "<group>"; };
 		4CE53DC823C5A8A300A38581 /* BuildingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingTableViewCell.swift; sourceTree = "<group>"; };
 		4CE53DCA23C5A8B000A38581 /* RoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomTableViewCell.swift; sourceTree = "<group>"; };
+		4CEBC41E240A25D500FAC440 /* ReBuildingRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReBuildingRoom.swift; sourceTree = "<group>"; };
 		8D91006867A7B390C2862E48 /* Pods-Qin-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qin-ios.debug.xcconfig"; path = "Target Support Files/Pods-Qin-ios/Pods-Qin-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		B6560DF1AB4EA09341915180 /* Pods-Qin-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Qin-ios.release.xcconfig"; path = "Target Support Files/Pods-Qin-ios/Pods-Qin-ios.release.xcconfig"; sourceTree = "<group>"; };
 		EAEB20EE9EABAA4E5D8A76A7 /* Pods_Qin_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Qin_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +144,8 @@
 				4C11FB5123F7A81500EA1CE4 /* Student.swift */,
 				4C11FB5623F7A81500EA1CE4 /* Version.swift */,
 				4C2ABB6D23FBDE8700538B1E /* LaunchImage.swift */,
+				4CEBC41E240A25D500FAC440 /* ReBuildingRoom.swift */,
+				4C4E09A6240A3D6200465CB7 /* Professor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,8 +209,8 @@
 			isa = PBXGroup;
 			children = (
 				4C11FB4623F7A7BF00EA1CE4 /* Model */,
-				4CA279C323C2F96100DD3D38 /* Camera.swift */,
 				4CA279CB23C2F99500DD3D38 /* ApplicationHelper.swift */,
+				4CA279C323C2F96100DD3D38 /* Camera.swift */,
 				4CA279C723C2F98500DD3D38 /* DatabaseHelper.swift */,
 			);
 			path = Util;
@@ -389,6 +395,7 @@
 				4C617D2923FFA39000769062 /* CalendarDayCollectionViewCell.swift in Sources */,
 				4CA279C823C2F98500DD3D38 /* DatabaseHelper.swift in Sources */,
 				4C11FB6423F7E3E600EA1CE4 /* ScheduleTableViewCell.swift in Sources */,
+				4CEBC41F240A25D500FAC440 /* ReBuildingRoom.swift in Sources */,
 				4CA279DC23C2FAC700DD3D38 /* ScannerViewController.swift in Sources */,
 				4CBC7B252400C4D70099AC40 /* CalendarMonthCollectionViewLayout.swift in Sources */,
 				4C2ABB6E23FBDE8700538B1E /* LaunchImage.swift in Sources */,
@@ -413,6 +420,7 @@
 				4CA279D423C2FA8B00DD3D38 /* CheckResultViewController.swift in Sources */,
 				4C1A2F1423FFB09200C136BB /* CalendayDayCollectionViewLayout.swift in Sources */,
 				4CE53DCB23C5A8B000A38581 /* RoomTableViewCell.swift in Sources */,
+				4C4E09A7240A3D6200465CB7 /* Professor.swift in Sources */,
 				4CA279D223C2FA8100DD3D38 /* CheckDBViewController.swift in Sources */,
 				4CA279CC23C2F99500DD3D38 /* ApplicationHelper.swift in Sources */,
 				4CBEE2C523C5D91B00C7D102 /* CheckDBTableViewCell.swift in Sources */,
@@ -554,7 +562,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -576,7 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 7GCQP6572P;
 				INFOPLIST_FILE = "Qin-ios/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

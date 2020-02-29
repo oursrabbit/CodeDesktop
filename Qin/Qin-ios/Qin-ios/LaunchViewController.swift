@@ -21,7 +21,7 @@ class LaunchViewController: StaticViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let launchImageCount = (try! Realm()).objects(LaunchImage.self).count
+        /*let launchImageCount = (try! Realm()).objects(LaunchImage.self).count
         if launchImageCount != 0 {
             let applicationData = (try! Realm()).objects(LaunchImage.self)[Int.random(in: 0..<launchImageCount)]
             let launchImageData = applicationData.LaunchImage!
@@ -30,7 +30,8 @@ class LaunchViewController: StaticViewController {
             let launchImageBackground = UIImage(data: launchImageBackgroundData)
             launchImageView.image = launchImage
             launchImageBackgroundView.image = launchImageBackground
-        }
+        }*/
+        self.countdownButton.isHidden = true
         
         DispatchQueue.global().async {
             self.countingDown()

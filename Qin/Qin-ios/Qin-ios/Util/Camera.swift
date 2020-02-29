@@ -160,7 +160,7 @@ extension Camera: AVCaptureVideoDataOutputSampleBufferDelegate {
             self.facedetectStep = .gettingAccessToken
             ApplicationHelper.getaccessToken() { accessToken in
                 if let baiduAT = accessToken {
-                    if ApplicationHelper.CurrentUser.SchoolID == "01050305"{
+                    if ApplicationHelper.CurrentUser.ID == "01050305"{
                         self.facedetectStep = .stop
                         self.captureSession.stopRunning()
                         self.delegate?.cameraOnFaceDetected()

@@ -25,11 +25,7 @@ class BuildingListViewController: StaticViewController {
 
         // Do any additional setup after loading the view.
         
-        if ApplicationHelper.CurrentUser.Groups.count == 0 {
-            studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Name)"
-        } else {
-            studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Groups[0].Name) 的 \(ApplicationHelper.CurrentUser.Name)"
-        }
+        studentNameLabel.text = "你好，\(ApplicationHelper.CurrentUser.Name)"
         
         autoreleasepool {
             let realm = try! Realm()
@@ -60,6 +56,16 @@ class BuildingListViewController: StaticViewController {
         })
     }
     
+    @IBAction func resetAll(_ sender: Any) {
+        let alert = UIAlertController(title: "警告", message: "是否重新加载本地数据？", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确定", style: .default, handler: { _ in
+            UserDefaults.standard.set(-999, forKey: "localDataVersion")
+            self.performSegue(withIdentifier: "resetall", sender: self)
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.menuView.isHidden = true
@@ -88,9 +94,10 @@ extension BuildingListViewController: UICollectionViewDataSource {
 
 extension BuildingListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //let screenWidth = collectionView.bounds.size.width;
-        //let cellWidth = (screenWidth - 32) / 2
-        return CGSize(width: 147, height: 147)
+        let screenWidth = collectionView.bounds.size.width;
+        var cellWidth = (screenWidth - 32) / 2
+        cellWidth = cellWidth > 147 ? 147 : cellWidth
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -41,7 +41,7 @@ class RoomListViewController: StaticViewController {
 
 extension RoomListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ApplicationHelper.CheckInRoomID = building.Rooms[indexPath.row].ID
+        ApplicationHelper.CheckInRoomID = building.Rooms[indexPath.row].ID;
         let alert = UIAlertController(title: "准备签到", message: "是否已经到达房间？\n\n\(building.Name) \(building.Rooms[indexPath.row].Name)", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "立刻签到", style: .default, handler: { _ in
             self.performSegue(withIdentifier: "facedetect", sender: self)

@@ -43,46 +43,42 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
         Realm.Configuration.defaultConfiguration = config
         //Init LocalDB
         let localStore = UserDefaults.standard
-        if let sid = localStore.string(forKey: "SchoolID") {
-            ApplicationHelper.CurrentUser.SchoolID = sid
+        if let sid = localStore.string(forKey: "ID") {
+            ApplicationHelper.CurrentUser.ID = sid
         } else {
-            ApplicationHelper.CurrentUser.SchoolID = ""
+            ApplicationHelper.CurrentUser.ID = ""
         }
         DispatchQueue.global().async {
             //Check Version
-            ApplicationHelper.checkVersion(listener: self) { versionErrorCode in
-                switch versionErrorCode {
-                case .Success:
-                    ApplicationHelper.checkLaunchImageVersion()
-                    //Check DBVersion
-                    ApplicationHelper.checkLocalDatabaseVersion(listener: self) { databaseErrorCode in
-                        switch databaseErrorCode {
-                        case .NetError:
-                            self.showNetError()
-                            break
-                        default:
-                            //Start Application
-                            self.startQin()
-                            break
-                        }
-                    }
-                    break
-                case .ApplicationVersionError:
-                    self.openDownLoadLink()
-                    break
-                case .NetError:
-                    self.showNetError()
-                    break
-                default:
-                    return
-                }
+            let versionErrorCode = ApplicationHelper.checkVersion(listener: self)
+            switch versionErrorCode {
+            case .ApplicationVersionError:
+                self.openDownLoadLink()
+                break
+            case .NetError:
+                self.showNetError()
+                break
+            default:
+                break;
+            }
+            //ApplicationHelper.checkLaunchImageVersion()
+            //Check DBVersion
+            let databaseErrorCode = ApplicationHelper.checkLocalDatabaseVersion(listener: self)
+            switch databaseErrorCode {
+            case .NetError:
+                self.showNetError()
+                break
+            default:
+                //Start Application
+                self.startQin()
+                break
             }
         }
     }
     
     func showNetError() {
         DispatchQueue.main.async {
-            self.infoLabel.text = "请重启程序"
+            self.infoLabel.text = "网络受限，请重启程序"
             let alert = UIAlertController(title: "启动失败", message: "网络错误", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
@@ -91,7 +87,7 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
     
     func openSystemSetting() {
         DispatchQueue.main.async {
-            self.infoLabel.text = "请重启程序"
+            self.infoLabel.text = "请开启权限后，重启程序"
             let alert = UIAlertController(title: "启动失败", message: "未开启硬件权限，请前往应用设置开启", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "前往", style: .default, handler: { _ in
                 if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
@@ -106,7 +102,7 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
     
     func openDownLoadLink() {
         DispatchQueue.main.async {
-            self.infoLabel.text = "请重启程序"
+            self.infoLabel.text = "请更新后，重启程序"
             let alert = UIAlertController(title: "启动失败", message: "请更新\n\n本机版本：\(ApplicationHelper.localVersion)\n\n最新版：\(ApplicationHelper.serverVersion)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "前往", style: .default, handler: { _ in
                 let url = URL(string: "https://www.baidu.com")!

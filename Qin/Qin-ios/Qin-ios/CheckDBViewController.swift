@@ -30,41 +30,19 @@ class CheckDBViewController: StaticViewController {
     }
     
     func LoadingDatabase() {
-        let checkJson = ["StudentID": ApplicationHelper.CurrentUser.ID]
-        let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
-        let jsonString = String(data: checkJSONData!, encoding: .utf8)
-        let urlString = jsonString!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let url = "\(DatabaseHelper.LeancloudAPIBaseURL)/1.1/classes/CheckRecording?where=\(urlString)"
-        DatabaseHelper.LCSearch(searchURL: url) { response, error in
-            if error == nil {
-                let DatabaseResults = response["results"] as! [[String:Any?]]
-                self.logs.removeAll()
-                self.leanlogs.removeAll()
-                for checkLog in DatabaseResults {
-                    let newLog = CheckLog()
-                    newLog.StudentID = checkLog["StudentID"] as! Int
-                    newLog.RoomID = checkLog["RoomID"] as! Int
-                    newLog.CheckDate = (checkLog["createdAt"] as! String).iso8601!
-                    self.logs.append(newLog)
-                    self.leanlogs.append(newLog)
-                }
-                DispatchQueue.main.async {
-                    self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
-                    self.idlabel.text = "\(ApplicationHelper.CurrentUser.Name)·签到记录"
-                    self.logstableview.reloadData()
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.idlabel.text = "网络错误，加载失败";
-                }
-            }
+        self.leanlogs = CheckLog.GetAll()
+        self.logs = self.leanlogs
+        DispatchQueue.main.async {
+            self.logs.sort(by: {$0.CheckDate > $1.CheckDate})
+            self.idlabel.text = "\(ApplicationHelper.CurrentUser.Name)·签到记录"
+            self.logstableview.reloadData()
         }
     }
     
     func LoadingLocalDatabase(keyword: String) {
         self.logs =  self.leanlogs.filter{ (item) -> Bool in
             let room = (try! Realm()).objects(Room.self).filter("ID = \(item.RoomID)").first!
-            let building = room.Location.first!
+            let building = room.Location!
             let checkDate = item.CheckDate.longString
             return room.Name.contains(keyword) || building.Name.contains(keyword) || checkDate.contains(keyword)
         }
@@ -94,11 +72,11 @@ extension CheckDBViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let room = (try! Realm()).objects(Room.self).filter("ID = \(logs[indexPath.row].RoomID)").first!
+        let room = (try! Realm()).objects(Room.self).first(where: {$0.ID == logs[indexPath.row].RoomID})!
         let cell = tableView.dequeueReusableCell(withIdentifier: "checkdb") as! CheckDBTableViewCell
         cell.initCellInterface()
-        cell.roomidlabel.text = "签到地点: \(room.Location.first!.Name) \(room.Name)"
-        cell.checkdatelabel.text = "签到时间: \(logs[indexPath.row].CheckDate.longString)"
+        cell.roomidlabel.text = "\(room.Location!.Name) \(room.Name)"
+        cell.checkdatelabel.text = "\(logs[indexPath.row].CheckDate.longString)"
         let timespan = -logs[indexPath.row].CheckDate.timeIntervalSinceNow
         let ti = Int(timespan)
         let sec = ti % 60
@@ -122,7 +100,7 @@ extension CheckDBViewController: UITableViewDataSource {
         } else {
             cell.checktimelabel.text = "刚刚"
         }
-        if let image = UIImage(named: "\(room.Location.first!.ID)") {
+        if let image = UIImage(named: "\(room.Location!.ID)") {
             cell.buildingImage.image = image
         } else {
             cell.buildingImage.image = UIImage(named: "0")
