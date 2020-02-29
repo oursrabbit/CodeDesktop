@@ -1,0 +1,16 @@
+﻿<Window x:Class="QinAdmin_Win.GroupManager.GroupEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QinAdmin_Win.GroupManager"
+        mc:Ignorable="d"
+        Title="GroupEditorWindow" Height="276.198" Width="232.784" Loaded="Window_Loaded">
+    <DockPanel Margin="32" LastChildFill="False">
+        <Label Content="班级编号" DockPanel.Dock="Top"/>
+        <TextBox x:Name="GroupIDTextBox" DockPanel.Dock="Top"/>
+        <Label Content="班级名称" DockPanel.Dock="Top"/>
+        <TextBox x:Name="GroupNameTextBox" DockPanel.Dock="Top"/>
+        <Button x:Name="ConfirmButton" Content="确定" DockPanel.Dock="Bottom" Click="ConfirmButton_Click"/>
+    </DockPanel>
+</Window>

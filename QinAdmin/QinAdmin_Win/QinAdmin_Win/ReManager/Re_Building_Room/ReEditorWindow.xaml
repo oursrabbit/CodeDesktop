@@ -1,0 +1,16 @@
+﻿<Window x:Class="QinAdmin_Win.ReManager.Re_Building_Room.ReEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QinAdmin_Win.ReManager.Re_Building_Room"
+        mc:Ignorable="d"
+        Title="ReEditorWindow" Height="263.207" Width="234.906" Loaded="Window_Loaded">
+    <DockPanel Margin="32" LastChildFill="False">
+        <Label Content="建筑编号" DockPanel.Dock="Top"/>
+        <TextBox x:Name="BuildingIDTextBox" DockPanel.Dock="Top"/>
+        <Label Content="房间编号" DockPanel.Dock="Top"/>
+        <TextBox x:Name="RoomIDTextBox" DockPanel.Dock="Top"/>
+        <Button x:Name="ConfirmButton" Content="确定" DockPanel.Dock="Bottom" Click="ConfirmButton_Click"/>
+    </DockPanel>
+</Window>

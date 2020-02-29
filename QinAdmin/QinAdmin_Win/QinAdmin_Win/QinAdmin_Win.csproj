@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3A379464-5ADC-4D92-8A78-2CC7976826EF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>QinAdmin_Win</RootNamespace>
+    <AssemblyName>QinAdmin_Win</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.8.1\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Manager\CheckRecordingManager\AdminCheckRecordingWindow.xaml.cs">
+      <DependentUpon>AdminCheckRecordingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\CourseManager\AdminCourseWindow.xaml.cs">
+      <DependentUpon>AdminCourseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\CourseManager\CourseEditorWindow.xaml.cs">
+      <DependentUpon>CourseEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\GroupManager\AdminGroupWindow.xaml.cs">
+      <DependentUpon>AdminGroupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\GroupManager\GroupEditorWindow.xaml.cs">
+      <DependentUpon>GroupEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CheckRecording.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\DBInterface.cs" />
+    <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\Professor.cs" />
+    <Compile Include="Model\ReStudentGroup.cs" />
+    <Compile Include="Model\ReBuildingRoom.cs" />
+    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\Schedule.cs" />
+    <Compile Include="Model\Section.cs" />
+    <Compile Include="Model\Student.cs" />
+    <Compile Include="Manager\ProfessorManager\AdminProfessorWindow.xaml.cs">
+      <DependentUpon>AdminProfessorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ProfessorManager\ProfessorEditorWindow.xaml.cs">
+      <DependentUpon>ProfessorEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RoomManager\AdminRoomWindow.xaml.cs">
+      <DependentUpon>AdminRoomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\RoomManager\RoomEditorWindow.xaml.cs">
+      <DependentUpon>RoomEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SectionManager\AdminSectionWindow.xaml.cs">
+      <DependentUpon>AdminSectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\SectionManager\SectionEditorWindow.xaml.cs">
+      <DependentUpon>SectionEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\StudentManager\AdminStudentWindow.xaml.cs">
+      <DependentUpon>AdminStudentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\StudentManager\StudentEditorWindow.xaml.cs">
+      <DependentUpon>StudentEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Building_Room\ReAdminWindows.xaml.cs">
+      <DependentUpon>ReAdminWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Building_Room\ReEditorWindow.xaml.cs">
+      <DependentUpon>ReEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Schedule\ReAdminWindows.xaml.cs">
+      <DependentUpon>ReAdminWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Schedule\ReEditorWindow.xaml.cs">
+      <DependentUpon>ReEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Schedule\ScheduleEditorWindow.xaml.cs">
+      <DependentUpon>ScheduleEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Student_Group\ReAdminWindows.xaml.cs">
+      <DependentUpon>ReAdminWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReManager\Re_Student_Group\ReEditorWindow.xaml.cs">
+      <DependentUpon>ReEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Manager\BuildingManager\AdminBuildingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\BuildingManager\BuildingEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\CheckRecordingManager\AdminCheckRecordingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\CourseManager\AdminCourseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\CourseManager\CourseEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\GroupManager\AdminGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\GroupManager\GroupEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="ApplicationHelper.cs" />
+    <Compile Include="Manager\BuildingManager\AdminBuildingWindow.xaml.cs">
+      <DependentUpon>AdminBuildingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Manager\BuildingManager\BuildingEditorWindow.xaml.cs">
+      <DependentUpon>BuildingEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Manager\ProfessorManager\AdminProfessorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\ProfessorManager\ProfessorEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\RoomManager\AdminRoomWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\RoomManager\RoomEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SectionManager\AdminSectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\SectionManager\SectionEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\StudentManager\AdminStudentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Manager\StudentManager\StudentEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReManager\Re_Building_Room\ReAdminWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReManager\Re_Building_Room\ReEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReManager\Re_Schedule\ReAdminWindows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReManager\Re_Schedule\ReEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReManager\Re_Schedule\ScheduleEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReManager\Re_Student_Group\ReAdminWindows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ReManager\Re_Student_Group\ReEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\Building.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

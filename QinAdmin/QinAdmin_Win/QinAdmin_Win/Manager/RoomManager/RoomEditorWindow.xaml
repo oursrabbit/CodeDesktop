@@ -1,0 +1,18 @@
+﻿<Window x:Class="QinAdmin_Win.RoomManager.RoomEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QinAdmin_Win.RoomManager"
+        mc:Ignorable="d"
+         Title="RoomEditorWindow" Height="263.207" Width="234.906" Loaded="Window_Loaded">
+    <DockPanel LastChildFill="False" Margin="32">
+        <Label Content="房间编号" DockPanel.Dock="Top"/>
+        <TextBox x:Name="RoomIDTextBox" DockPanel.Dock="Top" />
+        <Label Content="房间名称" DockPanel.Dock="Top"/>
+        <TextBox x:Name="RoomNameTextBox" DockPanel.Dock="Top" />
+        <Label Content="房间签到码" DockPanel.Dock="Top"/>
+        <TextBox x:Name="RoomBLETextBox" DockPanel.Dock="Top" />
+        <Button x:Name="ConfirmButton" Content="确定" DockPanel.Dock="Bottom" Click="ConfirmButton_Click"/>
+    </DockPanel>
+</Window>

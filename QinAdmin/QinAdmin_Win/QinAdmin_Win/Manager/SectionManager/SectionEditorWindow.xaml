@@ -1,0 +1,23 @@
+﻿<Window x:Class="QinAdmin_Win.SectionManager.SectionEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QinAdmin_Win.SectionManager"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        mc:Ignorable="d"
+         Title="SectionEditorWindow" Height="353.773" Width="270.755" Loaded="Window_Loaded">
+    <DockPanel LastChildFill="False" Margin="32">
+        <Label Content="学时编号" DockPanel.Dock="Top"/>
+        <TextBox x:Name="SectionIDTextBox" DockPanel.Dock="Top" />
+        <Label Content="学时名称" DockPanel.Dock="Top"/>
+        <TextBox x:Name="SectionNameTextBox" DockPanel.Dock="Top" />
+        <Label Content="学时顺序" DockPanel.Dock="Top"/>
+        <TextBox x:Name="SectionOrderTextBox" DockPanel.Dock="Top" />
+        <Label Content="开始时间" DockPanel.Dock="Top"/>
+        <xctk:TimePicker  x:Name="SectionStartTimePicker" DockPanel.Dock="Top"/>
+        <Label Content="结束时间" DockPanel.Dock="Top"/>
+        <xctk:TimePicker  x:Name="SectionEndTimePicker" DockPanel.Dock="Top"/>
+        <Button x:Name="ConfirmButton" Content="确定" DockPanel.Dock="Bottom" Click="ConfirmButton_Click"/>
+    </DockPanel>
+</Window>
