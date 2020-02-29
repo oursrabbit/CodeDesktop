@@ -548,8 +548,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMh-38-sNA">
-                                <rect key="frame" x="32" y="406.5" width="256" height="36"/>
+                                <rect key="frame" x="32" y="406.5" width="256" height="48"/>
                                 <color key="backgroundColor" red="0.21402135489999999" green="0.38388156890000003" blue="0.40111482139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="LrQ-vQ-A4f"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HYZiYanHuanLeSongW" family="HYZiYanHuanLeSong" pointSize="20"/>
                                 <state key="normal" title="取消">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -612,6 +615,9 @@
                                 <state key="normal" title="再次签到">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="7Ij-J3-hze" kind="show" id="m2c-dL-uRq"/>
+                                </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nC8-ic-r3s" customClass="WaitingView" customModule="SSA签到" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
@@ -1225,7 +1231,8 @@
         <image name="waiting" width="138" height="108"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Iia-va-crw"/>
+        <segue reference="G0v-cG-JEI"/>
+        <segue reference="m2c-dL-uRq"/>
         <segue reference="OTK-Sd-Tom"/>
     </inferredMetricsTieBreakers>
 </document>

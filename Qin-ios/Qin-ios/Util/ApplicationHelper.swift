@@ -31,7 +31,7 @@ public class ApplicationHelper {
     public static var CurrentUser = Student()
     public static var CheckInRoomID = 0;
     
-    public static let localVersion = 4
+    public static let localVersion = 6
     public static var serverVersion = 0
     public static var databaseVersion = 0
     public static var launchImageVersion = 0
