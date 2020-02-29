@@ -1,0 +1,225 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+MERGED from [io.realm:realm-android-library:3.1.1] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/ae22467439f47627c756e086bff4bf98/jetified-realm-android-library-3.1.1/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.mediarouter:mediarouter:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/0a5c31a6f9bffb380d63886bc234819e/mediarouter-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/29de4663f408019a840accae4ef13353/appcompat-1.0.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7a03d48ae20f40a5fc9590694f128147/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6f3c6e7c2ddacd3f525ef6bad49a6f5d/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [com.getkeepsafe.relinker:relinker:1.2.2] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/aaaa2824b646b1d5e0469df356ea7b33/relinker-1.2.2/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.media:media:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6409fa8b1e23e6faf40478e38548524d/media-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e963789e8744462d61e05d23426706b3/fragment-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/c729f604eaa1492c1a5aa7f9ae2e8c68/vectordrawable-animated-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7936462e41fe83060f18616e5983ce37/recyclerview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e2899bb47a88bc011bb3e595fcb467e7/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.palette:palette:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7e3d566975294a6ced0bfa06f61869d7/palette-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/f15eb27d58a17bfe1b09ddcc90c8a6ba/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/23051957c828d85e74751968fd80c42b/vectordrawable-1.0.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/374a601be43410b2c0c1f34dd4ccd714/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/273a5766ca1857195a1a2d73b5249662/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/2dcd59ac0ae89389cb0e1d557425a19c/coordinatorlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5f58bf9f54fd577bc288c359d1f96821/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7b74d5ecead8b217149ea85174e97bcb/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/05b5f49e2cd54cf5298d3b7b09457ac6/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/42bfd336e9c4ec6372b3d10943d4867a/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5f5bfb36668db98eb895f4c1dda1f9ef/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/12c6b7235c65f2502c7ae1875e84314e/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5893adcaba8ee033b0a360f647743a00/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e763806a7c8ae833b0e18c12647956ea/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6a1178f9dc8bd2da0c0b8612ad83657b/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/d3e5c7bdb3d36caaa8370996d8796f2c/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7231b064b058a56c5c98490c57eb9b98/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/caecbdfa5f31c874d950fd8c7aca85cf/lifecycle-viewmodel-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7699a29d590b6e8791845d53c02e8b52/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/1f864211a789bd16e71dec272d0c703f/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e4624d9e5aeda7954675b1e9f25553d5/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/b6f0c919b2f4fd7850ea86ffa7ceec5e/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/dd7fdecb0732f2eb29e405c2e7d7fb37/lifecycle-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+	package
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:3:5-29
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:1-35:12
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.CAMERA
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:5:5-65
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:5:22-62
+uses-permission#android.permission.INTERNET
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:6:5-67
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:7:22-76
+uses-permission#android.permission.BLUETOOTH
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:8:5-68
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:8:22-65
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:9:5-74
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:9:22-71
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:10:5-79
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:10:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:11:22-78
+application
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:13:5-33:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7a03d48ae20f40a5fc9590694f128147/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7a03d48ae20f40a5fc9590694f128147/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/12c6b7235c65f2502c7ae1875e84314e/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/12c6b7235c65f2502c7ae1875e84314e/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5893adcaba8ee033b0a360f647743a00/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5893adcaba8ee033b0a360f647743a00/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/12c6b7235c65f2502c7ae1875e84314e/core-1.1.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:19:9-35
+	android:label
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:17:9-41
+	android:roundIcon
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:18:9-54
+	android:icon
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:16:9-43
+	android:allowBackup
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:15:9-35
+	android:theme
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:20:9-65
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:14:9-49
+activity#edu.bfa.ss.qin.InitializationActivity
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:21:9-27:20
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:21:19-57
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:22:13-26:29
+action#android.intent.action.MAIN
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:23:17-69
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:23:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:25:17-77
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:25:27-74
+activity#edu.bfa.ss.qin.CheckResultActivity
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:28:9-57
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:28:19-54
+activity#edu.bfa.ss.qin.FaceDetectSimpleActivity
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:29:9-62
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:29:19-59
+activity#edu.bfa.ss.qin.RoomListActivity
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:30:9-54
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:30:19-51
+activity#edu.bfa.ss.qin.CheckDBActivity
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:31:9-53
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:31:19-50
+activity#edu.bfa.ss.qin.QinSettingActivity
+ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:32:9-55
+	android:name
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml:32:19-53
+uses-sdk
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+MERGED from [io.realm:realm-android-library:3.1.1] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/ae22467439f47627c756e086bff4bf98/jetified-realm-android-library-3.1.1/AndroidManifest.xml:7:5-9:41
+MERGED from [io.realm:realm-android-library:3.1.1] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/ae22467439f47627c756e086bff4bf98/jetified-realm-android-library-3.1.1/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.mediarouter:mediarouter:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/0a5c31a6f9bffb380d63886bc234819e/mediarouter-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.mediarouter:mediarouter:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/0a5c31a6f9bffb380d63886bc234819e/mediarouter-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/29de4663f408019a840accae4ef13353/appcompat-1.0.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/29de4663f408019a840accae4ef13353/appcompat-1.0.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7a03d48ae20f40a5fc9590694f128147/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7a03d48ae20f40a5fc9590694f128147/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6f3c6e7c2ddacd3f525ef6bad49a6f5d/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6f3c6e7c2ddacd3f525ef6bad49a6f5d/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [com.getkeepsafe.relinker:relinker:1.2.2] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/aaaa2824b646b1d5e0469df356ea7b33/relinker-1.2.2/AndroidManifest.xml:7:5-43
+MERGED from [com.getkeepsafe.relinker:relinker:1.2.2] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/aaaa2824b646b1d5e0469df356ea7b33/relinker-1.2.2/AndroidManifest.xml:7:5-43
+MERGED from [androidx.media:media:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6409fa8b1e23e6faf40478e38548524d/media-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media:media:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6409fa8b1e23e6faf40478e38548524d/media-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e963789e8744462d61e05d23426706b3/fragment-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e963789e8744462d61e05d23426706b3/fragment-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/c729f604eaa1492c1a5aa7f9ae2e8c68/vectordrawable-animated-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/c729f604eaa1492c1a5aa7f9ae2e8c68/vectordrawable-animated-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7936462e41fe83060f18616e5983ce37/recyclerview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7936462e41fe83060f18616e5983ce37/recyclerview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e2899bb47a88bc011bb3e595fcb467e7/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e2899bb47a88bc011bb3e595fcb467e7/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.palette:palette:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7e3d566975294a6ced0bfa06f61869d7/palette-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.palette:palette:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7e3d566975294a6ced0bfa06f61869d7/palette-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/f15eb27d58a17bfe1b09ddcc90c8a6ba/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/f15eb27d58a17bfe1b09ddcc90c8a6ba/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/23051957c828d85e74751968fd80c42b/vectordrawable-1.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/23051957c828d85e74751968fd80c42b/vectordrawable-1.0.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/374a601be43410b2c0c1f34dd4ccd714/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/374a601be43410b2c0c1f34dd4ccd714/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/273a5766ca1857195a1a2d73b5249662/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/273a5766ca1857195a1a2d73b5249662/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/2dcd59ac0ae89389cb0e1d557425a19c/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/2dcd59ac0ae89389cb0e1d557425a19c/coordinatorlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5f58bf9f54fd577bc288c359d1f96821/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5f58bf9f54fd577bc288c359d1f96821/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7b74d5ecead8b217149ea85174e97bcb/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7b74d5ecead8b217149ea85174e97bcb/slidingpanelayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/05b5f49e2cd54cf5298d3b7b09457ac6/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/05b5f49e2cd54cf5298d3b7b09457ac6/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/42bfd336e9c4ec6372b3d10943d4867a/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/42bfd336e9c4ec6372b3d10943d4867a/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5f5bfb36668db98eb895f4c1dda1f9ef/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5f5bfb36668db98eb895f4c1dda1f9ef/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/12c6b7235c65f2502c7ae1875e84314e/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/12c6b7235c65f2502c7ae1875e84314e/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5893adcaba8ee033b0a360f647743a00/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/5893adcaba8ee033b0a360f647743a00/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e763806a7c8ae833b0e18c12647956ea/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e763806a7c8ae833b0e18c12647956ea/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6a1178f9dc8bd2da0c0b8612ad83657b/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/6a1178f9dc8bd2da0c0b8612ad83657b/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/d3e5c7bdb3d36caaa8370996d8796f2c/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/d3e5c7bdb3d36caaa8370996d8796f2c/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7231b064b058a56c5c98490c57eb9b98/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7231b064b058a56c5c98490c57eb9b98/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/caecbdfa5f31c874d950fd8c7aca85cf/lifecycle-viewmodel-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/caecbdfa5f31c874d950fd8c7aca85cf/lifecycle-viewmodel-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7699a29d590b6e8791845d53c02e8b52/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/7699a29d590b6e8791845d53c02e8b52/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/1f864211a789bd16e71dec272d0c703f/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/1f864211a789bd16e71dec272d0c703f/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e4624d9e5aeda7954675b1e9f25553d5/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/e4624d9e5aeda7954675b1e9f25553d5/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/b6f0c919b2f4fd7850ea86ffa7ceec5e/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/b6f0c919b2f4fd7850ea86ffa7ceec5e/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/dd7fdecb0732f2eb29e405c2e7d7fb37/lifecycle-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/yangcan/.gradle/caches/transforms-2/files-2.1/dd7fdecb0732f2eb29e405c2e7d7fb37/lifecycle-runtime-2.0.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		ADDED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/yangcan/Desktop/CodeDesktop/Qin/app/src/main/AndroidManifest.xml
