@@ -41,7 +41,7 @@ class CheckDBViewController: StaticViewController {
     
     func LoadingLocalDatabase(keyword: String) {
         self.logs =  self.leanlogs.filter{ (item) -> Bool in
-            let room = (try! Realm()).objects(Room.self).filter("ID = \(item.RoomID)").first!
+            let room = (try! Realm()).objects(Room.self).first(where: {$0.ID == item.RoomID})!
             let building = room.Location!
             let checkDate = item.CheckDate.longString
             return room.Name.contains(keyword) || building.Name.contains(keyword) || checkDate.contains(keyword)

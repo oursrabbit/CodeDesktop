@@ -33,7 +33,7 @@ public class CheckLog {
             let newLog = CheckLog()
             newLog.StudentID = checkLog["StudentID"] as! String
             newLog.RoomID = checkLog["RoomID"] as! String
-            newLog.CheckDate = (checkLog["createdAt"] as! String).iso8601!
+            newLog.CheckDate = Date.convert(string: (checkLog["CheckDate"] as! String), By: "yyyy-MM-dd HH:mm:ss")
             checkLogs.append(newLog)
         }
         return checkLogs

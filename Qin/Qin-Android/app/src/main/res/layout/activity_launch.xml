@@ -4,29 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2D575B"
-    tools:context=".RoomListActivity">
+    tools:context=".LaunchActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/RL.toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2D575B"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="勤！" />
-
-    <ExpandableListView
-        android:id="@+id/RL.roomlist"
+    <ImageView
+        android:id="@+id/imageView6"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#2D575B"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RL.toolbar" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/launchimagebackground" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/launchimage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

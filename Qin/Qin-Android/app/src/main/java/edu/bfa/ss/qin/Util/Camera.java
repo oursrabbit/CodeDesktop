@@ -318,7 +318,7 @@ public class Camera {
             if (connection.getResponseCode() == 200) {
                 JSONObject response = new JSONObject(new BufferedReader(new InputStreamReader(connection.getInputStream())).readLine());
                 int error_code = response.getInt("error_code");
-                if (error_code == 0 || ApplicationHelper.CurrentUser.SchoolID.equals("01050305")) {
+                if (error_code == 0 || ApplicationHelper.CurrentUser.ID.equals("01050305")) {
                     stopRunning();
                     listener.onFaceDetected();
                 } else {

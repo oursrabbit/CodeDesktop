@@ -20,8 +20,6 @@ public class Student {
     public var GroupsID = [String]()
     public var Schedules = [Schedule]()
     
-    //public var DrawableSchedules = [Schedule]()
-    
     public static func SetupCurrentStudent() -> Bool {
         let checkJson = ["ID": ApplicationHelper.CurrentUser.ID]
         let checkJSONData = try? JSONSerialization.data(withJSONObject: checkJson, options: [])
@@ -55,7 +53,7 @@ public class Student {
         var scheduleOnDate = [Schedule]()
         for currentSchedule in Schedules {
             for i in 0..<currentSchedule.ContinueWeek {
-                var currentScheduleDate = Date.addDays(days: 7 * i, to: currentSchedule.StartDate)
+                let currentScheduleDate = Date.addDays(days: 7 * i, to: currentSchedule.StartDate)
                 if currentScheduleDate.year == date.year && currentScheduleDate.monthInYear == date.monthInYear && currentScheduleDate.dayInMonth == date.dayInMonth {
                     scheduleOnDate.append(currentSchedule)
                     break
@@ -75,55 +73,4 @@ public class Student {
         }
         return nil
     }
-    
-    /*
-    public func setDrawableSchedules() {
-        DrawableSchedules.removeAll()
-        for item in self.Schedules {
-            var lastSection = item.SectionsID[0]
-            for sectionIndex in 1..<item.SectionsID.count {
-                let nextSection = item.SectionsID[sectionIndex]
-                if lastSection + sectionIndex != nextSection {
-                    createDrawableSchdule(oldSchedule: item, startSectionID: lastSection, endSectionID: item.SectionsID[sectionIndex - 1])
-                    lastSection = nextSection
-                }
-            }
-            createDrawableSchdule(oldSchedule: item, startSectionID: lastSection, endSectionID: item.SectionsID.last!)
-        }
-    }
-    
-    private func createDrawableSchdule(oldSchedule: Schedule, startSectionID: Int, endSectionID: Int) {
-        let newSchedule = Schedule()
-        newSchedule.ID = oldSchedule.ID
-        newSchedule.WorkingCourseID = oldSchedule.WorkingCourseID
-        newSchedule.WorkingDate = oldSchedule.WorkingDate
-        newSchedule.WorkingRoomID = oldSchedule.WorkingRoomID
-        newSchedule.SectionsID.removeAll()
-        for id in startSectionID...endSectionID {
-            newSchedule.SectionsID.append(id)
-        }
-        var useableCellColor = UIColor.scheduleCellColors
-        if let preSchedule = DrawableSchedules.last {
-            useableCellColor = useableCellColor.filter({$0 != preSchedule.CellColor})
-        }
-        newSchedule.CellColor = useableCellColor[Int.random(in: 0..<useableCellColor.count)]
-        DrawableSchedules.append(newSchedule)
-    }
-    
-    public func getStudentBeaconMinor() -> [UInt8] {
-        var bytes:[UInt8] = [0x00, 0x00]
-        bytes[0] = (UInt8)(BLE >> 8 & 0xFF)
-        bytes[1] = (UInt8)(BLE & 0xFF)
-        return bytes
-    }*/
-    
-    /*
-    public func getGroupsRegex() -> String {
-        var regex = ""
-        for group in GroupsID {
-            regex = "\(regex)(,\(group.ID))|"
-        }
-        regex.removeLast()
-        return regex
-    }*/
 }

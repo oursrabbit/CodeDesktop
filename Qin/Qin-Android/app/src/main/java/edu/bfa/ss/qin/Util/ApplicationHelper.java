@@ -47,7 +47,7 @@ public class ApplicationHelper {
         return bytes;
     }
 
-    public static final int localVersion = 1;
+    public static final int localVersion = 7;
     public static int serverVersion = 0;
     public static int databaseVersion = 0;
 
@@ -72,6 +72,16 @@ public class ApplicationHelper {
         DateFormat df = new SimpleDateFormat(formart);
         //df.setTimeZone(tz);
         return df.format(date);
+    }
+
+    public static Date getStringDate(String formart, String dateString)
+    {
+        DateFormat df = new SimpleDateFormat(formart);
+        try {
+            return df.parse(dateString);
+        } catch (ParseException e) {
+            return new Date();
+        }
     }
 
     public static interface StaticDataUpdateInfoListener {
@@ -99,7 +109,7 @@ public class ApplicationHelper {
         try {
             if (listener != null)
                 listener.updateInfomation("正在检查软件版本...");
-            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/ApplicationData/5e184373562071008e2f4a0a";
+            String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/ApplicationData/5e59e2ec21b47e0081de8189";
             JSONObject response = DatabaseHelper.LCSearch(url);
             ApplicationHelper.serverVersion = response.getInt("ApplicationVersion");
             ApplicationHelper.databaseVersion = response.getInt("DatabaseVersion");
@@ -116,17 +126,26 @@ public class ApplicationHelper {
 
     public static QinMessage checkLocalDatabaseVersion(StaticDataUpdateInfoListener listener) {
         if (listener != null)
-            listener.updateInfomation("正在检查本地数据版本...");
+            listener.updateInfomation("正在更新本地数据库...");
         SharedPreferences localStore = QinApplication.getContext().getSharedPreferences("localData", Context.MODE_PRIVATE);
         int localDataVersion = localStore.getInt("localDataVersion", -1);
+        //localDataVersion = -1;
         if (localDataVersion == ApplicationHelper.databaseVersion) {
             return QinMessage.Success;
+        } else {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            realm.deleteAll();
+            realm.commitTransaction();
+
+            ReBuildingRoom.CreateBuildingRoom(true);
+            Section.GetAll(true);
+            Course.GetAll(true);
+            Professor.GetAll(true);
+            localStore.edit().putInt("localDataVersion", ApplicationHelper.databaseVersion).commit();
         }
-        if (listener != null)
-            listener.updateInfomation("正在更新本地数据版本...");
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        realm.deleteAll();
+        return QinMessage.DatabaseUpdated;
+        /*
         HashMap<String, Building> buildings = new HashMap<String, Building>();
         try {
             if (listener != null)
@@ -138,9 +157,9 @@ public class ApplicationHelper {
                 listener.updateInfomation("正在更新建筑信息...");
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                Building newBuilding = realm.createObject(Building.class, checkLog.getInt("ID"));
+                Building newBuilding = realm.createObject(Building.class, checkLog.getInt("BLE"));
                 newBuilding.Name = checkLog.getString("Name");
-                buildings.put(newBuilding.ID + "", newBuilding);
+                buildings.put(newBuilding.BLE + "", newBuilding);
             }
             if (listener != null)
                 listener.updateInfomation("正在获取房间信息...");
@@ -151,7 +170,7 @@ public class ApplicationHelper {
                 listener.updateInfomation("正在更新房间信息...");
             for (int i = 0; i < DatabaseResults.length(); i++) {
                 JSONObject checkLog = DatabaseResults.getJSONObject(i);
-                Room newRoom = realm.createObject(Room.class, checkLog.getInt("ID"));
+                Room newRoom = realm.createObject(Room.class, checkLog.getInt("BLE"));
                 newRoom.Name = checkLog.getString("Name");
                 //Relation
                 int locationID = checkLog.getInt("LocationID");
@@ -168,7 +187,7 @@ public class ApplicationHelper {
             return QinMessage.NetError;
         } finally {
             realm.close();
-        }
+        }*/
     }
 
     public static String getBaiduAIAccessToken(StaticDataUpdateInfoListener listener) {

@@ -61,7 +61,7 @@ public class CheckResultActivity extends StaticAppCompatActivity {
             checkingStartTime = new Date();
             int timeout = 30000;
             while ((new Date()).getTime() - checkingStartTime.getTime() < timeout) {
-                if (DatabaseHelper.LCCheckAdvertising("0") == true || ApplicationHelper.CurrentUser.SchoolID.equals("01050305")) {
+                if (DatabaseHelper.LCCheckAdvertising("0") == true || ApplicationHelper.CurrentUser.ID.equals("01050305")) {
                     timeout = 60000;
                     advertiser.stopAdvertising(mAdvertiseCallback);
                     if (DatabaseHelper.LCUploadCheckLog() == true) {
@@ -92,7 +92,7 @@ public class CheckResultActivity extends StaticAppCompatActivity {
     }
 
     public void goBackRoomList(View button) {
-        startActivity(new Intent().setClass(this, RoomListActivity.class));
+        startActivity(new Intent().setClass(this, BuildingListActivity.class));
     }
 
     public void checkLogData(View button) {

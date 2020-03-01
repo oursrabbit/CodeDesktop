@@ -18,18 +18,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".InitializationActivity">
+        <activity android:name=".LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".InitializationActivity" />
         <activity android:name=".CheckResultActivity" />
         <activity android:name=".FaceDetectSimpleActivity" />
-        <activity android:name=".RoomListActivity" />
+        <activity android:name=".BuildingListActivity" />
         <activity android:name=".CheckDBActivity" />
-        <activity android:name=".QinSettingActivity"/>
+        <activity android:name=".QinSettingActivity" />
     </application>
 
 </manifest>

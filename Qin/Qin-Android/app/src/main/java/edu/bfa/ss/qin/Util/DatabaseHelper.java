@@ -15,9 +15,9 @@ import io.realm.Realm;
 
 public class DatabaseHelper {
     //Lean Cloud
-    public static String LeancloudAppid = "N4v46EIBIAWtiOANE61Fe1no-gzGzoHsz";
-    public static String LeancloudAppKey = "RCzPdQyEuPLaFhcPlxaKVb9P";
-    public static String LeancloudAPIBaseURL = "https://n4v46eib.lc-cn-n1-shared.com";
+    public static String LeancloudAppid = "Tf0m64H1aEhwItMDiMH87pD7-gzGzoHsz";
+    public static String LeancloudAppKey = "SWhko62oywljuSCkqRnNdjiM";
+    public static String LeancloudAPIBaseURL = "https://tf0m64h1.lc-cn-n1-shared.com";
     public static String LeancloudIDHeader = "X-LC-Id";
     public static String LeancloudKeyHeader = "X-LC-Key";
     public static String HttpContentTypeHeader = "Content-Type";
@@ -68,7 +68,7 @@ public class DatabaseHelper {
     public static boolean LCUploadCheckLog() {
         String url = LeancloudAPIBaseURL + "/1.1/classes/CheckRecording";
         Realm realm = Realm.getDefaultInstance();
-        Room checkInRoom = realm.where(Room.class).equalTo("ID", ApplicationHelper.CheckInRoomID).findFirst();
+        Room checkInRoom = realm.where(Room.class).equalTo("BLE", ApplicationHelper.CheckInRoomID).findFirst();
         try {
             HttpsURLConnection connection = (HttpsURLConnection) (new URL(url)).openConnection();
             connection.setRequestMethod("POST");
@@ -78,7 +78,7 @@ public class DatabaseHelper {
             connection.setDoOutput(true);
             connection.setDoInput(true);
             JSONObject jsonParam = new JSONObject();
-            jsonParam.put("StudentID", ApplicationHelper.CurrentUser.ID);
+            jsonParam.put("StudentID", ApplicationHelper.CurrentUser.BLE);
             jsonParam.put("RoomID", checkInRoom.ID);
             DataOutputStream os = new DataOutputStream(connection.getOutputStream());
             os.writeBytes(jsonParam.toString());

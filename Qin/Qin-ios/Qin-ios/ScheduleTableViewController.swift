@@ -188,7 +188,7 @@ extension ScheduleTableViewController: UICollectionViewDataSource {
                 cell.DateLabel.text = "\(courseName) \(professorString)"
                 cell.DateLabel.textColor = schedule.CellColor
                 cell.DecorateView.backgroundColor = schedule.CellColor
-                //cell.CheckStateLabel.text = checkState
+                cell.CheckStateLabel.text = "(点击查看签到记录)"
                 cell.CheckStateLabel.textColor = schedule.CellColor
                 cell.InfoView.backgroundColor = schedule.CellColor.withAlphaComponent(0.15)
                 return cell
@@ -241,7 +241,23 @@ extension ScheduleTableViewController: UICollectionViewDelegate {
                 InitInterface()
             }
         } else if collectionView == self.scheduleCollectionView && indexPath.section == 1 {
-
+            let schedule = schedules[indexPath.row]
+            let startSection = (try! Realm()).objects(Section.self).first(where: {$0.ID == schedule.StartSectionID})!
+            let endSection = (try! Realm()).objects(Section.self).first(where: {$0.Order == startSection.Order + schedule.ContinueSection - 1})!
+            let startTime = Date.convert(string: Date.convert(date: selectDate, By: "yyyy-MM-dd") + " " + Date.convert(date: startSection.StartTime, By: "HH:mm"), By: "yyyy-MM-dd HH:mm")
+            let endTime = Date.convert(string: Date.convert(date: selectDate, By: "yyyy-MM-dd") + " " + Date.convert(date: endSection.EndTime, By: "HH:mm"), By: "yyyy-MM-dd HH:mm")
+            
+            if let checkLog = ApplicationHelper.CurrentUser.GetCheckLogBy(startDate: startTime, endDate: endTime, roomID: schedule.RoomID)
+            {
+                let alert = UIAlertController(title: "已签到", message: "签到时间：\n\n\(checkLog.CheckDate.longString)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            else {
+                let alert = UIAlertController(title: "未签到", message: "未找到签到记录", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
         }
     }
     

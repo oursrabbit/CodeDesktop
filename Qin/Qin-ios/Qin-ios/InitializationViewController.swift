@@ -21,12 +21,6 @@ class InitializationViewController: StaticViewController, StaticDataUpdateInfoDe
         initApplication()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let des = segue.destination as! QinSettingViewController
-        des.autoLogin = true
-    }
-
-    
     func updateInfomation(message: String) {
         updateWaitingDialog(message: message)
     }

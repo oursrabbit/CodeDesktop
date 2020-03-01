@@ -279,7 +279,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="fRR-lF-6kE"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" name="HYZiYanHuanLeSongW" family="HYZiYanHuanLeSong" pointSize="12"/>
                                                     <color key="textColor" red="0.57862675190000001" green="0.6393323541" blue="0.64794158940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1298,6 +1298,7 @@
         <image name="waiting" width="138" height="108"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="a8s-l8-Pl4"/>
         <segue reference="1xt-GK-qHV"/>
         <segue reference="Iia-va-crw"/>
         <segue reference="OTK-Sd-Tom"/>

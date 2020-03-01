@@ -1,6 +1,5 @@
 package edu.bfa.ss.qin;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,7 +24,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initialization);
-        //waitingDialog = new InCanceledAlterDialog.Builder(this).setMessage("").show();
+
         infoLabel = findViewById(R.id.INIT_infolabel);
         initApplication();
     }
@@ -56,7 +55,7 @@ public class InitializationActivity extends StaticAppCompatActivity {
         Realm.setDefaultConfiguration(config);
         //Init LocalDB
         SharedPreferences localStore = getSharedPreferences("localData", Context.MODE_PRIVATE);
-        ApplicationHelper.CurrentUser.SchoolID = localStore.getString("SchoolID", "");
+        ApplicationHelper.CurrentUser.ID = localStore.getString("ID", "");
         new Thread(new Runnable() {
             @Override
             public void run() {

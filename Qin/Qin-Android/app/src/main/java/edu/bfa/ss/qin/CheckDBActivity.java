@@ -16,9 +16,7 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import edu.bfa.ss.qin.Util.ApplicationHelper;
@@ -59,7 +57,7 @@ public class CheckDBActivity extends AppCompatActivity {
     private void LoadingDatabase() {
         try {
             updateInfoLabel("正在加载数据...");
-            String condition = URLEncoder.encode("{\"StudentID\":" + ApplicationHelper.CurrentUser.ID + "}", "UTF-8");
+            String condition = URLEncoder.encode("{\"StudentID\":" + ApplicationHelper.CurrentUser.BLE + "}", "UTF-8");
             String url = DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/CheckRecording?where=" + condition;
             JSONObject response = DatabaseHelper.LCSearch(url);
             JSONArray DatabaseResults = response.getJSONArray("results");
@@ -105,7 +103,7 @@ class CheckDBItemAdapter extends ArrayAdapter<CheckLog> {
         }
         CheckLog checkLog = getItem(position);
         Realm realm = Realm.getDefaultInstance();
-        Room checkRoom = realm.where(Room.class).equalTo("ID", checkLog.RoomID).findFirst();
+        Room checkRoom = realm.where(Room.class).equalTo("BLE", checkLog.RoomID).findFirst();
         ((TextView) convertView.findViewById(R.id.CDB_ITEM_roomid)).setText(checkRoom.Name);
         ((TextView) convertView.findViewById(R.id.CDB_ITEM_checkdate)).setText(ApplicationHelper.getDateString("yyyy年MM月dd日", getItem(position).CheckDate));
         ((TextView) convertView.findViewById(R.id.CDB_ITEM_checktime)).setText(ApplicationHelper.getDateString("HH时mm分", getItem(position).CheckDate));
