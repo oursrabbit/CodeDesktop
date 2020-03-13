@@ -7,6 +7,7 @@ import 'package:sign/Model/relationbuildingroom.dart';
 import 'package:sign/Model/relationstudentgroup.dart';
 import 'package:sign/Model/student.dart';
 import 'package:sign/applicationhelper.dart';
+import 'package:sign/databasehelper.dart';
 import 'package:sign/values/colors.dart';
 import 'package:sign/values/fonts.dart';
 
@@ -14,6 +15,7 @@ import 'Model/building.dart';
 import 'Model/group.dart';
 import 'Model/room.dart';
 import 'Model/section.dart';
+import 'scheduleviewwidget.dart';
 
 class LoginViewWidget extends StatefulWidget {
   LoginViewWidget({Key key}) : super(key: key);
@@ -23,9 +25,9 @@ class LoginViewWidget extends StatefulWidget {
 }
 
 class _LoginViewWidget extends State<LoginViewWidget> {
-  double headerHeight = 300.0;
   String loginInfo = "";
-  final myController = TextEditingController();
+  final studentIDTextController = TextEditingController(text: ApplicationHelper.currentUser.id);
+  final passwordTextController = TextEditingController();
 
   @override
   void initState() {
@@ -36,18 +38,49 @@ class _LoginViewWidget extends State<LoginViewWidget> {
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    myController.dispose();
+    studentIDTextController.dispose();
+    passwordTextController.dispose();
     super.dispose();
   }
 
-  void onLoginButtonPressed(BuildContext context) async {
-    var currentUser = await Student.getStudentByID(myController.text);
-    if (currentUser.id == "NONE") {
+  Future<bool> checkUserExist() async{
+    if ((await Student.getStudentByID(studentIDTextController.text)).id == "NONE")
+      return false;
+    else
+      return true;
+  }
+  
+  void onResetPasswordButtonPressed(BuildContext context) async {
+    var currentUser = await Student.getStudentByID(studentIDTextController.text);
+    if(currentUser.id == "NONE") {
       setState(() {
         loginInfo = "未找到用户";
       });
+    } else {
+      if(currentUser.email == "NONE") {
+        setState(() {
+          loginInfo = "未设置邮箱，请联系班主任重置密码";
+        });
+      } else {
+        await DatabaseHelper.leanCloudResetPassword(currentUser.email);
+        setState(() {
+          loginInfo = "重置邮件已发送";
+        });
+      }
+    }
+  }
+  
+  void onLoginButtonPressed(BuildContext context) async {
+    if(await DatabaseHelper.leanCloudLogin(studentIDTextController.text, passwordTextController.text) == false) {
+      setState(() {
+        loginInfo = "用户名或密码错误";
+      });
     }
     else {
+      setState(() {
+        loginInfo = "正在获取用户信息";
+      });
+      var currentUser = await Student.getStudentByID(studentIDTextController.text);
       setState(() {
         loginInfo = "正在更新建筑信息";
       });
@@ -69,12 +102,12 @@ class _LoginViewWidget extends State<LoginViewWidget> {
       await ApplicationHelper.getLocalDatabase(
           "id", ApplicationHelper.currentUser.id);
       setState(() {
-        /*Navigator.pushAndRemoveUntil(
+        Navigator.pushAndRemoveUntil(
           context,
           new MaterialPageRoute(builder: (context) => new MaterialApp(
               home: new ScheduleViewWidget())),
               (route) => route == null,
-        );*/
+        );
       });
     }
   }
@@ -90,112 +123,123 @@ class _LoginViewWidget extends State<LoginViewWidget> {
         ),
         child: Column(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: new ExactAssetImage(
-                      'assets/images/logobackgroundimage.png'),
-                  fit: BoxFit.fill,
+            SafeArea(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(32, 32, 32, 0),
+                child: SizedBox(
+                  width: 256,
+                  child: TextField(
+                    controller: studentIDTextController,
+                    decoration: InputDecoration(
+                      hintText: "学号",
+                      border: UnderlineInputBorder(),
+                    ),
+                    style: TextStyle(
+                      color: AppColors.NormalInputText,
+                      fontFamily: FontsHelper.DefaultTextFontFamily,
+                      fontWeight: FontWeight.w400,
+                      fontSize: FontsHelper.DefaultInputTextFontSize,
+                    ),
+                    onEditingComplete: () {
+                      setState(() {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      });
+                    },
+                  ),
                 ),
               ),
-              height: headerHeight,
-              width: double.infinity,
-              child: SafeArea(
-                child: Column(
+            ),
+            Padding(
+            padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
+            child: SizedBox(
+              width: 256,
+              child: TextField(
+                obscureText: true,
+                controller: passwordTextController,
+                decoration: InputDecoration(
+                  hintText: "密码",
+                  border: UnderlineInputBorder(),
+                ),
+                style: TextStyle(
+                  color: AppColors.NormalInputText,
+                  fontFamily: FontsHelper.DefaultTextFontFamily,
+                  fontWeight: FontWeight.w400,
+                  fontSize: FontsHelper.DefaultInputTextFontSize,
+                ),
+                onEditingComplete: () {
+                  setState(() {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  });
+                },
+              ),
+            ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(32, 32, 32, 8),
+              child: SizedBox(
+                width: 256,
+                child: ImageButton(
+                  height: 40,
                   children: <Widget>[
-                    Expanded(
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Positioned(child:
-                          Image.asset(
-                            "assets/images/logoimage.png",
-                          ),)
-                        ],
+                    Text(
+                      "登录",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppColors.NormalText,
+                        fontFamily: FontsHelper.DefaultTextFontFamily,
+                        fontWeight: FontWeight.w400,
+                        fontSize: FontsHelper.DefaultButtonTextFontSize,
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                      child: Text(
-                        "BFA SOUND SCHOOL",
-                        textDirection: TextDirection.ltr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Color.fromARGB(127, 255, 255, 255),
-                          fontFamily: FontsHelper.DefaultTextFontFamily,
-                          fontWeight: FontWeight.w400,
-                          fontSize: FontsHelper.DefaultInputTextFontSize,
-                        ),
+                  ],
+                  pressedImage: Image.asset(
+                      "assets/images/buttonbackground.png"),
+                  unpressedImage: Image.asset(
+                      "assets/images/buttonbackground.png"),
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    this.onLoginButtonPressed(context);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
+              child: SizedBox(
+                width: 256,
+                child: Row(
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text("注册账号"),
+                      onPressed: () => showDialog(
+                        context: context,
+                        builder: (context) =>
+                            CupertinoAlertDialog (
+                              title: Text("注册提示"),
+                              content: Text("请联系班主任进行注册"),
+                              actions: <Widget>[
+                                FlatButton(
+                                  child: new Text("确定"),
+                                  onPressed: () {
+                                    FocusScope.of(context).requestFocus(FocusNode());
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
                       ),
+                    ),
+                    Expanded(child: Container(),),
+                    FlatButton(
+                      child: Text("忘记密码？"),
+                      onPressed: (){
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        this.onResetPasswordButtonPressed(context);},
                     ),
                   ],
                 ),
               ),
             ),
-            SafeArea(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(32, 32, 32, 0),
-                child: TextField(
-                  controller: myController,
-                  decoration: InputDecoration(
-                    hintText: "请输入学号",
-                    border: UnderlineInputBorder(),
-                  ),
-                  style: TextStyle(
-                    color: AppColors.NormalInputText,
-                    fontFamily: FontsHelper.DefaultTextFontFamily,
-                    fontWeight: FontWeight.w400,
-                    fontSize: FontsHelper.DefaultInputTextFontSize,
-                  ),
-                  onTap: () {
-                    setState(() {
-                      headerHeight = 0;
-                    });
-                  },
-                  onEditingComplete: () {
-                    setState(() {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      headerHeight = 220;
-                    });
-                  },
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(32),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ImageButton(
-                      height: 40,
-                      children: <Widget>[
-                        Text(
-                          "登录",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: AppColors.NormalText,
-                            fontFamily: FontsHelper.DefaultTextFontFamily,
-                            fontWeight: FontWeight.w400,
-                            fontSize: FontsHelper.DefaultButtonTextFontSize,
-                          ),
-                        ),
-                      ],
-                      pressedImage: Image.asset(
-                          "assets/images/buttonbackground.png"),
-                      unpressedImage: Image.asset(
-                          "assets/images/buttonbackground.png"),
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        this.onLoginButtonPressed(context);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-
-            )
             Padding(
               padding: EdgeInsets.fromLTRB(32, 32, 32, 0),
               child: Text(

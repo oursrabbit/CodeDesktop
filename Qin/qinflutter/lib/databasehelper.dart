@@ -11,6 +11,7 @@ class DatabaseHelper {
   static var LeancloudKeyHeader = "X-LC-Key";
   static var HttpContentTypeHeader = "content-type";
   static var HttpContentTypeJSONUTF8 = "application/json";
+
   static Future<http.Response> leanCloudSearch(String url) async{
     String dataURL = url;
     http.Response response = await http.get(
@@ -21,6 +22,49 @@ class DatabaseHelper {
           HttpContentTypeHeader: HttpContentTypeJSONUTF8,
         });
     return response;
+  }
+
+  static Future<bool> leanCloudLogin(String username, String password) async{
+    try {
+      Map<String, String> jsonMap = {
+        'username': username,
+        'password': password,
+      };
+      String jsonString = json.encode(jsonMap);
+      var url = Uri.encodeFull(
+          DatabaseHelper.LeancloudAPIBaseURL + '/1.1/login');
+      http.Response response = await http.post(
+          url,
+          body: jsonString,
+          headers: {
+            LeancloudIDHeader: LeancloudAppid,
+            LeancloudKeyHeader: LeancloudAppKey,
+            HttpContentTypeHeader: HttpContentTypeJSONUTF8,
+          });
+      var data = json.decode(response.body);
+      return username == data["username"];
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> leanCloudResetPassword(String email) async {
+    Map<String, String> jsonMap = {
+      'email': email,
+    };
+    String jsonString = json.encode(jsonMap);
+    var url = Uri.encodeFull(
+        DatabaseHelper.LeancloudAPIBaseURL + '/1.1/requestPasswordReset');
+    http.Response response = await http.post(
+        url,
+        body: jsonString,
+        headers: {
+          LeancloudIDHeader: LeancloudAppid,
+          LeancloudKeyHeader: LeancloudAppKey,
+          HttpContentTypeHeader: HttpContentTypeJSONUTF8,
+        });
+    var data = json.decode(response.body);
+    return true;
   }
 
   static Future<bool> updateAdvertising() async {

@@ -9,6 +9,7 @@ class Student {
   var advertising = 0;
   var name = "无效学生";
   var ble = 0;
+  var email = "";
 
   static Future<Student> getStudentByID(String id) async {
     Map<String, String> jsonMap = {
@@ -29,6 +30,7 @@ class Student {
       student.ble = checkLog["BLE"];
       student.id = checkLog["ID"] as String;
       student.name = checkLog["Name"] as String;
+      student.email = checkLog["Email"] as String;
       return student;
     } else {
       return new Student();

@@ -27,6 +27,8 @@ class _InitViewWidgetState extends State<InitViewWidget> {
   }
 
   initApplication() async {
+    ApplicationHelper.canCheckBiometrics = await ApplicationHelper.localAuth.canCheckBiometrics;
+    ApplicationHelper.useBiometrics = await ApplicationHelper.getLocalDatabaseBool("useBiometrics");
     ApplicationHelper.currentUser.id = await ApplicationHelper.getLocalDatabaseString("id");
     var url = DatabaseHelper.LeancloudAPIBaseURL +
         "/1.1/classes/ApplicationData/5e59e2ec21b47e0081de8189";

@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:date_util/date_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/course.dart';
 import 'package:sign/Model/professor.dart';
@@ -21,7 +23,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'Model/section.dart';
 import 'loginviewwidget.dart';
 
-enum SettingMenu {ChangeUser, History, OpenBioSecurityIOS}
+enum SettingMenu {ChangeUser, History, OpenBioSecurity}
 
 class ScheduleViewWidget extends StatefulWidget {
   ScheduleViewWidget({Key key}) : super(key: key);
@@ -38,6 +40,7 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
   ScrollController _dayCalendarController = ScrollController();
   ScrollController _monthCalendarController = ScrollController();
 
+  bool useBiometrics = ApplicationHelper.useBiometrics;
 
   @override
   void initState() {
@@ -80,6 +83,18 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
       _monthCalendarController = ScrollController(
           initialScrollOffset: 315.0 * 3 * 12 + 315 * (selectedDay.month));
     });
+  }
+
+  void onUseBiometricsPressed(BuildContext context, bool open) {
+    if(open) {
+      setState(() {
+        useBiometrics = open;
+      });
+    } else {
+      setState(() {
+        useBiometrics = open;
+      });
+    }
   }
 
   void onBackToTodayPressed(BuildContext context) {
@@ -271,7 +286,7 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
         ),
       );
     } else {
-      headerHeight = 270.0;
+      headerHeight = 200.0 + MediaQuery.of(context).padding.top;
       calendarWidget = createDayCalendarWidget();
     }
 
@@ -362,10 +377,18 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
                 value: SettingMenu.History,
                 child: Text('签到历史'),
               ));
-              if (Platform.isWindows) {
+              if(ApplicationHelper.canCheckBiometrics) {
                 menu.add(PopupMenuItem<SettingMenu>(
-                  value: SettingMenu.OpenBioSecurityIOS,
-                  child: Text('启用人脸/指纹'),
+                  value: SettingMenu.OpenBioSecurity,
+                  child: Row(
+                    children: <Widget>[
+                      Text("启用人脸/指纹职别"),
+                      CupertinoSwitch(
+                        value: useBiometrics,
+                        onChanged: (value) => this.onUseBiometricsPressed(context, value),
+                      )
+                    ],
+                  ),
                 ));
               }
               return menu;

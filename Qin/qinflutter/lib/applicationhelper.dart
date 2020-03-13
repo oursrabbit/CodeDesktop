@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/room.dart';
 import 'package:sign/Model/schedule.dart';
@@ -15,8 +16,21 @@ class ApplicationHelper {
   }
 
   static Future<String> getLocalDatabaseString(String id) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(id);
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString(id);
+    } catch (e) {
+      return "";
+    }
+  }
+
+  static Future<bool> getLocalDatabaseBool(String id) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getBool(id);
+    } catch (e) {
+      return false;
+    }
   }
 
   static Student currentUser = new Student();
@@ -24,6 +38,10 @@ class ApplicationHelper {
   static Building checkBuilding = new Building();
   static Room checkRoom = new Room();
   static String checkResult = "";
+
+  static bool canCheckBiometrics = false;
+  static bool useBiometrics = false;
+  static LocalAuthentication localAuth = LocalAuthentication();
 }
 
 extension StringDateConvert on String {
