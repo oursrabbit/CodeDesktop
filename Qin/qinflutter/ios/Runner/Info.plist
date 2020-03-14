@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSFaceIDUsageDescription</key>
+    <string>是否使用生物信息进行登录？</string>
+    <key>NSBluetoothAlwaysUsageDescription</key>
+    <string>需要获取蓝牙权限，以向服务器发送签到信息</string>
+    <key>NSBluetoothPeripheralUsageDescription</key>
+    <string>需要获取蓝牙广播权限，以向服务器发送签到信息</string>
+    <key>NSCameraUsageDescription</key>
+    <string>需要获取摄像头权限，以验证您的身份是否与学号对应</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>需要获取位置信息，以验证您当前所在的教室位置</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

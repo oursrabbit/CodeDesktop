@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sign/applicationhelper.dart';
 import 'package:sign/databasehelper.dart';
 import 'package:sign/loginviewwidget.dart';
@@ -27,6 +28,7 @@ class _InitViewWidgetState extends State<InitViewWidget> {
   }
 
   initApplication() async {
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     ApplicationHelper.canCheckBiometrics = await ApplicationHelper.localAuth.canCheckBiometrics;
     ApplicationHelper.useBiometrics = await ApplicationHelper.getLocalDatabaseBool("useBiometrics");
     ApplicationHelper.autoLogin = await ApplicationHelper.getLocalDatabaseBool('autoLogin');

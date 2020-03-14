@@ -1,5 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:date_util/date_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
 import 'package:sign/Model/building.dart';
@@ -7,14 +8,25 @@ import 'package:sign/Model/course.dart';
 import 'package:sign/Model/professor.dart';
 import 'package:sign/Model/room.dart';
 import 'package:sign/Model/schedule.dart';
+import 'package:sign/aboutviewwidget.dart';
 import 'package:sign/applicationhelper.dart';
 import 'package:sign/main.dart';
 import 'package:sign/scheduleviewwidget.dart';
 import 'package:sign/values/colors.dart';
 import 'package:sign/values/fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Model/section.dart';
+import 'Model/student.dart';
+import 'applicationhelper.dart';
+import 'applicationhelper.dart';
+import 'applicationhelper.dart';
+import 'applicationhelper.dart';
+import 'checkresultviewwidget.dart';
+import 'databasehelper.dart';
+import 'historyviewwidget.dart';
+import 'initviewwidget.dart';
 
 class SettingViewWidget extends StatefulWidget {
   SettingViewWidget({Key key}) : super(key: key);
@@ -28,8 +40,79 @@ class _SettingViewWidget extends State<SettingViewWidget> {
   bool autoLogin = ApplicationHelper.autoLogin;
   bool useBio = ApplicationHelper.useBiometrics;
 
+  void onResetPasswordButtonPressed(BuildContext context) async {
+    if (ApplicationHelper.currentUser.email == "NONE") {
+      showDialog(
+        context: context,
+        builder: (context) =>
+            CupertinoAlertDialog(
+              title: Text("修改密码失败"),
+              content: Text("未设置邮箱，请联系班主任重置密码"),
+              actions: <Widget>[
+                FlatButton(
+                  child: new Text("确定"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+      );
+    } else {
+      await DatabaseHelper.leanCloudResetPassword(
+          ApplicationHelper.currentUser.email);
+      showDialog(
+        context: context,
+        builder: (context) =>
+            CupertinoAlertDialog(
+              title: Text("已发送"),
+              content: Text("密码重置邮件已发送至注册邮箱"),
+              actions: <Widget>[
+                FlatButton(
+                  child: new Text("确定"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget useBioButton = Container();
+    if(ApplicationHelper.canCheckBiometrics == true) {
+      useBioButton = Padding(
+        padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
+        child: Row(
+          children: <Widget>[
+            FlatButton(
+              child: Text(
+                "面部/指纹登陆",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: AppColors.PrimaryBackground,
+                  fontFamily: FontsHelper.DefaultTextFontFamily,
+                  fontWeight: FontWeight.w400,
+                  fontSize: FontsHelper.DefaultButtonTextFontSize,
+                ),
+              ),
+            ),
+            Expanded(child: Container(),),
+            Switch(value: useBio, onChanged: (value) async {
+              if(await ApplicationHelper.checkBiometrics() == true ) {
+                ApplicationHelper.setLocalDatabaseBool('useBiometrics', value);
+                setState(() {
+                  useBio = value;
+                });
+              }
+            }),
+          ],
+        ),
+      );
+    }
     return Scaffold(
       body: Container(
         color: AppColors.AppDefaultBackgroundColor,
@@ -53,7 +136,7 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(32, 32, 32, 0),
+                padding: EdgeInsets.fromLTRB(32, 32, 32, 32),
                 child: Row(
                   children: <Widget>[
                     FlatButton(
@@ -67,34 +150,21 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                             fontSize: FontsHelper.DefaultButtonTextFontSize,
                           ),
                         ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                              context, MaterialPageRoute(builder: (context) {
+                            return HistoryViewViewWidget();
+                          }));
+                        },
                       ),
                     Expanded(child: Container(),),
                   ],
                 ),
               ),
+              useBioButton,
               Padding(
-                padding: EdgeInsets.fromLTRB(32, 32, 32, 0),
-                child: Row(
-                  children: <Widget>[
-                    FlatButton(
-                      child: Text(
-                        "面部/指纹登陆",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: AppColors.PrimaryBackground,
-                          fontFamily: FontsHelper.DefaultTextFontFamily,
-                          fontWeight: FontWeight.w400,
-                          fontSize: FontsHelper.DefaultButtonTextFontSize,
-                        ),
-                      ),
-                    ),
-                    Expanded(child: Container(),),
-                    Switch(value: useBio, onChanged: null),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(32, 8, 32, 0),
+                padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
                 child: Row(
                   children: <Widget>[
                     FlatButton(
@@ -115,6 +185,12 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                       setState(() {
                         autoLogin = value;
                       });
+                      if(value == false) {
+                        ApplicationHelper.setLocalDatabaseBool('useBiometrics', value);
+                        setState(() {
+                          useBio = value;
+                        });
+                      }
                     }),
                   ],
                 ),
@@ -134,6 +210,13 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                           fontSize: FontsHelper.DefaultButtonTextFontSize,
                         ),
                       ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) {
+                          return AboutViewWidget();
+                        }));
+                      },
                     ),
                     Expanded(child: Container(),)
                   ],
@@ -154,6 +237,7 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                           fontSize: FontsHelper.DefaultButtonTextFontSize,
                         ),
                       ),
+                      onPressed: () async => await launch("https://blog.csdn.net/qq_27485675/article/details/104864866"),
                     ),
                     Expanded(child: Container(),)
                   ],
@@ -173,6 +257,7 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                           fontSize: FontsHelper.DefaultButtonTextFontSize,
                         ),
                       ),
+                      onPressed: () => this.onResetPasswordButtonPressed(context),
                     ),
                     Expanded(child: Container(),)
                   ],
@@ -201,9 +286,17 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                           "assets/images/buttonbackground.png"),
                       unpressedImage: Image.asset(
                           "assets/images/buttonbackground.png"),
-                      onTap: () {
-                        //FocusScope.of(context).requestFocus(FocusNode());
-                        //this.onLoginButtonPressed(context);
+                      onTap: () async {
+                        await ApplicationHelper.setLocalDatabaseBool('autoLogin', false);
+                        await ApplicationHelper.setLocalDatabaseBool('useBiometrics', false);
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) =>
+                              new MaterialApp(
+                                  home: new InitViewWidget())),
+                              (route) => route == null,
+                        );
                       },
                     ),
                   ),

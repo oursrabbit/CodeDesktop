@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:local_auth/auth_strings.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/room.dart';
@@ -35,6 +36,33 @@ class ApplicationHelper {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return prefs.getBool(id) == null ? false : prefs.getBool(id);
     } catch (e) {
+      return false;
+    }
+  }
+
+  static Future<bool> checkBiometrics() async {
+    try {
+      return await localAuth.authenticateWithBiometrics(
+        localizedReason: "进行生物识别完成用户登录",
+        //useErrorDialogs: false,
+        androidAuthStrings: AndroidAuthMessages(
+          cancelButton: '取消',
+          goToSettingsButton: '去设置',
+          fingerprintNotRecognized: '指纹识别失败',
+          goToSettingsDescription: '请设置指纹信息.',
+          fingerprintHint: '指纹识别',
+          fingerprintSuccess: '指纹识别成功',
+          signInTitle: '指纹识别',
+          fingerprintRequiredTitle: '请先录入指纹信息!',),
+        iOSAuthStrings: IOSAuthMessages(
+          lockOut: "请重启用身份识别",
+          goToSettingsButton: "去设置",
+          goToSettingsDescription: "请设置身份识别信息",
+          cancelButton: "取消",
+        ),
+      );
+    } catch (e) {
+      print(e);
       return false;
     }
   }

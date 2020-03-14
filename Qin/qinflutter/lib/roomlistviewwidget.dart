@@ -1,4 +1,5 @@
 import 'package:date_util/date_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sign/Model/room.dart';
 import 'package:sign/Model/course.dart';
@@ -138,7 +139,7 @@ class _RoomListViewViewWidget extends State<RoomListViewViewWidget> {
         showDialog(
           context: context,
           builder: (context) =>
-              AlertDialog(
+              CupertinoAlertDialog(
                 title: Text("准备签到"),
                 content: Text("请确认已经抵达教室\n${"(" + room.getLocation().name + ")" +
                     room.name}"),

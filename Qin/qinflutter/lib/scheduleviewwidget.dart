@@ -131,7 +131,7 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
       showDialog(
         context: context,
         builder: (context) =>
-            AlertDialog(
+            CupertinoAlertDialog(
               title: Text("准备签到"),
               content: Text("请确认已经抵达教室\n${"(" + schedule.building.name + ")" +
                   schedule.room.name}"),

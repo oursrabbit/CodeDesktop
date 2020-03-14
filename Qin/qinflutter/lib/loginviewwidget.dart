@@ -10,11 +10,15 @@ import 'package:sign/applicationhelper.dart';
 import 'package:sign/databasehelper.dart';
 import 'package:sign/values/colors.dart';
 import 'package:sign/values/fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'Model/building.dart';
 import 'Model/group.dart';
 import 'Model/room.dart';
 import 'Model/section.dart';
+import 'applicationhelper.dart';
+import 'applicationhelper.dart';
+import 'applicationhelper.dart';
 import 'scheduleviewwidget.dart';
 
 class LoginViewWidget extends StatefulWidget {
@@ -29,6 +33,10 @@ class _LoginViewWidget extends State<LoginViewWidget> {
   bool enableLoginButton = true;
   final studentIDTextController = TextEditingController(text: ApplicationHelper.currentUser.id);
   final passwordTextController = TextEditingController();
+
+  bool agreePrivacy = true;
+
+  int loginerrorcount = 0;
 
   @override
   void initState() {
@@ -76,52 +84,81 @@ class _LoginViewWidget extends State<LoginViewWidget> {
         });
       }
     }
-  }
-  
-  void onLoginButtonPressed(BuildContext context, bool ignorePassword) async {
-    var loginStatus = false;
-    if(ignorePassword == true) {
-      loginStatus = true;
-    } else {
-      loginStatus = await DatabaseHelper.leanCloudLogin(studentIDTextController.text, passwordTextController.text);
-    }
-    if(loginStatus == false) {
+    if(mounted) {
       setState(() {
-        loginInfo = "用户名或密码错误";
+        enableLoginButton = true;
+      });
+    }
+  }
+
+  void onLoginButtonPressed(BuildContext context, bool ignorePassword) async {
+    if (agreePrivacy == false) {
+      setState(() {
+        loginInfo = "请同意《隐私策略》后，在进行登录";
       });
     }
     else {
+      var loginStatus = false;
+      if (ignorePassword == true) {
+        if (ApplicationHelper.useBiometrics == true) {
+          loginStatus = await ApplicationHelper.checkBiometrics();
+        } else {
+          loginStatus = true;
+        }
+      } else {
+        loginStatus = await DatabaseHelper.leanCloudLogin(
+            studentIDTextController.text, passwordTextController.text);
+      }
+      if (loginStatus == false) {
+        loginerrorcount += 1;
+        setState(() {
+          if (loginerrorcount >= 6) {
+            loginInfo = "错误次数太多，请30分钟之后再试";
+          } else {
+            loginInfo = "用户名或密码错误";
+          }
+        });
+      }
+      else {
+        setState(() {
+          loginInfo = "正在获取用户信息";
+        });
+        var currentUser = await Student.getStudentByID(
+            studentIDTextController.text);
+        setState(() {
+          loginInfo = "正在更新建筑信息";
+        });
+        //MUST BE IN ORDER
+        //Group One
+        await Building.getAllBuildings();
+        await Room.getAllRooms();
+        setState(() {
+          loginInfo = "正在更新教学信息";
+        });
+        await Course.getAllCourses();
+        await Professor.getAllProfessors();
+        await Section.getAllSections();
+        await RelationBuildingRoom.getAllRelationBuildingRooms();
+        await RelationStudentGroup.getAllRelationStudentGroups();
+        //Group Tow
+        await Group.getAllGroups();
+        ApplicationHelper.currentUser = currentUser;
+        await ApplicationHelper.setLocalDatabaseString(
+            "id", ApplicationHelper.currentUser.id);
+        setState(() {
+          Navigator.pushAndRemoveUntil(
+            context,
+            new MaterialPageRoute(builder: (context) =>
+            new MaterialApp(
+                home: new ScheduleViewWidget())),
+                (route) => route == null,
+          );
+        });
+      }
+    }
+    if (mounted) {
       setState(() {
-        loginInfo = "正在获取用户信息";
-      });
-      var currentUser = await Student.getStudentByID(studentIDTextController.text);
-      setState(() {
-        loginInfo = "正在更新建筑信息";
-      });
-      //MUST BE IN ORDER
-      //Group One
-      await Building.getAllBuildings();
-      await Room.getAllRooms();
-      setState(() {
-        loginInfo = "正在更新教学信息";
-      });
-      await Course.getAllCourses();
-      await Professor.getAllProfessors();
-      await Section.getAllSections();
-      await RelationBuildingRoom.getAllRelationBuildingRooms();
-      await RelationStudentGroup.getAllRelationStudentGroups();
-      //Group Tow
-      await Group.getAllGroups();
-      ApplicationHelper.currentUser = currentUser;
-      await ApplicationHelper.setLocalDatabaseString(
-          "id", ApplicationHelper.currentUser.id);
-      setState(() {
-        Navigator.pushAndRemoveUntil(
-          context,
-          new MaterialPageRoute(builder: (context) => new MaterialApp(
-              home: new ScheduleViewWidget())),
-              (route) => route == null,
-        );
+        enableLoginButton = true;
       });
     }
   }
@@ -211,6 +248,9 @@ class _LoginViewWidget extends State<LoginViewWidget> {
                   unpressedImage: Image.asset(
                       "assets/images/buttonbackground.png"),
                   onTap: () {
+                    setState(() {
+                      enableLoginButton = false;
+                    });
                     FocusScope.of(context).requestFocus(FocusNode());
                     this.onLoginButtonPressed(context, false);
                   },
@@ -220,7 +260,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
             Padding(
               padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
               child: SizedBox(
-                width: 256,
+                width: enableLoginButton == true ? 256 : 0,
                 child: Row(
                   children: <Widget>[
                     FlatButton(
@@ -247,9 +287,35 @@ class _LoginViewWidget extends State<LoginViewWidget> {
                     FlatButton(
                       child: Text("忘记密码？"),
                       onPressed: (){
+                        setState(() {
+                          enableLoginButton = false;
+                        });
                         FocusScope.of(context).requestFocus(FocusNode());
                         this.onResetPasswordButtonPressed(context);},
                     ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
+              child: SizedBox(
+                width: enableLoginButton == true ? 256 : 0,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(child: Container(),),
+                    Checkbox(value: agreePrivacy, onChanged: (value) => setState(() {
+                      agreePrivacy = value;
+                    })),
+                    Text("同意"),
+                    InkWell(
+                      child: Text("《隐私策略》",
+                      style: TextStyle(
+                        color: Colors.blue
+                      ),
+                      ),
+                      onTap: () async => await launch("https://blog.csdn.net/qq_27485675/article/details/104864866"),
+                    )
                   ],
                 ),
               ),
