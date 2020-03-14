@@ -26,6 +26,7 @@ class LoginViewWidget extends StatefulWidget {
 
 class _LoginViewWidget extends State<LoginViewWidget> {
   String loginInfo = "";
+  bool enableLoginButton = true;
   final studentIDTextController = TextEditingController(text: ApplicationHelper.currentUser.id);
   final passwordTextController = TextEditingController();
 
@@ -33,6 +34,12 @@ class _LoginViewWidget extends State<LoginViewWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    if(ApplicationHelper.autoLogin == true && ApplicationHelper.openApp == true) {
+      setState(() {
+        enableLoginButton = false;
+      });
+      onLoginButtonPressed(context, true);
+    }
   }
 
   @override
@@ -40,6 +47,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
     // Clean up the controller when the widget is disposed.
     studentIDTextController.dispose();
     passwordTextController.dispose();
+    ApplicationHelper.openApp = false;
     super.dispose();
   }
 
@@ -70,8 +78,14 @@ class _LoginViewWidget extends State<LoginViewWidget> {
     }
   }
   
-  void onLoginButtonPressed(BuildContext context) async {
-    if(await DatabaseHelper.leanCloudLogin(studentIDTextController.text, passwordTextController.text) == false) {
+  void onLoginButtonPressed(BuildContext context, bool ignorePassword) async {
+    var loginStatus = false;
+    if(ignorePassword == true) {
+      loginStatus = true;
+    } else {
+      loginStatus = await DatabaseHelper.leanCloudLogin(studentIDTextController.text, passwordTextController.text);
+    }
+    if(loginStatus == false) {
       setState(() {
         loginInfo = "用户名或密码错误";
       });
@@ -99,7 +113,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
       //Group Tow
       await Group.getAllGroups();
       ApplicationHelper.currentUser = currentUser;
-      await ApplicationHelper.getLocalDatabase(
+      await ApplicationHelper.setLocalDatabaseString(
           "id", ApplicationHelper.currentUser.id);
       setState(() {
         Navigator.pushAndRemoveUntil(
@@ -179,7 +193,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
               child: SizedBox(
                 width: 256,
                 child: ImageButton(
-                  height: 40,
+                  height: enableLoginButton == true ? 40 : 0,
                   children: <Widget>[
                     Text(
                       "登录",
@@ -198,7 +212,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
                       "assets/images/buttonbackground.png"),
                   onTap: () {
                     FocusScope.of(context).requestFocus(FocusNode());
-                    this.onLoginButtonPressed(context);
+                    this.onLoginButtonPressed(context, false);
                   },
                 ),
               ),

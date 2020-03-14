@@ -10,7 +10,13 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApplicationHelper {
-  static getLocalDatabase(String id, String value) async {
+
+  static setLocalDatabaseBool(String id, bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(id, value);
+  }
+
+  static setLocalDatabaseString(String id, String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(id, value);
   }
@@ -18,7 +24,7 @@ class ApplicationHelper {
   static Future<String> getLocalDatabaseString(String id) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString(id);
+      return prefs.getString(id).isEmpty ? "" : prefs.getString(id);
     } catch (e) {
       return "";
     }
@@ -27,7 +33,7 @@ class ApplicationHelper {
   static Future<bool> getLocalDatabaseBool(String id) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getBool(id);
+      return prefs.getBool(id) == null ? false : prefs.getBool(id);
     } catch (e) {
       return false;
     }
@@ -42,6 +48,9 @@ class ApplicationHelper {
   static bool canCheckBiometrics = false;
   static bool useBiometrics = false;
   static LocalAuthentication localAuth = LocalAuthentication();
+
+  static bool autoLogin = false;
+  static bool openApp = true;
 }
 
 extension StringDateConvert on String {

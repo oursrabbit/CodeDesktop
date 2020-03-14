@@ -16,14 +16,13 @@ import 'package:sign/facedetectviewwidget.dart';
 import 'package:sign/generated/i18n.dart';
 import 'package:sign/historyviewwidget.dart';
 import 'package:sign/main.dart';
+import 'package:sign/settingviewwidget.dart';
 import 'package:sign/values/colors.dart';
 import 'package:sign/values/fonts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import 'Model/section.dart';
 import 'loginviewwidget.dart';
-
-enum SettingMenu {ChangeUser, History, OpenBioSecurity}
 
 class ScheduleViewWidget extends StatefulWidget {
   ScheduleViewWidget({Key key}) : super(key: key);
@@ -39,8 +38,6 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
 
   ScrollController _dayCalendarController = ScrollController();
   ScrollController _monthCalendarController = ScrollController();
-
-  bool useBiometrics = ApplicationHelper.useBiometrics;
 
   @override
   void initState() {
@@ -83,18 +80,6 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
       _monthCalendarController = ScrollController(
           initialScrollOffset: 315.0 * 3 * 12 + 315 * (selectedDay.month));
     });
-  }
-
-  void onUseBiometricsPressed(BuildContext context, bool open) {
-    if(open) {
-      setState(() {
-        useBiometrics = open;
-      });
-    } else {
-      setState(() {
-        useBiometrics = open;
-      });
-    }
   }
 
   void onBackToTodayPressed(BuildContext context) {
@@ -348,52 +333,13 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
             ),
           ),
         ),
-        PopupMenuButton<SettingMenu>(
-          //enabled: this.schedules == null ? false : true,
-            icon: Icon(Icons.settings, size: 18, color: Colors.white,),
-            onSelected: (SettingMenu result) {
-              if (result == SettingMenu.ChangeUser) {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) {
-                  return LoginViewWidget();
-                })
-                );
-              }
-              else if (result == SettingMenu.History) {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) {
-                  return HistoryViewViewWidget();
-                })
-                );
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              var menu = <PopupMenuEntry<SettingMenu>>[];
-              menu.add(PopupMenuItem<SettingMenu>(
-                value: SettingMenu.ChangeUser,
-                child: Text('更改用户'),
-              ));
-              menu.add(PopupMenuItem<SettingMenu>(
-                value: SettingMenu.History,
-                child: Text('签到历史'),
-              ));
-              if(ApplicationHelper.canCheckBiometrics) {
-                menu.add(PopupMenuItem<SettingMenu>(
-                  value: SettingMenu.OpenBioSecurity,
-                  child: Row(
-                    children: <Widget>[
-                      Text("启用人脸/指纹职别"),
-                      CupertinoSwitch(
-                        value: useBiometrics,
-                        onChanged: (value) => this.onUseBiometricsPressed(context, value),
-                      )
-                    ],
-                  ),
-                ));
-              }
-              return menu;
-            }
-        ),
+        IconButton(
+          icon: Icon(Icons.settings, size: 18, color: Colors.white,),
+          onPressed: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) {
+            return SettingViewWidget();
+          })),
+        )
       ],
     );
   }
