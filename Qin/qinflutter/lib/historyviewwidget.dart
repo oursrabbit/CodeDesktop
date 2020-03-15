@@ -110,7 +110,7 @@ class _HistoryViewViewWidget extends State<HistoryViewViewWidget> {
     return Scaffold(
       body: Container(
         color: AppColors.AppDefaultBackgroundColor,
-        child: Column(
+        child: SafeArea(child: Column(
           children: <Widget>[
             Padding(
               padding: EdgeInsets.fromLTRB(32, 32, 0, 0),
@@ -154,7 +154,7 @@ class _HistoryViewViewWidget extends State<HistoryViewViewWidget> {
               child: secondPart,
             ),
           ],
-        ),
+        ),),
       ),
     );
   }

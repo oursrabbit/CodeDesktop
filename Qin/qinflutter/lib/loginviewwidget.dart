@@ -42,12 +42,14 @@ class _LoginViewWidget extends State<LoginViewWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(ApplicationHelper.autoLogin == true && ApplicationHelper.openApp == true) {
-      setState(() {
-        enableLoginButton = false;
-      });
-      onLoginButtonPressed(context, true);
-    }
+    Future.delayed(Duration(seconds: 2), (){
+      if(ApplicationHelper.autoLogin == true && ApplicationHelper.openApp == true) {
+        setState(() {
+          enableLoginButton = false;
+        });
+        onLoginButtonPressed(context, true);
+      }
+    });
   }
 
   @override

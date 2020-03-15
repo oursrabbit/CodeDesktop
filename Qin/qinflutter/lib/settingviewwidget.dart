@@ -104,6 +104,7 @@ class _SettingViewWidget extends State<SettingViewWidget> {
             Switch(value: useBio, onChanged: (value) async {
               if(await ApplicationHelper.checkBiometrics() == true ) {
                 ApplicationHelper.setLocalDatabaseBool('useBiometrics', value);
+                ApplicationHelper.useBiometrics = value;
                 setState(() {
                   useBio = value;
                 });
@@ -182,11 +183,13 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                     Expanded(child: Container(),),
                     Switch(value: autoLogin, onChanged: (value) {
                       ApplicationHelper.setLocalDatabaseBool('autoLogin', value);
+                      ApplicationHelper.autoLogin = value;
                       setState(() {
                         autoLogin = value;
                       });
                       if(value == false) {
                         ApplicationHelper.setLocalDatabaseBool('useBiometrics', value);
+                        ApplicationHelper.useBiometrics = value;
                         setState(() {
                           useBio = value;
                         });
