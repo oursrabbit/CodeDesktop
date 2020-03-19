@@ -103,7 +103,7 @@ class _SettingViewWidget extends State<SettingViewWidget> {
             Expanded(child: Container(),),
             Switch(value: useBio, onChanged: (value) async {
               if(await ApplicationHelper.checkBiometrics() == true ) {
-                ApplicationHelper.setLocalDatabaseBool('useBiometrics', value);
+                ApplicationHelper.setLocalDatabaseBool('useBiometrics useBiometrics', value);
                 ApplicationHelper.useBiometrics = value;
                 setState(() {
                   useBio = value;
@@ -186,13 +186,6 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                       setState(() {
                         autoLogin = value;
                       });
-                      if(value == false) {
-                        ApplicationHelper.setLocalDatabaseBool('useBiometrics', value);
-                        ApplicationHelper.useBiometrics = value;
-                        setState(() {
-                          useBio = value;
-                        });
-                      }
                     }),
                   ],
                 ),
@@ -238,7 +231,7 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                           fontSize: FontsHelper.DefaultButtonTextFontSize,
                         ),
                       ),
-                      onPressed: () async => await launch("https://blog.csdn.net/qq_27485675/article/details/104864866"),
+                      onPressed: () => launch(ApplicationHelper.applicationWebSite),
                     ),
                     Expanded(child: Container(),)
                   ],

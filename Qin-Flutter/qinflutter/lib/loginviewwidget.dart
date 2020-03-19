@@ -8,6 +8,7 @@ import 'package:sign/Model/relationstudentgroup.dart';
 import 'package:sign/Model/student.dart';
 import 'package:sign/applicationhelper.dart';
 import 'package:sign/databasehelper.dart';
+import 'package:sign/helpviewwidget.dart';
 import 'package:sign/values/colors.dart';
 import 'package:sign/values/fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -42,14 +43,28 @@ class _LoginViewWidget extends State<LoginViewWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 2), (){
-      if(ApplicationHelper.autoLogin == true && ApplicationHelper.openApp == true) {
+    if (ApplicationHelper.autoLogin == true &&
+        ApplicationHelper.openApp == true) {
+      setState(() {
+        enableLoginButton = false;
+      });
+      Future.delayed(Duration(seconds: 2), () {
+        onLoginButtonPressed(context, true);
+      });
+    } else if (ApplicationHelper.useBiometrics == true) {
+      Future.delayed(Duration(seconds: 2), () async {
         setState(() {
           enableLoginButton = false;
         });
-        onLoginButtonPressed(context, true);
-      }
-    });
+        if (await ApplicationHelper.checkBiometrics()) {
+          onLoginButtonPressed(context, true);
+        } else {
+          setState(() {
+            enableLoginButton = true;
+          });
+        }
+      });
+    }
   }
 
   @override
@@ -67,8 +82,9 @@ class _LoginViewWidget extends State<LoginViewWidget> {
     else
       return true;
   }
-  
+
   void onResetPasswordButtonPressed(BuildContext context) async {
+    FocusScope.of(context).unfocus();
     var currentUser = await Student.getStudentByID(studentIDTextController.text);
     if(currentUser.id == "NONE") {
       setState(() {
@@ -94,6 +110,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
   }
 
   void onLoginButtonPressed(BuildContext context, bool ignorePassword) async {
+    FocusScope.of(context).unfocus();
     if (agreePrivacy == false) {
       setState(() {
         loginInfo = "请同意《隐私策略》后，在进行登录";
@@ -102,15 +119,12 @@ class _LoginViewWidget extends State<LoginViewWidget> {
     else {
       var loginStatus = false;
       if (ignorePassword == true) {
-        if (ApplicationHelper.useBiometrics == true) {
-          loginStatus = await ApplicationHelper.checkBiometrics();
-        } else {
-          loginStatus = true;
-        }
+        loginStatus = true;
       } else {
         loginStatus = await DatabaseHelper.leanCloudLogin(
             studentIDTextController.text, passwordTextController.text);
       }
+
       if (loginStatus == false) {
         loginerrorcount += 1;
         setState(() {
@@ -144,6 +158,10 @@ class _LoginViewWidget extends State<LoginViewWidget> {
         await RelationStudentGroup.getAllRelationStudentGroups();
         //Group Tow
         await Group.getAllGroups();
+        if(currentUser.id != ApplicationHelper.currentUser.id) {
+          await ApplicationHelper.setLocalDatabaseBool("useBiometrics", false);
+          await ApplicationHelper.setLocalDatabaseBool('autoLogin', false);
+        }
         ApplicationHelper.currentUser = currentUser;
         await ApplicationHelper.setLocalDatabaseString(
             "id", ApplicationHelper.currentUser.id);
@@ -152,6 +170,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
             context,
             new MaterialPageRoute(builder: (context) =>
             new MaterialApp(
+                debugShowCheckedModeBanner: false,
                 home: new ScheduleViewWidget())),
                 (route) => route == null,
           );
@@ -172,7 +191,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: BoxDecoration(
-          color: AppColors.AppDefaultBackgroundColor,
+          //color: AppColors.AppDefaultBackgroundColor,
         ),
         child: Column(
           children: <Widget>[
@@ -207,6 +226,7 @@ class _LoginViewWidget extends State<LoginViewWidget> {
             child: SizedBox(
               width: 256,
               child: TextField(
+                enabled: enableLoginButton,
                 obscureText: true,
                 controller: passwordTextController,
                 decoration: InputDecoration(
@@ -265,46 +285,6 @@ class _LoginViewWidget extends State<LoginViewWidget> {
                 width: enableLoginButton == true ? 256 : 0,
                 child: Row(
                   children: <Widget>[
-                    FlatButton(
-                      child: Text("注册账号"),
-                      onPressed: () => showDialog(
-                        context: context,
-                        builder: (context) =>
-                            CupertinoAlertDialog (
-                              title: Text("注册提示"),
-                              content: Text("请联系班主任进行注册"),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: new Text("确定"),
-                                  onPressed: () {
-                                    FocusScope.of(context).requestFocus(FocusNode());
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
-                            ),
-                      ),
-                    ),
-                    Expanded(child: Container(),),
-                    FlatButton(
-                      child: Text("忘记密码？"),
-                      onPressed: (){
-                        setState(() {
-                          enableLoginButton = false;
-                        });
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        this.onResetPasswordButtonPressed(context);},
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
-              child: SizedBox(
-                width: enableLoginButton == true ? 256 : 0,
-                child: Row(
-                  children: <Widget>[
                     Expanded(child: Container(),),
                     Checkbox(value: agreePrivacy, onChanged: (value) => setState(() {
                       agreePrivacy = value;
@@ -312,12 +292,41 @@ class _LoginViewWidget extends State<LoginViewWidget> {
                     Text("同意"),
                     InkWell(
                       child: Text("《隐私策略》",
-                      style: TextStyle(
-                        color: Colors.blue
+                        style: TextStyle(
+                            color: Colors.blue
+                        ),
                       ),
-                      ),
-                      onTap: () async => await launch("https://blog.csdn.net/qq_27485675/article/details/104864866"),
+                      onTap: () => launch(ApplicationHelper.applicationWebSite),
                     )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              child: SizedBox(
+                width: enableLoginButton == true ? 256 : 0,
+                child: Row(
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text("登陆有问题？"),
+                      onPressed: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) {
+                          return HelpViewWidget();
+                        }));
+                      },
+                    ),
+                    Expanded(child: Container(),),
+                    FlatButton(
+                      child: Text("重置密码"),
+                      onPressed: () {
+                        setState(() {
+                          enableLoginButton = false;
+                        });
+                        onResetPasswordButtonPressed(context);
+                      },
+                    ),
                   ],
                 ),
               ),

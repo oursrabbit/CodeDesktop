@@ -10,6 +10,8 @@ import 'package:sign/values/colors.dart';
 import 'package:sign/values/fonts.dart';
 import 'dart:convert';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class InitViewWidget extends StatefulWidget {
   InitViewWidget({Key key}) : super(key: key);
 
@@ -24,7 +26,9 @@ class _InitViewWidgetState extends State<InitViewWidget> {
   void initState() {
     super.initState();
     initInfo = "正在查询软件版本...";
-    initApplication();
+    Future.delayed(Duration(seconds: 1), () {
+      initApplication();
+    });
   }
 
   initApplication() async {
@@ -39,17 +43,43 @@ class _InitViewWidgetState extends State<InitViewWidget> {
     sleep(Duration(seconds: 1));
     var data = json.decode(response.body);
     var serverVersion = data["ApplicationVersion"];
+    ApplicationHelper.applicationWebSite = data["WebSite"];
     setState(() {
       print(serverVersion);
-      if (9 == serverVersion) {
+      if (ApplicationHelper.applicationVersion >= serverVersion) {
         Navigator.pushAndRemoveUntil(
           context,
-          new MaterialPageRoute(builder: (context) => new MaterialApp(home: new LoginViewWidget())),
+          new MaterialPageRoute(builder: (context) => new MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: new LoginViewWidget())),
               (route) => route == null,
         );
       }
       else {
         initInfo = "请更新至最新版：$serverVersion";
+        showDialog(
+          context: context,
+          builder: (context) =>
+              CupertinoAlertDialog(
+                title: Text("更新"),
+                content: Text("请更新至最新版：$serverVersion"),
+                actions: <Widget>[
+                  FlatButton(
+                    child: new Text("取消"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  FlatButton(
+                    child: new Text("前往更新"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      launch(ApplicationHelper.applicationWebSite);
+                    },
+                  ),
+                ],
+              ),
+        );
       }
     });
   }
@@ -98,7 +128,8 @@ class _InitViewWidgetState extends State<InitViewWidget> {
             Padding(
               padding: EdgeInsets.all(32),
               child: Text(
-                "©2020 BFA Sound School",
+                "",
+                //"©2020 BFA Sound School",
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.ltr,
                 style: TextStyle(

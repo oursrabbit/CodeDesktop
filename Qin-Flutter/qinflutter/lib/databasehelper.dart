@@ -108,12 +108,22 @@ class DatabaseHelper {
 
   static Future<bool> uploadCheckRecording() async {
     try {
+      var timeurl = Uri.encodeFull(DatabaseHelper.LeancloudAPIBaseURL + "/1.1/date");
+      http.Response timeresponse = await http.get(timeurl, headers: {
+        LeancloudIDHeader: LeancloudAppid,
+        LeancloudKeyHeader: LeancloudAppKey,
+        HttpContentTypeHeader: HttpContentTypeJSONUTF8,
+      });
+      var timedata = json.decode(timeresponse.body);
+      var timeiso = timedata["iso"];
+      var checkDate = DateTime.parse(timeiso).toLocal();
+
       var url = Uri.encodeFull(DatabaseHelper.LeancloudAPIBaseURL + "/1.1/classes/CheckRecording");
 
       http.Response response = await http.post(url, body: jsonEncode(<String, String>{
         "StudentID": ApplicationHelper.currentUser.id,
         "RoomID" : ApplicationHelper.checkRoom.id,
-        "CheckDate" : DateTime.now().convertToString("yyyy-MM-dd HH:mm:ss"),
+        "CheckDate" : checkDate.convertToString("yyyy-MM-dd HH:mm:ss"),
         "ScheduleID" : ApplicationHelper.checkSchedule.id
       }), headers: {
         LeancloudIDHeader: LeancloudAppid,

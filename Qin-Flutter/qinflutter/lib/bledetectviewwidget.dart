@@ -36,6 +36,7 @@ class _BLEDetectViewWidget extends State<BLEDetectViewWidget> {
   MethodChannel currentPlatform;
   Timer countDown;
   int testCount = 0;
+  bool timerLock = false;
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class _BLEDetectViewWidget extends State<BLEDetectViewWidget> {
       context,
       new MaterialPageRoute(builder: (context) =>
       new MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: new CheckResultViewWidget())),
           (route) => route == null,
     );
@@ -105,16 +107,23 @@ class _BLEDetectViewWidget extends State<BLEDetectViewWidget> {
             else { bleInfo = '正在发现教室蓝牙设备...${restTime}s'; }
           });
         }
-        DatabaseHelper.checkAdvertising().then((checkstate) {
-          if(checkstate || (testCount >= 10 && ApplicationHelper.currentUser.id == "01050305")) {
-            DatabaseHelper.uploadCheckRecording().then((uploadstate) {
-              if(uploadstate) {
-                timer.cancel();
-                showError("签到成功");
-              }
-            });
-          }
-        });
+        if(timerLock == false) {
+          timerLock = true;
+          DatabaseHelper.checkAdvertising().then((checkstate) {
+            if (checkstate || (testCount >= 10 &&
+                ApplicationHelper.currentUser.id == "01050305")) {
+              DatabaseHelper.uploadCheckRecording().then((uploadstate) {
+                if (uploadstate) {
+                  timer.cancel();
+                  showError("签到成功");
+                }
+                timerLock = false;
+              });
+            } else {
+              timerLock = false;
+            }
+          });
+        }
       }
     });
   }

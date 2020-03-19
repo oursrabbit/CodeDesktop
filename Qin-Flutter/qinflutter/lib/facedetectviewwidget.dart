@@ -83,6 +83,7 @@ class _FaceDetectViewViewWidget extends State<FaceDetectViewWidget> {
       context,
       new MaterialPageRoute(
           builder: (context) => new MaterialApp(
+              debugShowCheckedModeBanner: false,
               home: new ScheduleViewWidget())),
           (route) => route == null,
     );
@@ -101,6 +102,7 @@ class _FaceDetectViewViewWidget extends State<FaceDetectViewWidget> {
     final cameras = await availableCameras();
     if (cameras.length < 2) {
       showError('未发现前置摄像头');
+      return;
     }
     frontCamera = cameras[1];
     cameraController =

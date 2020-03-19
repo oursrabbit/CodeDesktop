@@ -48,7 +48,7 @@ class _AboutViewWidget extends State<AboutViewWidget> {
                         width: double.infinity,
                         //color: Colors.green,
                         child: Text(
-                         "声音学院 签到软件",
+                         "SSA签到 版本号：${ApplicationHelper.applicationVersion}\n\nPowered By Flutter",
                           textDirection: TextDirection.ltr,
                           textAlign: TextAlign.center,
                           style: TextStyle(

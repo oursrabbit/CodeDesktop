@@ -67,6 +67,9 @@ class ApplicationHelper {
     }
   }
 
+  static int applicationVersion = 15;
+  static String applicationWebSite = "";
+
   static Student currentUser = new Student();
   static Schedule checkSchedule = new Schedule();
   static Building checkBuilding = new Building();
