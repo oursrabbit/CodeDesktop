@@ -81,6 +81,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LoginWIndow.xaml.cs">
+      <DependentUpon>LoginWIndow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Manager\CheckRecordingManager\AdminCheckRecordingWindow.xaml.cs">
       <DependentUpon>AdminCheckRecordingWindow.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
     <Compile Include="ReManager\Re_Student_Group\ReEditorWindow.xaml.cs">
       <DependentUpon>ReEditorWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="LoginWIndow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Manager\BuildingManager\AdminBuildingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

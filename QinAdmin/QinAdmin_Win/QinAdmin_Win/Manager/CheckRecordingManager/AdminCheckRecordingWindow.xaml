@@ -8,7 +8,8 @@
                Title="AdminCheckRecordingWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <DockPanel Margin="8,8,8,0">
         <DockPanel DockPanel.Dock="Top">
-            <Button Content="按课程导出" Click="Button_Click" />
+            <TextBlock Text="按课程导出：" Width="100"/>
+            <Button Content="导出" Click="Button_Click" DockPanel.Dock="Right" Width="100" />
             <ComboBox x:Name="CourseList"/>
         </DockPanel>
         <Label x:Name="InfoLabel" Content="课程管理器" DockPanel.Dock="Bottom" Height="30" VerticalContentAlignment="Center" Background="#FFF0EEEE"/>
@@ -19,8 +20,6 @@
                 <DataGridTextColumn Header="签到房间编号"  Binding="{Binding Room.ID}"/>
                 <DataGridTextColumn Header="签到房间名称"  Binding="{Binding Room.Name}"/>
                 <DataGridTextColumn Header="签到时间"  Binding="{Binding CheckDate}"/>
-                <DataGridTextColumn Header="签到课程日程编号"  Binding="{Binding Schedule.Course.ID}"/>
-                <DataGridTextColumn Header="签到课程名称"  Binding="{Binding Schedule.Course.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>

@@ -59,8 +59,6 @@ C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj
 C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\ProfessorManager\ProfessorEditorWindow.baml
 C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\RoomManager\AdminRoomWindow.baml
 C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\RoomManager\RoomEditorWindow.baml
-C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\ScheduleManager\AdminScheduleWindow.baml
-C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\ScheduleManager\ScheduleEditorWindow.baml
 C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\SectionManager\AdminSectionWindow.baml
 C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\SectionManager\SectionEditorWindow.baml
 C:\Users\giddy\Desktop\GitHub\CodeDesktop\QinAdmin\QinAdmin_Win\QinAdmin_Win\obj\Debug\Manager\StudentManager\AdminStudentWindow.baml

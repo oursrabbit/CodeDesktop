@@ -15,6 +15,8 @@ namespace QinAdmin_Win.Model
 
         public String CheckDate { get; set; }
 
+        public String ScheduleID { get; set; }
+
         Student student = null;
 
         [Newtonsoft.Json.JsonIgnore]
@@ -54,10 +56,7 @@ namespace QinAdmin_Win.Model
             {
                 if (schedule == null)
                 {
-                    Schedule.GetAll(false).ForEach( t=> {
-                        var checkDate = this.CheckDate.ConvertToDateTime("yyyy-MM-dd HH:mm:ss");
-
-                    });
+                    Schedule.GetAll(false).Where(t => t.ID.Equals(this.ScheduleID)).FirstOrDefault();
                 }
                 return schedule ?? new Schedule() { objectId = null };
             }

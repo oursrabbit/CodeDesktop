@@ -5,24 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QinAdmin_Win"
         mc:Ignorable="d"
-        Title="MainWindow" Height="204.222" Width="470.323" WindowStartupLocation="CenterScreen">
-    <StackPanel Margin="0" VerticalAlignment="Top">
-        <StackPanel Margin="0" Orientation="Horizontal">
-            <Button x:Name="AdminBuildingButton" Content="管理建筑" Margin="32,8,32,0" Height="30" Click="AdminBuildingButton_Click"/>
-            <Button x:Name="AdminRoomButton" Content="管理房间" Margin="32,8,32,0" Height="30"  Click="AdminRoomButton_Click"/>
-            <Button x:Name="AdminReBuildingRoom" Content="管理建筑与房间" Margin="32,8,32,0" Height="30"  Click="AdminReBuildingRoomButton_Click"/>
-        </StackPanel>
-        <StackPanel Margin="0" Orientation="Horizontal">
-            <Button x:Name="AdminStudentButton" Content="管理学生" Margin="32,8,32,0" Height="30" Click="AdminStudentButton_Click"/>
-            <Button x:Name="AdminGroupButton" Content="管理班级" Margin="32,8,32,0" Height="30" Click="AdminGroupButton_Click"/>
-            <Button x:Name="AdminReStudentGroup" Content="管理学生与班级" Margin="32,8,32,0" Height="30"  Click="AdminReStudentGroup_Click"/>
-        </StackPanel>
-        <StackPanel Margin="0" Orientation="Horizontal">
-            <Button  x:Name="AdminProfessorButton" Content="管理教师" Margin="32,8,32,0" Height="30" Click="AdminProfessorButton_Click"/>
-            <Button x:Name="AdminSectionButton" Content="管理学时" Margin="32,8,32,0" Height="30" Click="AdminSectionButton_Click"/>
-            <Button x:Name="AdminCourseButton" Content="管理课程" Margin="32,8,32,0" Height="30" Click="AdminCourseButton_Click"/>
-            <Button x:Name="AdminScheduleButton" Content="管理课表" Margin="32,8,32,0" Height="30" Click="AdminScheduleButton_Click"/>
-        </StackPanel>
-        <Button x:Name="AdminCheckRecording" Content="管理签到" Margin="32,8,32,0" Height="30" Click="AdminCheckRecording_Click"/>
+        Title="MainWindow" Height="564.222" Width="347.323" WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Button x:Name="AdminCheckRecording" Content="查看签到" Margin="32,32,32,0" Height="30" Click="AdminCheckRecording_Click"/>
+        <GroupBox Header="修改数据库数据（请勿随意操作）" Margin="32,65,32,8">
+            <StackPanel >
+                <Button x:Name="AdminBuildingButton" Content="管理建筑" Margin="32,8,32,0" Height="30" Click="AdminBuildingButton_Click"/>
+                <Button x:Name="AdminRoomButton" Content="管理房间" Margin="32,8,32,0" Height="30"  Click="AdminRoomButton_Click"/>
+                <Button x:Name="AdminReBuildingRoom" Content="管理建筑与房间" Margin="32,8,32,0" Height="30"  Click="AdminReBuildingRoomButton_Click"/>
+                <Button x:Name="AdminStudentButton" Content="管理学生" Margin="32,8,32,0" Height="30" Click="AdminStudentButton_Click"/>
+                <Button x:Name="AdminGroupButton" Content="管理班级" Margin="32,8,32,0" Height="30" Click="AdminGroupButton_Click"/>
+                <Button x:Name="AdminReStudentGroup" Content="管理学生与班级" Margin="32,8,32,0" Height="30"  Click="AdminReStudentGroup_Click"/>
+                <Button  x:Name="AdminProfessorButton" Content="管理教师" Margin="32,8,32,0" Height="30" Click="AdminProfessorButton_Click"/>
+                <Button x:Name="AdminSectionButton" Content="管理学时" Margin="32,8,32,0" Height="30" Click="AdminSectionButton_Click"/>
+                <Button x:Name="AdminCourseButton" Content="管理课程" Margin="32,8,32,0" Height="30" Click="AdminCourseButton_Click"/>
+                <Button x:Name="AdminScheduleButton" Content="管理课表" Margin="32,8,32,0" Height="30" Click="AdminScheduleButton_Click"/>
+            </StackPanel>
+        </GroupBox>
     </StackPanel>
 </Window>
