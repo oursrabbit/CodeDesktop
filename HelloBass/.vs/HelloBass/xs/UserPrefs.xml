@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{B62E72BC-0659-4260-A318-1198F4557D20}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="HelloBass/Program.cs">
+    <Files>
+      <File FileName="HelloBass/Program.cs" Line="19" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HelloBass" expanded="True">
+            <Node name="HelloBass" expanded="True">
+              <Node name="References" expanded="True" />
+              <Node name="Canon.wav" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.HelloBass PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|anycpu" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/yangcan/Desktop/HelloBass/HelloBass/Program.cs" relfile="HelloBass/Program.cs" line="19" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
