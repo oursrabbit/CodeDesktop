@@ -3,6 +3,7 @@ import 'package:date_util/date_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
+import 'package:qrcode_reader/qrcode_reader.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/course.dart';
 import 'package:sign/Model/professor.dart';
@@ -10,6 +11,8 @@ import 'package:sign/Model/room.dart';
 import 'package:sign/Model/schedule.dart';
 import 'package:sign/aboutviewwidget.dart';
 import 'package:sign/applicationhelper.dart';
+import 'package:sign/buildinglistviewwidget.dart';
+import 'package:sign/facedetectviewwidget.dart';
 import 'package:sign/main.dart';
 import 'package:sign/scheduleviewwidget.dart';
 import 'package:sign/values/colors.dart';
@@ -39,6 +42,16 @@ class _SettingViewWidget extends State<SettingViewWidget> {
 
   bool autoLogin = ApplicationHelper.autoLogin;
   bool useBio = ApplicationHelper.useBiometrics;
+
+  void onCustomSignInButtonPressed(BuildContext context) {
+    ApplicationHelper.isCustomCheckIn = true;
+    ApplicationHelper.checkSchedule = new Schedule();
+    Navigator.of(context).pop();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) {
+      return BuildingListViewViewWidget();
+    }));
+  }
 
   void onResetPasswordButtonPressed(BuildContext context) async {
     if (ApplicationHelper.currentUser.email == "NONE") {
@@ -137,27 +150,48 @@ class _SettingViewWidget extends State<SettingViewWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(32, 32, 32, 32),
+                padding: EdgeInsets.fromLTRB(32, 8, 32, 0),
                 child: Row(
                   children: <Widget>[
                     FlatButton(
-                        child: Text(
-                          "查看签到记录",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: AppColors.PrimaryBackground,
-                            fontFamily: FontsHelper.DefaultTextFontFamily,
-                            fontWeight: FontWeight.w400,
-                            fontSize: FontsHelper.DefaultButtonTextFontSize,
-                          ),
+                      child: Text(
+                        "查看签到记录",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: AppColors.PrimaryBackground,
+                          fontFamily: FontsHelper.DefaultTextFontFamily,
+                          fontWeight: FontWeight.w400,
+                          fontSize: FontsHelper.DefaultButtonTextFontSize,
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context, MaterialPageRoute(builder: (context) {
-                            return HistoryViewViewWidget();
-                          }));
-                        },
                       ),
+                      onPressed: () {
+                        Navigator.push(
+                            context, MaterialPageRoute(builder: (context) {
+                          return HistoryViewViewWidget();
+                        }));
+                      },
+                    ),
+                    Expanded(child: Container(),),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(32, 8, 32, 0),
+                child: Row(
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        "自主签到",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: AppColors.PrimaryBackground,
+                          fontFamily: FontsHelper.DefaultTextFontFamily,
+                          fontWeight: FontWeight.w400,
+                          fontSize: FontsHelper.DefaultButtonTextFontSize,
+                        ),
+                      ),
+                      onPressed: () => this.onCustomSignInButtonPressed(context),
+                    ),
                     Expanded(child: Container(),),
                   ],
                 ),

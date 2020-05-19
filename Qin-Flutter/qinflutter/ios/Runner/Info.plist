@@ -27,7 +27,7 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>需要获取蓝牙广播权限，以向服务器发送签到信息</string>
 	<key>NSCameraUsageDescription</key>
-	<string>需要获取摄像头权限，以验证您的身份是否与学号对应</string>
+	<string>需要获取摄像头权限，以验证您的身份是否与学号对应或进行二维码扫描</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>需要获取面部信息，已完成登陆</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

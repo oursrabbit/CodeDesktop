@@ -145,6 +145,7 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
                 FlatButton(
                     child: new Text("更换教室"),
                     onPressed: () {
+                      ApplicationHelper.isCustomCheckIn = false;
                       ApplicationHelper.checkSchedule = schedule;
                       Navigator.of(context).pop();
                       Navigator.push(
@@ -156,6 +157,7 @@ class _ScheduleViewWidget extends State<ScheduleViewWidget> {
                 FlatButton(
                   child: new Text("开始签到"),
                   onPressed: () {
+                    ApplicationHelper.isCustomCheckIn = false;
                     ApplicationHelper.checkSchedule = schedule;
                     ApplicationHelper.checkRoom = schedule.room;
                     ApplicationHelper.checkBuilding =

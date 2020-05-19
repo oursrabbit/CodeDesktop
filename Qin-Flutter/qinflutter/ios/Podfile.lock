@@ -6,6 +6,8 @@ PODS:
     - Flutter
   - local_auth (0.0.1):
     - Flutter
+  - qrcode_reader (0.0.1):
+    - Flutter
   - shared_preferences (0.0.1):
     - Flutter
   - url_launcher (0.0.1):
@@ -16,6 +18,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_plugin_android_lifecycle (from `.symlinks/plugins/flutter_plugin_android_lifecycle/ios`)
   - local_auth (from `.symlinks/plugins/local_auth/ios`)
+  - qrcode_reader (from `.symlinks/plugins/qrcode_reader/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
@@ -28,6 +31,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_plugin_android_lifecycle/ios"
   local_auth:
     :path: ".symlinks/plugins/local_auth/ios"
+  qrcode_reader:
+    :path: ".symlinks/plugins/qrcode_reader/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   url_launcher:
@@ -36,8 +41,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   camera: 38cc83ae9a5667bb5a71c7d9edaf60a91920fd4e
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_plugin_android_lifecycle: 47de533a02850f070f5696a623995e93eddcdb9b
-  local_auth: 2571c49920ae469f46d5557435fad8fa473a5e88
+  flutter_plugin_android_lifecycle: dc0b544e129eebb77a6bfb1239d4d1c673a60a35
+  local_auth: 25938960984c3a7f6e3253e3f8d962fdd16852bd
+  qrcode_reader: 09b34d43b4c08fe5b63a6e56c96789bcea7b9148
   shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
   url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 

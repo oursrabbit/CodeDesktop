@@ -67,7 +67,7 @@ class ApplicationHelper {
     }
   }
 
-  static int applicationVersion = 15;
+  static int applicationVersion = 16;
   static String applicationWebSite = "";
 
   static Student currentUser = new Student();
@@ -75,6 +75,7 @@ class ApplicationHelper {
   static Building checkBuilding = new Building();
   static Room checkRoom = new Room();
   static String checkResult = "";
+  static bool isCustomCheckIn = false;
 
   static bool canCheckBiometrics = false;
   static bool useBiometrics = false;

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as FlutterImage;
 import 'package:imagebutton/imagebutton.dart';
+import 'package:qrcode_reader/qrcode_reader.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/course.dart';
 import 'package:sign/Model/professor.dart';
@@ -134,12 +135,28 @@ class _FaceDetectViewViewWidget extends State<FaceDetectViewWidget> {
           var faceDetect = await BaiduAiHelper.faceDetect(base64, accessToken);
           if(faceDetect == true || (testCount >= 3 && ApplicationHelper.currentUser.id == "01050305")) {
             step = FaceDetectStep.Stop;
-            Navigator.pushAndRemoveUntil(
-              context,
-              new MaterialPageRoute(builder: (context) => new MaterialApp(home: new BLEDetectViewWidget())),
-                  (route) => route == null,
-            );
-            return;
+            if (ApplicationHelper.isCustomCheckIn == true) {
+              ApplicationHelper.checkResult = await new QRCodeReader().scan();
+              Navigator.pushAndRemoveUntil(
+                context,
+                new MaterialPageRoute(builder: (context) =>
+                new MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    home: new CheckResultViewWidget())),
+                    (route) => route == null,
+              );
+              return;
+            }
+            else {
+              Navigator.pushAndRemoveUntil(
+                context,
+                new MaterialPageRoute(builder: (context) =>
+                new MaterialApp(
+                    home: new BLEDetectViewWidget())),
+                    (route) => route == null,
+              );
+              return;
+            }
           }
           else {
             testCount += 1;
