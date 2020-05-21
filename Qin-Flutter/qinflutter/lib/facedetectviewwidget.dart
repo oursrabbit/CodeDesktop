@@ -2,13 +2,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:super_qr_reader/super_qr_reader.dart';
 import 'package:camera/camera.dart';
 import 'package:date_util/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image/image.dart' as FlutterImage;
 import 'package:imagebutton/imagebutton.dart';
-import 'package:qrcode_reader/qrcode_reader.dart';
+//import 'package:qrcode_reader/qrcode_reader.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/course.dart';
 import 'package:sign/Model/professor.dart';
@@ -136,7 +137,13 @@ class _FaceDetectViewViewWidget extends State<FaceDetectViewWidget> {
           if(faceDetect == true || (testCount >= 3 && ApplicationHelper.currentUser.id == "01050305")) {
             step = FaceDetectStep.Stop;
             if (ApplicationHelper.isCustomCheckIn == true) {
-              ApplicationHelper.checkResult = await new QRCodeReader().scan();
+              ApplicationHelper.checkResult =
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ScanView(),
+                ),
+              );
               Navigator.pushAndRemoveUntil(
                 context,
                 new MaterialPageRoute(builder: (context) =>

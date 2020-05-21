@@ -130,6 +130,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.4"
+  image_picker:
+    dependency: transitive
+    description:
+      name: image_picker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.6+1"
+  image_picker_platform_interface:
+    dependency: transitive
+    description:
+      name: image_picker_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   imagebutton:
     dependency: "direct main"
     description:
@@ -179,6 +193,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0+1"
+  permission_handler:
+    dependency: transitive
+    description:
+      name: permission_handler
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.0.0+hotfix.6"
+  permission_handler_platform_interface:
+    dependency: transitive
+    description:
+      name: permission_handler_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   petitparser:
     dependency: transitive
     description:
@@ -193,13 +221,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.1"
-  qrcode_reader:
-    dependency: "direct main"
+  plugin_platform_interface:
+    dependency: transitive
     description:
-      name: qrcode_reader
+      name: plugin_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.4"
+    version: "1.0.2"
   quiver:
     dependency: transitive
     description:
@@ -254,6 +282,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.5"
+  super_qr_reader:
+    dependency: "direct main"
+    description:
+      name: super_qr_reader
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   table_calendar:
     dependency: "direct main"
     description:
@@ -311,5 +346,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.5.0 <3.0.0"
+  dart: ">=2.7.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.5 <2.0.0"

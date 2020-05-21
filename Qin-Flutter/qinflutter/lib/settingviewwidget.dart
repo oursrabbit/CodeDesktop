@@ -3,7 +3,7 @@ import 'package:date_util/date_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imagebutton/imagebutton.dart';
-import 'package:qrcode_reader/qrcode_reader.dart';
+//import 'package:qrcode_reader/qrcode_reader.dart';
 import 'package:sign/Model/building.dart';
 import 'package:sign/Model/course.dart';
 import 'package:sign/Model/professor.dart';

@@ -1,0 +1,12 @@
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/bin/Debug/BaiduAIUpload.exe.config
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/bin/Debug/BaiduAIUpload.exe
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/bin/Debug/BaiduAIUpload.pdb
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/bin/Debug/AipSdk.dll
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/bin/Debug/Newtonsoft.Json.dll
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/bin/Debug/Newtonsoft.Json.xml
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/obj/Debug/BaiduAIUpload.csprojAssemblyReference.cache
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/obj/Debug/BaiduAIUpload.exe.config
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/obj/Debug/BaiduAIUpload.csproj.CoreCompileInputs.cache
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/obj/Debug/BaiduAIUpload.csproj.CopyComplete
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/obj/Debug/BaiduAIUpload.exe
+/Users/yangcan/Desktop/BaiduAIUpload/BaiduAIUpload/obj/Debug/BaiduAIUpload.pdb
